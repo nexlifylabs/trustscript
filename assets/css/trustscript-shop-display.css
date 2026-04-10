@@ -1,0 +1,125 @@
+/**
+ * TrustScript Shop Display 
+ * @package TrustScript
+ * @since 1.0.0
+ */
+
+.trustscript-shop-rating {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 6px;
+  font-size: 100%;
+}
+
+.trustscript-shop-rating-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 8px 0;
+  font-size: 100%;
+}
+
+.trustscript-shop-rating-empty .trustscript-shop-rating-text {
+  color: #999;
+  font-style: italic;
+  font-size: 90%;
+}
+
+.trustscript-shop-rating-value {
+  font-weight: 600;
+  color: currentColor;
+  min-width: 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.trustscript-shop-stars-display {
+  display: inline-flex;
+  gap: 0px;
+  align-items: center;
+}
+
+.trustscript-shop-star {
+  font-size: 140%;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.trustscript-shop-star-full {
+  color: #E8A020;
+}
+
+.trustscript-shop-star-half {
+  position: relative;
+  display: inline-block;
+  color: #e0e0e0;
+  vertical-align: middle;
+}
+
+.trustscript-shop-star-half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #E8A020; 
+  width: 50%;
+  overflow: hidden;
+  display: block;
+}
+
+.trustscript-shop-star-empty {
+  color: #e0e0e0;
+}
+
+.trustscript-shop-review-count {
+  color: currentColor;
+  font-size: 80%;
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .trustscript-shop-rating {
+    gap: 4px;
+  }
+
+  .trustscript-shop-star {
+    font-size: 120%;
+  }
+
+  .trustscript-shop-rating-value {
+    min-width: 28px;
+    font-size: 90%;
+  }
+}
+/**
+ * Hide default WooCommerce star ratings on shop/archive/product-listing pages,
+ * including hover cards and related/upsell/cross-sell blocks, since we're
+ * replacing them with our own TrustScript ratings.
+ *
+ * This also hides theme implementations that render default rating spans inside
+ * the loop output, while leaving the single product rating intact.
+ */
+.products .star-rating,
+.products .star-rating span,
+.woocommerce ul.products .star-rating,
+.woocommerce ul.products .star-rating span,
+.woocommerce-loop-product .star-rating,
+.woocommerce-loop-product .star-rating span,
+.related.products .star-rating,
+.related.products .star-rating span,
+.upsells.products .star-rating,
+.upsells.products .star-rating span,
+.cross-sells .star-rating,
+.cross-sells .star-rating span {
+  display: none !important;
+}

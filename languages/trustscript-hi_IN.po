@@ -1,0 +1,3867 @@
+# Copyright (C) 2026 NexlifyLabs
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: trustscript 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trustscript\n"
+"POT-Creation-Date: 2026-04-08T12:46:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: trustscript\n"
+"X-Generator: WP-CLI 2.12.0\n"
+
+#. Plugin Name of the plugin
+#: trustscript.php
+msgid "trustscript"
+msgstr "trustscript"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: trustscript.php
+msgid "https://nexlifylabs.com"
+msgstr "https://nexlifylabs.com"
+
+#. Description of the plugin
+#: trustscript.php
+msgid ""
+"Automated review collection for WooCommerce — verified, visual, AI-assisted,"
+" and 100% privacy compliant. No PII. No manual work."
+msgstr ""
+"WooCommerce के लिए स्वचालित समीक्षा संग्रह — सत्यापित, दृश्य, AI-assisted, और"
+" 100% गोपनीयता अनुरूप। कोई पीआईआई नहीं। कोई "
+"मैन्युअल कार्य नहीं।"
+
+#. Author of the plugin
+#: trustscript.php
+msgid "NexlifyLabs"
+msgstr "नेक्स्लिफाईलैब्स"
+
+#: includes/admin/branding.php:18
+msgid "TrustScript Branding"
+msgstr "TrustScript ब्रांडिंग"
+
+#: includes/admin/branding.php:21
+msgid "Loading your account information..."
+msgstr "आपके खाते की जानकारी लोड हो रही है..."
+
+#: includes/admin/branding.php:25
+msgid "⚠️ Unable to Verify Plan"
+msgstr "⚠️ योजना सत्यापित नहीं हो सकी"
+
+#: includes/admin/branding.php:29
+msgid "Check API Settings"
+msgstr "एपीआई सेटिंग्स जांचें"
+
+#: includes/admin/branding.php:32 includes/admin/branding.php:71
+msgid "Refresh Plan Information"
+msgstr "योजना जानकारी ताज़ा करें"
+
+#: includes/admin/branding.php:39
+msgid "Upgrade to Pro or Business Plan"
+msgstr "प्रो या बिजनेस प्लान में अपग्रेड करें"
+
+#: includes/admin/branding.php:42
+msgid ""
+"Custom branding is available for Pro and Business plan users. Customize your"
+" review pages with your own logo, colors, and domain to create a "
+"professional branded experience."
+msgstr ""
+"प्रो और बिजनेस प्लान उपयोगकर्ताओं के लिए कस्टम ब्रांडिंग उपलब्ध है। पेशेवर "
+"ब्रांडेड अनुभव बनाने के लिए अपने समीक्षा पृष्ठों को अपने स्वयं के लोगो, "
+"रंगों और डोमेन के साथ अनुकूलित करें।"
+
+#: includes/admin/branding.php:47
+msgid "Custom logo and business name"
+msgstr "कस्टम लोगो और व्यवसाय का नाम"
+
+#: includes/admin/branding.php:51
+msgid "Custom subdomain or domain"
+msgstr "कस्टम सबडोमेन या डोमेन"
+
+#: includes/admin/branding.php:55
+msgid "Custom brand colors"
+msgstr "कस्टम ब्रांड रंग"
+
+#: includes/admin/branding.php:59
+msgid "White-label review pages"
+msgstr "व्हाइट-लेबल समीक्षा पृष्ठ"
+
+#: includes/admin/branding.php:63
+msgid "Pro: 500 reviews/month | Business: 2,000 reviews/month"
+msgstr "प्रो: 500 समीक्षाएँ/महीना | व्यवसाय: 2,000 समीक्षाएँ/महीना"
+
+#: includes/admin/branding.php:68
+msgid "View Plans & Upgrade →"
+msgstr "योजनाएँ देखें और अपग्रेड करें →"
+
+#: includes/admin/branding.php:78
+msgid "✨ Your White-Label Branding"
+msgstr "✨ आपकी व्हाइट-लेबल ब्रांडिंग"
+
+#: includes/admin/branding.php:79
+msgid ""
+"Customize how your review pages appear to customers. Changes sync "
+"automatically to TrustScript."
+msgstr ""
+"ग्राहकों को आपके समीक्षा पृष्ठ कैसे दिखते हैं, इसे अनुकूलित करें। परिवर्तन "
+"स्वचालित रूप से TrustScript में सिंक हो जाते हैं।"
+
+#: includes/admin/branding.php:86
+msgid "Business Name"
+msgstr "व्यवसाय का नाम"
+
+#: includes/admin/branding.php:89
+msgid "Your business name shown on review pages"
+msgstr "समीक्षा पृष्ठों पर आपका व्यवसाय का नाम दिखाया गया है।"
+
+#: includes/admin/branding.php:93
+msgid "Logo"
+msgstr "लोगो"
+
+#: includes/admin/branding.php:97
+msgid "Upload Logo"
+msgstr "लोगो अपलोड करें"
+
+#: includes/admin/branding.php:98
+msgid "Remove"
+msgstr "हटाएँ"
+
+#: includes/admin/branding.php:103
+msgid "Upload your logo (PNG, JPG, or SVG recommended). Max 5MB."
+msgstr ""
+"अपना लोगो अपलोड करें (PNG, JPG, या SVG की सिफारिश की जाती है)। अधिकतम 5MB।"
+
+#: includes/admin/branding.php:107
+msgid "Custom Subdomain"
+msgstr "कस्टम सबडोमेन"
+
+#: includes/admin/branding.php:114
+msgid ""
+"Your custom subdomain (e.g., \"yourbrand\" for yourbrand.nexlifylabs.com). "
+"Checks availability in real-time."
+msgstr ""
+"आपका कस्टम सबडोमेन (उदाहरण के लिए, yourbrand.nexlifylabs.com के लिए "
+"\"yourbrand\")। वास्तविक समय में उपलब्धता की जाँच करता है।"
+
+#: includes/admin/branding.php:120
+msgid "🎨 Brand Colors"
+msgstr "🎨 ब्रांड रंग"
+
+#: includes/admin/branding.php:121
+msgid "Customize the colors of your review pages to match your brand identity"
+msgstr ""
+"अपने ब्रांड की पहचान से मेल खाने के लिए अपने समीक्षा पृष्ठों के रंगों को "
+"अनुकूलित करें।"
+
+#: includes/admin/branding.php:126
+msgid "Title & Sub heading"
+msgstr "शीर्षक और उपशीर्षक"
+
+#: includes/admin/branding.php:132
+msgid "Title & Sub heading color"
+msgstr "शीर्षक और उपशीर्षक का रंग"
+
+#: includes/admin/branding.php:137
+msgid "Accent Color"
+msgstr "उच्चारण रंग"
+
+#: includes/admin/branding.php:143
+msgid "Secondary accent color for interactive elements"
+msgstr "इंटरैक्टिव तत्वों के लिए द्वितीयक उभार रंग"
+
+#: includes/admin/branding.php:148
+msgid "Page Background"
+msgstr "पृष्ठ पृष्ठभूमि"
+
+#: includes/admin/branding.php:154
+msgid "Main page background color"
+msgstr "मुख्य पृष्ठ पृष्ठभूमि का रंग"
+
+#: includes/admin/branding.php:159
+msgid "Header Background"
+msgstr "शीर्षक पृष्ठभूमि"
+
+#: includes/admin/branding.php:165
+msgid "Header section background color"
+msgstr "शीर्ष अनुभाग पृष्ठभूमि का रंग"
+
+#: includes/admin/branding.php:170
+msgid "Card Background"
+msgstr "कार्ड पृष्ठभूमि"
+
+#: includes/admin/branding.php:176
+msgid "Card and content area background color"
+msgstr "कार्ड और सामग्री क्षेत्र का पृष्ठभूमि रंग"
+
+#: includes/admin/branding.php:181
+msgid "Text Color"
+msgstr "पाठ का रंग"
+
+#: includes/admin/branding.php:187
+msgid "Primary text color"
+msgstr "मुख्य पाठ का रंग"
+
+#: includes/admin/branding.php:192
+msgid "Secondary Text Color"
+msgstr "द्वितीयक पाठ का रंग"
+
+#: includes/admin/branding.php:198
+msgid "Secondary/dimmed text color"
+msgstr "द्वितीयक/धूसरित पाठ का रंग"
+
+#: includes/admin/branding.php:203
+msgid "Border Color"
+msgstr "सीमा का रंग"
+
+#: includes/admin/branding.php:209
+msgid "Border and divider color"
+msgstr "सीमा और विभाजक का रंग"
+
+#: includes/admin/branding.php:214
+msgid "Button Background"
+msgstr "बटन पृष्ठभूमि"
+
+#: includes/admin/branding.php:220
+msgid "Button background color"
+msgstr "बटन का पृष्ठभूमि रंग"
+
+#: includes/admin/branding.php:225
+msgid "Button Text"
+msgstr "बटन का पाठ"
+
+#: includes/admin/branding.php:231
+msgid "Button text color"
+msgstr "बटन टेक्स्ट का रंग"
+
+#: includes/admin/branding.php:236
+msgid "Button Border"
+msgstr "बटन बॉर्डर"
+
+#: includes/admin/branding.php:242
+msgid "Button border color"
+msgstr "बटन बॉर्डर का रंग"
+
+#: includes/admin/branding.php:247
+msgid "Success Color"
+msgstr "सफलता का रंग"
+
+#: includes/admin/branding.php:253
+msgid "Color for success messages and indicators"
+msgstr "सफलता के संदेशों और संकेतकों के लिए रंग"
+
+#: includes/admin/branding.php:258
+msgid "Error Color"
+msgstr "त्रुटि का रंग"
+
+#: includes/admin/branding.php:264
+msgid "Color for error messages and alerts"
+msgstr "त्रुटि संदेशों और चेतावनियों के लिए रंग"
+
+#: includes/admin/branding.php:269
+msgid "Star Color (Filled)"
+msgstr "स्टार रंग (भरा हुआ)"
+
+#: includes/admin/branding.php:275
+msgid "Color for filled rating stars"
+msgstr "भरे हुए रेटिंग सितारों के लिए रंग"
+
+#: includes/admin/branding.php:280
+msgid "Star Color (Empty)"
+msgstr "स्टार रंग (खाली)"
+
+#: includes/admin/branding.php:286
+msgid "Color for empty rating stars"
+msgstr "खाली रेटिंग सितारों के लिए रंग"
+
+#: includes/admin/branding.php:292
+msgid "⚙️ Layout & Display"
+msgstr "⚙️ लेआउट और डिस्प्ले"
+
+#: includes/admin/branding.php:297
+msgid "Display Logo Only"
+msgstr "केवल लोगो प्रदर्शित करें"
+
+#: includes/admin/branding.php:301
+msgid "Show only the logo without business name"
+msgstr "व्यवसाय के नाम के बिना केवल लोगो दिखाएँ"
+
+#: includes/admin/branding.php:307
+msgid "Display Name Only"
+msgstr "केवल प्रदर्शन नाम"
+
+#: includes/admin/branding.php:311
+msgid "Show only the business name without logo"
+msgstr "लोगो के बिना केवल व्यवसाय का नाम दिखाएँ"
+
+#: includes/admin/branding.php:317
+msgid "Remove Footer"
+msgstr "फ़ुटर हटाएँ"
+
+#: includes/admin/branding.php:321
+msgid "Remove footer text from review pages"
+msgstr "समीक्षा पृष्ठों से फ़ुटर टेक्स्ट हटाएँ"
+
+#: includes/admin/branding.php:327
+msgid "Footer Text"
+msgstr "पाद पाठ"
+
+#: includes/admin/branding.php:330
+msgid "Custom footer text shown on review pages (optional)"
+msgstr "समीक्षा पृष्ठों पर प्रदर्शित कस्टम फ़ुटर टेक्स्ट (वैकल्पिक)"
+
+#: includes/admin/branding.php:337 includes/admin/settings.php:342
+msgid "Save Changes"
+msgstr "बदलाव सहेजें"
+
+#: includes/admin/class-analytics-page.php:48
+msgid "TrustScript Analytics"
+msgstr "TrustScript एनालिटिक्स"
+
+#: includes/admin/class-analytics-page.php:51
+msgid "Welcome to TrustScript"
+msgstr "TrustScript में आपका स्वागत है"
+
+#: includes/admin/class-analytics-page.php:52
+msgid ""
+"Transform your WooCommerce customer reviews with AI-powered content "
+"generation. TrustScript automatically creates authentic, engaging review "
+"options that help customers express their genuine experiences-making it "
+"easier to gather valuable feedback."
+msgstr ""
+"AI-संचालित सामग्री निर्माण के साथ अपने WooCommerce ग्राहक समीक्षाओं को "
+"बदलें। TrustScript स्वचालित रूप से प्रामाणिक और आकर्षक समीक्षा विकल्प बनाता "
+"है, जो ग्राहकों को उनके वास्तविक अनुभव व्यक्त करने में मदद करते हैं—और "
+"मूल्यवान प्रतिक्रिया एकत्र करना आसान बनाते हैं।"
+
+#: includes/admin/class-analytics-page.php:58
+msgid "Review Requests Sent"
+msgstr "समीक्षा अनुरोध भेजे गए"
+
+#: includes/admin/class-analytics-page.php:62
+msgid "Approved Reviews"
+msgstr "अनुमोदित समीक्षाएँ"
+
+#: includes/admin/class-analytics-page.php:66
+msgid "Pending Reviews"
+msgstr "लंबित समीक्षाएँ"
+
+#: includes/admin/class-analytics-page.php:70
+#: includes/admin/review-request.php:59
+msgid "Conversion Rate"
+msgstr "परिवर्तन दर"
+
+#: includes/admin/class-analytics-page.php:76
+msgid "How It Works"
+msgstr "यह कैसे काम करता है"
+
+#: includes/admin/class-analytics-page.php:81
+msgid "Order Delivered"
+msgstr "ऑर्डर पहुँचा दिया गया"
+
+#: includes/admin/class-analytics-page.php:82
+msgid ""
+"When order is marked as \"Delivered\", TrustScript sends review request "
+"email to customer (configured by admin)."
+msgstr ""
+"जब ऑर्डर को \"Delivered\" के रूप में चिह्नित किया जाता है, TrustScript "
+"ग्राहक को समीक्षा अनुरोध ईमेल भेजता है (प्रशासक द्वारा कॉन्फ़िगर किया गया)।"
+
+#: includes/admin/class-analytics-page.php:88
+msgid "Customer Clicks Link"
+msgstr "ग्राहक लिंक पर क्लिक करता है"
+
+#: includes/admin/class-analytics-page.php:89
+msgid ""
+"Customer opens email and clicks the secure review link to access the review "
+"page."
+msgstr ""
+"ग्राहक ईमेल खोलता है और समीक्षा पृष्ठ तक पहुँचने के लिए सुरक्षित समीक्षा "
+"लिंक पर क्लिक करता है।"
+
+#: includes/admin/class-analytics-page.php:95
+msgid "Write Review"
+msgstr "समीक्षा लिखें"
+
+#: includes/admin/class-analytics-page.php:96
+msgid ""
+"Customer types their honest review in their own words - anything from a few "
+"words to detailed feedback."
+msgstr ""
+"ग्राहक अपनी ईमानदार समीक्षा अपनी भाषा में टाइप करते हैं - कुछ शब्दों से लेकर"
+" विस्तृत प्रतिक्रिया तक।"
+
+#: includes/admin/class-analytics-page.php:102
+msgid "Select Tone & Variant"
+msgstr "टोन और वेरिएंट चुनें"
+
+#: includes/admin/class-analytics-page.php:103
+msgid ""
+"Customer chooses writing tone (Professional, Casual, Enthusiastic). AI "
+"generates 3 enhanced versions."
+msgstr ""
+"ग्राहक लेखन का स्वर चुनता है (पेशेवर, अनौपचारिक, उत्साही)। एआई 3 उन्नत "
+"संस्करण उत्पन्न करता है।"
+
+#: includes/admin/class-analytics-page.php:109
+msgid "Choose Version"
+msgstr "संस्करण चुनें"
+
+#: includes/admin/class-analytics-page.php:110
+msgid ""
+"Customer picks their favorite: original text or one of the AI-enhanced "
+"versions. Can edit before submitting."
+msgstr ""
+"ग्राहक अपनी पसंद चुनता है: मूल पाठ या एआई-सुधारित संस्करणों में से कोई एक। "
+"सबमिट करने से पहले संपादित कर सकता है।"
+
+#: includes/admin/class-analytics-page.php:116
+msgid "Auto-Publish"
+msgstr "स्वचालित-प्रकाशन"
+
+#: includes/admin/class-analytics-page.php:117
+msgid ""
+"Once approved, review automatically publishes to your WooCommerce product "
+"page via webhook or daily sync."
+msgstr ""
+"एक बार स्वीकृत होने पर, समीक्षा वेबहुक या दैनिक सिंक के माध्यम से स्वचालित "
+"रूप से आपके WooCommerce उत्पाद पृष्ठ पर प्रकाशित हो जाती है।"
+
+#: includes/admin/class-analytics-page.php:123
+msgid "Cryptographic Verification"
+msgstr "क्रिप्टोग्राफ़िक सत्यापन"
+
+#: includes/admin/class-analytics-page.php:124
+msgid ""
+"Each review gets a unique SHA-256 hash for authenticity verification. "
+"Customers can verify at nexlifylabs.com/verify-review."
+msgstr ""
+"प्रत्येक समीक्षा को प्रामाणिकता सत्यापन के लिए एक अद्वितीय SHA-256 हैश दिया "
+"जाता है। ग्राहक nexlifylabs.com/verify-review पर जाकर सत्यापन कर सकते हैं।"
+
+#: includes/admin/class-analytics-page.php:132
+msgid "Recent Activity (Last 10)"
+msgstr "हाल की गतिविधि (अंतिम 10)"
+
+#: includes/admin/class-analytics-page.php:134
+msgid "View All Review Requests →"
+msgstr "सभी समीक्षा अनुरोध देखें →"
+
+#: includes/admin/class-analytics-page.php:141
+msgid "Loading activity..."
+msgstr "लोडिंग गतिविधि..."
+
+#: includes/admin/class-analytics-page.php:142
+msgid "Please wait"
+msgstr "कृपया प्रतीक्षा करें"
+
+#: includes/admin/class-analytics-page.php:151
+#: includes/class-trustscript-admin.php:595
+msgid "Refresh Analytics"
+msgstr "एनालिटिक्स ताज़ा करें"
+
+#: includes/admin/class-analytics-page.php:154
+#: includes/admin/pending-queue.php:135 includes/admin/settings.php:158
+#: includes/admin/settings.php:429
+msgid "Upgrade Plan"
+msgstr "अपग्रेड योजना"
+
+#: includes/admin/class-analytics-page.php:157
+#: includes/admin/review-setting.php:87 includes/admin/review-setting.php:90
+#: includes/class-trustscript-admin.php:135
+#: includes/class-trustscript-admin.php:136
+msgid "Review Settings"
+msgstr "सेटिंग्स की समीक्षा करें"
+
+#: includes/admin/email-template.php:53
+msgid "Email Template Management"
+msgstr "ईमेल टेम्पलेट प्रबंधन"
+
+#: includes/admin/email-template.php:60
+msgid "Email Template Customization - Pro & Business Plans Only"
+msgstr "ईमेल टेम्पलेट अनुकूलन - केवल प्रो और बिजनेस प्लान"
+
+#: includes/admin/email-template.php:63
+msgid ""
+"Email template customization is available for Pro and Business plan users. "
+"Upgrade your plan to create and manage custom, compliance-checked email "
+"templates in your TrustScript dashboard."
+msgstr ""
+"ईमेल टेम्पलेट अनुकूलन प्रो और बिजनेस प्लान उपयोगकर्ताओं के लिए उपलब्ध है। "
+"अपने TrustScript डैशबोर्ड में कस्टम, अनुपालन-जांचित ईमेल टेम्पलेट बनाने और "
+"प्रबंधित करने के लिए अपना प्लान अपग्रेड करें।"
+
+#: includes/admin/email-template.php:67
+msgid "Upgrade Your Plan →"
+msgstr "अपनी योजना अपग्रेड करें →"
+
+#: includes/admin/email-template.php:76
+msgid "Manage Your Email Templates"
+msgstr "अपने ईमेल टेम्पलेट्स प्रबंधित करें"
+
+#: includes/admin/email-template.php:79
+msgid ""
+"Email templates are centrally managed in your TrustScript dashboard for all "
+"your platforms (WordPress, Wix, Shopify, API). Create custom, compliance-"
+"checked templates with built-in FTC & GDPR protection."
+msgstr ""
+"ईमेल टेम्पलेट्स को आपके TrustScript डैशबोर्ड में सभी प्लेटफ़ॉर्म्स "
+"(WordPress, Wix, Shopify, API) के लिए केंद्रीय रूप से प्रबंधित किया जाता है।"
+" अंतर्निहित FTC और GDPR सुरक्षा के साथ अनुकूलित, अनुपालन-जांचित टेम्पलेट्स "
+"बनाएँ।"
+
+#: includes/admin/email-template.php:84
+msgid "Go to Email Template Dashboard →"
+msgstr "ईमेल टेम्पलेट डैशबोर्ड पर जाएँ →"
+
+#: includes/admin/email-template.php:94
+msgid "Privacy & GDPR/FTC Compliance"
+msgstr "गोपनीयता और जीडीपीआर/एफटीसी अनुपालन"
+
+#: includes/admin/email-template.php:97
+msgid "🔒 No Customer Data Collection:"
+msgstr "🔒 ग्राहक डेटा का कोई संग्रह नहीं:"
+
+#: includes/admin/email-template.php:97
+msgid ""
+"TrustScript never collects, or stores customer personal information (names, "
+"emails, addresses, phone numbers, etc.)."
+msgstr ""
+"TrustScript कभी भी ग्राहक की व्यक्तिगत जानकारी (नाम, ईमेल, पते, फोन नंबर "
+"आदि) एकत्रित या संग्रहीत नहीं करता।"
+
+#: includes/admin/email-template.php:98
+msgid "🔐 Hashed Emails Only:"
+msgstr "🔐 केवल हैश किए गए ईमेल:"
+
+#: includes/admin/email-template.php:98
+msgid ""
+"We only store secure hashes of email addresses for opt-out purposes - the "
+"original email is never stored or accessible."
+msgstr ""
+"हम केवल ऑप्ट-आउट उद्देश्यों के लिए ईमेल पतों के सुरक्षित हैश संग्रहीत करते "
+"हैं - मूल ईमेल कभी भी संग्रहीत या सुलभ नहीं होती।"
+
+#: includes/admin/email-template.php:99
+msgid "📊 Order IDs Only:"
+msgstr "📊 केवल ऑर्डर आईडी:"
+
+#: includes/admin/email-template.php:99
+msgid ""
+"We track order IDs to manage review requests and match approved reviews back"
+" to products."
+msgstr ""
+"हम समीक्षा अनुरोधों का प्रबंधन करने और स्वीकृत समीक्षाओं को उत्पादों से "
+"मिलाने के लिए ऑर्डर आईडी ट्रैक करते हैं।"
+
+#: includes/admin/email-template.php:100
+msgid "✓ FTC & GDPR Compliant:"
+msgstr "✓ FTC और GDPR के अनुरूप:"
+
+#: includes/admin/email-template.php:100
+msgid ""
+"All emails include mandatory GDPR footer, opt-out links, and honest feedback"
+" language - automatically enforced by the system."
+msgstr ""
+"सभी ईमेल में अनिवार्य GDPR फ़ुटर, ऑप्ट-आउट लिंक और ईमानदार प्रतिक्रिया भाषा "
+"शामिल होती है - जिसे सिस्टम स्वचालित रूप से लागू करता है।"
+
+#: includes/admin/email-template.php:101
+msgid "✓ Automatic Privacy Footer:"
+msgstr "✓ स्वचालित गोपनीयता फ़ुटर:"
+
+#: includes/admin/email-template.php:101
+msgid ""
+"Privacy notice, opt-out links, and transactional disclosures are added to "
+"every email automatically and cannot be removed."
+msgstr ""
+"गोपनीयता सूचना, ऑप्ट-आउट लिंक और लेन-देन संबंधी खुलासे हर ईमेल में स्वचालित "
+"रूप से जोड़े जाते हैं और इन्हें हटाया नहीं जा सकता।"
+
+#: includes/admin/pending-queue.php:24 includes/admin/settings.php:10
+msgid "Sorry, you are not allowed to access this page."
+msgstr "क्षमा करें, आपको इस पृष्ठ तक पहुँच की अनुमति नहीं है।"
+
+#. translators: %d = number of processed review requests
+#: includes/admin/pending-queue.php:62
+#, php-format
+msgid "All done! %d review request(s) were sent successfully."
+msgstr "सब हो गया! %d समीक्षा अनुरोध सफलतापूर्वक भेजे गए।"
+
+#. translators: 1: number of processed review requests, 2: number of still
+#. pending orders
+#: includes/admin/pending-queue.php:70
+#, php-format
+msgid ""
+"%1$d review request(s) sent. %2$d order(s) still pending — quota may still "
+"be limited."
+msgstr ""
+"%1$d समीक्षा अनुरोध भेजे गए। %2$d ऑर्डर अभी भी लंबित हैं — कोटा अभी भी सीमित"
+" हो सकता है।"
+
+#. translators: %d = number of failed orders
+#: includes/admin/pending-queue.php:79
+#, php-format
+msgid "%d order(s) could not be processed. Check the Failed tab for details."
+msgstr "%d ऑर्डर संसाधित नहीं किए जा सके। विवरण के लिए 'असफल' टैब देखें।"
+
+#: includes/admin/pending-queue.php:84
+msgid ""
+"Queue processed — no new orders were sent (quota may still be limited)."
+msgstr ""
+"क्व्यू संसाधित — कोई नया ऑर्डर नहीं भेजा गया (कोटा अभी भी सीमित हो सकता है)।"
+
+#: includes/admin/pending-queue.php:92
+msgid "Pending Review Queue"
+msgstr "समीक्षा के लिए प्रतीक्षारत कतार"
+
+#. translators: %d number of pending orders
+#: includes/admin/pending-queue.php:99
+#, php-format
+msgid "%d order pending"
+msgid_plural "%d orders pending"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s formatted reset date
+#: includes/admin/pending-queue.php:109
+#, php-format
+msgid "&nbsp;&middot;&nbsp; Quota resets %s"
+msgstr " ·  कोटा रीसेट %s"
+
+#. translators: 1: next plan name 2: limit
+#: includes/admin/pending-queue.php:124
+#, php-format
+msgid "Upgrade to %1$s for %2$s reviews/mo"
+msgstr "%1$s के लिए %2$s समीक्षाएँ/माह अपग्रेड करें"
+
+#: includes/admin/pending-queue.php:144
+#: includes/class-trustscript-admin.php:629
+msgid "Process Queue Now"
+msgstr "प्रक्रिया कतार अब"
+
+#: includes/admin/pending-queue.php:147
+msgid ""
+"Processes quota failures and other non-scheduled errors only. To process "
+"scheduled items early, use the Retry button on each individual item."
+msgstr ""
+"केवल कोटा विफलताओं और अन्य गैर-निर्धारित त्रुटियों को संसाधित करता है। "
+"निर्धारित आइटमों को पहले संसाधित करने के लिए प्रत्येक आइटम पर पुनः प्रयास "
+"बटन का उपयोग करें।"
+
+#: includes/admin/pending-queue.php:152
+msgid "✅ Queue is empty — all review requests are up to date."
+msgstr "✅ कतार खाली है — सभी समीक्षा अनुरोध अद्यतित हैं।"
+
+#. translators: %d = number of pending items
+#: includes/admin/pending-queue.php:177
+#, php-format
+msgid "Pending (%d)"
+msgstr "लंबित (%d)"
+
+#. translators: %d = number of failed items
+#: includes/admin/pending-queue.php:180
+#, php-format
+msgid "Failed (%d)"
+msgstr "असफल (%d)"
+
+#. translators: %d = number of completed items
+#: includes/admin/pending-queue.php:183
+#, php-format
+msgid "Completed (%d)"
+msgstr "पूर्ण (%d)"
+
+#: includes/admin/pending-queue.php:184
+msgid "All"
+msgstr "सभी"
+
+#: includes/admin/pending-queue.php:199
+msgid "ID"
+msgstr "पहचान संख्या"
+
+#: includes/admin/pending-queue.php:200
+msgid "Order #"
+msgstr "आदेश संख्या"
+
+#: includes/admin/pending-queue.php:201
+msgid "Service"
+msgstr "सेवा"
+
+#: includes/admin/pending-queue.php:202
+msgid "Reason"
+msgstr "कारण"
+
+#: includes/admin/pending-queue.php:203
+msgid "Queued At"
+msgstr "की कतार में"
+
+#: includes/admin/pending-queue.php:204
+msgid "Scheduled For"
+msgstr "के लिए निर्धारित"
+
+#: includes/admin/pending-queue.php:205
+msgid "Last Attempt"
+msgstr "अंतिम प्रयास"
+
+#: includes/admin/pending-queue.php:206
+msgid "Retries"
+msgstr "पुनः प्रयास"
+
+#: includes/admin/pending-queue.php:207 includes/admin/review-request.php:83
+#: includes/admin/review-request.php:122
+msgid "Status"
+msgstr "स्थिति"
+
+#: includes/admin/pending-queue.php:208 includes/admin/review-request.php:125
+msgid "Actions"
+msgstr "शेयर"
+
+#: includes/admin/pending-queue.php:217
+msgid "No permanently failed items."
+msgstr "कोई भी आइटम स्थायी रूप से असफल नहीं हुआ।"
+
+#: includes/admin/pending-queue.php:219
+msgid "No completed review requests yet."
+msgstr "अभी तक कोई पूर्ण समीक्षा अनुरोध नहीं हैं।"
+
+#: includes/admin/pending-queue.php:221
+msgid "The queue is empty."
+msgstr "कतार खाली है।"
+
+#: includes/admin/pending-queue.php:223
+msgid ""
+"No pending orders. New quota-exceeded orders will appear here automatically."
+msgstr ""
+"कोई लंबित आदेश नहीं हैं। नए कोटा-अतिक्रमण वाले आदेश स्वचालित रूप से यहां "
+"दिखाई देंगे।"
+
+#: includes/admin/pending-queue.php:248
+msgid "Quota"
+msgstr "राशि"
+
+#: includes/admin/pending-queue.php:249
+msgid "Rate limit"
+msgstr "दर सीमा"
+
+#: includes/admin/pending-queue.php:250
+msgid "Network"
+msgstr "नेटवर्क"
+
+#: includes/admin/pending-queue.php:251
+msgid "API error"
+msgstr "एपीआई त्रुटि"
+
+#: includes/admin/pending-queue.php:252
+msgid "Scheduled"
+msgstr "निर्धारित"
+
+#: includes/admin/pending-queue.php:276
+msgid "Immediate"
+msgstr "तत्काल"
+
+#: includes/admin/pending-queue.php:280
+msgid "Never"
+msgstr "कभी नहीं"
+
+#: includes/admin/pending-queue.php:285 includes/admin/review-request.php:51
+#: includes/admin/review-request.php:87
+#: includes/providers/class-trustscript-memberpress-provider.php:79
+msgid "Pending"
+msgstr "लंबित"
+
+#: includes/admin/pending-queue.php:286
+#: includes/providers/class-trustscript-memberpress-provider.php:80
+msgid "Failed"
+msgstr "असफल"
+
+#: includes/admin/pending-queue.php:287
+msgid "Completed"
+msgstr "पूर्ण"
+
+#: includes/admin/pending-queue.php:309
+#: includes/class-trustscript-admin.php:627
+msgid "Retry"
+msgstr "दोबारा प्रयास करें"
+
+#: includes/admin/pending-queue.php:316
+#: includes/class-trustscript-admin.php:628
+msgid "Clear"
+msgstr "स्पष्ट"
+
+#: includes/admin/pending-queue.php:319
+msgid "No actions available"
+msgstr "कोई कार्रवाई उपलब्ध नहीं है"
+
+#. translators: %d = total number of items
+#: includes/admin/pending-queue.php:346
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/pending-queue.php:361 includes/admin/pending-queue.php:421
+msgid "Security verification failed. Please refresh the page."
+msgstr "सुरक्षा सत्यापन विफल हो गया। कृपया पेज को रिफ्रेश करें।"
+
+#: includes/admin/pending-queue.php:365 includes/admin/pending-queue.php:425
+#: includes/admin/pending-queue.php:458
+#: includes/class-trustscript-admin.php:643
+#: includes/class-trustscript-admin.php:669
+#: includes/class-trustscript-admin.php:2018
+msgid "Permission denied"
+msgstr "अनुमति अस्वीकार कर दी गई"
+
+#: includes/admin/pending-queue.php:370 includes/admin/pending-queue.php:430
+msgid "Invalid ID"
+msgstr "अमान्य आईडी"
+
+#: includes/admin/pending-queue.php:379
+msgid "Queue item not found"
+msgstr "कतार आइटम नहीं मिला"
+
+#: includes/admin/pending-queue.php:384
+msgid "This order has already been completed. No retry needed."
+msgstr ""
+"यह आदेश पहले ही पूरा हो चुका है। पुनः प्रयास करने की आवश्यकता नहीं है।"
+
+#. translators: %s: service ID
+#: includes/admin/pending-queue.php:393
+#, php-format
+msgid "Service provider not active: %s"
+msgstr "सेवा प्रदाता सक्रिय नहीं है: %s"
+
+#. translators: %d: order ID
+#: includes/admin/pending-queue.php:403
+#, php-format
+msgid "Order #%d processed successfully."
+msgstr "ऑर्डर #%d सफलतापूर्वक संसाधित हो गया।"
+
+#. translators: %s: error message
+#: includes/admin/pending-queue.php:411
+#, php-format
+msgid "Request failed (%s). Order remains in queue."
+msgstr "अनुरोध विफल हो गया (%s)। ऑर्डर कतार में बना हुआ है।"
+
+#: includes/admin/pending-queue.php:439
+msgid ""
+"Completed items cannot be cleared (kept for audit trail). Use the Completed "
+"tab to view processed orders."
+msgstr ""
+"पूरे किए गए आइटम हटाए नहीं जा सकते (ऑडिट ट्रेल के लिए रखे जाते हैं)। संसाधित"
+" ऑर्डर देखने के लिए पूरे किए गए टैब का उपयोग करें।"
+
+#: includes/admin/pending-queue.php:443
+msgid "Item removed from queue."
+msgstr "आइटम कतार से हटा दिया गया।"
+
+#: includes/admin/pending-queue.php:445
+msgid "Item not found or already removed."
+msgstr "आइटम नहीं मिला या पहले से हटा दिया गया।"
+
+#: includes/admin/pending-queue.php:454
+msgid "Security verification failed. Please refresh the page and try again."
+msgstr ""
+"सुरक्षा सत्यापन विफल हो गया। कृपया पेज को रिफ्रेश करें और फिर से प्रयास "
+"करें।"
+
+#: includes/admin/pending-queue.php:491
+msgid ""
+"An error occurred while processing the queue. Check the error logs for "
+"details."
+msgstr "कतार संसाधित करते समय एक त्रुटि हुई। विवरण के लिए त्रुटि लॉग्स देखें।"
+
+#: includes/admin/review-request.php:25
+#: includes/class-trustscript-admin.php:144
+#: includes/class-trustscript-admin.php:145
+msgid "Review Requests"
+msgstr "समीक्षा अनुरोध"
+
+#: includes/admin/review-request.php:28
+msgid "Review Request"
+msgstr "समीक्षा अनुरोध"
+
+#: includes/admin/review-request.php:31
+msgid "Quick Operations Dashboard"
+msgstr "त्वरित संचालन डैशबोर्ड"
+
+#: includes/admin/review-request.php:33
+msgid ""
+"Manage review requests for this store. For complete report, and cross-"
+"platform analytics, visit your TrustScript dashboard."
+msgstr ""
+"इस स्टोर के लिए समीक्षा अनुरोधों का प्रबंधन करें। पूर्ण रिपोर्ट और "
+"क्रॉस-प्लेटफ़ॉर्म विश्लेषण के लिए, अपने TrustScript डैशबोर्ड पर जाएँ।"
+
+#: includes/admin/review-request.php:38
+msgid "Open TrustScript Compliance Dashboard →"
+msgstr "ओपन TrustScript अनुपालन डैशबोर्ड →"
+
+#: includes/admin/review-request.php:47
+msgid "Total Requests"
+msgstr "कुल अनुरोध"
+
+#: includes/admin/review-request.php:55 includes/admin/review-request.php:88
+msgid "Approved"
+msgstr "स्वीकृत"
+
+#: includes/admin/review-request.php:65
+msgid "All Review Requests"
+msgstr "सभी समीक्षा अनुरोध"
+
+#: includes/admin/review-request.php:72
+msgid "Search"
+msgstr "खोजें"
+
+#: includes/admin/review-request.php:78
+msgid "Product name or order ID..."
+msgstr "उत्पाद का नाम या ऑर्डर आईडी..."
+
+#: includes/admin/review-request.php:86
+msgid "All Statuses"
+msgstr "सभी स्थितियाँ"
+
+#: includes/admin/review-request.php:93
+msgid "Date Range"
+msgstr "दिनांक सीमा"
+
+#: includes/admin/review-request.php:96
+msgid "All Time"
+msgstr "सभी समय"
+
+#: includes/admin/review-request.php:97
+msgid "Last 7 Days"
+msgstr "पिछले 7 दिन"
+
+#: includes/admin/review-request.php:98
+msgid "Last 30 Days"
+msgstr "पिछले 30 दिन"
+
+#: includes/admin/review-request.php:99
+msgid "Last 90 Days"
+msgstr "पिछले 90 दिन"
+
+#: includes/admin/review-request.php:104
+msgid "Apply Filters"
+msgstr "फ़िल्टर लागू करें"
+
+#: includes/admin/review-request.php:111
+msgid "Loading review requests..."
+msgstr "समीक्षा अनुरोध लोड हो रहे हैं..."
+
+#: includes/admin/review-request.php:120
+msgid "Order ID"
+msgstr "ऑर्डर आईडी"
+
+#: includes/admin/review-request.php:121
+msgid "Product"
+msgstr "उत्पाद"
+
+#: includes/admin/review-request.php:123
+msgid "Project"
+msgstr "परियोजना"
+
+#: includes/admin/review-request.php:124
+msgid "Date"
+msgstr "डेटा"
+
+#: includes/admin/review-request.php:144
+msgid ""
+"No review requests found. They will appear here after orders are completed."
+msgstr ""
+"कोई समीक्षा अनुरोध नहीं मिला। आदेश पूरे होने के बाद वे यहाँ दिखाई देंगे।"
+
+#: includes/admin/review-request.php:150
+msgid "Refresh"
+msgstr "ताज़ा करें"
+
+#: includes/admin/review-setting.php:91
+msgid ""
+"Configure how TrustScript generates and collects AI-powered reviews from "
+"your customers across all services."
+msgstr ""
+"सभी सेवाओं में अपने ग्राहकों से TrustScript द्वारा AI-संचालित समीक्षाएँ कैसे"
+" उत्पन्न और एकत्र की जाती हैं, इसे कॉन्फ़िगर करें।"
+
+#: includes/admin/review-setting.php:99
+msgid "Review Email Timing Guide"
+msgstr "ईमेल समीक्षा समय-निर्देशिका"
+
+#: includes/admin/review-setting.php:100
+msgid "Common questions about when and how to send review requests"
+msgstr "समीक्षा अनुरोध कब और कैसे भेजने के बारे में सामान्य प्रश्न"
+
+#: includes/admin/review-setting.php:106
+msgid "Why shouldn't I use \"Completed\" status?"
+msgstr "मैं \"Completed\" स्थिति का उपयोग क्यों नहीं करूँ?"
+
+#: includes/admin/review-setting.php:110
+msgid ""
+"Most stores mark orders as \"Completed\" when shipped, NOT when delivered. "
+"This means customers receive review requests while the package is still in "
+"transit - before they even have the product!"
+msgstr ""
+"अधिकांश स्टोर ऑर्डर को शिप होने पर \"पूर्ण\" के रूप में चिह्नित करते हैं, न "
+"कि डिलीवर होने पर। इसका मतलब है कि ग्राहकों को समीक्षा अनुरोध तब मिलते हैं "
+"जब पैकेज अभी भी परिवहन में होता है – उत्पाद उनके पास पहुँचने से पहले ही!"
+
+#: includes/admin/review-setting.php:114
+msgid "Result:"
+msgstr "परिणाम:"
+
+#: includes/admin/review-setting.php:115
+msgid "Low response rates, frustrated customers, and poor quality reviews."
+msgstr "निम्न प्रतिक्रिया दरें, निराश ग्राहक, और खराब गुणवत्ता की समीक्षाएँ।"
+
+#: includes/admin/review-setting.php:123
+msgid "What is the \"Delivered\" status?"
+msgstr "\"Delivered\" स्थिति क्या है?"
+
+#: includes/admin/review-setting.php:127
+msgid ""
+"TrustScript creates a new \"Delivered\" order status. Mark orders as "
+"\"Delivered\" only when customers actually receive their products."
+msgstr ""
+"TrustScript एक नया \"Delivered\" ऑर्डर स्टेटस बनाता है। ऑर्डरों को केवल तब "
+"\"Delivered\" के रूप में चिह्नित करें जब ग्राहक वास्तव में अपने उत्पाद "
+"प्राप्त कर लें।"
+
+#: includes/admin/review-setting.php:130
+msgid "✅ Customers have the product in hand"
+msgstr "✅ ग्राहकों के पास उत्पाद हाथ में है"
+
+#: includes/admin/review-setting.php:131
+msgid "✅ Review emails sent at the perfect time"
+msgstr "✅ सही समय पर भेजे गए ईमेल की समीक्षा करें"
+
+#: includes/admin/review-setting.php:132
+msgid "✅ Higher response rates and quality reviews"
+msgstr "✅ उच्च प्रतिक्रिया दरें और गुणवत्तापूर्ण समीक्षाएँ"
+
+#: includes/admin/review-setting.php:133
+msgid "✅ Professional customer experience"
+msgstr "✅ पेशेवर ग्राहक अनुभव"
+
+#: includes/admin/review-setting.php:141
+msgid "How do I use the Delivered status?"
+msgstr "मैं Delivered स्थिति का उपयोग कैसे करूँ?"
+
+#: includes/admin/review-setting.php:146
+msgid "Delivered Status Detected!"
+msgstr "पहुँचाया गया स्थिति का पता चला!"
+
+#. translators: %s: status name
+#: includes/admin/review-setting.php:151
+msgid ""
+"TrustScript found an existing \"Delivered\" status. We'll use this "
+"automatically!"
+msgstr ""
+"TrustScript ने एक मौजूदा \"Delivered\" स्थिति पाई। हम इसका स्वचालित रूप से "
+"उपयोग करेंगे!"
+
+#: includes/admin/review-setting.php:160
+msgid "Manual Method:"
+msgstr "मैनुअल विधि:"
+
+#: includes/admin/review-setting.php:162
+msgid "Go to WooCommerce → Orders"
+msgstr "WooCommerce → ऑर्डर्स पर जाएँ"
+
+#: includes/admin/review-setting.php:163
+msgid "When a customer confirms delivery, change order status to \"Delivered\""
+msgstr ""
+"जब ग्राहक डिलीवरी की पुष्टि करता है, तो ऑर्डर की स्थिति को \"डिलीवर\" में "
+"बदलें।"
+
+#: includes/admin/review-setting.php:164
+msgid "TrustScript will send review request after configured delay"
+msgstr "TrustScript कॉन्फ़िगर की गई देरी के बाद समीक्षा अनुरोध भेजेगा।"
+
+#: includes/admin/review-setting.php:169
+msgid "Automatic Method (Recommended):"
+msgstr "स्वचालित विधि (अनुशंसित):"
+
+#: includes/admin/review-setting.php:171
+msgid ""
+"Use a shipment tracking plugin like ShipStation, TrackShip, or WooCommerce "
+"Shipment Tracking"
+msgstr ""
+"ShipStation, TrackShip, या WooCommerce Shipment Tracking जैसे शिपमेंट "
+"ट्रैकिंग प्लगइन का उपयोग करें।"
+
+#: includes/admin/review-setting.php:172
+msgid ""
+"Configure it to auto-update orders to \"Delivered\" when tracking shows "
+"delivery"
+msgstr ""
+"जब ट्रैकिंग से डिलीवरी दिखती है, तो ऑर्डरों को स्वचालित रूप से \"डिलीवर\" "
+"में अपडेट करने के लिए इसे कॉन्फ़िगर करें।"
+
+#: includes/admin/review-setting.php:173
+msgid "TrustScript will handle the rest automatically!"
+msgstr "TrustScript बाकी सब कुछ स्वचालित रूप से संभाल लेगा!"
+
+#: includes/admin/review-setting.php:182
+msgid "Can I still use \"Completed\" status?"
+msgstr "क्या मैं अभी भी \"Completed\" स्थिति का उपयोग कर सकता हूँ?"
+
+#: includes/admin/review-setting.php:188
+msgid "Yes, but with caution."
+msgstr "हाँ, लेकिन सावधानी के साथ।"
+
+#: includes/admin/review-setting.php:189
+msgid ""
+"You can use \"Completed\" status, but set a longer delay to ensure customers"
+" receive products first. By default, international orders use this same "
+"domestic delay. To send international orders on a different schedule, enable"
+" the \"Handle international orders differently\" option above to set a "
+"separate delay."
+msgstr ""
+"आप \"Completed\" स्थिति का उपयोग कर सकते हैं, लेकिन ग्राहकों को पहले उत्पाद "
+"प्राप्त होने सुनिश्चित करने के लिए लंबी देरी निर्धारित करें। डिफ़ॉल्ट रूप "
+"से, अंतरराष्ट्रीय ऑर्डर इसी घरेलू देरी का उपयोग करते हैं। अंतरराष्ट्रीय "
+"ऑर्डर को अलग शेड्यूल पर भेजने के लिए, ऊपर दिए गए \"Handle international "
+"orders differently\" विकल्प को सक्षम करें और अलग देरी निर्धारित करें।"
+
+#: includes/admin/review-setting.php:198
+msgid "Review Collection"
+msgstr "समीक्षा संग्रह"
+
+#: includes/admin/review-setting.php:205
+msgid "Enable automatic review requests"
+msgstr "स्वचालित समीक्षा अनुरोध सक्षम करें"
+
+#: includes/admin/review-setting.php:207
+msgid ""
+"When enabled, TrustScript will automatically send review request emails to "
+"customers after order completion."
+msgstr ""
+"सक्रिय होने पर, TrustScript ऑर्डर पूरा होने के बाद स्वचालित रूप से "
+"ग्राहकों को समीक्षा अनुरोध ईमेल भेजेगा।"
+
+#: includes/admin/review-setting.php:211
+msgid "Domestic Review Request Delay"
+msgstr "घरेलू समीक्षा अनुरोध में देरी"
+
+#: includes/admin/review-setting.php:215
+#: includes/class-trustscript-admin.php:1993
+msgid "Immediately"
+msgstr "तुरंत"
+
+#: includes/admin/review-setting.php:216
+msgid "1 hour"
+msgstr "एक घंटा"
+
+#: includes/admin/review-setting.php:217
+msgid "12 hours"
+msgstr "12 घंटे"
+
+#: includes/admin/review-setting.php:218
+msgid "1 day"
+msgstr "एक दिन"
+
+#: includes/admin/review-setting.php:219
+msgid "2 days"
+msgstr "2 दिन"
+
+#: includes/admin/review-setting.php:220
+msgid "3 days"
+msgstr "तीन दिन"
+
+#: includes/admin/review-setting.php:221
+msgid "1 week"
+msgstr "1 सप्ताह"
+
+#: includes/admin/review-setting.php:222 includes/admin/review-setting.php:259
+msgid "2 weeks"
+msgstr "दो सप्ताह"
+
+#: includes/admin/review-setting.php:223 includes/admin/review-setting.php:260
+msgid "3 weeks"
+msgstr "तीन सप्ताह"
+
+#: includes/admin/review-setting.php:224 includes/admin/review-setting.php:261
+msgid "4 weeks (1 month)"
+msgstr "4 सप्ताह (1 महीना)"
+
+#: includes/admin/review-setting.php:225 includes/admin/review-setting.php:263
+msgid "Custom..."
+msgstr "अनुकूलित..."
+
+#: includes/admin/review-setting.php:230 includes/admin/review-setting.php:268
+msgid "Value"
+msgstr "मूल्य"
+
+#: includes/admin/review-setting.php:232 includes/admin/review-setting.php:270
+msgid "Hours"
+msgstr "घंटे"
+
+#: includes/admin/review-setting.php:233 includes/admin/review-setting.php:271
+msgid "Days"
+msgstr "दिन"
+
+#: includes/admin/review-setting.php:238
+msgid ""
+"Time to wait after order status change before sending review request to "
+"customers."
+msgstr ""
+"ऑर्डर की स्थिति बदलने के बाद ग्राहकों को समीक्षा अनुरोध भेजने से पहले "
+"प्रतीक्षा का समय।"
+
+#: includes/admin/review-setting.php:247
+msgid "Handle international orders differently"
+msgstr "अंतरराष्ट्रीय ऑर्डरों को अलग तरह से संभालें"
+
+#: includes/admin/review-setting.php:249
+msgid ""
+"When enabled, international orders will use a separate, longer review "
+"request delay. This gives international customers more time to receive and "
+"verify their orders."
+msgstr ""
+"जब सक्षम किया जाता है, तो अंतरराष्ट्रीय ऑर्डरों के लिए समीक्षा अनुरोध में "
+"अलग और लंबा विलंब लागू होगा। इससे अंतरराष्ट्रीय ग्राहकों को अपने ऑर्डर "
+"प्राप्त करने और सत्यापित करने के लिए अधिक समय मिलता है।"
+
+#: includes/admin/review-setting.php:253
+msgid "International Order Review Request Delay"
+msgstr "अंतर्राष्ट्रीय ऑर्डर समीक्षा अनुरोध में देरी"
+
+#: includes/admin/review-setting.php:255
+msgid "International Delay"
+msgstr "अंतर्राष्ट्रीय विलंब"
+
+#: includes/admin/review-setting.php:262
+msgid "8 weeks (2 months)"
+msgstr "8 सप्ताह (2 महीने)"
+
+#: includes/admin/review-setting.php:276
+msgid ""
+"International shipments typically take longer. Set a longer delay to ensure "
+"customers receive and verify orders before review requests arrive."
+msgstr ""
+"अंतरराष्ट्रीय शिपमेंट्स में आमतौर पर अधिक समय लगता है। समीक्षा अनुरोध आने से"
+" पहले ग्राहकों को ऑर्डर प्राप्त करने और सत्यापित करने का समय देने के लिए "
+"अधिक देरी निर्धारित करें।"
+
+#: includes/admin/review-setting.php:282
+msgid "Service-Specific Settings"
+msgstr "सेवा-विशिष्ट सेटिंग्स"
+
+#: includes/admin/review-setting.php:283
+msgid "Configure filtering and options for each active service independently."
+msgstr ""
+"प्रत्येक सक्रिय सेवा के लिए फ़िल्टरिंग और विकल्पों को स्वतंत्र रूप से "
+"कॉन्फ़िगर करें।"
+
+#: includes/admin/review-setting.php:322
+msgid ""
+"No active services detected. Please install and activate WooCommerce, "
+"MemberPress, or other supported plugins."
+msgstr ""
+"कोई सक्रिय सेवाएँ नहीं मिलीं। कृपया WooCommerce, MemberPress, या अन्य "
+"समर्थित प्लगइन्स इंस्टॉल और सक्रिय करें।"
+
+#: includes/admin/review-setting.php:328
+msgid "Review Publishing"
+msgstr "समीक्षा प्रकाशन"
+
+#: includes/admin/review-setting.php:335
+msgid "Auto-publish approved reviews"
+msgstr "स्वीकृत समीक्षाओं को स्वचालित रूप से प्रकाशित करें"
+
+#: includes/admin/review-setting.php:337
+msgid ""
+"When enabled, customer-approved reviews will be published immediately to "
+"your WooCommerce product pages. When disabled, reviews will require admin "
+"approval first."
+msgstr ""
+"सक्रिय होने पर, ग्राहक-स्वीकृत समीक्षाएँ तुरंत आपके WooCommerce उत्पाद "
+"पृष्ठों पर प्रकाशित हो जाएँगी। निष्क्रिय होने पर, समीक्षाओं को पहले एडमिन की"
+" मंजूरी की आवश्यकता होगी।"
+
+#: includes/admin/review-setting.php:344
+msgid "Review & Email Settings"
+msgstr "समीक्षा और ईमेल सेटिंग्स"
+
+#: includes/admin/review-setting.php:345
+msgid ""
+"The following settings are now managed from your TrustScript Dashboard:"
+msgstr ""
+"निम्नलिखित सेटिंग्स अब आपके TrustScript डैशबोर्ड से प्रबंधित की जाती हैं:"
+
+#: includes/admin/review-setting.php:347
+msgid "Email Mode Settings (Auto Send or Manual Send)"
+msgstr "ईमेल मोड सेटिंग्स (स्वचालित भेजें या मैन्युअल भेजें)"
+
+#: includes/admin/review-setting.php:348
+msgid "Photo Uploads (Enable/Disable)"
+msgstr "फ़ोटो अपलोड (सक्षम/अक्षम)"
+
+#: includes/admin/review-setting.php:349
+msgid "Video Uploads (Coming Soon)"
+msgstr "वीडियो अपलोड (जल्द आ रहा है)"
+
+#: includes/admin/review-setting.php:353
+msgid "Go to TrustScript Dashboard →"
+msgstr "TrustScript डैशबोर्ड पर जाएँ →"
+
+#: includes/admin/review-setting.php:361
+msgid "Review Filter Keywords"
+msgstr "समीक्षा फ़िल्टर कीवर्ड"
+
+#: includes/admin/review-setting.php:362
+msgid ""
+"Select which keywords should appear as filter chips on product pages. "
+"Keywords are only displayed if they exist in actual customer reviews. You "
+"can also configure product-specific keywords from the product editor."
+msgstr ""
+"चुनें कि उत्पाद पृष्ठों पर कौन से कीवर्ड फ़िल्टर चिप्स के रूप में दिखाई दें।"
+" कीवर्ड केवल तभी दिखाए जाते हैं जब वे वास्तविक ग्राहक समीक्षाओं में मौजूद "
+"हों। आप उत्पाद संपादक से उत्पाद-विशिष्ट कीवर्ड भी कॉन्फ़िगर कर सकते हैं।"
+
+#: includes/admin/review-setting.php:365
+msgid "Available Keywords"
+msgstr "उपलब्ध कीवर्ड"
+
+#: includes/admin/review-setting.php:379
+msgid ""
+"💡 Tip: Select the keywords that matter most for your products. Unselected "
+"keywords will never appear as filter chips, even if found in reviews."
+msgstr ""
+"💡 सुझाव: अपने उत्पादों के लिए सबसे महत्वपूर्ण कीवर्ड चुनें। चयनित नहीं किए "
+"गए कीवर्ड फ़िल्टर चिप्स के रूप में कभी नहीं दिखेंगे, भले ही वे समीक्षाओं में"
+" पाए जाएँ।"
+
+#: includes/admin/review-setting.php:385
+msgid "Review Voting"
+msgstr "समीक्षा मतदान"
+
+#: includes/admin/review-setting.php:386
+msgid ""
+"Allow logged-in users to vote on review helpfulness. One vote per review per"
+" user."
+msgstr ""
+"लॉग इन किए हुए उपयोगकर्ताओं को समीक्षा की उपयोगिता पर मतदान करने की अनुमति "
+"दें। प्रत्येक उपयोगकर्ता को प्रत्येक समीक्षा के लिए एक वोट।"
+
+#: includes/admin/review-setting.php:397
+msgid "Enable upvote/downvote on reviews"
+msgstr "समीक्षाओं पर अपवोट/डाउनवोट सक्षम करें"
+
+#: includes/admin/review-setting.php:400
+msgid ""
+"When enabled, logged-in users can vote on review helpfulness. Users must be "
+"logged in to vote, and each user can vote once per review."
+msgstr ""
+"जब यह सक्षम होता है, लॉग इन किए हुए उपयोगकर्ता समीक्षा की उपयोगिता पर मतदान "
+"कर सकते हैं। मतदान करने के लिए उपयोगकर्ताओं को लॉग इन करना आवश्यक है, और "
+"प्रत्येक उपयोगकर्ता प्रत्येक समीक्षा पर केवल एक बार मतदान कर सकता है।"
+
+#: includes/admin/review-setting.php:408
+msgid "Privacy Guarantee"
+msgstr "गोपनीयता गारंटी"
+
+#: includes/admin/review-setting.php:411
+msgid "✓ Vote data is stored ONLY on your WordPress site"
+msgstr "✓ वोट डेटा केवल आपकी वर्डप्रेस साइट पर संग्रहीत किया जाता है।"
+
+#: includes/admin/review-setting.php:412
+msgid "✓ NO voting data is ever sent to or stored on TrustScript servers"
+msgstr ""
+"✓ कोई भी मतदान डेटा कभी भी TrustScript सर्वरों पर भेजा या संग्रहीत नहीं किया"
+" जाता।"
+
+#: includes/admin/review-setting.php:413
+msgid "✓ All vote tracking is handled locally using WordPress user accounts"
+msgstr ""
+"✓ सभी वोट ट्रैकिंग वर्डप्रेस उपयोगकर्ता खातों का उपयोग करके स्थानीय रूप से "
+"संभाली जाती है।"
+
+#: includes/admin/review-setting.php:414
+msgid "✓ Users must be logged in to vote"
+msgstr "✓ वोट करने के लिए उपयोगकर्ताओं को लॉग इन करना होगा।"
+
+#: includes/admin/review-setting.php:422
+msgid "Automatic Daily Sync"
+msgstr "स्वचालित दैनिक सिंक"
+
+#: includes/admin/review-setting.php:427
+msgid "Two-way synchronization"
+msgstr "द्वि-तरफ़ा सिंक्रनाइज़ेशन"
+
+#: includes/admin/review-setting.php:429
+msgid ""
+"TrustScript runs a complete synchronization once every day. During this "
+"cycle, it:"
+msgstr ""
+"TrustScript हर दिन एक बार पूर्ण समकालिकता चलाता है। इस चक्र के दौरान, यह:"
+
+#: includes/admin/review-setting.php:431
+msgid ""
+"Publishes any approved reviews from TrustScript to your products "
+"(WooCommerce, MemberPress, etc.)"
+msgstr ""
+"TrustScript से किसी भी अनुमोदित समीक्षा को आपके उत्पादों (WooCommerce, "
+"MemberPress, आदि) पर प्रकाशित करता है।"
+
+#: includes/admin/review-setting.php:432
+msgid ""
+"Sends completed orders/bookings to TrustScript (WooCommerce, MemberPress)"
+msgstr ""
+"TrustScript (WooCommerce, MemberPress) को पूर्ण किए गए ऑर्डर/बुकिंग भेजता "
+"है।"
+
+#: includes/admin/review-setting.php:434
+msgid ""
+"This ensures all your services stay synced even if webhooks are unavailable "
+"or manual sync is not triggered."
+msgstr ""
+"यह सुनिश्चित करता है कि वेबहुक्स अनुपलब्ध होने या मैन्युअल सिंक न किए जाने "
+"पर भी आपकी सभी सेवाएँ सिंक बनी रहें।"
+
+#: includes/admin/review-setting.php:439
+msgid "Recommended for localhost, staging, and development setups"
+msgstr "लोकलहोस्ट, स्टेजिंग और डेवलपमेंट सेटअप के लिए अनुशंसित"
+
+#: includes/admin/review-setting.php:441
+msgid ""
+"Localhost environments cannot receive webhooks, which means reviews and "
+"orders won't sync instantly."
+msgstr ""
+"लोकलहोस्ट वातावरण वेबहुक्स प्राप्त नहीं कर सकते, जिसका अर्थ है कि समीक्षाएं "
+"और ऑर्डर तुरंत सिंक नहीं होंगे।"
+
+#: includes/admin/review-setting.php:442
+msgid ""
+"The Automatic Daily Sync helps bridge that gap by regularly checking for:"
+msgstr ""
+"स्वचालित दैनिक सिंक नियमित रूप से निम्नलिखित की जाँच करके उस अंतर को पाटने "
+"में मदद करता है:"
+
+#: includes/admin/review-setting.php:444
+msgid "Orders that weren't sent to TrustScript"
+msgstr "TrustScript को नहीं भेजे गए ऑर्डर"
+
+#: includes/admin/review-setting.php:445
+msgid "Reviews that were approved but not yet published on your site"
+msgstr "आपकी साइट पर स्वीकृत लेकिन अभी तक प्रकाशित नहीं हुई समीक्षाएँ"
+
+#: includes/admin/review-setting.php:447
+msgid ""
+"This makes it easier to test the full review flow without needing live "
+"servers or public URLs."
+msgstr ""
+"इससे लाइव सर्वर या सार्वजनिक यूआरएल की आवश्यकता के बिना पूरे समीक्षा प्रवाह "
+"का परीक्षण करना आसान हो जाता है।"
+
+#: includes/admin/review-setting.php:452
+msgid "Reliable fallback for all installations"
+msgstr "सभी इंस्टॉलेशन के लिए विश्वसनीय वैकल्पिक उपाय"
+
+#: includes/admin/review-setting.php:454
+msgid ""
+"Even on live websites, the daily sync acts as a safety net to ensure nothing"
+" is missed due to API delays, hosting limitations, or temporary downtime."
+msgstr ""
+"लाइव वेबसाइटों पर भी, दैनिक सिंक एक सुरक्षा जाल के रूप में कार्य करता है "
+"ताकि API में देरी, होस्टिंग सीमाओं, या अस्थायी डाउनटाइम के कारण कुछ भी छूट न"
+" जाए।"
+
+#: includes/admin/review-setting.php:455
+msgid ""
+"When enabled, TrustScript automatically processes any pending data once per "
+"day_making it especially helpful during plugin development or when testing "
+"review workflows on a local machine."
+msgstr ""
+"सक्रिय होने पर, TrustScript किसी भी लंबित डेटा को प्रतिदिन एक बार स्वचालित "
+"रूप से संसाधित करता है, जो प्लगइन विकास या स्थानीय मशीन पर समीक्षा वर्कफ़्लो"
+" का परीक्षण करते समय विशेष रूप से सहायक होता है।"
+
+#: includes/admin/review-setting.php:464
+msgid "Enable automatic daily sync"
+msgstr "स्वचालित दैनिक सिंक सक्षम करें"
+
+#: includes/admin/review-setting.php:466
+msgid ""
+"When enabled, TrustScript will automatically check for missed orders once "
+"per day."
+msgstr ""
+"सक्रिय होने पर, TrustScript दिन में एक बार छूटे हुए ऑर्डरों की स्वचालित रूप "
+"से जाँच करेगा।"
+
+#: includes/admin/review-setting.php:470
+msgid "Daily Sync Time"
+msgstr "दैनिक सिंक समय"
+
+#: includes/admin/review-setting.php:478
+msgid "Time of day to run automatic sync (in your site timezone)."
+msgstr "स्वचालित सिंक चलाने का समय (आपकी साइट के समय क्षेत्र में)।"
+
+#: includes/admin/review-setting.php:482
+msgid "Look Back Period"
+msgstr "पिछला अवधी"
+
+#: includes/admin/review-setting.php:490
+msgid "How far back to check for missed orders during auto-sync."
+msgstr ""
+"ऑटो-सिंक के दौरान छूटे हुए ऑर्डरों की जांच कितनी पिछली अवधि तक करनी है।"
+
+#: includes/admin/review-setting.php:495
+msgid "Next Scheduled Sync:"
+msgstr "अगली निर्धारित सिंक:"
+
+#: includes/admin/review-setting.php:504
+msgid "Last Run: Processed"
+msgstr "अंतिम रन: संसाधित"
+
+#: includes/admin/review-setting.php:508
+msgid "Last Run: Skipped"
+msgstr "पिछली बार: छोड़ा गया"
+
+#: includes/admin/review-setting.php:512
+msgid "Last Run: Errors"
+msgstr "अंतिम रन: त्रुटियाँ"
+
+#: includes/admin/review-setting.php:516
+msgid "Last run:"
+msgstr "अंतिम दौड़:"
+
+#: includes/admin/review-setting.php:524
+#: includes/class-trustscript-admin.php:597
+msgid "Save Review Settings"
+msgstr "समीक्षा सेटिंग्स सहेजें"
+
+#: includes/admin/review-setting.php:532
+msgid "Manual Sync & Test"
+msgstr "मैनुअल सिंक और परीक्षण"
+
+#: includes/admin/review-setting.php:535
+msgid ""
+"Run a complete sync immediately without waiting for the daily schedule. This"
+" is helpful for testing on localhost or staging sites."
+msgstr ""
+"दैनिक अनुसूची का इंतज़ार किए बिना तुरंत एक पूर्ण सिंक चलाएँ। यह लोकलहोस्ट या"
+" स्टेजिंग साइटों पर परीक्षण के लिए सहायक है।"
+
+#: includes/admin/review-setting.php:539
+msgid "What happens when you click:"
+msgstr "क्लिक करने पर क्या होता है:"
+
+#: includes/admin/review-setting.php:541
+msgid ""
+"1. Fetches any approved reviews from TrustScript and publishes them to your "
+"products/services"
+msgstr ""
+"1. TrustScript से कोई भी अनुमोदित समीक्षाएँ प्राप्त करता है और उन्हें आपके "
+"उत्पादों/सेवाओं पर प्रकाशित करता है।"
+
+#: includes/admin/review-setting.php:542
+msgid ""
+"2. Sends existing orders/bookings from all enabled services (WooCommerce, "
+"MemberPress, etc.) to TrustScript"
+msgstr ""
+"2. सभी सक्षम सेवाओं (WooCommerce, MemberPress, आदि) से मौजूदा ऑर्डर/बुकिंग्स"
+" को TrustScript पर भेजता है।"
+
+#: includes/admin/review-setting.php:546
+msgid "Sync orders from the last:"
+msgstr "अंतिम से ऑर्डर सिंक करें:"
+
+#: includes/admin/review-setting.php:559
+msgid "Run Complete Sync Now"
+msgstr "अभी पूर्ण सिंक चलाएँ"
+
+#: includes/admin/review-setting.php:566
+msgid "TOTAL PROCESSED"
+msgstr "कुल संसाधित"
+
+#: includes/admin/settings.php:22 includes/admin/settings.php:151
+msgid "TrustScript Settings"
+msgstr "TrustScript सेटिंग्स"
+
+#: includes/admin/settings.php:30 includes/class-trustscript-admin.php:106
+#: includes/class-trustscript-admin.php:107
+#: includes/integration/elementor/class-trustscript-elementor.php:59
+#: trustscript.php:171
+msgid "TrustScript"
+msgstr "TrustScript"
+
+#: includes/admin/settings.php:31
+msgid "AI-powered review collection for WooCommerce &amp; MemberPress"
+msgstr "WooCommerce और MemberPress के लिए एआई-संचालित समीक्षा संग्रह"
+
+#: includes/admin/settings.php:36
+msgid "Not Connected"
+msgstr "कनेक्ट नहीं है"
+
+#: includes/admin/settings.php:41
+msgid "Get Up &amp; Running in 3 Steps"
+msgstr "3 चरणों में शुरू करें"
+
+#: includes/admin/settings.php:50
+msgid "Create Your Free Account"
+msgstr "अपना मुफ़्त खाता बनाएँ"
+
+#: includes/admin/settings.php:51
+msgid "Sign up on TrustScript — no credit card required."
+msgstr "TrustScript पर साइन अप करें — क्रेडिट कार्ड की आवश्यकता नहीं है।"
+
+#: includes/admin/settings.php:53
+msgid "Create Free Account →"
+msgstr "नि:शुल्क खाता बनाएँ →"
+
+#: includes/admin/settings.php:64
+msgid "Generate an API Key"
+msgstr "एक एपीआई कुंजी उत्पन्न करें"
+
+#. translators: %s is the site URL wrapped in <code>
+#: includes/admin/settings.php:69
+#, php-format
+msgid "In your dashboard → API Keys, generate a new key for: %s"
+msgstr "अपने डैशबोर्ड → API कुंजियाँ में, %s के लिए एक नई कुंजी उत्पन्न करें।"
+
+#: includes/admin/settings.php:75
+msgid "Open API Keys Dashboard →"
+msgstr "ओपन एपीआई कीज़ डैशबोर्ड →"
+
+#: includes/admin/settings.php:85
+msgid "Paste Your Key Below &amp; Connect"
+msgstr "अपनी कुंजी नीचे पेस्ट करें और कनेक्ट करें"
+
+#: includes/admin/settings.php:86
+msgid ""
+"Copy the key (it looks like TSK-XXXX-XXXX-XXXX) and paste it in the form "
+"just below, then click Save &amp; Connect."
+msgstr ""
+"कुंजी की प्रतिलिपि बनाएँ (यह TSK-XXXX-XXXX-XXXX जैसी दिखती है) और इसे ठीक "
+"नीचे दिए गए फ़ॉर्म में पेस्ट करें, फिर 'सेव और कनेक्ट' पर क्लिक करें।"
+
+#: includes/admin/settings.php:88
+msgid "↓ Jump to API Key Field"
+msgstr "↓ एपीआई कुंजी फ़ील्ड पर जाएँ"
+
+#: includes/admin/settings.php:97
+msgid "Choose Your Plan"
+msgstr "अपना प्लान चुनें"
+
+#: includes/admin/settings.php:98
+msgid "Start free. Upgrade anytime. No lock-in."
+msgstr "मुफ्त में शुरू करें। कभी भी अपग्रेड करें। कोई लॉक-इन नहीं।"
+
+#: includes/admin/settings.php:105
+msgid "Most Popular"
+msgstr "सबसे लोकप्रिय"
+
+#: includes/admin/settings.php:116
+msgid "reviews / month"
+msgstr "समीक्षाएँ / महीना"
+
+#: includes/admin/settings.php:129
+msgid "Free Forever"
+msgstr "हमेशा के लिए मुफ्त"
+
+#: includes/admin/settings.php:135
+msgid "All plans include AI-powered review rewriting and email support."
+msgstr ""
+"सभी योजनाओं में एआई-संचालित समीक्षा पुनर्लेखन और ईमेल सहायता शामिल हैं।"
+
+#: includes/admin/settings.php:140
+msgid "Step 3 — Paste Your API Key to Connect"
+msgstr "चरण 3 — कनेक्ट करने के लिए अपनी API कुंजी पेस्ट करें"
+
+#: includes/admin/settings.php:149
+msgid "Connected to TrustScript"
+msgstr "TrustScript से जुड़ा हुआ"
+
+#: includes/admin/settings.php:155
+msgid "Open Dashboard"
+msgstr "डैशबोर्ड खोलें"
+
+#: includes/admin/settings.php:171
+msgid "API Configuration"
+msgstr "एपीआई विन्यास"
+
+#: includes/admin/settings.php:173
+msgid "Connect Your API Key"
+msgstr "अपनी API कुंजी कनेक्ट करें"
+
+#: includes/admin/settings.php:178
+msgid "Don't have a key? Get one free →"
+msgstr "चाबी नहीं है? एक मुफ़्त पाएं →"
+
+#: includes/admin/settings.php:200 includes/admin/settings.php:276
+msgid "API Key Save Failed"
+msgstr "एपीआई कुंजी सहेजने में विफल"
+
+#: includes/admin/settings.php:211 includes/admin/settings.php:287
+msgid "Connected Successfully"
+msgstr "सफलतापूर्वक जुड़ा"
+
+#: includes/admin/settings.php:221 includes/admin/settings.php:297
+msgid "Connected — Quota Limit Reached"
+msgstr "कनेक्टेड — कोटा सीमा समाप्त"
+
+#: includes/admin/settings.php:243
+msgid "Save &amp; Connect"
+msgstr "सहेजें और कनेक्ट करें"
+
+#. translators: %1$s dashboard link open, %2$s close
+#: includes/admin/settings.php:250
+#, php-format
+msgid ""
+"Your key is tied to this domain. It looks like %1$s. Generate one from your "
+"%2$sTrustScript Dashboard%3$s."
+msgstr ""
+"आपकी कुंजी इस डोमेन से जुड़ी हुई है। यह %1$s जैसी दिखती है। अपने "
+"%2$sTrustScript डैशबोर्ड%3$s से एक उत्पन्न करें।"
+
+#: includes/admin/settings.php:258
+msgid "Security Note:"
+msgstr "सुरक्षा सूचना:"
+
+#: includes/admin/settings.php:259
+msgid ""
+"Your API key is masked as you type for security. It will never be displayed "
+"in plain text or source code."
+msgstr ""
+"सुरक्षा के लिए जैसे ही आप टाइप करते हैं, आपकी API कुंजी मास्क्ड हो जाती है। "
+"इसे कभी भी सादा पाठ या स्रोत कोड में प्रदर्शित नहीं किया जाएगा।"
+
+#: includes/admin/settings.php:262 includes/admin/settings.php:377
+msgid "Important:"
+msgstr "महत्वपूर्ण:"
+
+#: includes/admin/settings.php:263
+msgid ""
+"You must provide a valid API key to use TrustScript. The form submission "
+"will be blocked until you paste a key."
+msgstr ""
+"TrustScript का उपयोग करने के लिए आपको एक वैध API कुंजी प्रदान करनी होगी। जब "
+"तक आप कुंजी पेस्ट नहीं करेंगे, तब तक फॉर्म सबमिशन अवरुद्ध रहेगा।"
+
+#: includes/admin/settings.php:308 includes/consent-form-template.php:42
+msgid "API Key"
+msgstr "एपीआई कुंजी"
+
+#: includes/admin/settings.php:316
+msgid "Replace Key"
+msgstr "कुंजी बदलें"
+
+#: includes/admin/settings.php:319
+msgid "Delete"
+msgstr "मिटायें"
+
+#: includes/admin/settings.php:323
+msgid ""
+"Click \"Replace Key\" to paste a new key. Leave the field blank to keep the "
+"current key unchanged."
+msgstr ""
+"नई कुंजी चिपकाने के लिए \"Replace Key\" पर क्लिक करें। वर्तमान कुंजी को "
+"अपरिवर्तित रखने के लिए फ़ील्ड को खाली छोड़ दें।"
+
+#: includes/admin/settings.php:328
+msgid "TrustScript Server"
+msgstr "TrustScript सर्वर"
+
+#: includes/admin/settings.php:331
+msgid "Your site is connected to the TrustScript server at nexlifylabs.com"
+msgstr "आपकी साइट nexlifylabs.com पर TrustScript सर्वर से जुड़ी हुई है।"
+
+#: includes/admin/settings.php:335
+msgid "Webhook Endpoint"
+msgstr "वेबहुक एंडपॉइंट"
+
+#: includes/admin/settings.php:338
+msgid "Webhooks from TrustScript will be delivered to this URL."
+msgstr "TrustScript से वेबहुक्स इस URL पर भेजे जाएंगे।"
+
+#: includes/admin/settings.php:349
+msgid "Plugin Uninstall & Data"
+msgstr "प्लगइन अनइंस्टॉल और डेटा"
+
+#: includes/admin/settings.php:350
+msgid ""
+"Choose how TrustScript should handle your data if you decide to uninstall "
+"the plugin."
+msgstr ""
+"यदि आप प्लगइन को अनइंस्टॉल करने का निर्णय लेते हैं, तो चुनें कि TrustScript "
+"को आपके डेटा को कैसे संभालना चाहिए।"
+
+#: includes/admin/settings.php:355
+msgid "Delete Data on Uninstall"
+msgstr "अनइंस्टॉल करते समय डेटा हटाएँ"
+
+#: includes/admin/settings.php:366
+msgid "Completely remove all TrustScript data when I uninstall the plugin"
+msgstr ""
+"जब मैं प्लगइन अनइंस्टॉल करता हूँ, तो सभी TrustScript डेटा पूरी तरह से हटा "
+"दें।"
+
+#: includes/admin/settings.php:370
+msgid ""
+"If unchecked (recommended), your TrustScript data will be preserved when you"
+" uninstall the plugin. This lets you reinstall later without losing your "
+"settings and review history."
+msgstr ""
+"यदि अनचेक (अनुशंसित) छोड़ दिया जाए, तो प्लगइन अनइंस्टॉल करने पर आपका "
+"TrustScript डेटा संरक्षित रहेगा। इससे आप बाद में अपनी सेटिंग्स और समीक्षा "
+"इतिहास खोए बिना पुनः इंस्टॉल कर सकते हैं।"
+
+#: includes/admin/settings.php:379
+msgid ""
+"If you enable this option, the following data will be permanently deleted "
+"when you uninstall the plugin:"
+msgstr ""
+"यदि आप इस विकल्प को सक्षम करते हैं, तो प्लगइन को अनइंस्टॉल करने पर "
+"निम्नलिखित डेटा स्थायी रूप से हटा दिया जाएगा:"
+
+#: includes/admin/settings.php:382
+msgid "All TrustScript settings and configuration"
+msgstr "सभी TrustScript सेटिंग्स और कॉन्फ़िगरेशन"
+
+#: includes/admin/settings.php:383
+msgid "API key and connection information"
+msgstr "एपीआई कुंजी और कनेक्शन जानकारी"
+
+#: includes/admin/settings.php:384
+msgid "Review collection history and pending queue items"
+msgstr "संग्रह इतिहास और लंबित कतार आइटमों की समीक्षा करें"
+
+#: includes/admin/settings.php:385
+msgid "Database tables (order registry, queue, and related data)"
+msgstr "डेटाबेस तालिकाएँ (ऑर्डर रजिस्ट्री, कतार, और संबंधित डेटा)"
+
+#: includes/admin/settings.php:386
+msgid "Scheduled automation tasks (auto-sync, quota checks)"
+msgstr "निर्धारित स्वचालन कार्य (स्वचालित-सिंक, कोटा जाँच)"
+
+#: includes/admin/settings.php:391 includes/class-trustscript-admin.php:630
+msgid "Save Preference"
+msgstr "पसंद बचाएँ"
+
+#: includes/admin/settings.php:398
+msgid "Privacy-First Architecture (GDPR Compliant)"
+msgstr "गोपनीयता-प्रथम वास्तुकला (जीडीपीआर अनुरूप)"
+
+#: includes/admin/settings.php:403
+msgid ""
+"TrustScript follows privacy-by-design principles. We do NOT store customer "
+"names or email addresses — only Order IDs for merchant analytics."
+msgstr ""
+"TrustScript गोपनीयता-डिज़ाइन सिद्धांतों का पालन करता है। हम ग्राहकों के नाम "
+"या ईमेल पते संग्रहीत नहीं करते — केवल व्यापारी विश्लेषण के लिए ऑर्डर आईडी "
+"संग्रहीत करते हैं।"
+
+#: includes/admin/settings.php:406
+msgid ""
+"✓ Customer emails are hashed (SHA-256) for opt-out checking only, then "
+"immediately discarded"
+msgstr ""
+"✓ ग्राहक ईमेल केवल ऑप्ट-आउट जांच के लिए हैश (SHA-256) किए जाते हैं, फिर "
+"तुरंत हटा दिए जाते हैं।"
+
+#: includes/admin/settings.php:407
+msgid ""
+"✓ No customer PII (personally identifiable information) is stored in our "
+"database"
+msgstr ""
+"✓ हमारे डेटाबेस में किसी भी ग्राहक की PII (व्यक्तिगत रूप से पहचान योग्य "
+"जानकारी) संग्रहीत नहीं की जाती है।"
+
+#: includes/admin/settings.php:408
+msgid ""
+"✓ Reviews are published as \"Verified Buyer\" — no customer names displayed"
+msgstr ""
+"✓ समीक्षाएँ \"Verified Buyer\" के रूप में प्रकाशित होती हैं — कोई ग्राहक नाम"
+" प्रदर्शित नहीं किया जाता।"
+
+#: includes/admin/settings.php:409
+msgid ""
+"✓ Full compliance with GDPR Article 5 (data minimization) and Article 25 "
+"(privacy by design)"
+msgstr ""
+"✓ जीडीपीआर अनुच्छेद 5 (डेटा न्यूनिकरण) और अनुच्छेद 25 (डिज़ाइन में गोपनीयता)"
+" के साथ पूर्ण अनुपालन"
+
+#: includes/admin/settings.php:417
+msgid "Documentation"
+msgstr "दस्तावेज़ीकरण"
+
+#: includes/admin/settings.php:421 trustscript.php:194
+msgid "Support"
+msgstr "समर्थन"
+
+#: includes/admin/settings.php:425
+msgid "Manage API Keys"
+msgstr "एपीआई कुंजियों का प्रबंधन करें"
+
+#: includes/admin/settings.php:436
+msgid "Delete API Key?"
+msgstr "एपीआई कुंजी हटाएँ?"
+
+#: includes/admin/settings.php:443
+msgid ""
+"Are you sure you want to delete your API key? You will need to enter a new "
+"API key to use TrustScript."
+msgstr ""
+"क्या आप सुनिश्चित हैं कि आप अपनी API कुंजी हटाना चाहते हैं? TrustScript का "
+"उपयोग करने के लिए आपको एक नई API कुंजी दर्ज करनी होगी।"
+
+#: includes/admin/settings.php:446 includes/class-trustscript-admin.php:624
+#: includes/consent-form-template.php:70
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: includes/admin/settings.php:447
+msgid "Delete API Key"
+msgstr "एपीआई कुंजी हटाएँ"
+
+#: includes/class-trustscript-admin.php:117
+#: includes/class-trustscript-admin.php:118 trustscript.php:188
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: includes/class-trustscript-admin.php:126
+#: includes/class-trustscript-admin.php:127
+msgid "Branding"
+msgstr "ब्रांडिंग"
+
+#: includes/class-trustscript-admin.php:153
+#: includes/class-trustscript-admin.php:154
+msgid "Email Templates"
+msgstr "ईमेल टेम्पलेट्स"
+
+#: includes/class-trustscript-admin.php:161
+#: includes/class-trustscript-admin.php:167
+msgid "Pending Queue"
+msgstr "प्रतीक्षा में कतार"
+
+#: includes/class-trustscript-admin.php:197
+msgid "API Key Invalid or Expired"
+msgstr "एपीआई कुंजी अमान्य या समाप्त हो गई है"
+
+#: includes/class-trustscript-admin.php:198
+msgid "Your TrustScript API key is no longer valid. This might be because:"
+msgstr ""
+"आपकी TrustScript API कुंजी अब मान्य नहीं है। इसका कारण निम्नलिखित हो सकता "
+"है:"
+
+#: includes/class-trustscript-admin.php:200
+msgid "The key has expired (development keys expire after 24 hours)"
+msgstr ""
+"कुंजी की अवधि समाप्त हो गई है (डेवलपमेंट कुंजियाँ 24 घंटों के बाद समाप्त हो "
+"जाती हैं)"
+
+#: includes/class-trustscript-admin.php:201
+msgid "The key was deleted from your TrustScript dashboard"
+msgstr "आपके TrustScript डैशबोर्ड से कुंजी हटा दी गई थी।"
+
+#: includes/class-trustscript-admin.php:202
+msgid "Your account or key was revoked"
+msgstr "आपका खाता या कुंजी रद्द कर दी गई थी।"
+
+#: includes/class-trustscript-admin.php:207
+msgid "Go to Settings & Update Key"
+msgstr "सेटिंग्स पर जाएँ और कुंजी अपडेट करें"
+
+#: includes/class-trustscript-admin.php:210
+msgid "Generate New Key"
+msgstr "नई कुंजी उत्पन्न करें"
+
+#. translators: %s: current plan name
+#. translators: %s: plan name
+#: includes/class-trustscript-admin.php:245
+#: includes/class-trustscript-admin.php:431
+#, php-format
+msgid "Monthly review limit reached for your %s plan."
+msgstr "आपके %s प्लान के लिए मासिक समीक्षा सीमा समाप्त हो गई है।"
+
+#. translators: 1: next plan name, 2: review limit
+#. translators: %1$s: next plan name, %2$d: review limit
+#: includes/class-trustscript-admin.php:253
+#: includes/class-trustscript-admin.php:439
+#, php-format
+msgid " Upgrade to %1$s for %2$d reviews per month."
+msgstr " प्रति माह %2$d समीक्षाओं के लिए %1$s में अपग्रेड करें।"
+
+#. translators: %s: date when quota resets
+#. translators: %s: reset date
+#: includes/class-trustscript-admin.php:265
+#: includes/class-trustscript-admin.php:271
+#: includes/class-trustscript-admin.php:451
+#: includes/class-trustscript-admin.php:457
+#, php-format
+msgid " Or wait until %s for your limit to reset."
+msgstr " या %s तक प्रतीक्षा करें जब तक आपकी सीमा रीसेट न हो जाए।"
+
+#: includes/class-trustscript-admin.php:279
+msgid "Review Quota Limit Reached"
+msgstr "समीक्षा कोटा सीमा पहुँच गई"
+
+#: includes/class-trustscript-admin.php:283
+msgid "Upgrade Your Plan"
+msgstr "अपनी योजना अपग्रेड करें"
+
+#: includes/class-trustscript-admin.php:336
+msgid "Invalid API key format. API keys should look like: TSK-XXXX-XXXX-XXXX"
+msgstr ""
+"अमान्य API कुंजी प्रारूप।   API कुंजियाँ इस प्रकार दिखनी चाहिए: TSK-XXXX-"
+"XXXX-XXXX"
+
+#: includes/class-trustscript-admin.php:349
+msgid "You must agree to data sharing before verifying your API key."
+msgstr ""
+"आपको अपनी API कुंजी सत्यापित करने से पहले डेटा साझाकरण के लिए सहमत होना "
+"होगा।"
+
+#: includes/class-trustscript-admin.php:414
+msgid ""
+"API key verified successfully! Your site is now connected to TrustScript."
+msgstr ""
+"एपीआई कुंजी सफलतापूर्वक सत्यापित हो गई! आपकी साइट अब TrustScript से जुड़ गई "
+"है।"
+
+#. translators: 1: remaining reviews, 2: total limit, 3: reset date
+#: includes/class-trustscript-admin.php:475
+#, php-format
+msgid " You have %1$d/%2$d reviews remaining this month (resets on %3$s)."
+msgstr ""
+" इस महीने आपके पास %1$d/%2$d समीक्षाएं बची हैं (%3$s पर रीसेट होती हैं)।"
+
+#: includes/class-trustscript-admin.php:590
+msgid "No recent activity"
+msgstr "हाल की कोई गतिविधि नहीं"
+
+#: includes/class-trustscript-admin.php:591
+msgid "Start by configuring review settings"
+msgstr "समीक्षा सेटिंग्स को कॉन्फ़िगर करके शुरू करें।"
+
+#: includes/class-trustscript-admin.php:592
+msgid "Reviews Generated"
+msgstr "समीक्षाएँ उत्पन्न"
+
+#: includes/class-trustscript-admin.php:593
+msgid ""
+"Failed to load analytics data. Please check your API connection in Settings."
+msgstr ""
+"एनालिटिक्स डेटा लोड करने में असफल रहा। कृपया सेटिंग्स में अपना API कनेक्शन "
+"जांचें।"
+
+#: includes/class-trustscript-admin.php:594
+msgid "Refreshing..."
+msgstr "ताज़गी..."
+
+#: includes/class-trustscript-admin.php:596
+msgid "Saving..."
+msgstr "बचा रहा है..."
+
+#: includes/class-trustscript-admin.php:598
+#: includes/class-trustscript-memberpress-reviews.php:112
+msgid "Settings saved successfully!"
+msgstr "सेटिंग्स सफलतापूर्वक सहेजी गईं!"
+
+#: includes/class-trustscript-admin.php:599
+msgid "Failed to save"
+msgstr "सहेजने में असफल"
+
+#: includes/class-trustscript-admin.php:600
+msgid "Network error"
+msgstr "नेटवर्क त्रुटि"
+
+#: includes/class-trustscript-admin.php:601
+msgid "Syncing..."
+msgstr "सिंक हो रहा है..."
+
+#: includes/class-trustscript-admin.php:602
+msgid "Sync Completed Orders"
+msgstr "सिंक पूर्ण आदेश"
+
+#: includes/class-trustscript-admin.php:603
+msgid ""
+"This will create review requests for all completed orders in the selected "
+"time range. Continue?"
+msgstr ""
+"यह चयनित समय सीमा में सभी पूर्ण ऑर्डरों के लिए समीक्षा अनुरोध बनाएगा। जारी "
+"रखें?"
+
+#: includes/class-trustscript-admin.php:604
+msgid "Failed to sync"
+msgstr "सिंक करने में असफल"
+
+#: includes/class-trustscript-admin.php:605
+msgid ""
+"Short delay recommended (1-2 days) - customers already have the product."
+msgstr ""
+"छोटी देरी की सिफारिश (1-2 दिन) - ग्राहकों के पास उत्पाद पहले से ही है।"
+
+#: includes/class-trustscript-admin.php:606
+msgid ""
+"Longer delay recommended to ensure product delivery before review request. "
+"International orders use this same delay by default. To use a different "
+"delay for international orders, enable \"Handle international orders "
+"differently\" below."
+msgstr ""
+"समीक्षा अनुरोध से पहले उत्पाद वितरण सुनिश्चित करने के लिए लंबी देरी की "
+"अनुशंसा की जाती है। अंतरराष्ट्रीय ऑर्डर डिफ़ॉल्ट रूप से इसी देरी का उपयोग "
+"करते हैं। अंतरराष्ट्रीय ऑर्डर के लिए अलग देरी का उपयोग करने के लिए, नीचे "
+"\"अंतरराष्ट्रीय ऑर्डर को अलग तरह से संभालें\" सक्षम करें।"
+
+#: includes/class-trustscript-admin.php:607
+msgid "Are you sure? This will remove the item from the queue."
+msgstr "क्या आप सुनिश्चित हैं? इससे कतार से आइटम हटा दिया जाएगा।"
+
+#: includes/class-trustscript-admin.php:608
+msgid "Please paste your TrustScript API key (TSK-XXXX-XXXX-XXXX)."
+msgstr "कृपया अपनी TrustScript API कुंजी (TSK-XXXX-XXXX-XXXX) पेस्ट करें।"
+
+#: includes/class-trustscript-admin.php:609
+msgid "API Key Required"
+msgstr "एपीआई कुंजी आवश्यक है"
+
+#: includes/class-trustscript-admin.php:610
+msgid ""
+"Invalid format. Your key should look like: TSK-XXXX-XXXX-XXXX. Copy it from "
+"your TrustScript dashboard."
+msgstr ""
+"अमान्य प्रारूप। आपकी कुंजी इस प्रकार दिखनी चाहिए: TSK-XXXX-XXXX-XXXX। इसे "
+"अपने TrustScript डैशबोर्ड से कॉपी करें।"
+
+#: includes/class-trustscript-admin.php:611
+msgid "Invalid API Key Format"
+msgstr "अमान्य एपीआई कुंजी प्रारूप"
+
+#: includes/class-trustscript-admin.php:612
+msgid "Media library not available"
+msgstr "मीडिया लाइब्रेरी उपलब्ध नहीं है"
+
+#: includes/class-trustscript-admin.php:613
+msgid "Select Logo"
+msgstr "लोगो चुनें"
+
+#: includes/class-trustscript-admin.php:614
+msgid "Use this logo"
+msgstr "इस लोगो का उपयोग करें"
+
+#: includes/class-trustscript-admin.php:615
+msgid "Deleting..."
+msgstr "मिटान..."
+
+#: includes/class-trustscript-admin.php:616
+msgid "Failed to delete API key"
+msgstr "एपीआई कुंजी हटाने में असफल"
+
+#: includes/class-trustscript-admin.php:617
+msgid "Failed to refresh plan information. Please try again."
+msgstr "योजना की जानकारी ताज़ा करने में विफल। कृपया फिर से प्रयास करें।"
+
+#: includes/class-trustscript-admin.php:618
+msgid "Queued for processing..."
+msgstr "प्रसंस्करण के लिए कतारबद्ध..."
+
+#: includes/class-trustscript-admin.php:619
+msgid ""
+"Processing your orders in the background — please check back in a few "
+"minutes."
+msgstr ""
+"आपके ऑर्डर पृष्ठभूमि में संसाधित हो रहे हैं — कृपया कुछ मिनटों में फिर से "
+"प्रयास करें।"
+
+#: includes/class-trustscript-admin.php:620
+msgid "All categories"
+msgstr "सभी श्रेणियाँ"
+
+#: includes/class-trustscript-admin.php:621
+msgid "1 category"
+msgstr "1 श्रेणी"
+
+#. translators: %d: number of categories
+#: includes/class-trustscript-admin.php:623
+#: includes/class-trustscript-admin.php:1835
+#, php-format
+msgid "%d categories"
+msgstr "%d श्रेणियाँ"
+
+#: includes/class-trustscript-admin.php:625
+msgid "Retrying..."
+msgstr "पुनः प्रयास..."
+
+#: includes/class-trustscript-admin.php:626
+msgid "Clearing..."
+msgstr "साफ़ कर रहा हूँ..."
+
+#: includes/class-trustscript-admin.php:654
+msgid "Unknown notice"
+msgstr "अज्ञात सूचना"
+
+#: includes/class-trustscript-admin.php:675
+msgid "enabled"
+msgstr "सक्षम"
+
+#: includes/class-trustscript-admin.php:675
+msgid "disabled"
+msgstr "अक्षम"
+
+#. translators: %s is the status of data deletion (enabled or disabled)
+#: includes/class-trustscript-admin.php:678
+#, php-format
+msgid "Data deletion on uninstall %s"
+msgstr "अनइंस्टॉल पर डेटा हटाना %s"
+
+#: includes/class-trustscript-admin.php:694
+msgid "API key deleted successfully"
+msgstr "एपीआई कुंजी सफलतापूर्वक हटा दी गई"
+
+#: includes/class-trustscript-admin.php:702
+#: includes/class-trustscript-admin.php:998
+#: includes/class-trustscript-admin.php:1280
+msgid "Unauthorized"
+msgstr "अनधिकृत"
+
+#: includes/class-trustscript-admin.php:740
+msgid "Subdomain is required"
+msgstr "सबडोमेन आवश्यक है"
+
+#: includes/class-trustscript-admin.php:744
+msgid ""
+"Invalid subdomain format. Use alphanumeric characters and hyphens only (3-63"
+" characters)."
+msgstr ""
+"अमान्य सबडोमेन प्रारूप। केवल अल्फ़ान्यूमेरिक वर्ण और हाइफ़न का उपयोग करें "
+"(3–63 वर्ण)।"
+
+#: includes/class-trustscript-admin.php:788
+msgid "logo_url is required"
+msgstr "logo_url अनिवार्य है।"
+
+#: includes/class-trustscript-admin.php:796
+#: includes/trustscript-helpers.php:62
+msgid "Please set your API key in settings."
+msgstr "कृपया सेटिंग्स में अपनी API कुंजी सेट करें।"
+
+#. translators: %s: error message
+#: includes/class-trustscript-admin.php:818
+#, php-format
+msgid "Failed to verify plan: %s"
+msgstr "योजना सत्यापित करने में विफल: %s"
+
+#: includes/class-trustscript-admin.php:825
+msgid ""
+"Custom branding is available for Pro and Business plan users only. Please "
+"upgrade your plan to access this feature."
+msgstr ""
+"कस्टम ब्रांडिंग केवल प्रो और बिजनेस प्लान उपयोगकर्ताओं के लिए उपलब्ध है। "
+"कृपया इस सुविधा का उपयोग करने के लिए अपनी योजना को अपग्रेड करें।"
+
+#: includes/class-trustscript-admin.php:992
+msgid "Security check failed"
+msgstr "सुरक्षा जाँच विफल"
+
+#: includes/class-trustscript-admin.php:1148
+msgid "Review settings saved successfully"
+msgstr "सेटिंग्स की समीक्षा सफलतापूर्वक सहेजी गई।"
+
+#: includes/class-trustscript-admin.php:1288
+msgid ""
+"No active service providers detected. Please enable at least one service "
+"(WooCommerce or MemberPress)."
+msgstr ""
+"कोई सक्रिय सेवा प्रदाता नहीं मिला। कृपया कम से कम एक सेवा (WooCommerce या "
+"MemberPress) सक्षम करें।"
+
+#: includes/class-trustscript-admin.php:1300
+msgid "Sync service not available"
+msgstr "सिंक सेवा उपलब्ध नहीं है"
+
+#: includes/class-trustscript-admin.php:1333
+msgid "No new data to sync"
+msgstr "सिंक करने के लिए कोई नया डेटा नहीं"
+
+#. translators: %d: number of orders that were already published
+#: includes/class-trustscript-admin.php:1337
+#, php-format
+msgid " (but %d order(s) were already published and skipped)"
+msgstr " (लेकिन %d आदेश पहले ही प्रकाशित और छोड़े जा चुके थे)"
+
+#. translators: %1$d: reviews published, %2$d: orders synced
+#: includes/class-trustscript-admin.php:1354
+#, php-format
+msgid "Sync complete! Reviews published: %1$d, New orders sent: %2$d"
+msgstr "सिंक पूरा हो गया! समीक्षाएँ प्रकाशित: %1$d, नए ऑर्डर भेजे गए: %2$d"
+
+#. translators: %d: orders that were already published and skipped
+#: includes/class-trustscript-admin.php:1362
+#, php-format
+msgid ", %d order(s) already published (skipped re-sync)"
+msgstr ", %d ऑर्डर(स) पहले ही प्रकाशित हो चुके हैं (री-सिंक छोड़ा गया)"
+
+#: includes/class-trustscript-admin.php:1590
+msgid "Service settings saved successfully!"
+msgstr "सेवा सेटिंग्स सफलतापूर्वक सहेजी गईं!"
+
+#: includes/class-trustscript-admin.php:1607
+msgid "No Supported Services Detected"
+msgstr "कोई समर्थित सेवाएँ नहीं मिलीं"
+
+#: includes/class-trustscript-admin.php:1610
+msgid "TrustScript works with WooCommerce, MemberPress, and more."
+msgstr "TrustScript WooCommerce, MemberPress, और अन्य के साथ काम करता है।"
+
+#: includes/class-trustscript-admin.php:1613 trustscript.php:175
+msgid "Install and activate a supported plugin to start collecting reviews."
+msgstr ""
+"समीक्षाएँ एकत्र करना शुरू करने के लिए एक समर्थित प्लगइन स्थापित और सक्रिय "
+"करें।"
+
+#: includes/class-trustscript-admin.php:1616 trustscript.php:176
+msgid "View Supported Platforms"
+msgstr "समर्थित प्लेटफ़ॉर्म देखें"
+
+#: includes/class-trustscript-admin.php:1627
+msgid "Detected Services"
+msgstr "पहचानी गई सेवाएँ"
+
+#: includes/class-trustscript-admin.php:1630
+msgid ""
+"TrustScript has detected the following services on your site. Configure "
+"trigger statuses for each service to automatically collect reviews."
+msgstr ""
+"TrustScript ने आपकी साइट पर निम्नलिखित सेवाओं का पता लगाया है। प्रत्येक सेवा"
+" के लिए ट्रिगर स्थितियों को कॉन्फ़िगर करें ताकि समीक्षाएँ स्वचालित रूप से "
+"एकत्रित हों।"
+
+#: includes/class-trustscript-admin.php:1664
+msgid "Trigger Status:"
+msgstr "ट्रिगर स्थिति:"
+
+#: includes/class-trustscript-admin.php:1666
+msgid "Send review request when order reaches this status"
+msgstr "जब ऑर्डर इस स्थिति तक पहुँच जाए तो समीक्षा अनुरोध भेजें"
+
+#. translators: %s is the number of available statuses
+#: includes/class-trustscript-admin.php:1684
+#, php-format
+msgid "%d status options available"
+msgstr "%d स्थिति विकल्प उपलब्ध हैं"
+
+#: includes/class-trustscript-admin.php:1697
+msgid "Save Service Settings"
+msgstr "सेवा सेटिंग्स सहेजें"
+
+#: includes/class-trustscript-admin.php:1706
+msgid "Optional Data Collection"
+msgstr "वैकल्पिक डेटा संग्रह"
+
+#: includes/class-trustscript-admin.php:1709
+msgid ""
+"Enhance review requests with additional context. You can disable these "
+"options for privacy-sensitive products (e.g., medical, adult content)."
+msgstr ""
+"अतिरिक्त संदर्भ के साथ समीक्षा अनुरोधों को बेहतर बनाएँ। आप "
+"गोपनीयता-संवेदनशील उत्पादों (जैसे चिकित्सा, वयस्क सामग्री) के लिए इन "
+"विकल्पों को अक्षम कर सकते हैं।"
+
+#: includes/class-trustscript-admin.php:1723
+msgid "Include Product Names"
+msgstr "उत्पाद नाम शामिल करें"
+
+#: includes/class-trustscript-admin.php:1726
+msgid ""
+"Show specific product names in review requests (e.g., \"Blue Wireless "
+"Headphones\"). If disabled, customers will see generic text like \"your "
+"recent purchase\" instead. Disable this for privacy-sensitive products."
+msgstr ""
+"समीक्षा अनुरोधों में विशिष्ट उत्पाद नाम दिखाएँ (उदाहरण के लिए, \"ब्लू "
+"वायरलेस हेडफ़ोन\")। यदि इसे अक्षम किया गया है, तो ग्राहक इसके बजाय \"आपकी "
+"हाल की खरीदारी\" जैसे सामान्य पाठ देखेंगे। गोपनीयता-संवेदनशील उत्पादों के "
+"लिए इसे अक्षम करें।"
+
+#: includes/class-trustscript-admin.php:1732
+msgid "Why this matters:"
+msgstr "यह क्यों मायने रखता है:"
+
+#: includes/class-trustscript-admin.php:1733
+msgid ""
+"Specific product names help customers write better, more relevant reviews. "
+"However, for sensitive items (health, personal care, gifts), you may want to"
+" keep purchases private."
+msgstr ""
+"विशिष्ट उत्पाद नाम ग्राहकों को बेहतर और अधिक प्रासंगिक समीक्षाएँ लिखने में "
+"मदद करते हैं। हालांकि, संवेदनशील वस्तुओं (स्वास्थ्य, व्यक्तिगत देखभाल, "
+"उपहार) के लिए आप खरीदारी को निजी रखना चाह सकते हैं।"
+
+#: includes/class-trustscript-admin.php:1749
+msgid "Include Order Dates"
+msgstr "ऑर्डर तिथियाँ शामिल करें"
+
+#: includes/class-trustscript-admin.php:1751
+msgid ""
+"Share the purchase date with customers. This helps with timing review "
+"requests and adds context to their feedback."
+msgstr ""
+"ग्राहकों के साथ खरीद की तारीख साझा करें। इससे समीक्षा अनुरोधों के समय "
+"निर्धारण में मदद मिलती है और उनकी प्रतिक्रिया में संदर्भ जुड़ता है।"
+
+#: includes/class-trustscript-admin.php:1760
+msgid "Save Privacy Settings"
+msgstr "गोपनीयता सेटिंग्स सहेजें"
+
+#: includes/class-trustscript-admin.php:1792
+msgid ""
+"No additional filters available for this service. All orders/bookings will "
+"be processed."
+msgstr ""
+"इस सेवा के लिए कोई अतिरिक्त फ़िल्टर उपलब्ध नहीं हैं। सभी ऑर्डर/बुकिंग "
+"संसाधित की जाएँगी।"
+
+#: includes/class-trustscript-admin.php:1816
+msgid "Product Category Filtering"
+msgstr "उत्पाद श्रेणी फ़िल्टरिंग"
+
+#: includes/class-trustscript-admin.php:1818
+msgid ""
+"Select specific product categories to collect reviews for. Leave all "
+"unchecked to include all products."
+msgstr ""
+"समीक्षाएँ एकत्र करने के लिए विशिष्ट उत्पाद श्रेणियाँ चुनें। सभी उत्पादों को "
+"शामिल करने के लिए सभी विकल्प अनचेक छोड़ें।"
+
+#: includes/class-trustscript-admin.php:1825
+msgid "Search categories..."
+msgstr "श्रेणियाँ खोजें..."
+
+#: includes/class-trustscript-admin.php:1827
+msgid "Select All"
+msgstr "सभी चुनें"
+
+#: includes/class-trustscript-admin.php:1830
+msgid "Deselect All"
+msgstr "सभी को असूचीबद्ध करें"
+
+#: includes/class-trustscript-admin.php:1915
+msgid "No product categories found."
+msgstr "कोई उत्पाद श्रेणियाँ नहीं मिलीं।"
+
+#: includes/class-trustscript-admin.php:1919
+msgid "Order Value Filtering"
+msgstr "ऑर्डर मूल्य फ़िल्टरिंग"
+
+#. translators: %s: store currency symbol
+#: includes/class-trustscript-admin.php:1925
+#, php-format
+msgid "Minimum Order Value (%s):"
+msgstr "न्यूनतम ऑर्डर मूल्य (%s):"
+
+#: includes/class-trustscript-admin.php:1932
+msgid ""
+"Only send review requests for orders above this amount. Set to 0 to disable."
+msgstr ""
+"केवल इस राशि से अधिक के ऑर्डरों के लिए समीक्षा अनुरोध भेजें। अक्षम करने के "
+"लिए 0 पर सेट करें।"
+
+#. translators: %s: store currency symbol
+#: includes/class-trustscript-admin.php:1943
+#, php-format
+msgid "Exclude free products and %s0 orders"
+msgstr "मुफ्त उत्पाद और %s0 ऑर्डर को बाहर करें"
+
+#: includes/class-trustscript-admin.php:1954
+msgid "MemberPress is not properly loaded."
+msgstr "MemberPress ठीक से लोड नहीं हुआ है।"
+
+#: includes/class-trustscript-admin.php:1964
+msgid "Membership Tier Filtering"
+msgstr "सदस्यता स्तर फ़िल्टरिंग"
+
+#: includes/class-trustscript-admin.php:1966
+msgid ""
+"Select which membership tiers should trigger review requests. Leave all "
+"unchecked to include all memberships."
+msgstr ""
+"चुनें कि कौन से सदस्यता स्तर समीक्षा अनुरोधों को ट्रिगर करें। सभी सदस्यताओं "
+"को शामिल करने के लिए सभी विकल्प अनचेक छोड़ें।"
+
+#: includes/class-trustscript-admin.php:1980
+msgid "No memberships found."
+msgstr "कोई सदस्यता नहीं मिली।"
+
+#: includes/class-trustscript-admin.php:1985
+msgid "Review Request Timing"
+msgstr "समीक्षा अनुरोध समय"
+
+#: includes/class-trustscript-admin.php:1988
+msgid "Send review request after:"
+msgstr "के बाद समीक्षा अनुरोध भेजें:"
+
+#: includes/class-trustscript-admin.php:1995
+msgid "7 days"
+msgstr "सात दिन"
+
+#: includes/class-trustscript-admin.php:1997
+msgid "14 days"
+msgstr "14 दिन"
+
+#: includes/class-trustscript-admin.php:1999
+msgid "30 days"
+msgstr "30 दिन"
+
+#: includes/class-trustscript-admin.php:2003
+msgid ""
+"Allow members time to experience your content before requesting a review."
+msgstr ""
+"समीक्षा का अनुरोध करने से पहले सदस्यों को आपकी सामग्री का अनुभव करने के लिए "
+"समय दें।"
+
+#: includes/class-trustscript-admin.php:2031
+msgid "Privacy settings saved successfully!"
+msgstr "गोपनीयता सेटिंग्स सफलतापूर्वक सहेजी गईं!"
+
+#. translators: %s: Plugin/Component name
+#: includes/class-trustscript-compatibility.php:252
+#, php-format
+msgid "TrustScript Compatibility: %s"
+msgstr "TrustScript संगतता: %s"
+
+#: includes/class-trustscript-compatibility.php:257
+msgid "Solution:"
+msgstr "समाधान:"
+
+#: includes/class-trustscript-compatibility.php:263
+msgid "View Documentation"
+msgstr "दस्तावेज़ देखें"
+
+#: includes/class-trustscript-compatibility.php:267
+msgid "Configure Compatibility Settings"
+msgstr "अनुकूलता सेटिंग्स कॉन्फ़िगर करें"
+
+#: includes/class-trustscript-compatibility.php:293
+#: includes/class-trustscript-review-renderer.php:1063
+msgid "Critical"
+msgstr "आलोचनात्मक"
+
+#: includes/class-trustscript-compatibility.php:294
+#: includes/class-trustscript-compatibility.php:299
+msgid "Warning"
+msgstr "चेतावनी"
+
+#: includes/class-trustscript-compatibility.php:295
+msgid "Caution"
+msgstr "सावधानी"
+
+#: includes/class-trustscript-compatibility.php:296
+msgid "Information"
+msgstr "जानकारी"
+
+#. translators: %d = number of minutes
+#: includes/class-trustscript-date-formatter.php:60
+#, php-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of hours
+#: includes/class-trustscript-date-formatter.php:69
+#, php-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of days
+#: includes/class-trustscript-date-formatter.php:78
+#, php-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of weeks
+#: includes/class-trustscript-date-formatter.php:87
+#, php-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of months
+#: includes/class-trustscript-date-formatter.php:95
+#, php-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-date-formatter.php:107
+msgid "Relative (e.g., \"2 weeks ago\")"
+msgstr "सापेक्ष (उदाहरण के लिए, \"2 सप्ताह पहले\")"
+
+#: includes/class-trustscript-date-formatter.php:108
+msgid "Full (e.g., \"January 15, 2024\")"
+msgstr "पूरा (उदाहरण के लिए, \"१५ जनवरी, २०२४\")"
+
+#: includes/class-trustscript-date-formatter.php:109
+msgid "Short (e.g., \"Jan 15, 2024\")"
+msgstr "संक्षिप्त (उदाहरण के लिए, \"15 जनवरी, 2024\")"
+
+#: includes/class-trustscript-date-formatter.php:110
+msgid "Numeric (e.g., \"01/15/2024\")"
+msgstr "संख्यात्मक (उदाहरण के लिए, \"01/15/2024\")"
+
+#: includes/class-trustscript-frontend-reviews-base.php:136
+#: includes/class-trustscript-webhook.php:693
+msgid "Click to view verification hash"
+msgstr "सत्यापन हैश देखने के लिए क्लिक करें"
+
+#: includes/class-trustscript-frontend-reviews-base.php:149
+#: includes/integration/elementor/widgets/reviews-showcase.php:934
+msgid "Verified"
+msgstr "सत्यापित"
+
+#: includes/class-trustscript-frontend-reviews-base.php:187
+msgid "Previous"
+msgstr "पिछला"
+
+#. translators: 1: Current page number, 2: Total pages
+#: includes/class-trustscript-frontend-reviews-base.php:194
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "%2$d में से %1$dवां पृष्ठ"
+
+#: includes/class-trustscript-frontend-reviews-base.php:200
+msgid "Next"
+msgstr "अगला"
+
+#: includes/class-trustscript-frontend-reviews-base.php:240
+msgid ""
+"This review is cryptographically verified. Use this hash to verify the "
+"review's authenticity:"
+msgstr ""
+"यह समीक्षा क्रिप्टोग्राफ़िक रूप से सत्यापित है। समीक्षा की प्रामाणिकता "
+"सत्यापित करने के लिए इस हैश का उपयोग करें:"
+
+#: includes/class-trustscript-frontend-reviews-base.php:244
+#: includes/class-trustscript-review-renderer.php:1258
+msgid "Copy Hash"
+msgstr "हैश कॉपी करें"
+
+#: includes/class-trustscript-frontend-reviews-base.php:247
+#: includes/class-trustscript-review-renderer.php:1262
+msgid "Verify on TrustScript"
+msgstr "TrustScript पर सत्यापित करें"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:43
+#: includes/class-trustscript-memberpress-reviews.php:39
+#: includes/class-trustscript-review-renderer.php:813
+#: includes/class-trustscript-review-renderer.php:821
+#: includes/class-trustscript-webhook.php:700
+msgid "Verified Purchase"
+msgstr "सत्यापित खरीद"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:47
+#: includes/class-trustscript-memberpress-reviews.php:43
+msgid "Verified Member"
+msgstr "सत्यापित सदस्य"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:51
+#: includes/class-trustscript-memberpress-reviews.php:47
+msgid "Verified Purchase Hash"
+msgstr "सत्यापित खरीद हैश"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:70
+msgid "TrustScript Member Reviews"
+msgstr "TrustScript सदस्य समीक्षाएँ"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:115
+msgid "Display Member Reviews Below This Page"
+msgstr "इस पृष्ठ के नीचे सदस्य समीक्षाएँ प्रदर्शित करें"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:122
+msgid "Review Display Options"
+msgstr "प्रदर्शन विकल्पों की समीक्षा करें"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:126
+#: includes/class-trustscript-memberpress-reviews-metabox.php:130
+msgid "Display Method"
+msgstr "प्रदर्शन विधि"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:133
+msgid "Select from Dropdown"
+msgstr "ड्रॉपडाउन से चुनें"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:138
+msgid "Paste Shortcode"
+msgstr "शॉर्टकोड पेस्ट करें"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:146
+#: includes/providers/class-trustscript-memberpress-provider.php:111
+#: includes/providers/class-trustscript-memberpress-provider.php:175
+msgid "Membership"
+msgstr "सदस्यता"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:150
+msgid "-- Select a Membership --"
+msgstr "-- सदस्यता चुनें --"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:153
+msgid "Choose a membership to display its reviews."
+msgstr "समीक्षाएँ दिखाने के लिए एक सदस्यता चुनें।"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:159
+msgid "Shortcode"
+msgstr "शॉर्टकोड"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:164
+msgid "Example: "
+msgstr "उदाहरण: "
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:172
+msgid "Reviews Per Page"
+msgstr "प्रति पृष्ठ समीक्षाएँ"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:176
+msgid "Number of reviews to display per page. Default: 10"
+msgstr "प्रति पृष्ठ दिखाने के लिए समीक्षाओं की संख्या। डिफ़ॉल्ट: 10"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:182
+msgid "Minimum Rating Filter"
+msgstr "न्यूनतम रेटिंग फ़िल्टर"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:186
+msgid "Show All Ratings"
+msgstr "सभी रेटिंग दिखाएँ"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:193
+msgid "Only show reviews with this minimum rating. Default: Show all"
+msgstr "केवल इस न्यूनतम रेटिंग वाली समीक्षाएँ दिखाएँ।  डिफ़ॉल्ट: सभी दिखाएँ"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:199
+msgid "💡 Tip:"
+msgstr "💡 सुझाव:"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:200
+msgid ""
+"These reviews will display below the page content, outside of MemberPress "
+"access restrictions. This allows public visibility for SEO and social proof."
+msgstr ""
+"ये समीक्षाएँ पेज की सामग्री के नीचे, MemberPress की पहुँच प्रतिबंधों से बाहर"
+" प्रदर्शित होंगी। इससे SEO और सोशल प्रूफ के लिए सार्वजनिक दृश्यता मिलती है।"
+
+#: includes/class-trustscript-memberpress-reviews.php:78
+msgid "Review Display Settings"
+msgstr "प्रदर्शन सेटिंग्स की समीक्षा करें"
+
+#: includes/class-trustscript-memberpress-reviews.php:79
+msgid "Review Display"
+msgstr "प्रदर्शन समीक्षा"
+
+#: includes/class-trustscript-memberpress-reviews.php:86
+msgid "MemberPress Review Display"
+msgstr "मेम्बरप्रेस समीक्षा प्रदर्शित करें"
+
+#: includes/class-trustscript-memberpress-reviews.php:87
+msgid "MemberPress Reviews"
+msgstr "मेम्बरप्रेस समीक्षाएँ"
+
+#: includes/class-trustscript-memberpress-reviews.php:120
+msgid "MemberPress Review Display Settings"
+msgstr "MemberPress समीक्षा प्रदर्शन सेटिंग्स"
+
+#: includes/class-trustscript-memberpress-reviews.php:123
+msgid "How to Display Reviews"
+msgstr "समीक्षाएँ कैसे प्रदर्शित करें"
+
+#: includes/class-trustscript-memberpress-reviews.php:125
+msgid ""
+"Use the shortcode below to display member reviews anywhere on your site. The"
+" shortcode parameters allow full control over what and how reviews are "
+"displayed."
+msgstr ""
+"अपनी साइट पर कहीं भी सदस्य समीक्षाएँ दिखाने के लिए नीचे दिया गया शॉर्टकोड "
+"उपयोग करें। शॉर्टकोड पैरामीटर यह पूरी तरह नियंत्रित करते हैं कि समीक्षाएँ "
+"क्या और कैसे दिखाई देंगी।"
+
+#: includes/class-trustscript-memberpress-reviews.php:134
+msgid "Default Layout"
+msgstr "डिफ़ॉल्ट लेआउट"
+
+#: includes/class-trustscript-memberpress-reviews.php:137
+msgid "List"
+msgstr "सूची"
+
+#: includes/class-trustscript-memberpress-reviews.php:139
+msgid "Reviews display in a vertical list format"
+msgstr "समीक्षाएँ एक ऊर्ध्वाधर सूची प्रारूप में प्रदर्शित होती हैं।"
+
+#: includes/class-trustscript-memberpress-reviews.php:144
+msgid "Who Can See Reviews"
+msgstr "समीक्षाएँ कौन देख सकता है"
+
+#: includes/class-trustscript-memberpress-reviews.php:147
+msgid "Everyone"
+msgstr "सभी"
+
+#: includes/class-trustscript-memberpress-reviews.php:148
+msgid "Members Only"
+msgstr "केवल सदस्यों के लिए"
+
+#: includes/class-trustscript-memberpress-reviews.php:149
+msgid "Active Members Only"
+msgstr "केवल सक्रिय सदस्य"
+
+#: includes/class-trustscript-memberpress-reviews.php:151
+msgid "Control who can view member reviews on your site"
+msgstr "नियंत्रण करें कि आपकी साइट पर सदस्य समीक्षाएँ कौन देख सकता है।"
+
+#: includes/class-trustscript-memberpress-reviews.php:157
+msgid "Save Settings"
+msgstr "सेटिंग्स सहेजें"
+
+#: includes/class-trustscript-memberpress-reviews.php:163
+msgid "Shortcode Reference"
+msgstr "शॉर्टकोड संदर्भ"
+
+#: includes/class-trustscript-memberpress-reviews.php:165
+msgid "Basic Usage"
+msgstr "मूल उपयोग"
+
+#: includes/class-trustscript-memberpress-reviews.php:166
+msgid "Display member reviews for a specific membership product:"
+msgstr "किसी विशिष्ट सदस्यता उत्पाद के लिए सदस्य समीक्षाएँ प्रदर्शित करें:"
+
+#: includes/class-trustscript-memberpress-reviews.php:169
+msgid "Shortcode Parameters"
+msgstr "शॉर्टकोड पैरामीटर"
+
+#: includes/class-trustscript-memberpress-reviews.php:173
+msgid "Parameter"
+msgstr "पैरामीटर"
+
+#: includes/class-trustscript-memberpress-reviews.php:174
+msgid "Description"
+msgstr "विवरण"
+
+#: includes/class-trustscript-memberpress-reviews.php:175
+msgid "Example"
+msgstr "उदाहरण"
+
+#: includes/class-trustscript-memberpress-reviews.php:181
+msgid "Membership product ID (required)"
+msgstr "सदस्यता उत्पाद आईडी (आवश्यक)"
+
+#: includes/class-trustscript-memberpress-reviews.php:186
+msgid "Number of reviews per page. Default: 10"
+msgstr "प्रति पृष्ठ समीक्षाओं की संख्या। डिफ़ॉल्ट: 10"
+
+#: includes/class-trustscript-memberpress-reviews.php:191
+msgid "Display layout (list). Default: list"
+msgstr "प्रदर्शन लेआउट (सूची)। डिफ़ॉल्ट: सूची"
+
+#: includes/class-trustscript-memberpress-reviews.php:196
+msgid "Filter by minimum rating (1-5). Default: 0 (show all)"
+msgstr "न्यूनतम रेटिंग (1-5) के अनुसार फ़िल्टर करें। डिफ़ॉल्ट: 0 (सभी दिखाएँ)"
+
+#: includes/class-trustscript-memberpress-reviews.php:201
+msgid "Page number for pagination. Default: 1"
+msgstr "पृष्ठ संख्याकरण के लिए पृष्ठ संख्या। डिफ़ॉल्ट: 1"
+
+#: includes/class-trustscript-memberpress-reviews.php:207
+msgid "Example Shortcodes"
+msgstr "उदाहरण शॉर्टकोड्स"
+
+#: includes/class-trustscript-memberpress-reviews.php:208
+msgid "Show 5 reviews per page:"
+msgstr "प्रति पृष्ठ 5 समीक्षाएँ दिखाएँ:"
+
+#: includes/class-trustscript-memberpress-reviews.php:211
+msgid "Show only 4 and 5 star reviews:"
+msgstr "केवल 4 और 5 सितारा समीक्षाएँ दिखाएँ:"
+
+#: includes/class-trustscript-memberpress-reviews.php:214
+msgid "Show 15 reviews per page:"
+msgstr "प्रति पृष्ठ 15 समीक्षाएँ दिखाएँ:"
+
+#: includes/class-trustscript-memberpress-reviews.php:266
+msgid "You must be a member to view reviews."
+msgstr "समीक्षाएँ देखने के लिए आपका सदस्य होना आवश्यक है।"
+
+#: includes/class-trustscript-memberpress-reviews.php:341
+msgid "Member Reviews"
+msgstr "सदस्य समीक्षाएँ"
+
+#. translators: %s: Number of reviews
+#: includes/class-trustscript-memberpress-reviews.php:352
+#, php-format
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-memberpress-reviews.php:386
+msgid "No Reviews Yet"
+msgstr "अभी तक कोई समीक्षा नहीं"
+
+#: includes/class-trustscript-memberpress-reviews.php:387
+msgid "Be the first to share your experience with this membership!"
+msgstr "इस सदस्यता के साथ अपना अनुभव साझा करने वाले पहले व्यक्ति बनें!"
+
+#: includes/class-trustscript-order-status.php:46
+msgctxt "Order status"
+msgid "Delivered"
+msgstr "पहुँचा दिया गया"
+
+#. translators: %s: number of orders
+#: includes/class-trustscript-order-status.php:52
+#, php-format
+msgid "Delivered <span class=\"count\">(%s)</span>"
+msgid_plural "Delivered <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-order-status.php:66
+#: includes/class-trustscript-order-status.php:68
+msgid "Delivered"
+msgstr "पहुँचा दिया गया"
+
+#: includes/class-trustscript-order-status.php:89
+msgid "Change status to delivered"
+msgstr "स्थिति को डिलीवर में बदलें"
+
+#: includes/class-trustscript-order-status.php:107
+#: includes/class-trustscript-order-status.php:132
+msgid "Order marked as delivered by bulk action."
+msgstr "बल्क कार्रवाई द्वारा डिलीवर के रूप में चिह्नित आदेश।"
+
+#: includes/class-trustscript-order-status.php:154
+msgid "Order status changed to delivered via bulk action."
+msgstr "बल्क एक्शन के माध्यम से ऑर्डर की स्थिति डिलीवर में बदल गई।"
+
+#: includes/class-trustscript-order-status.php:168
+msgid "Mark as Delivered"
+msgstr "पहुँचाया हुआ चिह्नित करें"
+
+#: includes/class-trustscript-order-status.php:176
+msgid "Order marked as delivered."
+msgstr "ऑर्डर डिलीवर किया गया चिह्नित।"
+
+#: includes/class-trustscript-placeholder-mapper.php:132
+msgid "Image"
+msgstr "छवि"
+
+#: includes/class-trustscript-placeholder-mapper.php:140
+msgid "Customer name"
+msgstr "ग्राहक का नाम"
+
+#: includes/class-trustscript-placeholder-mapper.php:141
+msgid "Customer email"
+msgstr "ग्राहक ईमेल"
+
+#: includes/class-trustscript-placeholder-mapper.php:142
+msgid "Store name"
+msgstr "दुकान का नाम"
+
+#: includes/class-trustscript-placeholder-mapper.php:143
+msgid "Store URL"
+msgstr "पूरा यूआरएल"
+
+#: includes/class-trustscript-placeholder-mapper.php:144
+msgid "Review link"
+msgstr "समीक्षा लिंक"
+
+#: includes/class-trustscript-placeholder-mapper.php:145
+msgid "Item/Product/Service name"
+msgstr "आइटम/उत्पाद/सेवा का नाम"
+
+#: includes/class-trustscript-placeholder-mapper.php:146
+msgid "Item description"
+msgstr "आइटम का विवरण"
+
+#: includes/class-trustscript-placeholder-mapper.php:147
+msgid "Item image"
+msgstr "आइटम की छवि"
+
+#: includes/class-trustscript-placeholder-mapper.php:148
+msgid "Order/Transaction/Booking ID"
+msgstr "ऑर्डर/लेनदेन/बुकिंग आईडी"
+
+#: includes/class-trustscript-placeholder-mapper.php:149
+msgid "Purchase date"
+msgstr "खरीद की तारीख"
+
+#: includes/class-trustscript-placeholder-mapper.php:150
+msgid "Purchase total"
+msgstr "कुल खरीद"
+
+#: includes/class-trustscript-placeholder-mapper.php:158
+msgid "Product name"
+msgstr "उत्पाद का नाम"
+
+#: includes/class-trustscript-placeholder-mapper.php:159
+msgid "Product description"
+msgstr "उत्पाद विवरण"
+
+#: includes/class-trustscript-placeholder-mapper.php:160
+msgid "Product image"
+msgstr "उत्पाद की छवि"
+
+#: includes/class-trustscript-placeholder-mapper.php:161
+msgid "Order number"
+msgstr "ऑर्डर संख्या"
+
+#: includes/class-trustscript-placeholder-mapper.php:162
+msgid "Order date"
+msgstr "ऑर्डर की तारीख"
+
+#: includes/class-trustscript-placeholder-mapper.php:163
+msgid "Order total"
+msgstr "कुल ऑर्डर"
+
+#: includes/class-trustscript-placeholder-mapper.php:168
+msgid "Membership name"
+msgstr "सदस्यता का नाम"
+
+#: includes/class-trustscript-placeholder-mapper.php:169
+msgid "Membership description"
+msgstr "सदस्यता विवरण"
+
+#: includes/class-trustscript-placeholder-mapper.php:170
+msgid "Transaction number"
+msgstr "लेन-देन संख्या"
+
+#: includes/class-trustscript-placeholder-mapper.php:171
+msgid "Transaction total"
+msgstr "लेनदेन कुल"
+
+#: includes/class-trustscript-placeholder-mapper.php:172
+msgid "Subscription date"
+msgstr "सदस्यता तिथि"
+
+#: includes/class-trustscript-queue.php:344
+msgid "Every 6 hours"
+msgstr "हर 6 घंटे"
+
+#: includes/class-trustscript-review-renderer.php:424
+msgid "Customer Reviews"
+msgstr "ग्राहक समीक्षाएँ"
+
+#: includes/class-trustscript-review-renderer.php:425
+msgid "Honest opinions from verified buyers"
+msgstr "सत्यापित खरीदारों की ईमानदार राय"
+
+#: includes/class-trustscript-review-renderer.php:454
+msgid "No reviews yet. Be the first!"
+msgstr "अभी तक कोई समीक्षा नहीं है। पहले बनें!"
+
+#: includes/class-trustscript-review-renderer.php:575
+msgid "Filter by keyword"
+msgstr "कीवर्ड से फ़िल्टर करें"
+
+#: includes/class-trustscript-review-renderer.php:579
+msgid "All Reviews"
+msgstr "सभी समीक्षाएँ"
+
+#: includes/class-trustscript-review-renderer.php:594
+msgid "Sort by"
+msgstr "के अनुसार क्रमबद्ध करें"
+
+#: includes/class-trustscript-review-renderer.php:598
+msgid "Most Helpful"
+msgstr "सबसे सहायक"
+
+#: includes/class-trustscript-review-renderer.php:602
+msgid "Newest"
+msgstr "नवीनतम"
+
+#: includes/class-trustscript-review-renderer.php:606
+#: includes/integration/elementor/widgets/reviews-showcase.php:57
+msgid "Highest Rated"
+msgstr "सबसे उच्च रेटिंग प्राप्त"
+
+#: includes/class-trustscript-review-renderer.php:610
+msgid "Lowest Rated"
+msgstr "सबसे कम रेटिंग वाले"
+
+#. translators: %1$d = reviews shown, %2$d = total reviews
+#: includes/class-trustscript-review-renderer.php:619
+#: includes/class-trustscript-woocommerce-reviews.php:72
+#, php-format
+msgid "Showing %1$d of %2$d reviews"
+msgstr "%2$d में से %1$d समीक्षाएँ दिखा रहा है"
+
+#: includes/class-trustscript-review-renderer.php:624
+#: includes/class-trustscript-woocommerce-reviews.php:68
+msgid "Showing 1 review"
+msgstr "1 समीक्षा दिखा रहा है"
+
+#. translators: %d = number of reviews
+#: includes/class-trustscript-review-renderer.php:628
+#, php-format
+msgid "Showing %d review"
+msgid_plural "Showing %d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-review-renderer.php:660
+msgctxt "button label"
+msgid "Load more reviews"
+msgstr "और समीक्षाएँ लोड करें"
+
+#: includes/class-trustscript-review-renderer.php:666
+msgid "No reviews match your filter."
+msgstr "आपके फ़िल्टर से कोई समीक्षा मेल नहीं खाती।"
+
+#: includes/class-trustscript-review-renderer.php:808
+msgid "Click to verify this review"
+msgstr "इस समीक्षा को सत्यापित करने के लिए क्लिक करें"
+
+#. translators: %d = star rating number from 1 to 5
+#: includes/class-trustscript-review-renderer.php:833
+#, php-format
+msgid "%d out of 5 stars"
+msgstr "5 में से %d सितारे"
+
+#: includes/class-trustscript-review-renderer.php:853
+msgid "Read more"
+msgstr "और पढ़ें"
+
+#: includes/class-trustscript-review-renderer.php:870
+#: includes/class-trustscript-review-renderer.php:1197
+msgid "Previous photo"
+msgstr "पिछली तस्वीर"
+
+#: includes/class-trustscript-review-renderer.php:897
+#: includes/class-trustscript-webhook.php:798
+#: includes/integration/elementor/widgets/reviews-showcase.php:1106
+msgid "Review photo"
+msgstr "समीक्षा फोटो"
+
+#: includes/class-trustscript-review-renderer.php:907
+#: includes/class-trustscript-review-renderer.php:1202
+msgid "Next photo"
+msgstr "अगली तस्वीर"
+
+#: includes/class-trustscript-review-renderer.php:924
+msgid "Was this helpful?"
+msgstr "क्या यह सहायक था?"
+
+#: includes/class-trustscript-review-renderer.php:931
+msgid "Yes, helpful"
+msgstr "हाँ, सहायक"
+
+#: includes/class-trustscript-review-renderer.php:933
+#: includes/integration/elementor/widgets/reviews-showcase.php:262
+#: includes/integration/elementor/widgets/reviews-showcase.php:288
+msgid "Yes"
+msgstr "हाँ"
+
+#: includes/class-trustscript-review-renderer.php:941
+msgid "No, not helpful"
+msgstr "नहीं, सहायक नहीं"
+
+#: includes/class-trustscript-review-renderer.php:943
+#: includes/integration/elementor/widgets/reviews-showcase.php:263
+#: includes/integration/elementor/widgets/reviews-showcase.php:289
+msgid "No"
+msgstr "से"
+
+#. translators: 1: total count
+#: includes/class-trustscript-review-renderer.php:1028
+#, php-format
+msgid "out of 5 · %d review"
+msgid_plural "out of 5 · %d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-review-renderer.php:1061
+msgid "Positive"
+msgstr "सकारात्मक"
+
+#: includes/class-trustscript-review-renderer.php:1062
+msgid "Neutral"
+msgstr "तटस्थ"
+
+#: includes/class-trustscript-review-renderer.php:1067
+msgid "Sentiment"
+msgstr "महसूस करना"
+
+#: includes/class-trustscript-review-renderer.php:1115
+msgid "All Product Photos"
+msgstr "सभी उत्पाद फ़ोटो"
+
+#. translators: %d is an integer count of photos
+#: includes/class-trustscript-review-renderer.php:1121
+#, php-format
+msgid "%d images"
+msgstr "%d छवियाँ"
+
+#. translators: %d = total count of images in the gallery
+#: includes/class-trustscript-review-renderer.php:1134
+#: includes/class-trustscript-review-renderer.php:1139
+#, php-format
+msgid "View all %d images"
+msgstr "सभी %d छवियाँ देखें"
+
+#: includes/class-trustscript-review-renderer.php:1152
+#: includes/class-trustscript-review-renderer.php:1173
+msgid "Product photo"
+msgstr "उत्पाद की तस्वीर"
+
+#: includes/class-trustscript-review-renderer.php:1155
+msgid "+More"
+msgstr "और अधिक"
+
+#: includes/class-trustscript-review-renderer.php:1192
+msgid "Photo viewer"
+msgstr "फ़ोटो दर्शक"
+
+#: includes/class-trustscript-review-renderer.php:1207
+#: includes/class-trustscript-review-renderer.php:1252
+msgid "Close"
+msgstr "बंद करें"
+
+#: includes/class-trustscript-review-renderer.php:1249
+msgid "Verify review"
+msgstr "समीक्षा सत्यापित करें"
+
+#: includes/class-trustscript-review-renderer.php:1253
+msgid "Verify this review"
+msgstr "इस समीक्षा की पुष्टि करें"
+
+#: includes/class-trustscript-review-renderer.php:1254
+msgid "Authenticity hash for this review:"
+msgstr "इस समीक्षा के लिए प्रामाणिकता हैश:"
+
+#: includes/class-trustscript-review-renderer.php:1308
+msgid "Store Owner"
+msgstr "दुकान मालिक"
+
+#: includes/class-trustscript-review-voting.php:125
+msgid "Invalid or missing nonce."
+msgstr "अमान्य या अनुपस्थित नॉनस।"
+
+#: includes/class-trustscript-review-voting.php:133
+msgid "You must be logged in to vote."
+msgstr "मतदान करने के लिए आपका लॉग इन होना आवश्यक है।"
+
+#: includes/class-trustscript-review-voting.php:152
+msgid "Voting is currently disabled"
+msgstr "मतदान वर्तमान में अक्षम है।"
+
+#: includes/class-trustscript-review-voting.php:160
+msgid "You must be logged in to vote"
+msgstr "मतदान करने के लिए आपका लॉग इन होना आवश्यक है।"
+
+#: includes/class-trustscript-review-voting.php:172
+#: includes/class-trustscript-review-voting.php:211
+msgid "Invalid request"
+msgstr "अमान्य अनुरोध"
+
+#: includes/class-trustscript-review-voting.php:181
+msgid "Could not process your vote. Please try again."
+msgstr "आपका वोट संसाधित नहीं हो सका। कृपया फिर से प्रयास करें।"
+
+#: includes/class-trustscript-review-voting.php:194
+msgid "Vote recorded successfully"
+msgstr "वोट सफलतापूर्वक दर्ज हो गया।"
+
+#: includes/class-trustscript-service-manager.php:148
+msgid "No services detected"
+msgstr "कोई सेवाएँ नहीं मिलीं"
+
+#: includes/class-trustscript-webhook.php:804
+msgid "Your browser does not support the video tag."
+msgstr "आपका ब्राउज़र वीडियो टैग का समर्थन नहीं करता है।"
+
+#: includes/class-trustscript-woocommerce-reviews.php:64
+msgid "Thank you for your feedback!"
+msgstr "आपकी प्रतिक्रिया के लिए धन्यवाद!"
+
+#: includes/class-trustscript-woocommerce-reviews.php:65
+msgid "You have already voted on this review"
+msgstr "आप पहले ही इस समीक्षा पर मतदान कर चुके हैं।"
+
+#: includes/class-trustscript-woocommerce-reviews.php:66
+msgid "Something went wrong. Please try again."
+msgstr "कुछ गलत हो गया। कृपया फिर से प्रयास करें।"
+
+#: includes/class-trustscript-woocommerce-reviews.php:67
+msgid "Login to vote"
+msgstr "मतदान के लिए लॉगिन करें"
+
+#. translators: %d = number of reviews
+#: includes/class-trustscript-woocommerce-reviews.php:70
+#, php-format
+msgid "Showing %d reviews"
+msgstr "%d समीक्षाएँ दिखा रहा है"
+
+#: includes/consent-form-template.php:26
+msgid "I agree to the"
+msgstr "मैं सहमत हूँ"
+
+#: includes/consent-form-template.php:27
+msgid "data sharing terms"
+msgstr "डेटा साझाकरण की शर्तें"
+
+#: includes/consent-form-template.php:35
+msgid "Data Sharing & Privacy Policy"
+msgstr "डेटा साझाकरण और गोपनीयता नीति"
+
+#: includes/consent-form-template.php:40
+msgid "What Data We Share:"
+msgstr "हम कौन सा डेटा साझा करते हैं:"
+
+#: includes/consent-form-template.php:42
+msgid "Required for authentication (sent securely via HTTPS)"
+msgstr ""
+"प्रमाणीकरण के लिए आवश्यक (HTTPS के माध्यम से सुरक्षित रूप से भेजा गया)"
+
+#: includes/consent-form-template.php:43
+msgid "Site URL"
+msgstr "वेबसाइट यूआरएल"
+
+#: includes/consent-form-template.php:43
+msgid "Required to tie the integration to your store"
+msgstr "इंटीग्रेशन को अपने स्टोर से जोड़ना आवश्यक है।"
+
+#: includes/consent-form-template.php:44
+msgid "Order IDs"
+msgstr "ऑर्डर आईडी"
+
+#: includes/consent-form-template.php:44
+msgid ""
+"Required for analytics and review verification (masked / never publicly "
+"exposed)"
+msgstr ""
+"विश्लेषण और समीक्षा सत्यापन के लिए आवश्यक (मास्क्ड / कभी सार्वजनिक रूप से "
+"प्रकट नहीं किया गया)"
+
+#: includes/consent-form-template.php:45
+msgid "Hashed Customer Email (SHA-256)"
+msgstr "हैश किया गया ग्राहक ईमेल (SHA-256)"
+
+#: includes/consent-form-template.php:45
+msgid ""
+"Required for opt-out tracking and duplicate prevention (raw email never sent"
+" or stored)"
+msgstr ""
+"ऑप्ट-आउट ट्रैकिंग और डुप्लिकेट रोकथाम के लिए आवश्यक (कच्चा ईमेल कभी भी भेजा "
+"या संग्रहीत नहीं किया जाता)"
+
+#: includes/consent-form-template.php:46
+msgid "Product Names"
+msgstr "उत्पाद नाम"
+
+#: includes/consent-form-template.php:46
+msgid ""
+"Optional (you can disable in review settings if privacy-sensitive, e.g., "
+"medical/adult products). However, product name is always required when order"
+" contain multiple products."
+msgstr ""
+"वैकल्पिक (यदि आप गोपनीयता-संवेदनशील हैं, जैसे चिकित्सा/वयस्क उत्पाद, तो "
+"समीक्षा सेटिंग्स में इसे अक्षम कर सकते हैं)। हालांकि, जब ऑर्डर में कई उत्पाद"
+" हों, तो उत्पाद का नाम हमेशा आवश्यक होता है।"
+
+#: includes/consent-form-template.php:47
+msgid "Order Dates"
+msgstr "ऑर्डर की तिथियाँ"
+
+#: includes/consent-form-template.php:47
+msgid "Suggested but optional (helps with timing review requests)"
+msgstr "सुझाया गया लेकिन वैकल्पिक (टाइमिंग समीक्षा अनुरोधों में मदद करता है)"
+
+#: includes/consent-form-template.php:48
+msgid "Review Content"
+msgstr "समीक्षा सामग्री"
+
+#: includes/consent-form-template.php:48
+msgid "Only after customer approval (sent inbound via secure webhook)"
+msgstr ""
+"केवल ग्राहक की स्वीकृति के बाद (सुरक्षित वेबहुक के माध्यम से इनबाउंड भेजा "
+"गया)"
+
+#: includes/consent-form-template.php:53
+msgid "Important – What we NEVER collect:"
+msgstr "महत्वपूर्ण – हम कभी भी क्या नहीं एकत्रित करते:"
+
+#: includes/consent-form-template.php:55
+msgid "Raw customer emails"
+msgstr "कच्चे ग्राहक ईमेल"
+
+#: includes/consent-form-template.php:56
+msgid "Customer names"
+msgstr "ग्राहकों के नाम"
+
+#: includes/consent-form-template.php:57
+msgid "Any other personal information"
+msgstr "कोई अन्य व्यक्तिगत जानकारी"
+
+#: includes/consent-form-template.php:63
+msgid ""
+"This integration is privacy-first and GDPR/CCPA compliant. TrustScript does "
+"not sell data, use it for marketing, or train AI on your reviews without "
+"explicit permission. You can disable the integration or revoke access "
+"anytime by removing the API key."
+msgstr ""
+"यह इंटीग्रेशन गोपनीयता-प्रथम है और GDPR/CCPA के अनुरूप है। TrustScript "
+"स्पष्ट अनुमति के बिना डेटा बेचता नहीं है, मार्केटिंग के लिए इसका उपयोग नहीं "
+"करता, और आपकी समीक्षाओं पर AI को प्रशिक्षित नहीं करता। आप API कुंजी हटाकर "
+"किसी भी समय इस इंटीग्रेशन को अक्षम या एक्सेस रद्द कर सकते हैं।"
+
+#: includes/consent-form-template.php:73
+msgid "I Agree"
+msgstr "मैं सहमत हूँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:20
+msgid "Reviews Showcase"
+msgstr "समीक्षाएँ प्रदर्शित करें"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:46
+msgid "Review Selection"
+msgstr "समीक्षा चयन"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:51
+msgid "Selection Method"
+msgstr "चयन विधि"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:55
+msgid "Manual Selection"
+msgstr "मैनुअल चयन"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:56
+msgid "Recent Reviews"
+msgstr "हाल की समीक्षाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:58
+msgid "By Product Category"
+msgstr "उत्पाद श्रेणी के अनुसार"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:63
+msgid "Select Reviews"
+msgstr "चुनिंदा समीक्षाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:82
+msgid "Product Category"
+msgstr "उत्पाद श्रेणी"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:90
+msgid "Minimum Star Rating"
+msgstr "न्यूनतम स्टार रेटिंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:94
+msgid "3 Stars & Above"
+msgstr "3 सितारे और उससे ऊपर"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:95
+msgid "4 Stars & Above"
+msgstr "4 सितारे और उससे ऊपर"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:100
+msgid "Number of Reviews"
+msgstr "समीक्षाओं की संख्या"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:110
+msgid "Display Settings"
+msgstr "प्रदर्शन सेटिंग्स"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:115
+msgid "Layout"
+msgstr "लेआउट"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:119
+msgid "Grid"
+msgstr "ग्रिड"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:120
+msgid "Marquee (Infinite Scroll)"
+msgstr "मार्की (अनंत स्क्रॉल)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:121
+msgid "Image-First Gallery"
+msgstr "छवि-प्रथम गैलरी"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:126
+msgid "Columns"
+msgstr "स्तंभ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:136
+msgid "Gap Between Cards (Rows & Columns)"
+msgstr "कार्डों के बीच का अंतर (पंक्तियाँ और स्तंभ)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:149
+msgid "Show Verification Badge"
+msgstr "सत्यापन बैज दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:151
+#: includes/integration/elementor/widgets/reviews-showcase.php:160
+#: includes/integration/elementor/widgets/reviews-showcase.php:179
+#: includes/integration/elementor/widgets/reviews-showcase.php:188
+msgid "Show"
+msgstr "दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:152
+#: includes/integration/elementor/widgets/reviews-showcase.php:161
+#: includes/integration/elementor/widgets/reviews-showcase.php:180
+#: includes/integration/elementor/widgets/reviews-showcase.php:189
+msgid "Hide"
+msgstr "छिपाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:158
+msgid "Show Product Name"
+msgstr "उत्पाद का नाम दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:167
+msgid "Product Name Length (characters)"
+msgstr "उत्पाद नाम की लंबाई (अक्षर)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:177
+msgid "Show Customer Name"
+msgstr "ग्राहक का नाम दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:186
+msgid "Show \"Verified Buyer\" Label"
+msgstr "\"Verified Buyer\" लेबल दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:196
+msgid "Review Text Length (characters)"
+msgstr "समीक्षा पाठ की लंबाई (अक्षर)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:206
+msgid "Image-First Settings"
+msgstr "छवि-प्रथम सेटिंग्स"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:212
+msgid "Image Height"
+msgstr "छवि की ऊँचाई"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:223
+msgid "Image Fit"
+msgstr "छवि फिट"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:227
+msgid "Cover"
+msgstr "आवरण"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:228
+msgid "Contain"
+msgstr "नियंत्रित करना"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:229
+msgid "Fill"
+msgstr "भरें"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:230
+msgid "None (original size)"
+msgstr "कोई नहीं (मूल आकार)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:231
+msgid "Scale Down"
+msgstr "आकार छोटा करें"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:239
+msgid "Image Position"
+msgstr "छवि स्थिति"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:243
+msgid "Center Center"
+msgstr "केंद्र केंद्र"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:244
+msgid "Center Top"
+msgstr "केंद्र शीर्ष"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:245
+msgid "Center Bottom"
+msgstr "केंद्र नीचे"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:246
+msgid "Left Top"
+msgstr "बाएँ शीर्ष"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:247
+msgid "Left Center"
+msgstr "बाएँ केंद्र"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:248
+msgid "Left Bottom"
+msgstr "बायाँ निचला"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:249
+msgid "Right Top"
+msgstr "दाहिना ऊपर"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:250
+msgid "Right Center"
+msgstr "दक्षिण मध्य"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:251
+msgid "Right Bottom"
+msgstr "दायाँ नीचे"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:260
+msgid "Show Only Reviews With Images"
+msgstr "केवल चित्रों वाले समीक्षाएँ दिखाएँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:270
+msgid "Marquee Settings"
+msgstr "मार्की सेटिंग्स"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:276
+msgid "Animation Speed (seconds)"
+msgstr "एनिमेशन गति (सेकंड)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:282
+msgid "Higher = slower animation"
+msgstr "उच्च = धीमी एनिमेशन"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:286
+msgid "Pause on Hover"
+msgstr "हॉवर पर विराम"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:295
+msgid "Scroll Direction"
+msgstr "स्क्रॉल दिशा"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:299
+msgid "Left (default)"
+msgstr "बायाँ (डिफ़ॉल्ट)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:300
+#: includes/integration/elementor/widgets/reviews-showcase.php:368
+msgid "Right"
+msgstr "सही"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:306
+msgid "Card Width (px)"
+msgstr "कार्ड की चौड़ाई (px)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:318
+msgid "Gap Between Cards (px)"
+msgstr "कार्डों के बीच का अंतर (px)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:330
+msgid "Edge Fade Color"
+msgstr "एज फेड रंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:331
+msgid "Should match your section background color."
+msgstr "यह आपके सेक्शन के पृष्ठभूमि रंग से मेल खाना चाहिए।"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:342
+msgid "Edge Fade Width"
+msgstr "एज फेड चौड़ाई"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:358
+msgid "Review Card"
+msgstr "समीक्षा कार्ड"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:363
+msgid "Content Alignment"
+msgstr "सामग्री संरेखण"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:366
+msgid "Left"
+msgstr "बायाँ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:367
+msgid "Center"
+msgstr "केंद्र"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:390
+#: includes/integration/elementor/widgets/reviews-showcase.php:777
+msgid "Background"
+msgstr "पृष्ठभूमि"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:411
+#: includes/integration/elementor/widgets/reviews-showcase.php:668
+#: includes/integration/elementor/widgets/reviews-showcase.php:798
+msgid "Border Radius"
+msgstr "सीमा त्रिज्या"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:427
+#: includes/integration/elementor/widgets/reviews-showcase.php:656
+msgid "Padding"
+msgstr "पैडिंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:438
+msgid "Hover Effects"
+msgstr "हॉवर प्रभाव"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:444
+msgid "Scale"
+msgstr "पैमाना"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:458
+msgid "Hover Shadow"
+msgstr "छाया तैरना"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:464
+msgid "Transition Duration (ms)"
+msgstr "परिवर्तन अवधि (मिलीसेकंड)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:478
+msgid "Product Name"
+msgstr "उत्पाद का नाम"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:483
+#: includes/integration/elementor/widgets/reviews-showcase.php:517
+#: includes/integration/elementor/widgets/reviews-showcase.php:561
+#: includes/integration/elementor/widgets/reviews-showcase.php:701
+#: includes/integration/elementor/widgets/reviews-showcase.php:737
+#: includes/integration/elementor/widgets/reviews-showcase.php:826
+msgid "Color"
+msgstr "रंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:498
+#: includes/integration/elementor/widgets/reviews-showcase.php:541
+#: includes/integration/elementor/widgets/reviews-showcase.php:575
+#: includes/integration/elementor/widgets/reviews-showcase.php:681
+#: includes/integration/elementor/widgets/reviews-showcase.php:716
+msgid "Bottom Spacing"
+msgstr "तल अंतर"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:512
+msgid "Star Rating"
+msgstr "तारा रेटिंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:528
+#: includes/integration/elementor/widgets/reviews-showcase.php:785
+msgid "Size"
+msgstr "तुम्हारे लिए"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:555
+msgid "Review Date"
+msgstr "समीक्षा तिथि"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:588
+msgid "Verified Badge"
+msgstr "सत्यापित बैज"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:594
+msgid "Badge Style"
+msgstr "बैज शैली"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:598
+msgid "Inline (next to stars)"
+msgstr "इनलाइन (सितारों के बगल में)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:604
+msgid "Text & Icon Color"
+msgstr "टेक्स्ट और आइकन का रंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:615
+msgid "Background Color"
+msgstr "पृष्ठभूमि का रंग"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:626
+#: includes/integration/elementor/widgets/reviews-showcase.php:838
+msgid "Typography"
+msgstr "टाइपोग्राफी"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:632
+msgid "Icon Size"
+msgstr "आइकन का आकार"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:644
+msgid "Text Size"
+msgstr "पाठ का आकार"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:696
+msgid "Review Text"
+msgstr "समीक्षा पाठ"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:731
+msgid "Customer Name"
+msgstr "ग्राहक का नाम"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:756
+msgid "Label Font Size"
+msgstr "लेबल फ़ॉन्ट आकार"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:770
+msgid "Avatar"
+msgstr "अवतार"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:815
+msgid "Border"
+msgstr "सीमा"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:820
+msgid "Text (Initials)"
+msgstr "पाठ (प्रारंभिक अक्षर)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:843
+msgid "Gap to Name"
+msgstr "नाम के लिए अंतर"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:864
+msgid "Unknown Product"
+msgstr "अज्ञात उत्पाद"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:925
+msgid "No reviews found matching your criteria."
+msgstr "आपके मानदंडों से मेल खाने वाली कोई समीक्षा नहीं मिली।"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:944
+msgid "No reviews with images found matching your criteria."
+msgstr ""
+"आपके मानदंडों से मेल खाने वाली कोई समीक्षाएँ चित्रों के साथ नहीं मिलीं।"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:1169
+#: includes/integration/elementor/widgets/reviews-showcase.php:1247
+#: includes/integration/elementor/widgets/reviews-showcase.php:1264
+msgid "Verified Buyer"
+msgstr "सत्यापित खरीदार"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:77
+msgid "Complete"
+msgstr "पूर्ण"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:78
+msgid "Confirmed"
+msgstr "पुष्टि"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:81
+msgid "Refunded"
+msgstr "वापस किया गया"
+
+#: includes/trustscript-helpers.php:94
+msgid "API request failed"
+msgstr "एपीआई अनुरोध विफल हो गया"
+
+#: includes/trustscript-helpers.php:97
+msgid "API key authentication failed"
+msgstr "एपीआई कुंजी प्रमाणीकरण विफल हो गया"
+
+#: includes/trustscript-helpers.php:99
+msgid "Access denied"
+msgstr "पहुँच अस्वीकृत"
+
+#: includes/trustscript-helpers.php:101
+msgid "Resource not found"
+msgstr "संसाधन नहीं मिला"
+
+#: includes/trustscript-helpers.php:103
+msgid "Rate limit exceeded"
+msgstr "दर सीमा पार हो गई"
+
+#: includes/trustscript-helpers.php:112
+msgid "Invalid JSON response from API"
+msgstr "एपीआई से अमान्य JSON प्रतिक्रिया"
+
+#: trustscript.php:172
+msgid ""
+"No supported services detected. TrustScript works with WooCommerce, "
+"MemberPress, and more."
+msgstr ""
+"कोई समर्थित सेवाएँ नहीं मिलीं। TrustScript WooCommerce, MemberPress और अन्य "
+"के साथ काम करता है।"
+
+#: trustscript.php:185
+msgid "Go Pro"
+msgstr "गो प्रो"
+
+#: trustscript.php:191
+msgid "Docs"
+msgstr "दस्तावेज़"

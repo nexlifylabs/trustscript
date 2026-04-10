@@ -1,0 +1,3922 @@
+# Copyright (C) 2026 NexlifyLabs
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: trustscript 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trustscript\n"
+"POT-Creation-Date: 2026-04-08T12:46:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Domain: trustscript\n"
+"X-Generator: WP-CLI 2.12.0\n"
+
+#. Plugin Name of the plugin
+#: trustscript.php
+msgid "trustscript"
+msgstr "trustscript"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: trustscript.php
+msgid "https://nexlifylabs.com"
+msgstr "https://nexlifylabs.com"
+
+#. Description of the plugin
+#: trustscript.php
+msgid ""
+"Automated review collection for WooCommerce — verified, visual, AI-assisted,"
+" and 100% privacy compliant. No PII. No manual work."
+msgstr ""
+"Recolha automatizada de avaliações para o WooCommerce — verificadas, "
+"visuais, assistidas por IA e 100% em conformidade com as normas de "
+"privacidade. Sem dados pessoais identificáveis. Sem trabalho manual."
+
+#. Author of the plugin
+#: trustscript.php
+msgid "NexlifyLabs"
+msgstr "NexlifyLabs"
+
+#: includes/admin/branding.php:18
+msgid "TrustScript Branding"
+msgstr "TrustScript Branding"
+
+#: includes/admin/branding.php:21
+msgid "Loading your account information..."
+msgstr "A carregar as informações da sua conta..."
+
+#: includes/admin/branding.php:25
+msgid "⚠️ Unable to Verify Plan"
+msgstr "⚠️ Impossível verificar o plano"
+
+#: includes/admin/branding.php:29
+msgid "Check API Settings"
+msgstr "Verificar as definições da API"
+
+#: includes/admin/branding.php:32 includes/admin/branding.php:71
+msgid "Refresh Plan Information"
+msgstr "Atualizar informações do plano"
+
+#: includes/admin/branding.php:39
+msgid "Upgrade to Pro or Business Plan"
+msgstr "Atualizar para o Plano Pro ou Business"
+
+#: includes/admin/branding.php:42
+msgid ""
+"Custom branding is available for Pro and Business plan users. Customize your"
+" review pages with your own logo, colors, and domain to create a "
+"professional branded experience."
+msgstr ""
+"A personalização da marca está disponível para utilizadores dos planos Pro e"
+" Business. Personalize as suas páginas de avaliações com o seu próprio "
+"logótipo, cores e domínio para criar uma experiência profissional com a sua "
+"marca."
+
+#: includes/admin/branding.php:47
+msgid "Custom logo and business name"
+msgstr "Logótipo personalizado e nome da empresa"
+
+#: includes/admin/branding.php:51
+msgid "Custom subdomain or domain"
+msgstr "Subdomínio ou domínio personalizado"
+
+#: includes/admin/branding.php:55
+msgid "Custom brand colors"
+msgstr "Cores personalizadas da marca"
+
+#: includes/admin/branding.php:59
+msgid "White-label review pages"
+msgstr "Páginas de avaliações com marca branca"
+
+#: includes/admin/branding.php:63
+msgid "Pro: 500 reviews/month | Business: 2,000 reviews/month"
+msgstr ""
+"Plano Pro: 500 avaliações/mês | Plano Empresarial: 2 000 avaliações/mês"
+
+#: includes/admin/branding.php:68
+msgid "View Plans & Upgrade →"
+msgstr "Ver planos e fazer upgrade →"
+
+#: includes/admin/branding.php:78
+msgid "✨ Your White-Label Branding"
+msgstr "✨ A sua marca em marca branca"
+
+#: includes/admin/branding.php:79
+msgid ""
+"Customize how your review pages appear to customers. Changes sync "
+"automatically to TrustScript."
+msgstr ""
+"Personalize a forma como as suas páginas de avaliações são apresentadas aos "
+"clientes. As alterações são sincronizadas automaticamente com o TrustScript."
+
+#: includes/admin/branding.php:86
+msgid "Business Name"
+msgstr "Nome da empresa"
+
+#: includes/admin/branding.php:89
+msgid "Your business name shown on review pages"
+msgstr "O nome da sua empresa apresentado nas páginas de avaliações"
+
+#: includes/admin/branding.php:93
+msgid "Logo"
+msgstr "Logo"
+
+#: includes/admin/branding.php:97
+msgid "Upload Logo"
+msgstr "Upload Logo"
+
+#: includes/admin/branding.php:98
+msgid "Remove"
+msgstr "Remover"
+
+#: includes/admin/branding.php:103
+msgid "Upload your logo (PNG, JPG, or SVG recommended). Max 5MB."
+msgstr ""
+"Carregue o seu logótipo (recomenda-se PNG, JPG ou SVG). Máximo de 5 MB."
+
+#: includes/admin/branding.php:107
+msgid "Custom Subdomain"
+msgstr "Subdomínio personalizado"
+
+#: includes/admin/branding.php:114
+msgid ""
+"Your custom subdomain (e.g., \"yourbrand\" for yourbrand.nexlifylabs.com). "
+"Checks availability in real-time."
+msgstr ""
+"O seu subdomínio personalizado (por exemplo, «yourbrand» para "
+"yourbrand.nexlifylabs.com). Verifica a disponibilidade em tempo real."
+
+#: includes/admin/branding.php:120
+msgid "🎨 Brand Colors"
+msgstr "🎨 Cores da marca"
+
+#: includes/admin/branding.php:121
+msgid "Customize the colors of your review pages to match your brand identity"
+msgstr ""
+"Personalize as cores das suas páginas de avaliações para que correspondam à "
+"identidade da sua marca"
+
+#: includes/admin/branding.php:126
+msgid "Title & Sub heading"
+msgstr "Título e subtítulo"
+
+#: includes/admin/branding.php:132
+msgid "Title & Sub heading color"
+msgstr "Cor do título e do subtítulo"
+
+#: includes/admin/branding.php:137
+msgid "Accent Color"
+msgstr "Cor de destaque"
+
+#: includes/admin/branding.php:143
+msgid "Secondary accent color for interactive elements"
+msgstr "Cor de destaque secundária para elementos interativos"
+
+#: includes/admin/branding.php:148
+msgid "Page Background"
+msgstr "Fundo da página"
+
+#: includes/admin/branding.php:154
+msgid "Main page background color"
+msgstr "Cor de fundo da página principal"
+
+#: includes/admin/branding.php:159
+msgid "Header Background"
+msgstr "Fundo do cabeçalho"
+
+#: includes/admin/branding.php:165
+msgid "Header section background color"
+msgstr "Cor de fundo da secção do cabeçalho"
+
+#: includes/admin/branding.php:170
+msgid "Card Background"
+msgstr "Fundo do cartão"
+
+#: includes/admin/branding.php:176
+msgid "Card and content area background color"
+msgstr "Cor de fundo do cartão e da área de conteúdo"
+
+#: includes/admin/branding.php:181
+msgid "Text Color"
+msgstr "Cor do texto"
+
+#: includes/admin/branding.php:187
+msgid "Primary text color"
+msgstr "Cor do texto principal"
+
+#: includes/admin/branding.php:192
+msgid "Secondary Text Color"
+msgstr "Cor do texto secundário"
+
+#: includes/admin/branding.php:198
+msgid "Secondary/dimmed text color"
+msgstr "Cor secundária/atenuada do texto"
+
+#: includes/admin/branding.php:203
+msgid "Border Color"
+msgstr "Cor da borda"
+
+#: includes/admin/branding.php:209
+msgid "Border and divider color"
+msgstr "Cor da moldura e da divisória"
+
+#: includes/admin/branding.php:214
+msgid "Button Background"
+msgstr "Fundo do botão"
+
+#: includes/admin/branding.php:220
+msgid "Button background color"
+msgstr "Cor de fundo do botão"
+
+#: includes/admin/branding.php:225
+msgid "Button Text"
+msgstr "Texto do botão"
+
+#: includes/admin/branding.php:231
+msgid "Button text color"
+msgstr "Cor do texto do botão"
+
+#: includes/admin/branding.php:236
+msgid "Button Border"
+msgstr "Borda com botões"
+
+#: includes/admin/branding.php:242
+msgid "Button border color"
+msgstr "Cor da moldura do botão"
+
+#: includes/admin/branding.php:247
+msgid "Success Color"
+msgstr "Cor do Sucesso"
+
+#: includes/admin/branding.php:253
+msgid "Color for success messages and indicators"
+msgstr "Cor para mensagens de sucesso e indicadores"
+
+#: includes/admin/branding.php:258
+msgid "Error Color"
+msgstr "Cor do erro"
+
+#: includes/admin/branding.php:264
+msgid "Color for error messages and alerts"
+msgstr "Cor das mensagens de erro e dos alertas"
+
+#: includes/admin/branding.php:269
+msgid "Star Color (Filled)"
+msgstr "Cor da Estrela (Preenchida)"
+
+#: includes/admin/branding.php:275
+msgid "Color for filled rating stars"
+msgstr "Cor das estrelas de classificação preenchidas"
+
+#: includes/admin/branding.php:280
+msgid "Star Color (Empty)"
+msgstr "Cor da Estrela (Vazio)"
+
+#: includes/admin/branding.php:286
+msgid "Color for empty rating stars"
+msgstr "Cor para as estrelas de classificação em branco"
+
+#: includes/admin/branding.php:292
+msgid "⚙️ Layout & Display"
+msgstr "⚙️ Layout e visualização"
+
+#: includes/admin/branding.php:297
+msgid "Display Logo Only"
+msgstr "Mostrar apenas o logótipo"
+
+#: includes/admin/branding.php:301
+msgid "Show only the logo without business name"
+msgstr "Mostrar apenas o logótipo, sem o nome da empresa"
+
+#: includes/admin/branding.php:307
+msgid "Display Name Only"
+msgstr "Apenas nome de exibição"
+
+#: includes/admin/branding.php:311
+msgid "Show only the business name without logo"
+msgstr "Mostrar apenas o nome da empresa, sem logótipo"
+
+#: includes/admin/branding.php:317
+msgid "Remove Footer"
+msgstr "Remover rodapé"
+
+#: includes/admin/branding.php:321
+msgid "Remove footer text from review pages"
+msgstr "Remover o texto do rodapé das páginas de avaliação"
+
+#: includes/admin/branding.php:327
+msgid "Footer Text"
+msgstr "Texto do rodapé"
+
+#: includes/admin/branding.php:330
+msgid "Custom footer text shown on review pages (optional)"
+msgstr ""
+"Texto personalizado do rodapé exibido nas páginas de avaliação (opcional)"
+
+#: includes/admin/branding.php:337 includes/admin/settings.php:342
+msgid "Save Changes"
+msgstr "Guardar alterações"
+
+#: includes/admin/class-analytics-page.php:48
+msgid "TrustScript Analytics"
+msgstr "TrustScript Analytics"
+
+#: includes/admin/class-analytics-page.php:51
+msgid "Welcome to TrustScript"
+msgstr "Bem-vindo ao TrustScript"
+
+#: includes/admin/class-analytics-page.php:52
+msgid ""
+"Transform your WooCommerce customer reviews with AI-powered content "
+"generation. TrustScript automatically creates authentic, engaging review "
+"options that help customers express their genuine experiences-making it "
+"easier to gather valuable feedback."
+msgstr ""
+"Transforme as avaliações dos clientes do WooCommerce com a geração de "
+"conteúdo baseada em IA. O TrustScript cria automaticamente opções de "
+"avaliações autênticas e envolventes que ajudam os clientes a expressar as "
+"suas experiências genuínas, facilitando a recolha de feedback valioso."
+
+#: includes/admin/class-analytics-page.php:58
+msgid "Review Requests Sent"
+msgstr "Pedidos de revisão enviados"
+
+#: includes/admin/class-analytics-page.php:62
+msgid "Approved Reviews"
+msgstr "Avaliações aprovadas"
+
+#: includes/admin/class-analytics-page.php:66
+msgid "Pending Reviews"
+msgstr "Avaliações pendentes"
+
+#: includes/admin/class-analytics-page.php:70
+#: includes/admin/review-request.php:59
+msgid "Conversion Rate"
+msgstr "Taxa de conversão"
+
+#: includes/admin/class-analytics-page.php:76
+msgid "How It Works"
+msgstr "Como funciona"
+
+#: includes/admin/class-analytics-page.php:81
+msgid "Order Delivered"
+msgstr "Encomenda entregue"
+
+#: includes/admin/class-analytics-page.php:82
+msgid ""
+"When order is marked as \"Delivered\", TrustScript sends review request "
+"email to customer (configured by admin)."
+msgstr ""
+"Quando a encomenda é marcada como «Entregue», o TrustScript envia um e-mail "
+"de pedido de avaliação ao cliente (conforme configurado pelo administrador)."
+
+#: includes/admin/class-analytics-page.php:88
+msgid "Customer Clicks Link"
+msgstr "O cliente clica no link"
+
+#: includes/admin/class-analytics-page.php:89
+msgid ""
+"Customer opens email and clicks the secure review link to access the review "
+"page."
+msgstr ""
+"O cliente abre o e-mail e clica no link seguro para aceder à página de "
+"avaliação."
+
+#: includes/admin/class-analytics-page.php:95
+msgid "Write Review"
+msgstr "Escrever uma avaliação"
+
+#: includes/admin/class-analytics-page.php:96
+msgid ""
+"Customer types their honest review in their own words - anything from a few "
+"words to detailed feedback."
+msgstr ""
+"O cliente escreve a sua avaliação sincera com as suas próprias palavras — "
+"desde algumas palavras até comentários detalhados."
+
+#: includes/admin/class-analytics-page.php:102
+msgid "Select Tone & Variant"
+msgstr "Selecionar tonalidade e variante"
+
+#: includes/admin/class-analytics-page.php:103
+msgid ""
+"Customer chooses writing tone (Professional, Casual, Enthusiastic). AI "
+"generates 3 enhanced versions."
+msgstr ""
+"O cliente escolhe o tom da redação (profissional, informal, entusiasta). A "
+"IA gera três versões melhoradas."
+
+#: includes/admin/class-analytics-page.php:109
+msgid "Choose Version"
+msgstr "Escolha a versão"
+
+#: includes/admin/class-analytics-page.php:110
+msgid ""
+"Customer picks their favorite: original text or one of the AI-enhanced "
+"versions. Can edit before submitting."
+msgstr ""
+"O cliente escolhe a sua opção preferida: o texto original ou uma das versões"
+" melhoradas pela IA. Pode editar antes de enviar."
+
+#: includes/admin/class-analytics-page.php:116
+msgid "Auto-Publish"
+msgstr "Publicação automática"
+
+#: includes/admin/class-analytics-page.php:117
+msgid ""
+"Once approved, review automatically publishes to your WooCommerce product "
+"page via webhook or daily sync."
+msgstr ""
+"Assim que for aprovada, a avaliação é publicada automaticamente na página do"
+" produto do WooCommerce através de um webhook ou de uma sincronização "
+"diária."
+
+#: includes/admin/class-analytics-page.php:123
+msgid "Cryptographic Verification"
+msgstr "Verificação criptográfica"
+
+#: includes/admin/class-analytics-page.php:124
+msgid ""
+"Each review gets a unique SHA-256 hash for authenticity verification. "
+"Customers can verify at nexlifylabs.com/verify-review."
+msgstr ""
+"Cada avaliação recebe um hash SHA-256 único para verificação da "
+"autenticidade. Os clientes podem verificar em nexlifylabs.com/verify-review."
+
+#: includes/admin/class-analytics-page.php:132
+msgid "Recent Activity (Last 10)"
+msgstr "Atividade recente (últimas 10)"
+
+#: includes/admin/class-analytics-page.php:134
+msgid "View All Review Requests →"
+msgstr "Ver todos os pedidos de revisão →"
+
+#: includes/admin/class-analytics-page.php:141
+msgid "Loading activity..."
+msgstr "A carregar..."
+
+#: includes/admin/class-analytics-page.php:142
+msgid "Please wait"
+msgstr "Por favor, aguarde"
+
+#: includes/admin/class-analytics-page.php:151
+#: includes/class-trustscript-admin.php:595
+msgid "Refresh Analytics"
+msgstr "Atualizar análises"
+
+#: includes/admin/class-analytics-page.php:154
+#: includes/admin/pending-queue.php:135 includes/admin/settings.php:158
+#: includes/admin/settings.php:429
+msgid "Upgrade Plan"
+msgstr "Plano de atualização"
+
+#: includes/admin/class-analytics-page.php:157
+#: includes/admin/review-setting.php:87 includes/admin/review-setting.php:90
+#: includes/class-trustscript-admin.php:135
+#: includes/class-trustscript-admin.php:136
+msgid "Review Settings"
+msgstr "Verificar definições"
+
+#: includes/admin/email-template.php:53
+msgid "Email Template Management"
+msgstr "Gestão de modelos de e-mail"
+
+#: includes/admin/email-template.php:60
+msgid "Email Template Customization - Pro & Business Plans Only"
+msgstr ""
+"Personalização de modelos de e-mail - Apenas nos planos Pro e Business"
+
+#: includes/admin/email-template.php:63
+msgid ""
+"Email template customization is available for Pro and Business plan users. "
+"Upgrade your plan to create and manage custom, compliance-checked email "
+"templates in your TrustScript dashboard."
+msgstr ""
+"A personalização de modelos de e-mail está disponível para utilizadores dos "
+"planos Pro e Business. Atualize o seu plano para criar e gerir modelos de "
+"e-mail personalizados e verificados quanto à conformidade no seu painel de "
+"controlo do TrustScript."
+
+#: includes/admin/email-template.php:67
+msgid "Upgrade Your Plan →"
+msgstr "Atualize o seu plano →"
+
+#: includes/admin/email-template.php:76
+msgid "Manage Your Email Templates"
+msgstr "Gerir os seus modelos de e-mail"
+
+#: includes/admin/email-template.php:79
+msgid ""
+"Email templates are centrally managed in your TrustScript dashboard for all "
+"your platforms (WordPress, Wix, Shopify, API). Create custom, compliance-"
+"checked templates with built-in FTC & GDPR protection."
+msgstr ""
+"Os modelos de e-mail são geridos centralmente no painel do TrustScript para "
+"todas as suas plataformas (WordPress, Wix, Shopify, API). Crie modelos "
+"personalizados e em conformidade com a legislação, com proteção integrada "
+"contra a FTC e o RGPD."
+
+#: includes/admin/email-template.php:84
+msgid "Go to Email Template Dashboard →"
+msgstr "Ir para o Painel de Modelos de E-mail →"
+
+#: includes/admin/email-template.php:94
+msgid "Privacy & GDPR/FTC Compliance"
+msgstr "Privacidade e conformidade com o RGPD/FTC"
+
+#: includes/admin/email-template.php:97
+msgid "🔒 No Customer Data Collection:"
+msgstr "🔒 Não recolhemos dados dos clientes:"
+
+#: includes/admin/email-template.php:97
+msgid ""
+"TrustScript never collects, or stores customer personal information (names, "
+"emails, addresses, phone numbers, etc.)."
+msgstr ""
+"A TrustScript nunca recolhe nem armazena informações pessoais dos clientes "
+"(nomes, e-mails, moradas, números de telefone, etc.)."
+
+#: includes/admin/email-template.php:98
+msgid "🔐 Hashed Emails Only:"
+msgstr "🔐 Apenas e-mails com hash:"
+
+#: includes/admin/email-template.php:98
+msgid ""
+"We only store secure hashes of email addresses for opt-out purposes - the "
+"original email is never stored or accessible."
+msgstr ""
+"Apenas guardamos hash seguros dos endereços de e-mail para efeitos de "
+"cancelamento de subscrição — o endereço de e-mail original nunca é guardado "
+"nem fica acessível."
+
+#: includes/admin/email-template.php:99
+msgid "📊 Order IDs Only:"
+msgstr "📊 Apenas números de encomenda:"
+
+#: includes/admin/email-template.php:99
+msgid ""
+"We track order IDs to manage review requests and match approved reviews back"
+" to products."
+msgstr ""
+"Acompanhamos os números de referência das encomendas para gerir os pedidos "
+"de avaliação e associar as avaliações aprovadas aos produtos."
+
+#: includes/admin/email-template.php:100
+msgid "✓ FTC & GDPR Compliant:"
+msgstr "✓ Em conformidade com a FTC e o RGPD:"
+
+#: includes/admin/email-template.php:100
+msgid ""
+"All emails include mandatory GDPR footer, opt-out links, and honest feedback"
+" language - automatically enforced by the system."
+msgstr ""
+"Todos os e-mails incluem um rodapé obrigatório relativo ao RGPD, links para "
+"cancelamento da subscrição e mensagens de feedback sinceras — tudo isto "
+"aplicado automaticamente pelo sistema."
+
+#: includes/admin/email-template.php:101
+msgid "✓ Automatic Privacy Footer:"
+msgstr "✓ Rodapé de privacidade automático:"
+
+#: includes/admin/email-template.php:101
+msgid ""
+"Privacy notice, opt-out links, and transactional disclosures are added to "
+"every email automatically and cannot be removed."
+msgstr ""
+"A declaração de privacidade, os links para cancelamento de subscrição e as "
+"informações transacionais são adicionados automaticamente a todos os e-mails"
+" e não podem ser removidos."
+
+#: includes/admin/pending-queue.php:24 includes/admin/settings.php:10
+msgid "Sorry, you are not allowed to access this page."
+msgstr "Lamentamos, mas não tem permissão para aceder a esta página."
+
+#. translators: %d = number of processed review requests
+#: includes/admin/pending-queue.php:62
+#, php-format
+msgid "All done! %d review request(s) were sent successfully."
+msgstr "Pronto! %d pedidos de revisão foram enviados com sucesso."
+
+#. translators: 1: number of processed review requests, 2: number of still
+#. pending orders
+#: includes/admin/pending-queue.php:70
+#, php-format
+msgid ""
+"%1$d review request(s) sent. %2$d order(s) still pending — quota may still "
+"be limited."
+msgstr ""
+"Foram enviadas %1$d solicitações de revisão. Ainda há %2$d encomendas "
+"pendentes — a quota pode ainda estar limitada."
+
+#. translators: %d = number of failed orders
+#: includes/admin/pending-queue.php:79
+#, php-format
+msgid "%d order(s) could not be processed. Check the Failed tab for details."
+msgstr ""
+"Não foi possível processar %d encomendas. Consulte o separador «Falhas» para"
+" obter mais detalhes."
+
+#: includes/admin/pending-queue.php:84
+msgid ""
+"Queue processed — no new orders were sent (quota may still be limited)."
+msgstr ""
+"Fila processada — não foram enviadas novas encomendas (a quota pode "
+"continuar limitada)."
+
+#: includes/admin/pending-queue.php:92
+msgid "Pending Review Queue"
+msgstr "Fila de revisão pendente"
+
+#. translators: %d number of pending orders
+#: includes/admin/pending-queue.php:99
+#, php-format
+msgid "%d order pending"
+msgid_plural "%d orders pending"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s formatted reset date
+#: includes/admin/pending-queue.php:109
+#, php-format
+msgid "&nbsp;&middot;&nbsp; Quota resets %s"
+msgstr "&nbsp;&middot;&nbsp; Quota resets %s"
+
+#. translators: 1: next plan name 2: limit
+#: includes/admin/pending-queue.php:124
+#, php-format
+msgid "Upgrade to %1$s for %2$s reviews/mo"
+msgstr "Atualize para %1$s por %2$s avaliações/mês"
+
+#: includes/admin/pending-queue.php:144
+#: includes/class-trustscript-admin.php:629
+msgid "Process Queue Now"
+msgstr "Processar fila agora"
+
+#: includes/admin/pending-queue.php:147
+msgid ""
+"Processes quota failures and other non-scheduled errors only. To process "
+"scheduled items early, use the Retry button on each individual item."
+msgstr ""
+"Processa apenas falhas de quota e outros erros não programados. Para "
+"processar itens programados antecipadamente, utilize o botão «Repetir» em "
+"cada item individual."
+
+#: includes/admin/pending-queue.php:152
+msgid "✅ Queue is empty — all review requests are up to date."
+msgstr "✅ A fila está vazia — todos os pedidos de revisão estão em dia."
+
+#. translators: %d = number of pending items
+#: includes/admin/pending-queue.php:177
+#, php-format
+msgid "Pending (%d)"
+msgstr "Pendente (%d)"
+
+#. translators: %d = number of failed items
+#: includes/admin/pending-queue.php:180
+#, php-format
+msgid "Failed (%d)"
+msgstr "Falha (%d)"
+
+#. translators: %d = number of completed items
+#: includes/admin/pending-queue.php:183
+#, php-format
+msgid "Completed (%d)"
+msgstr "Concluído (%d)"
+
+#: includes/admin/pending-queue.php:184
+msgid "All"
+msgstr "Todos"
+
+#: includes/admin/pending-queue.php:199
+msgid "ID"
+msgstr "Número de identificação"
+
+#: includes/admin/pending-queue.php:200
+msgid "Order #"
+msgstr "N.º de encomenda"
+
+#: includes/admin/pending-queue.php:201
+msgid "Service"
+msgstr "Serviço"
+
+#: includes/admin/pending-queue.php:202
+msgid "Reason"
+msgstr "Motivo"
+
+#: includes/admin/pending-queue.php:203
+msgid "Queued At"
+msgstr "Na fila em"
+
+#: includes/admin/pending-queue.php:204
+msgid "Scheduled For"
+msgstr "Agendado para"
+
+#: includes/admin/pending-queue.php:205
+msgid "Last Attempt"
+msgstr "Última tentativa"
+
+#: includes/admin/pending-queue.php:206
+msgid "Retries"
+msgstr "Novas tentativas"
+
+#: includes/admin/pending-queue.php:207 includes/admin/review-request.php:83
+#: includes/admin/review-request.php:122
+msgid "Status"
+msgstr "Status"
+
+#: includes/admin/pending-queue.php:208 includes/admin/review-request.php:125
+msgid "Actions"
+msgstr "Ações"
+
+#: includes/admin/pending-queue.php:217
+msgid "No permanently failed items."
+msgstr "Não há itens com falha permanente."
+
+#: includes/admin/pending-queue.php:219
+msgid "No completed review requests yet."
+msgstr "Ainda não há pedidos de revisão concluídos."
+
+#: includes/admin/pending-queue.php:221
+msgid "The queue is empty."
+msgstr "A fila está vazia."
+
+#: includes/admin/pending-queue.php:223
+msgid ""
+"No pending orders. New quota-exceeded orders will appear here automatically."
+msgstr ""
+"Não há encomendas pendentes. As novas encomendas que excedam a quota "
+"aparecerão aqui automaticamente."
+
+#: includes/admin/pending-queue.php:248
+msgid "Quota"
+msgstr "Quota"
+
+#: includes/admin/pending-queue.php:249
+msgid "Rate limit"
+msgstr "Limite de taxas"
+
+#: includes/admin/pending-queue.php:250
+msgid "Network"
+msgstr "Rede"
+
+#: includes/admin/pending-queue.php:251
+msgid "API error"
+msgstr "Erro de API"
+
+#: includes/admin/pending-queue.php:252
+msgid "Scheduled"
+msgstr "Agendado"
+
+#: includes/admin/pending-queue.php:276
+msgid "Immediate"
+msgstr "Imediato"
+
+#: includes/admin/pending-queue.php:280
+msgid "Never"
+msgstr "Nunca"
+
+#: includes/admin/pending-queue.php:285 includes/admin/review-request.php:51
+#: includes/admin/review-request.php:87
+#: includes/providers/class-trustscript-memberpress-provider.php:79
+msgid "Pending"
+msgstr "Em espera"
+
+#: includes/admin/pending-queue.php:286
+#: includes/providers/class-trustscript-memberpress-provider.php:80
+msgid "Failed"
+msgstr "Falha"
+
+#: includes/admin/pending-queue.php:287
+msgid "Completed"
+msgstr "Concluído"
+
+#: includes/admin/pending-queue.php:309
+#: includes/class-trustscript-admin.php:627
+msgid "Retry"
+msgstr "Tentar novamente"
+
+#: includes/admin/pending-queue.php:316
+#: includes/class-trustscript-admin.php:628
+msgid "Clear"
+msgstr "Limpar"
+
+#: includes/admin/pending-queue.php:319
+msgid "No actions available"
+msgstr "Não há ações disponíveis"
+
+#. translators: %d = total number of items
+#: includes/admin/pending-queue.php:346
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/admin/pending-queue.php:361 includes/admin/pending-queue.php:421
+msgid "Security verification failed. Please refresh the page."
+msgstr "A verificação de segurança falhou. Atualize a página."
+
+#: includes/admin/pending-queue.php:365 includes/admin/pending-queue.php:425
+#: includes/admin/pending-queue.php:458
+#: includes/class-trustscript-admin.php:643
+#: includes/class-trustscript-admin.php:669
+#: includes/class-trustscript-admin.php:2018
+msgid "Permission denied"
+msgstr "Permissão negada"
+
+#: includes/admin/pending-queue.php:370 includes/admin/pending-queue.php:430
+msgid "Invalid ID"
+msgstr "ID inválido"
+
+#: includes/admin/pending-queue.php:379
+msgid "Queue item not found"
+msgstr "Item da fila não encontrado"
+
+#: includes/admin/pending-queue.php:384
+msgid "This order has already been completed. No retry needed."
+msgstr ""
+"Esta encomenda já foi concluída. Não é necessário repetir a tentativa."
+
+#. translators: %s: service ID
+#: includes/admin/pending-queue.php:393
+#, php-format
+msgid "Service provider not active: %s"
+msgstr "O prestador de serviços não está ativo: %s"
+
+#. translators: %d: order ID
+#: includes/admin/pending-queue.php:403
+#, php-format
+msgid "Order #%d processed successfully."
+msgstr "A encomenda n.º %d foi processada com sucesso."
+
+#. translators: %s: error message
+#: includes/admin/pending-queue.php:411
+#, php-format
+msgid "Request failed (%s). Order remains in queue."
+msgstr "A solicitação falhou (%s). A encomenda permanece na fila."
+
+#: includes/admin/pending-queue.php:439
+msgid ""
+"Completed items cannot be cleared (kept for audit trail). Use the Completed "
+"tab to view processed orders."
+msgstr ""
+"Os itens concluídos não podem ser eliminados (são mantidos para fins de "
+"rastreabilidade). Utilize o separador «Concluídos» para visualizar as "
+"encomendas processadas."
+
+#: includes/admin/pending-queue.php:443
+msgid "Item removed from queue."
+msgstr "Item removido da fila."
+
+#: includes/admin/pending-queue.php:445
+msgid "Item not found or already removed."
+msgstr "O item não foi encontrado ou já foi removido."
+
+#: includes/admin/pending-queue.php:454
+msgid "Security verification failed. Please refresh the page and try again."
+msgstr ""
+"A verificação de segurança falhou. Atualize a página e tente novamente."
+
+#: includes/admin/pending-queue.php:491
+msgid ""
+"An error occurred while processing the queue. Check the error logs for "
+"details."
+msgstr ""
+"Ocorreu um erro durante o processamento da fila. Consulte os registos de "
+"erros para obter mais detalhes."
+
+#: includes/admin/review-request.php:25
+#: includes/class-trustscript-admin.php:144
+#: includes/class-trustscript-admin.php:145
+msgid "Review Requests"
+msgstr "Pedidos de revisão"
+
+#: includes/admin/review-request.php:28
+msgid "Review Request"
+msgstr "Pedido de revisão"
+
+#: includes/admin/review-request.php:31
+msgid "Quick Operations Dashboard"
+msgstr "Painel de Operações Rápidas"
+
+#: includes/admin/review-request.php:33
+msgid ""
+"Manage review requests for this store. For complete report, and cross-"
+"platform analytics, visit your TrustScript dashboard."
+msgstr ""
+"Gerir os pedidos de avaliação desta loja. Para obter um relatório completo e"
+" análises multiplataforma, aceda ao seu painel do TrustScript."
+
+#: includes/admin/review-request.php:38
+msgid "Open TrustScript Compliance Dashboard →"
+msgstr "Abrir o Painel de Conformidade do TrustScript →"
+
+#: includes/admin/review-request.php:47
+msgid "Total Requests"
+msgstr "Total de pedidos"
+
+#: includes/admin/review-request.php:55 includes/admin/review-request.php:88
+msgid "Approved"
+msgstr "Aprovado"
+
+#: includes/admin/review-request.php:65
+msgid "All Review Requests"
+msgstr "Todos os pedidos de revisão"
+
+#: includes/admin/review-request.php:72
+msgid "Search"
+msgstr "Pesquisar"
+
+#: includes/admin/review-request.php:78
+msgid "Product name or order ID..."
+msgstr "Nome do produto ou número de encomenda..."
+
+#: includes/admin/review-request.php:86
+msgid "All Statuses"
+msgstr "Todos os estados"
+
+#: includes/admin/review-request.php:93
+msgid "Date Range"
+msgstr "Intervalo de datas"
+
+#: includes/admin/review-request.php:96
+msgid "All Time"
+msgstr "De sempre"
+
+#: includes/admin/review-request.php:97
+msgid "Last 7 Days"
+msgstr "Últimos 7 dias"
+
+#: includes/admin/review-request.php:98
+msgid "Last 30 Days"
+msgstr "Últimos 30 dias"
+
+#: includes/admin/review-request.php:99
+msgid "Last 90 Days"
+msgstr "Últimos 90 dias"
+
+#: includes/admin/review-request.php:104
+msgid "Apply Filters"
+msgstr "Aplicar filtros"
+
+#: includes/admin/review-request.php:111
+msgid "Loading review requests..."
+msgstr "A carregar pedidos de revisão..."
+
+#: includes/admin/review-request.php:120
+msgid "Order ID"
+msgstr "N.º do pedido"
+
+#: includes/admin/review-request.php:121
+msgid "Product"
+msgstr "Produto"
+
+#: includes/admin/review-request.php:123
+msgid "Project"
+msgstr "Projeto"
+
+#: includes/admin/review-request.php:124
+msgid "Date"
+msgstr "Dados"
+
+#: includes/admin/review-request.php:144
+msgid ""
+"No review requests found. They will appear here after orders are completed."
+msgstr ""
+"Não foram encontrados pedidos de avaliação. Estes aparecerão aqui assim que "
+"as encomendas forem concluídas."
+
+#: includes/admin/review-request.php:150
+msgid "Refresh"
+msgstr "Atualizar"
+
+#: includes/admin/review-setting.php:91
+msgid ""
+"Configure how TrustScript generates and collects AI-powered reviews from "
+"your customers across all services."
+msgstr ""
+"Configure a forma como o TrustScript gera e recolhe avaliações baseadas em "
+"IA dos seus clientes em todos os serviços."
+
+#: includes/admin/review-setting.php:99
+msgid "Review Email Timing Guide"
+msgstr "Guia de temporização dos e-mails de revisão"
+
+#: includes/admin/review-setting.php:100
+msgid "Common questions about when and how to send review requests"
+msgstr "Perguntas frequentes sobre quando e como enviar pedidos de avaliação"
+
+#: includes/admin/review-setting.php:106
+msgid "Why shouldn't I use \"Completed\" status?"
+msgstr "Por que não devo usar o estado «Concluído»?"
+
+#: includes/admin/review-setting.php:110
+msgid ""
+"Most stores mark orders as \"Completed\" when shipped, NOT when delivered. "
+"This means customers receive review requests while the package is still in "
+"transit - before they even have the product!"
+msgstr ""
+"A maioria das lojas marca as encomendas como «Concluídas» quando são "
+"enviadas, e NÃO quando são entregues. Isto significa que os clientes recebem"
+" pedidos de avaliação enquanto a encomenda ainda está em trânsito — antes "
+"mesmo de terem o produto!"
+
+#: includes/admin/review-setting.php:114
+msgid "Result:"
+msgstr "Resultado:"
+
+#: includes/admin/review-setting.php:115
+msgid "Low response rates, frustrated customers, and poor quality reviews."
+msgstr ""
+"Baixas taxas de resposta, clientes insatisfeitos e comentários de má "
+"qualidade."
+
+#: includes/admin/review-setting.php:123
+msgid "What is the \"Delivered\" status?"
+msgstr "O que significa o estado «Entregue»?"
+
+#: includes/admin/review-setting.php:127
+msgid ""
+"TrustScript creates a new \"Delivered\" order status. Mark orders as "
+"\"Delivered\" only when customers actually receive their products."
+msgstr ""
+"O TrustScript cria um novo estado de encomenda: «Entregue». Marque as "
+"encomendas como «Entregue» apenas quando os clientes receberem efetivamente "
+"os seus produtos."
+
+#: includes/admin/review-setting.php:130
+msgid "✅ Customers have the product in hand"
+msgstr "✅ Os clientes têm o produto em mãos"
+
+#: includes/admin/review-setting.php:131
+msgid "✅ Review emails sent at the perfect time"
+msgstr "✅ Verifique os e-mails enviados no momento ideal"
+
+#: includes/admin/review-setting.php:132
+msgid "✅ Higher response rates and quality reviews"
+msgstr "✅ Maiores taxas de resposta e avaliações de qualidade"
+
+#: includes/admin/review-setting.php:133
+msgid "✅ Professional customer experience"
+msgstr "✅ Experiência profissional do cliente"
+
+#: includes/admin/review-setting.php:141
+msgid "How do I use the Delivered status?"
+msgstr "Como utilizo o estado «Entregue»?"
+
+#: includes/admin/review-setting.php:146
+msgid "Delivered Status Detected!"
+msgstr "Detetado o estado «Entregue»!"
+
+#. translators: %s: status name
+#: includes/admin/review-setting.php:151
+msgid ""
+"TrustScript found an existing \"Delivered\" status. We'll use this "
+"automatically!"
+msgstr ""
+"O TrustScript detetou um estado «Entregue» já existente. Vamos utilizá-lo "
+"automaticamente!"
+
+#: includes/admin/review-setting.php:160
+msgid "Manual Method:"
+msgstr "Método manual:"
+
+#: includes/admin/review-setting.php:162
+msgid "Go to WooCommerce → Orders"
+msgstr "Vá a WooCommerce → Encomendas"
+
+#: includes/admin/review-setting.php:163
+msgid "When a customer confirms delivery, change order status to \"Delivered\""
+msgstr ""
+"Quando um cliente confirmar a entrega, altere o estado da encomenda para "
+"«Entregue»"
+
+#: includes/admin/review-setting.php:164
+msgid "TrustScript will send review request after configured delay"
+msgstr ""
+"O TrustScript enviará um pedido de revisão após o intervalo de tempo "
+"configurado"
+
+#: includes/admin/review-setting.php:169
+msgid "Automatic Method (Recommended):"
+msgstr "Método automático (recomendado):"
+
+#: includes/admin/review-setting.php:171
+msgid ""
+"Use a shipment tracking plugin like ShipStation, TrackShip, or WooCommerce "
+"Shipment Tracking"
+msgstr ""
+"Utilize um plugin de acompanhamento de envios como o ShipStation, o "
+"TrackShip ou o WooCommerce Shipment Tracking"
+
+#: includes/admin/review-setting.php:172
+msgid ""
+"Configure it to auto-update orders to \"Delivered\" when tracking shows "
+"delivery"
+msgstr ""
+"Configure para que as encomendas sejam automaticamente atualizadas para "
+"«Entregue» quando o registo de envio indicar que a entrega foi efetuada"
+
+#: includes/admin/review-setting.php:173
+msgid "TrustScript will handle the rest automatically!"
+msgstr "O TrustScript trata do resto automaticamente!"
+
+#: includes/admin/review-setting.php:182
+msgid "Can I still use \"Completed\" status?"
+msgstr "Ainda posso usar o estado «Concluído»?"
+
+#: includes/admin/review-setting.php:188
+msgid "Yes, but with caution."
+msgstr "Sim, mas com cautela."
+
+#: includes/admin/review-setting.php:189
+msgid ""
+"You can use \"Completed\" status, but set a longer delay to ensure customers"
+" receive products first. By default, international orders use this same "
+"domestic delay. To send international orders on a different schedule, enable"
+" the \"Handle international orders differently\" option above to set a "
+"separate delay."
+msgstr ""
+"Pode utilizar o estado «Concluído», mas defina um prazo de espera mais longo"
+" para garantir que os clientes recebam os produtos primeiro. Por "
+"predefinição, as encomendas internacionais utilizam este mesmo prazo de "
+"espera aplicável às encomendas nacionais. Para enviar encomendas "
+"internacionais com um calendário diferente, ative a opção «Tratar as "
+"encomendas internacionais de forma diferente» acima para definir um prazo de"
+" espera distinto."
+
+#: includes/admin/review-setting.php:198
+msgid "Review Collection"
+msgstr "Coleção de críticas"
+
+#: includes/admin/review-setting.php:205
+msgid "Enable automatic review requests"
+msgstr "Ativar pedidos automáticos de revisão"
+
+#: includes/admin/review-setting.php:207
+msgid ""
+"When enabled, TrustScript will automatically send review request emails to "
+"customers after order completion."
+msgstr ""
+"Quando ativado, o TrustScript enviará automaticamente e-mails com pedidos de"
+" avaliação aos clientes após a conclusão da encomenda."
+
+#: includes/admin/review-setting.php:211
+msgid "Domestic Review Request Delay"
+msgstr "Atraso no pedido de revisão interna"
+
+#: includes/admin/review-setting.php:215
+#: includes/class-trustscript-admin.php:1993
+msgid "Immediately"
+msgstr "Imediatamente"
+
+#: includes/admin/review-setting.php:216
+msgid "1 hour"
+msgstr "1 hora"
+
+#: includes/admin/review-setting.php:217
+msgid "12 hours"
+msgstr "12 horas"
+
+#: includes/admin/review-setting.php:218
+msgid "1 day"
+msgstr "um dia"
+
+#: includes/admin/review-setting.php:219
+msgid "2 days"
+msgstr "2 dias"
+
+#: includes/admin/review-setting.php:220
+msgid "3 days"
+msgstr "3 dias"
+
+#: includes/admin/review-setting.php:221
+msgid "1 week"
+msgstr "1 semana"
+
+#: includes/admin/review-setting.php:222 includes/admin/review-setting.php:259
+msgid "2 weeks"
+msgstr "2 semanas"
+
+#: includes/admin/review-setting.php:223 includes/admin/review-setting.php:260
+msgid "3 weeks"
+msgstr "3 semanas"
+
+#: includes/admin/review-setting.php:224 includes/admin/review-setting.php:261
+msgid "4 weeks (1 month)"
+msgstr "4 semanas (1 mês)"
+
+#: includes/admin/review-setting.php:225 includes/admin/review-setting.php:263
+msgid "Custom..."
+msgstr "Personalizado..."
+
+#: includes/admin/review-setting.php:230 includes/admin/review-setting.php:268
+msgid "Value"
+msgstr "Valor"
+
+#: includes/admin/review-setting.php:232 includes/admin/review-setting.php:270
+msgid "Hours"
+msgstr "Horário"
+
+#: includes/admin/review-setting.php:233 includes/admin/review-setting.php:271
+msgid "Days"
+msgstr "Dias"
+
+#: includes/admin/review-setting.php:238
+msgid ""
+"Time to wait after order status change before sending review request to "
+"customers."
+msgstr ""
+"Tempo de espera após a alteração do estado da encomenda antes de enviar o "
+"pedido de avaliação aos clientes."
+
+#: includes/admin/review-setting.php:247
+msgid "Handle international orders differently"
+msgstr "Tratar as encomendas internacionais de forma diferente"
+
+#: includes/admin/review-setting.php:249
+msgid ""
+"When enabled, international orders will use a separate, longer review "
+"request delay. This gives international customers more time to receive and "
+"verify their orders."
+msgstr ""
+"Quando ativada, as encomendas internacionais passarão a ter um prazo de "
+"solicitação de avaliação mais longo e distinto. Isto dá aos clientes "
+"internacionais mais tempo para receberem e verificarem as suas encomendas."
+
+#: includes/admin/review-setting.php:253
+msgid "International Order Review Request Delay"
+msgstr "Atraso no pedido de revisão de encomenda internacional"
+
+#: includes/admin/review-setting.php:255
+msgid "International Delay"
+msgstr "Atraso internacional"
+
+#: includes/admin/review-setting.php:262
+msgid "8 weeks (2 months)"
+msgstr "8 semanas (2 meses)"
+
+#: includes/admin/review-setting.php:276
+msgid ""
+"International shipments typically take longer. Set a longer delay to ensure "
+"customers receive and verify orders before review requests arrive."
+msgstr ""
+"As remessas internacionais demoram normalmente mais tempo. Defina um prazo "
+"mais alargado para garantir que os clientes recebem e verificam as "
+"encomendas antes de chegarem os pedidos de revisão."
+
+#: includes/admin/review-setting.php:282
+msgid "Service-Specific Settings"
+msgstr "Definições específicas do serviço"
+
+#: includes/admin/review-setting.php:283
+msgid "Configure filtering and options for each active service independently."
+msgstr ""
+"Configure a filtragem e as opções para cada serviço ativo de forma "
+"independente."
+
+#: includes/admin/review-setting.php:322
+msgid ""
+"No active services detected. Please install and activate WooCommerce, "
+"MemberPress, or other supported plugins."
+msgstr ""
+"Não foram detetados serviços ativos. Por favor, instale e ative o "
+"WooCommerce, o MemberPress ou outros plugins compatíveis."
+
+#: includes/admin/review-setting.php:328
+msgid "Review Publishing"
+msgstr "Publicação de críticas"
+
+#: includes/admin/review-setting.php:335
+msgid "Auto-publish approved reviews"
+msgstr "Publicar automaticamente as avaliações aprovadas"
+
+#: includes/admin/review-setting.php:337
+msgid ""
+"When enabled, customer-approved reviews will be published immediately to "
+"your WooCommerce product pages. When disabled, reviews will require admin "
+"approval first."
+msgstr ""
+"Quando ativada, as avaliações aprovadas pelo cliente serão publicadas "
+"imediatamente nas páginas de produtos do WooCommerce. Quando desativada, as "
+"avaliações terão de ser aprovadas primeiro pelo administrador."
+
+#: includes/admin/review-setting.php:344
+msgid "Review & Email Settings"
+msgstr "Configurações de revisão e e-mail"
+
+#: includes/admin/review-setting.php:345
+msgid ""
+"The following settings are now managed from your TrustScript Dashboard:"
+msgstr ""
+"As seguintes configurações são agora geridas a partir do seu Painel do "
+"TrustScript:"
+
+#: includes/admin/review-setting.php:347
+msgid "Email Mode Settings (Auto Send or Manual Send)"
+msgstr "Definições do modo de e-mail (envio automático ou envio manual)"
+
+#: includes/admin/review-setting.php:348
+msgid "Photo Uploads (Enable/Disable)"
+msgstr "Carregamento de fotos (Ativar/Desativar)"
+
+#: includes/admin/review-setting.php:349
+msgid "Video Uploads (Coming Soon)"
+msgstr "Carregamento de vídeos (em breve)"
+
+#: includes/admin/review-setting.php:353
+msgid "Go to TrustScript Dashboard →"
+msgstr "Aceda ao Painel do TrustScript →"
+
+#: includes/admin/review-setting.php:361
+msgid "Review Filter Keywords"
+msgstr "Verificar palavras-chave do filtro"
+
+#: includes/admin/review-setting.php:362
+msgid ""
+"Select which keywords should appear as filter chips on product pages. "
+"Keywords are only displayed if they exist in actual customer reviews. You "
+"can also configure product-specific keywords from the product editor."
+msgstr ""
+"Selecione as palavras-chave que devem aparecer como opções de filtro nas "
+"páginas de produtos. As palavras-chave só são apresentadas se estiverem "
+"presentes nas avaliações reais dos clientes. Também pode configurar "
+"palavras-chave específicas para cada produto a partir do editor de produtos."
+
+#: includes/admin/review-setting.php:365
+msgid "Available Keywords"
+msgstr "Palavras-chave disponíveis"
+
+#: includes/admin/review-setting.php:379
+msgid ""
+"💡 Tip: Select the keywords that matter most for your products. Unselected "
+"keywords will never appear as filter chips, even if found in reviews."
+msgstr ""
+"💡 Dica: Selecione as palavras-chave mais relevantes para os seus produtos. "
+"As palavras-chave não selecionadas nunca aparecerão como opções de filtro, "
+"mesmo que sejam encontradas nas avaliações."
+
+#: includes/admin/review-setting.php:385
+msgid "Review Voting"
+msgstr "Votação das avaliações"
+
+#: includes/admin/review-setting.php:386
+msgid ""
+"Allow logged-in users to vote on review helpfulness. One vote per review per"
+" user."
+msgstr ""
+"Permitir que os utilizadores registados votem na utilidade das avaliações. "
+"Um voto por avaliação por utilizador."
+
+#: includes/admin/review-setting.php:397
+msgid "Enable upvote/downvote on reviews"
+msgstr "Ativar a função de votar a favor/contra nas avaliações"
+
+#: includes/admin/review-setting.php:400
+msgid ""
+"When enabled, logged-in users can vote on review helpfulness. Users must be "
+"logged in to vote, and each user can vote once per review."
+msgstr ""
+"Quando esta opção estiver ativada, os utilizadores que estiverem conectados "
+"podem votar na utilidade das avaliações. Os utilizadores têm de estar "
+"conectados para votar, e cada utilizador pode votar uma vez por avaliação."
+
+#: includes/admin/review-setting.php:408
+msgid "Privacy Guarantee"
+msgstr "Garantia de Privacidade"
+
+#: includes/admin/review-setting.php:411
+msgid "✓ Vote data is stored ONLY on your WordPress site"
+msgstr "✓ Os dados das votações são armazenados APENAS no seu site WordPress"
+
+#: includes/admin/review-setting.php:412
+msgid "✓ NO voting data is ever sent to or stored on TrustScript servers"
+msgstr ""
+"✓ NUNCA são enviados nem armazenados dados de votação nos servidores da "
+"TrustScript"
+
+#: includes/admin/review-setting.php:413
+msgid "✓ All vote tracking is handled locally using WordPress user accounts"
+msgstr ""
+"✓ Todo o acompanhamento das votações é gerido localmente através das contas "
+"de utilizador do WordPress"
+
+#: includes/admin/review-setting.php:414
+msgid "✓ Users must be logged in to vote"
+msgstr "✓ Os utilizadores têm de estar conectados para votar"
+
+#: includes/admin/review-setting.php:422
+msgid "Automatic Daily Sync"
+msgstr "Sincronização diária automática"
+
+#: includes/admin/review-setting.php:427
+msgid "Two-way synchronization"
+msgstr "Sincronização bidirecional"
+
+#: includes/admin/review-setting.php:429
+msgid ""
+"TrustScript runs a complete synchronization once every day. During this "
+"cycle, it:"
+msgstr ""
+"O TrustScript executa uma sincronização completa uma vez por dia. Durante "
+"este ciclo, ele:"
+
+#: includes/admin/review-setting.php:431
+msgid ""
+"Publishes any approved reviews from TrustScript to your products "
+"(WooCommerce, MemberPress, etc.)"
+msgstr ""
+"Publica todas as avaliações aprovadas do TrustScript nos seus produtos "
+"(WooCommerce, MemberPress, etc.)"
+
+#: includes/admin/review-setting.php:432
+msgid ""
+"Sends completed orders/bookings to TrustScript (WooCommerce, MemberPress)"
+msgstr ""
+"Envia encomendas/reservas concluídas para o TrustScript (WooCommerce, "
+"MemberPress)"
+
+#: includes/admin/review-setting.php:434
+msgid ""
+"This ensures all your services stay synced even if webhooks are unavailable "
+"or manual sync is not triggered."
+msgstr ""
+"Isto garante que todos os seus serviços permaneçam sincronizados, mesmo que "
+"os webhooks estejam indisponíveis ou que a sincronização manual não seja "
+"acionada."
+
+#: includes/admin/review-setting.php:439
+msgid "Recommended for localhost, staging, and development setups"
+msgstr ""
+"Recomendado para configurações de localhost, staging e desenvolvimento"
+
+#: includes/admin/review-setting.php:441
+msgid ""
+"Localhost environments cannot receive webhooks, which means reviews and "
+"orders won't sync instantly."
+msgstr ""
+"Os ambientes localhost não podem receber webhooks, o que significa que as "
+"avaliações e as encomendas não serão sincronizadas instantaneamente."
+
+#: includes/admin/review-setting.php:442
+msgid ""
+"The Automatic Daily Sync helps bridge that gap by regularly checking for:"
+msgstr ""
+"A Sincronização Diária Automática ajuda a colmatar essa lacuna, verificando "
+"regularmente:"
+
+#: includes/admin/review-setting.php:444
+msgid "Orders that weren't sent to TrustScript"
+msgstr "Encomendas que não foram enviadas para o TrustScript"
+
+#: includes/admin/review-setting.php:445
+msgid "Reviews that were approved but not yet published on your site"
+msgstr ""
+"Comentários que foram aprovados, mas ainda não foram publicados no seu site"
+
+#: includes/admin/review-setting.php:447
+msgid ""
+"This makes it easier to test the full review flow without needing live "
+"servers or public URLs."
+msgstr ""
+"Isto facilita o teste de todo o fluxo de revisão sem necessidade de "
+"servidores ativos ou URLs públicas."
+
+#: includes/admin/review-setting.php:452
+msgid "Reliable fallback for all installations"
+msgstr "Solução alternativa fiável para todas as instalações"
+
+#: includes/admin/review-setting.php:454
+msgid ""
+"Even on live websites, the daily sync acts as a safety net to ensure nothing"
+" is missed due to API delays, hosting limitations, or temporary downtime."
+msgstr ""
+"Mesmo em sites ativos, a sincronização diária funciona como uma rede de "
+"segurança para garantir que nada seja perdido devido a atrasos na API, "
+"limitações de alojamento ou interrupções temporárias do serviço."
+
+#: includes/admin/review-setting.php:455
+msgid ""
+"When enabled, TrustScript automatically processes any pending data once per "
+"day_making it especially helpful during plugin development or when testing "
+"review workflows on a local machine."
+msgstr ""
+"Quando ativado, o TrustScript processa automaticamente quaisquer dados "
+"pendentes uma vez por dia, o que o torna especialmente útil durante o "
+"desenvolvimento de plugins ou ao testar fluxos de trabalho de revisão numa "
+"máquina local."
+
+#: includes/admin/review-setting.php:464
+msgid "Enable automatic daily sync"
+msgstr "Ativar sincronização diária automática"
+
+#: includes/admin/review-setting.php:466
+msgid ""
+"When enabled, TrustScript will automatically check for missed orders once "
+"per day."
+msgstr ""
+"Quando ativado, o TrustScript verificará automaticamente se existem "
+"encomendas em falta uma vez por dia."
+
+#: includes/admin/review-setting.php:470
+msgid "Daily Sync Time"
+msgstr "Hora de sincronização diária"
+
+#: includes/admin/review-setting.php:478
+msgid "Time of day to run automatic sync (in your site timezone)."
+msgstr ""
+"Hora do dia em que a sincronização automática deve ser executada (no fuso "
+"horário do seu site)."
+
+#: includes/admin/review-setting.php:482
+msgid "Look Back Period"
+msgstr "Período de referência"
+
+#: includes/admin/review-setting.php:490
+msgid "How far back to check for missed orders during auto-sync."
+msgstr ""
+"Até que ponto se deve recuar para verificar se há encomendas em falta "
+"durante a sincronização automática."
+
+#: includes/admin/review-setting.php:495
+msgid "Next Scheduled Sync:"
+msgstr "Próxima sincronização agendada:"
+
+#: includes/admin/review-setting.php:504
+msgid "Last Run: Processed"
+msgstr "Última execução: Processado"
+
+#: includes/admin/review-setting.php:508
+msgid "Last Run: Skipped"
+msgstr "Última execução: Ignorada"
+
+#: includes/admin/review-setting.php:512
+msgid "Last Run: Errors"
+msgstr "Última execução: Erros"
+
+#: includes/admin/review-setting.php:516
+msgid "Last run:"
+msgstr "Última execução:"
+
+#: includes/admin/review-setting.php:524
+#: includes/class-trustscript-admin.php:597
+msgid "Save Review Settings"
+msgstr "Guardar definições de revisão"
+
+#: includes/admin/review-setting.php:532
+msgid "Manual Sync & Test"
+msgstr "Sincronização manual e teste"
+
+#: includes/admin/review-setting.php:535
+msgid ""
+"Run a complete sync immediately without waiting for the daily schedule. This"
+" is helpful for testing on localhost or staging sites."
+msgstr ""
+"Execute uma sincronização completa imediatamente, sem esperar pela "
+"programação diária. Isto é útil para realizar testes no localhost ou em "
+"sites de teste."
+
+#: includes/admin/review-setting.php:539
+msgid "What happens when you click:"
+msgstr "O que acontece quando clicas:"
+
+#: includes/admin/review-setting.php:541
+msgid ""
+"1. Fetches any approved reviews from TrustScript and publishes them to your "
+"products/services"
+msgstr ""
+"1. Recolhe todas as avaliações aprovadas do TrustScript e publica-as nos "
+"seus produtos/serviços"
+
+#: includes/admin/review-setting.php:542
+msgid ""
+"2. Sends existing orders/bookings from all enabled services (WooCommerce, "
+"MemberPress, etc.) to TrustScript"
+msgstr ""
+"2. Envia as encomendas/reservas existentes de todos os serviços ativados "
+"(WooCommerce, MemberPress, etc.) para o TrustScript"
+
+#: includes/admin/review-setting.php:546
+msgid "Sync orders from the last:"
+msgstr "Sincronizar encomendas a partir da última:"
+
+#: includes/admin/review-setting.php:559
+msgid "Run Complete Sync Now"
+msgstr "Executar sincronização completa agora"
+
+#: includes/admin/review-setting.php:566
+msgid "TOTAL PROCESSED"
+msgstr "TOTAL PROCESSADO"
+
+#: includes/admin/settings.php:22 includes/admin/settings.php:151
+msgid "TrustScript Settings"
+msgstr "Definições do TrustScript"
+
+#: includes/admin/settings.php:30 includes/class-trustscript-admin.php:106
+#: includes/class-trustscript-admin.php:107
+#: includes/integration/elementor/class-trustscript-elementor.php:59
+#: trustscript.php:171
+msgid "TrustScript"
+msgstr "TrustScript"
+
+#: includes/admin/settings.php:31
+msgid "AI-powered review collection for WooCommerce &amp; MemberPress"
+msgstr ""
+"Recolha de avaliações com tecnologia de IA para o WooCommerce e o "
+"MemberPress"
+
+#: includes/admin/settings.php:36
+msgid "Not Connected"
+msgstr "Não está ligado"
+
+#: includes/admin/settings.php:41
+msgid "Get Up &amp; Running in 3 Steps"
+msgstr "Comece a utilizar em 3 passos"
+
+#: includes/admin/settings.php:50
+msgid "Create Your Free Account"
+msgstr "Crie a sua conta gratuita"
+
+#: includes/admin/settings.php:51
+msgid "Sign up on TrustScript — no credit card required."
+msgstr "Registe-se no TrustScript — não é necessário cartão de crédito."
+
+#: includes/admin/settings.php:53
+msgid "Create Free Account →"
+msgstr "Criar conta gratuita →"
+
+#: includes/admin/settings.php:64
+msgid "Generate an API Key"
+msgstr "Gerar uma chave API"
+
+#. translators: %s is the site URL wrapped in <code>
+#: includes/admin/settings.php:69
+#, php-format
+msgid "In your dashboard → API Keys, generate a new key for: %s"
+msgstr "No seu painel de controlo → Chaves API, gere uma nova chave para: %s"
+
+#: includes/admin/settings.php:75
+msgid "Open API Keys Dashboard →"
+msgstr "Painel de Chaves de API Abertas →"
+
+#: includes/admin/settings.php:85
+msgid "Paste Your Key Below &amp; Connect"
+msgstr "Cole a sua chave abaixo e ligue-se"
+
+#: includes/admin/settings.php:86
+msgid ""
+"Copy the key (it looks like TSK-XXXX-XXXX-XXXX) and paste it in the form "
+"just below, then click Save &amp; Connect."
+msgstr ""
+"Copie a chave (tem o formato TSK-XXXX-XXXX-XXXX) e cole-a no formulário "
+"abaixo; em seguida, clique em «Guardar e ligar»."
+
+#: includes/admin/settings.php:88
+msgid "↓ Jump to API Key Field"
+msgstr "↓ Ir para o campo da chave API"
+
+#: includes/admin/settings.php:97
+msgid "Choose Your Plan"
+msgstr "Escolha o seu plano"
+
+#: includes/admin/settings.php:98
+msgid "Start free. Upgrade anytime. No lock-in."
+msgstr "Comece gratuitamente. Atualize a qualquer momento. Sem compromisso."
+
+#: includes/admin/settings.php:105
+msgid "Most Popular"
+msgstr "Mais populares"
+
+#: includes/admin/settings.php:116
+msgid "reviews / month"
+msgstr "críticas por mês"
+
+#: includes/admin/settings.php:129
+msgid "Free Forever"
+msgstr "Gratuito para sempre"
+
+#: includes/admin/settings.php:135
+msgid "All plans include AI-powered review rewriting and email support."
+msgstr ""
+"Todos os planos incluem a reescrita de avaliações com tecnologia de IA e "
+"assistência por e-mail."
+
+#: includes/admin/settings.php:140
+msgid "Step 3 — Paste Your API Key to Connect"
+msgstr "Passo 3 — Cole a sua chave API para estabelecer a ligação"
+
+#: includes/admin/settings.php:149
+msgid "Connected to TrustScript"
+msgstr "Ligado ao TrustScript"
+
+#: includes/admin/settings.php:155
+msgid "Open Dashboard"
+msgstr "Abrir Painel"
+
+#: includes/admin/settings.php:171
+msgid "API Configuration"
+msgstr "Configuração da API"
+
+#: includes/admin/settings.php:173
+msgid "Connect Your API Key"
+msgstr "Ligue a sua chave API"
+
+#: includes/admin/settings.php:178
+msgid "Don't have a key? Get one free →"
+msgstr "Não tem uma chave? Obtenha uma gratuitamente →"
+
+#: includes/admin/settings.php:200 includes/admin/settings.php:276
+msgid "API Key Save Failed"
+msgstr "Falha ao guardar a chave API"
+
+#: includes/admin/settings.php:211 includes/admin/settings.php:287
+msgid "Connected Successfully"
+msgstr "Ligado com sucesso"
+
+#: includes/admin/settings.php:221 includes/admin/settings.php:297
+msgid "Connected — Quota Limit Reached"
+msgstr "Conectado — Limite de quota atingido"
+
+#: includes/admin/settings.php:243
+msgid "Save &amp; Connect"
+msgstr "Guardar e ligar"
+
+#. translators: %1$s dashboard link open, %2$s close
+#: includes/admin/settings.php:250
+#, php-format
+msgid ""
+"Your key is tied to this domain. It looks like %1$s. Generate one from your "
+"%2$sTrustScript Dashboard%3$s."
+msgstr ""
+"A sua chave está associada a este domínio. Tem o seguinte formato: %1$s. "
+"Gere uma a partir do seu %2$sPainel do TrustScript%3$s."
+
+#: includes/admin/settings.php:258
+msgid "Security Note:"
+msgstr "Nota de segurança:"
+
+#: includes/admin/settings.php:259
+msgid ""
+"Your API key is masked as you type for security. It will never be displayed "
+"in plain text or source code."
+msgstr ""
+"Por motivos de segurança, a sua chave API é ocultada à medida que escreve. "
+"Nunca será apresentada em texto simples nem no código-fonte."
+
+#: includes/admin/settings.php:262 includes/admin/settings.php:377
+msgid "Important:"
+msgstr "Importante:"
+
+#: includes/admin/settings.php:263
+msgid ""
+"You must provide a valid API key to use TrustScript. The form submission "
+"will be blocked until you paste a key."
+msgstr ""
+"É necessário fornecer uma chave API válida para utilizar o TrustScript. O "
+"envio do formulário ficará bloqueado até que cole uma chave."
+
+#: includes/admin/settings.php:308 includes/consent-form-template.php:42
+msgid "API Key"
+msgstr "Chave API"
+
+#: includes/admin/settings.php:316
+msgid "Replace Key"
+msgstr "Substituir chave"
+
+#: includes/admin/settings.php:319
+msgid "Delete"
+msgstr "Apagar"
+
+#: includes/admin/settings.php:323
+msgid ""
+"Click \"Replace Key\" to paste a new key. Leave the field blank to keep the "
+"current key unchanged."
+msgstr ""
+"Clique em «Substituir chave» para colar uma nova chave. Deixe o campo em "
+"branco para manter a chave atual inalterada."
+
+#: includes/admin/settings.php:328
+msgid "TrustScript Server"
+msgstr "Servidor TrustScript"
+
+#: includes/admin/settings.php:331
+msgid "Your site is connected to the TrustScript server at nexlifylabs.com"
+msgstr "O seu site está ligado ao servidor TrustScript em nexlifylabs.com"
+
+#: includes/admin/settings.php:335
+msgid "Webhook Endpoint"
+msgstr "Ponto de extremidade do Webhook"
+
+#: includes/admin/settings.php:338
+msgid "Webhooks from TrustScript will be delivered to this URL."
+msgstr "Os webhooks do TrustScript serão enviados para este URL."
+
+#: includes/admin/settings.php:349
+msgid "Plugin Uninstall & Data"
+msgstr "Desinstalação de plugins e dados"
+
+#: includes/admin/settings.php:350
+msgid ""
+"Choose how TrustScript should handle your data if you decide to uninstall "
+"the plugin."
+msgstr ""
+"Escolha como o TrustScript deve tratar os seus dados caso decida desinstalar"
+" o plugin."
+
+#: includes/admin/settings.php:355
+msgid "Delete Data on Uninstall"
+msgstr "Apagar dados ao desinstalar"
+
+#: includes/admin/settings.php:366
+msgid "Completely remove all TrustScript data when I uninstall the plugin"
+msgstr ""
+"Remover completamente todos os dados do TrustScript quando desinstalar o "
+"plugin"
+
+#: includes/admin/settings.php:370
+msgid ""
+"If unchecked (recommended), your TrustScript data will be preserved when you"
+" uninstall the plugin. This lets you reinstall later without losing your "
+"settings and review history."
+msgstr ""
+"Se esta opção não estiver marcada (recomendado), os seus dados do "
+"TrustScript serão preservados quando desinstalar o plugin. Isto permite-lhe "
+"reinstalá-lo mais tarde sem perder as suas definições e o histórico de "
+"revisões."
+
+#: includes/admin/settings.php:379
+msgid ""
+"If you enable this option, the following data will be permanently deleted "
+"when you uninstall the plugin:"
+msgstr ""
+"Se ativar esta opção, os seguintes dados serão eliminados definitivamente "
+"quando desinstalar o plugin:"
+
+#: includes/admin/settings.php:382
+msgid "All TrustScript settings and configuration"
+msgstr "Todas as definições e configurações do TrustScript"
+
+#: includes/admin/settings.php:383
+msgid "API key and connection information"
+msgstr "Chave API e informações de ligação"
+
+#: includes/admin/settings.php:384
+msgid "Review collection history and pending queue items"
+msgstr "Verificar o histórico de cobranças e os itens na fila de pendências"
+
+#: includes/admin/settings.php:385
+msgid "Database tables (order registry, queue, and related data)"
+msgstr ""
+"Tabelas da base de dados (registo de encomendas, fila e dados relacionados)"
+
+#: includes/admin/settings.php:386
+msgid "Scheduled automation tasks (auto-sync, quota checks)"
+msgstr ""
+"Tarefas de automação programadas (sincronização automática, verificações de "
+"quota)"
+
+#: includes/admin/settings.php:391 includes/class-trustscript-admin.php:630
+msgid "Save Preference"
+msgstr "Guardar preferências"
+
+#: includes/admin/settings.php:398
+msgid "Privacy-First Architecture (GDPR Compliant)"
+msgstr "Arquitetura centrada na privacidade (em conformidade com o RGPD)"
+
+#: includes/admin/settings.php:403
+msgid ""
+"TrustScript follows privacy-by-design principles. We do NOT store customer "
+"names or email addresses — only Order IDs for merchant analytics."
+msgstr ""
+"O TrustScript segue os princípios da privacidade desde a conceção. NÃO "
+"guardamos nomes nem endereços de e-mail dos clientes — apenas os números de "
+"referência das encomendas para fins de análise do comerciante."
+
+#: includes/admin/settings.php:406
+msgid ""
+"✓ Customer emails are hashed (SHA-256) for opt-out checking only, then "
+"immediately discarded"
+msgstr ""
+"✓ Os e-mails dos clientes são submetidos a um algoritmo de hash (SHA-256) "
+"apenas para verificar se foram excluídos da lista de receção de "
+"comunicações, sendo depois imediatamente eliminados"
+
+#: includes/admin/settings.php:407
+msgid ""
+"✓ No customer PII (personally identifiable information) is stored in our "
+"database"
+msgstr ""
+"✓ Não são armazenadas informações de identificação pessoal (PII) dos "
+"clientes na nossa base de dados"
+
+#: includes/admin/settings.php:408
+msgid ""
+"✓ Reviews are published as \"Verified Buyer\" — no customer names displayed"
+msgstr ""
+"✓ As avaliações são publicadas como «Comprador verificado» — os nomes dos "
+"clientes não são exibidos"
+
+#: includes/admin/settings.php:409
+msgid ""
+"✓ Full compliance with GDPR Article 5 (data minimization) and Article 25 "
+"(privacy by design)"
+msgstr ""
+"✓ Total conformidade com o artigo 5.º do RGPD (minimização de dados) e o "
+"artigo 25.º (privacidade desde a conceção)"
+
+#: includes/admin/settings.php:417
+msgid "Documentation"
+msgstr "Documentação"
+
+#: includes/admin/settings.php:421 trustscript.php:194
+msgid "Support"
+msgstr "Suporte"
+
+#: includes/admin/settings.php:425
+msgid "Manage API Keys"
+msgstr "Gerir chaves API"
+
+#: includes/admin/settings.php:436
+msgid "Delete API Key?"
+msgstr "Apagar a chave API?"
+
+#: includes/admin/settings.php:443
+msgid ""
+"Are you sure you want to delete your API key? You will need to enter a new "
+"API key to use TrustScript."
+msgstr ""
+"Tem a certeza de que deseja eliminar a sua chave API? Terá de introduzir uma"
+" nova chave API para utilizar o TrustScript."
+
+#: includes/admin/settings.php:446 includes/class-trustscript-admin.php:624
+#: includes/consent-form-template.php:70
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: includes/admin/settings.php:447
+msgid "Delete API Key"
+msgstr "Eliminar chave API"
+
+#: includes/class-trustscript-admin.php:117
+#: includes/class-trustscript-admin.php:118 trustscript.php:188
+msgid "Settings"
+msgstr "Definições"
+
+#: includes/class-trustscript-admin.php:126
+#: includes/class-trustscript-admin.php:127
+msgid "Branding"
+msgstr "Branding"
+
+#: includes/class-trustscript-admin.php:153
+#: includes/class-trustscript-admin.php:154
+msgid "Email Templates"
+msgstr "Modelos de e-mail"
+
+#: includes/class-trustscript-admin.php:161
+#: includes/class-trustscript-admin.php:167
+msgid "Pending Queue"
+msgstr "Fila de pendências"
+
+#: includes/class-trustscript-admin.php:197
+msgid "API Key Invalid or Expired"
+msgstr "Chave API inválida ou caducada"
+
+#: includes/class-trustscript-admin.php:198
+msgid "Your TrustScript API key is no longer valid. This might be because:"
+msgstr ""
+"A sua chave API do TrustScript já não é válida. Isto pode dever-se ao "
+"seguinte:"
+
+#: includes/class-trustscript-admin.php:200
+msgid "The key has expired (development keys expire after 24 hours)"
+msgstr "A chave expirou (as chaves de desenvolvimento expiram após 24 horas)"
+
+#: includes/class-trustscript-admin.php:201
+msgid "The key was deleted from your TrustScript dashboard"
+msgstr "A chave foi eliminada do seu painel do TrustScript"
+
+#: includes/class-trustscript-admin.php:202
+msgid "Your account or key was revoked"
+msgstr "A sua conta ou chave foi revogada"
+
+#: includes/class-trustscript-admin.php:207
+msgid "Go to Settings & Update Key"
+msgstr "Ir para «Definições e Atualizar Chave»"
+
+#: includes/class-trustscript-admin.php:210
+msgid "Generate New Key"
+msgstr "Gerar nova chave"
+
+#. translators: %s: current plan name
+#. translators: %s: plan name
+#: includes/class-trustscript-admin.php:245
+#: includes/class-trustscript-admin.php:431
+#, php-format
+msgid "Monthly review limit reached for your %s plan."
+msgstr "Atingiu o limite mensal de revisões do seu plano %s."
+
+#. translators: 1: next plan name, 2: review limit
+#. translators: %1$s: next plan name, %2$d: review limit
+#: includes/class-trustscript-admin.php:253
+#: includes/class-trustscript-admin.php:439
+#, php-format
+msgid " Upgrade to %1$s for %2$d reviews per month."
+msgstr " Atualize para %1$s por %2$d avaliações por mês."
+
+#. translators: %s: date when quota resets
+#. translators: %s: reset date
+#: includes/class-trustscript-admin.php:265
+#: includes/class-trustscript-admin.php:271
+#: includes/class-trustscript-admin.php:451
+#: includes/class-trustscript-admin.php:457
+#, php-format
+msgid " Or wait until %s for your limit to reset."
+msgstr " Ou aguarde até às %s para que o seu limite seja reiniciado."
+
+#: includes/class-trustscript-admin.php:279
+msgid "Review Quota Limit Reached"
+msgstr "Limite de revisões atingido"
+
+#: includes/class-trustscript-admin.php:283
+msgid "Upgrade Your Plan"
+msgstr "Atualize o seu plano"
+
+#: includes/class-trustscript-admin.php:336
+msgid "Invalid API key format. API keys should look like: TSK-XXXX-XXXX-XXXX"
+msgstr ""
+"Formato inválido da chave API. As chaves API devem ter o seguinte formato: "
+"TSK-XXXX-XXXX-XXXX"
+
+#: includes/class-trustscript-admin.php:349
+msgid "You must agree to data sharing before verifying your API key."
+msgstr ""
+"Tem de concordar com a partilha de dados antes de verificar a sua chave API."
+
+#: includes/class-trustscript-admin.php:414
+msgid ""
+"API key verified successfully! Your site is now connected to TrustScript."
+msgstr ""
+"A chave API foi verificada com sucesso! O seu site está agora ligado ao "
+"TrustScript."
+
+#. translators: 1: remaining reviews, 2: total limit, 3: reset date
+#: includes/class-trustscript-admin.php:475
+#, php-format
+msgid " You have %1$d/%2$d reviews remaining this month (resets on %3$s)."
+msgstr ""
+" Ainda lhe faltam %1$d/%2$d avaliações este mês (reinicia no dia %3$s)."
+
+#: includes/class-trustscript-admin.php:590
+msgid "No recent activity"
+msgstr "Sem atividade recente"
+
+#: includes/class-trustscript-admin.php:591
+msgid "Start by configuring review settings"
+msgstr "Comece por configurar as definições de revisão"
+
+#: includes/class-trustscript-admin.php:592
+msgid "Reviews Generated"
+msgstr "Comentários gerados"
+
+#: includes/class-trustscript-admin.php:593
+msgid ""
+"Failed to load analytics data. Please check your API connection in Settings."
+msgstr ""
+"Não foi possível carregar os dados analíticos. Verifique a sua ligação à API"
+" em «Definições»."
+
+#: includes/class-trustscript-admin.php:594
+msgid "Refreshing..."
+msgstr "Refrescante..."
+
+#: includes/class-trustscript-admin.php:596
+msgid "Saving..."
+msgstr "A guardar..."
+
+#: includes/class-trustscript-admin.php:598
+#: includes/class-trustscript-memberpress-reviews.php:112
+msgid "Settings saved successfully!"
+msgstr "As definições foram guardadas com sucesso!"
+
+#: includes/class-trustscript-admin.php:599
+msgid "Failed to save"
+msgstr "Não foi possível guardar"
+
+#: includes/class-trustscript-admin.php:600
+msgid "Network error"
+msgstr "Erro de rede"
+
+#: includes/class-trustscript-admin.php:601
+msgid "Syncing..."
+msgstr "A sincronizar..."
+
+#: includes/class-trustscript-admin.php:602
+msgid "Sync Completed Orders"
+msgstr "Sincronizar encomendas concluídas"
+
+#: includes/class-trustscript-admin.php:603
+msgid ""
+"This will create review requests for all completed orders in the selected "
+"time range. Continue?"
+msgstr ""
+"Isto irá criar pedidos de avaliação para todas as encomendas concluídas no "
+"intervalo de tempo selecionado. Deseja continuar?"
+
+#: includes/class-trustscript-admin.php:604
+msgid "Failed to sync"
+msgstr "Falha na sincronização"
+
+#: includes/class-trustscript-admin.php:605
+msgid ""
+"Short delay recommended (1-2 days) - customers already have the product."
+msgstr ""
+"Recomenda-se um curto prazo de entrega (1 a 2 dias) — os clientes já têm o "
+"produto."
+
+#: includes/class-trustscript-admin.php:606
+msgid ""
+"Longer delay recommended to ensure product delivery before review request. "
+"International orders use this same delay by default. To use a different "
+"delay for international orders, enable \"Handle international orders "
+"differently\" below."
+msgstr ""
+"Recomenda-se um prazo de espera mais longo para garantir a entrega do "
+"produto antes do pedido de revisão. As encomendas internacionais utilizam, "
+"por predefinição, este mesmo prazo de espera. Para utilizar um prazo de "
+"espera diferente para as encomendas internacionais, ative a opção «Tratar as"
+" encomendas internacionais de forma diferente» abaixo."
+
+#: includes/class-trustscript-admin.php:607
+msgid "Are you sure? This will remove the item from the queue."
+msgstr "Tem a certeza? Isto irá remover o item da fila."
+
+#: includes/class-trustscript-admin.php:608
+msgid "Please paste your TrustScript API key (TSK-XXXX-XXXX-XXXX)."
+msgstr "Cole a sua chave API do TrustScript (TSK-XXXX-XXXX-XXXX)."
+
+#: includes/class-trustscript-admin.php:609
+msgid "API Key Required"
+msgstr "É necessária uma chave API"
+
+#: includes/class-trustscript-admin.php:610
+msgid ""
+"Invalid format. Your key should look like: TSK-XXXX-XXXX-XXXX. Copy it from "
+"your TrustScript dashboard."
+msgstr ""
+"Formato inválido. A sua chave deve ter o seguinte formato: TSK-XXXX-XXXX-"
+"XXXX. Copie-a do seu painel do TrustScript."
+
+#: includes/class-trustscript-admin.php:611
+msgid "Invalid API Key Format"
+msgstr "Formato inválido da chave API"
+
+#: includes/class-trustscript-admin.php:612
+msgid "Media library not available"
+msgstr "Biblioteca multimédia indisponível"
+
+#: includes/class-trustscript-admin.php:613
+msgid "Select Logo"
+msgstr "Selecionar logótipo"
+
+#: includes/class-trustscript-admin.php:614
+msgid "Use this logo"
+msgstr "Utilize este logótipo"
+
+#: includes/class-trustscript-admin.php:615
+msgid "Deleting..."
+msgstr "A eliminar..."
+
+#: includes/class-trustscript-admin.php:616
+msgid "Failed to delete API key"
+msgstr "Não foi possível eliminar a chave API"
+
+#: includes/class-trustscript-admin.php:617
+msgid "Failed to refresh plan information. Please try again."
+msgstr ""
+"Não foi possível atualizar as informações do plano. Por favor, tente "
+"novamente."
+
+#: includes/class-trustscript-admin.php:618
+msgid "Queued for processing..."
+msgstr "Em fila para processamento..."
+
+#: includes/class-trustscript-admin.php:619
+msgid ""
+"Processing your orders in the background — please check back in a few "
+"minutes."
+msgstr ""
+"A processar as suas encomendas em segundo plano — volte a tentar daqui a "
+"alguns minutos."
+
+#: includes/class-trustscript-admin.php:620
+msgid "All categories"
+msgstr "Todas as categorias"
+
+#: includes/class-trustscript-admin.php:621
+msgid "1 category"
+msgstr "1 categoria"
+
+#. translators: %d: number of categories
+#: includes/class-trustscript-admin.php:623
+#: includes/class-trustscript-admin.php:1835
+#, php-format
+msgid "%d categories"
+msgstr "%d categorias"
+
+#: includes/class-trustscript-admin.php:625
+msgid "Retrying..."
+msgstr "A tentar novamente..."
+
+#: includes/class-trustscript-admin.php:626
+msgid "Clearing..."
+msgstr "A limpar..."
+
+#: includes/class-trustscript-admin.php:654
+msgid "Unknown notice"
+msgstr "Aviso desconhecido"
+
+#: includes/class-trustscript-admin.php:675
+msgid "enabled"
+msgstr "ativado"
+
+#: includes/class-trustscript-admin.php:675
+msgid "disabled"
+msgstr "com deficiência"
+
+#. translators: %s is the status of data deletion (enabled or disabled)
+#: includes/class-trustscript-admin.php:678
+#, php-format
+msgid "Data deletion on uninstall %s"
+msgstr "Eliminação de dados ao desinstalar %s"
+
+#: includes/class-trustscript-admin.php:694
+msgid "API key deleted successfully"
+msgstr "A chave API foi eliminada com sucesso"
+
+#: includes/class-trustscript-admin.php:702
+#: includes/class-trustscript-admin.php:998
+#: includes/class-trustscript-admin.php:1280
+msgid "Unauthorized"
+msgstr "Não autorizado"
+
+#: includes/class-trustscript-admin.php:740
+msgid "Subdomain is required"
+msgstr "É necessário um subdomínio"
+
+#: includes/class-trustscript-admin.php:744
+msgid ""
+"Invalid subdomain format. Use alphanumeric characters and hyphens only (3-63"
+" characters)."
+msgstr ""
+"Formato de subdomínio inválido. Utilize apenas caracteres alfanuméricos e "
+"hífens (3 a 63 caracteres)."
+
+#: includes/class-trustscript-admin.php:788
+msgid "logo_url is required"
+msgstr "O campo logo_url é obrigatório"
+
+#: includes/class-trustscript-admin.php:796
+#: includes/trustscript-helpers.php:62
+msgid "Please set your API key in settings."
+msgstr "Defina a sua chave API nas definições."
+
+#. translators: %s: error message
+#: includes/class-trustscript-admin.php:818
+#, php-format
+msgid "Failed to verify plan: %s"
+msgstr "Não foi possível verificar o plano: %s"
+
+#: includes/class-trustscript-admin.php:825
+msgid ""
+"Custom branding is available for Pro and Business plan users only. Please "
+"upgrade your plan to access this feature."
+msgstr ""
+"A personalização da marca está disponível apenas para utilizadores dos "
+"planos Pro e Business. Atualize o seu plano para aceder a esta "
+"funcionalidade."
+
+#: includes/class-trustscript-admin.php:992
+msgid "Security check failed"
+msgstr "A verificação de segurança falhou"
+
+#: includes/class-trustscript-admin.php:1148
+msgid "Review settings saved successfully"
+msgstr "As definições da revisão foram guardadas com sucesso"
+
+#: includes/class-trustscript-admin.php:1288
+msgid ""
+"No active service providers detected. Please enable at least one service "
+"(WooCommerce or MemberPress)."
+msgstr ""
+"Não foram detetados prestadores de serviços ativos. Ative pelo menos um "
+"serviço (WooCommerce ou MemberPress)."
+
+#: includes/class-trustscript-admin.php:1300
+msgid "Sync service not available"
+msgstr "Serviço de sincronização indisponível"
+
+#: includes/class-trustscript-admin.php:1333
+msgid "No new data to sync"
+msgstr "Não há novos dados para sincronizar"
+
+#. translators: %d: number of orders that were already published
+#: includes/class-trustscript-admin.php:1337
+#, php-format
+msgid " (but %d order(s) were already published and skipped)"
+msgstr " (mas %d encomendas já foram publicadas e ignoradas)"
+
+#. translators: %1$d: reviews published, %2$d: orders synced
+#: includes/class-trustscript-admin.php:1354
+#, php-format
+msgid "Sync complete! Reviews published: %1$d, New orders sent: %2$d"
+msgstr ""
+"Sincronização concluída! Avaliações publicadas: %1$d, Novos pedidos "
+"enviados: %2$d"
+
+#. translators: %d: orders that were already published and skipped
+#: includes/class-trustscript-admin.php:1362
+#, php-format
+msgid ", %d order(s) already published (skipped re-sync)"
+msgstr ", %d encomendas já publicadas (sincronização repetida ignorada)"
+
+#: includes/class-trustscript-admin.php:1590
+msgid "Service settings saved successfully!"
+msgstr "As definições do serviço foram guardadas com sucesso!"
+
+#: includes/class-trustscript-admin.php:1607
+msgid "No Supported Services Detected"
+msgstr "Não foram detetados serviços suportados"
+
+#: includes/class-trustscript-admin.php:1610
+msgid "TrustScript works with WooCommerce, MemberPress, and more."
+msgstr ""
+"O TrustScript é compatível com o WooCommerce, o MemberPress e outras "
+"plataformas."
+
+#: includes/class-trustscript-admin.php:1613 trustscript.php:175
+msgid "Install and activate a supported plugin to start collecting reviews."
+msgstr ""
+"Instale e ative um plugin compatível para começar a recolher avaliações."
+
+#: includes/class-trustscript-admin.php:1616 trustscript.php:176
+msgid "View Supported Platforms"
+msgstr "Ver plataformas compatíveis"
+
+#: includes/class-trustscript-admin.php:1627
+msgid "Detected Services"
+msgstr "Serviços detetados"
+
+#: includes/class-trustscript-admin.php:1630
+msgid ""
+"TrustScript has detected the following services on your site. Configure "
+"trigger statuses for each service to automatically collect reviews."
+msgstr ""
+"O TrustScript detetou os seguintes serviços no seu site. Configure os "
+"estados de ativação para cada serviço, de modo a recolher automaticamente as"
+" avaliações."
+
+#: includes/class-trustscript-admin.php:1664
+msgid "Trigger Status:"
+msgstr "Estado do gatilho:"
+
+#: includes/class-trustscript-admin.php:1666
+msgid "Send review request when order reaches this status"
+msgstr "Enviar pedido de avaliação quando a encomenda atingir este estado"
+
+#. translators: %s is the number of available statuses
+#: includes/class-trustscript-admin.php:1684
+#, php-format
+msgid "%d status options available"
+msgstr "%d opções de estado disponíveis"
+
+#: includes/class-trustscript-admin.php:1697
+msgid "Save Service Settings"
+msgstr "Guardar definições do serviço"
+
+#: includes/class-trustscript-admin.php:1706
+msgid "Optional Data Collection"
+msgstr "Recolha de dados opcional"
+
+#: includes/class-trustscript-admin.php:1709
+msgid ""
+"Enhance review requests with additional context. You can disable these "
+"options for privacy-sensitive products (e.g., medical, adult content)."
+msgstr ""
+"Melhore os pedidos de revisão com contexto adicional. Pode desativar estas "
+"opções para produtos sensíveis em termos de privacidade (por exemplo, "
+"produtos médicos ou com conteúdo para adultos)."
+
+#: includes/class-trustscript-admin.php:1723
+msgid "Include Product Names"
+msgstr "Incluir nomes de produtos"
+
+#: includes/class-trustscript-admin.php:1726
+msgid ""
+"Show specific product names in review requests (e.g., \"Blue Wireless "
+"Headphones\"). If disabled, customers will see generic text like \"your "
+"recent purchase\" instead. Disable this for privacy-sensitive products."
+msgstr ""
+"Mostrar nomes específicos de produtos nos pedidos de avaliação (por exemplo,"
+" «Auscultadores sem fios azuis»). Se esta opção estiver desativada, os "
+"clientes verão, em vez disso, um texto genérico como «a sua compra recente»."
+" Desative esta opção para produtos sensíveis em termos de privacidade."
+
+#: includes/class-trustscript-admin.php:1732
+msgid "Why this matters:"
+msgstr "Por que é que isto é importante:"
+
+#: includes/class-trustscript-admin.php:1733
+msgid ""
+"Specific product names help customers write better, more relevant reviews. "
+"However, for sensitive items (health, personal care, gifts), you may want to"
+" keep purchases private."
+msgstr ""
+"Os nomes específicos dos produtos ajudam os clientes a escrever comentários "
+"melhores e mais relevantes. No entanto, no caso de artigos sensíveis (saúde,"
+" cuidados pessoais, presentes), poderá preferir manter as compras em sigilo."
+
+#: includes/class-trustscript-admin.php:1749
+msgid "Include Order Dates"
+msgstr "Incluir datas dos pedidos"
+
+#: includes/class-trustscript-admin.php:1751
+msgid ""
+"Share the purchase date with customers. This helps with timing review "
+"requests and adds context to their feedback."
+msgstr ""
+"Partilhe a data de compra com os clientes. Isto ajuda a programar os pedidos"
+" de revisão e acrescenta contexto aos seus comentários."
+
+#: includes/class-trustscript-admin.php:1760
+msgid "Save Privacy Settings"
+msgstr "Guardar definições de privacidade"
+
+#: includes/class-trustscript-admin.php:1792
+msgid ""
+"No additional filters available for this service. All orders/bookings will "
+"be processed."
+msgstr ""
+"Não há filtros adicionais disponíveis para este serviço. Todas as "
+"encomendas/reservas serão processadas."
+
+#: includes/class-trustscript-admin.php:1816
+msgid "Product Category Filtering"
+msgstr "Filtragem por categoria de produto"
+
+#: includes/class-trustscript-admin.php:1818
+msgid ""
+"Select specific product categories to collect reviews for. Leave all "
+"unchecked to include all products."
+msgstr ""
+"Selecione as categorias de produtos específicas para as quais pretende "
+"recolher avaliações. Deixe todas as opções desmarcadas para incluir todos os"
+" produtos."
+
+#: includes/class-trustscript-admin.php:1825
+msgid "Search categories..."
+msgstr "Pesquisar categorias..."
+
+#: includes/class-trustscript-admin.php:1827
+msgid "Select All"
+msgstr "Selecionar tudo"
+
+#: includes/class-trustscript-admin.php:1830
+msgid "Deselect All"
+msgstr "Desmarcar tudo"
+
+#: includes/class-trustscript-admin.php:1915
+msgid "No product categories found."
+msgstr "Não foram encontradas categorias de produtos."
+
+#: includes/class-trustscript-admin.php:1919
+msgid "Order Value Filtering"
+msgstr "Filtragem por valor da encomenda"
+
+#. translators: %s: store currency symbol
+#: includes/class-trustscript-admin.php:1925
+#, php-format
+msgid "Minimum Order Value (%s):"
+msgstr "Valor mínimo da encomenda (%s):"
+
+#: includes/class-trustscript-admin.php:1932
+msgid ""
+"Only send review requests for orders above this amount. Set to 0 to disable."
+msgstr ""
+"Envie pedidos de avaliação apenas para encomendas superiores a este valor. "
+"Defina como 0 para desativar."
+
+#. translators: %s: store currency symbol
+#: includes/class-trustscript-admin.php:1943
+#, php-format
+msgid "Exclude free products and %s0 orders"
+msgstr "Excluir produtos gratuitos e encomendas %s0"
+
+#: includes/class-trustscript-admin.php:1954
+msgid "MemberPress is not properly loaded."
+msgstr "O MemberPress não foi carregado corretamente."
+
+#: includes/class-trustscript-admin.php:1964
+msgid "Membership Tier Filtering"
+msgstr "Filtragem por nível de adesão"
+
+#: includes/class-trustscript-admin.php:1966
+msgid ""
+"Select which membership tiers should trigger review requests. Leave all "
+"unchecked to include all memberships."
+msgstr ""
+"Selecione os níveis de adesão que devem desencadear pedidos de revisão. "
+"Deixe todas as opções desmarcadas para incluir todas as adesões."
+
+#: includes/class-trustscript-admin.php:1980
+msgid "No memberships found."
+msgstr "Não foram encontradas assinaturas."
+
+#: includes/class-trustscript-admin.php:1985
+msgid "Review Request Timing"
+msgstr "Momento do pedido de revisão"
+
+#: includes/class-trustscript-admin.php:1988
+msgid "Send review request after:"
+msgstr "Enviar pedido de revisão após:"
+
+#: includes/class-trustscript-admin.php:1995
+msgid "7 days"
+msgstr "7 dias"
+
+#: includes/class-trustscript-admin.php:1997
+msgid "14 days"
+msgstr "14 dias"
+
+#: includes/class-trustscript-admin.php:1999
+msgid "30 days"
+msgstr "30 dias"
+
+#: includes/class-trustscript-admin.php:2003
+msgid ""
+"Allow members time to experience your content before requesting a review."
+msgstr ""
+"Dê tempo aos membros para que conheçam o seu conteúdo antes de solicitar uma"
+" avaliação."
+
+#: includes/class-trustscript-admin.php:2031
+msgid "Privacy settings saved successfully!"
+msgstr "As definições de privacidade foram guardadas com sucesso!"
+
+#. translators: %s: Plugin/Component name
+#: includes/class-trustscript-compatibility.php:252
+#, php-format
+msgid "TrustScript Compatibility: %s"
+msgstr "Compatibilidade com TrustScript: %s"
+
+#: includes/class-trustscript-compatibility.php:257
+msgid "Solution:"
+msgstr "Solução:"
+
+#: includes/class-trustscript-compatibility.php:263
+msgid "View Documentation"
+msgstr "Ver documentação"
+
+#: includes/class-trustscript-compatibility.php:267
+msgid "Configure Compatibility Settings"
+msgstr "Configurar as definições de compatibilidade"
+
+#: includes/class-trustscript-compatibility.php:293
+#: includes/class-trustscript-review-renderer.php:1063
+msgid "Critical"
+msgstr "Crítico"
+
+#: includes/class-trustscript-compatibility.php:294
+#: includes/class-trustscript-compatibility.php:299
+msgid "Warning"
+msgstr "Aviso"
+
+#: includes/class-trustscript-compatibility.php:295
+msgid "Caution"
+msgstr "Atenção"
+
+#: includes/class-trustscript-compatibility.php:296
+msgid "Information"
+msgstr "Informações"
+
+#. translators: %d = number of minutes
+#: includes/class-trustscript-date-formatter.php:60
+#, php-format
+msgid "%d minute ago"
+msgid_plural "%d minutes ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of hours
+#: includes/class-trustscript-date-formatter.php:69
+#, php-format
+msgid "%d hour ago"
+msgid_plural "%d hours ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of days
+#: includes/class-trustscript-date-formatter.php:78
+#, php-format
+msgid "%d day ago"
+msgid_plural "%d days ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of weeks
+#: includes/class-trustscript-date-formatter.php:87
+#, php-format
+msgid "%d week ago"
+msgid_plural "%d weeks ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %d = number of months
+#: includes/class-trustscript-date-formatter.php:95
+#, php-format
+msgid "%d month ago"
+msgid_plural "%d months ago"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-date-formatter.php:107
+msgid "Relative (e.g., \"2 weeks ago\")"
+msgstr "Relativo (por exemplo, «há duas semanas»)"
+
+#: includes/class-trustscript-date-formatter.php:108
+msgid "Full (e.g., \"January 15, 2024\")"
+msgstr "Data completa (por exemplo, «15 de janeiro de 2024»)"
+
+#: includes/class-trustscript-date-formatter.php:109
+msgid "Short (e.g., \"Jan 15, 2024\")"
+msgstr "Formato abreviado (por exemplo, «15 de janeiro de 2024»)"
+
+#: includes/class-trustscript-date-formatter.php:110
+msgid "Numeric (e.g., \"01/15/2024\")"
+msgstr "Numérico (por exemplo, «15/01/2024»)"
+
+#: includes/class-trustscript-frontend-reviews-base.php:136
+#: includes/class-trustscript-webhook.php:693
+msgid "Click to view verification hash"
+msgstr "Clique para ver o hash de verificação"
+
+#: includes/class-trustscript-frontend-reviews-base.php:149
+#: includes/integration/elementor/widgets/reviews-showcase.php:934
+msgid "Verified"
+msgstr "Verificado"
+
+#: includes/class-trustscript-frontend-reviews-base.php:187
+msgid "Previous"
+msgstr "Anterior"
+
+#. translators: 1: Current page number, 2: Total pages
+#: includes/class-trustscript-frontend-reviews-base.php:194
+#, php-format
+msgid "Page %1$d of %2$d"
+msgstr "Página %1$d de %2$d"
+
+#: includes/class-trustscript-frontend-reviews-base.php:200
+msgid "Next"
+msgstr "Próximo"
+
+#: includes/class-trustscript-frontend-reviews-base.php:240
+msgid ""
+"This review is cryptographically verified. Use this hash to verify the "
+"review's authenticity:"
+msgstr ""
+"Esta avaliação foi verificada criptograficamente. Utilize este hash para "
+"verificar a autenticidade da avaliação:"
+
+#: includes/class-trustscript-frontend-reviews-base.php:244
+#: includes/class-trustscript-review-renderer.php:1258
+msgid "Copy Hash"
+msgstr "Copiar hash"
+
+#: includes/class-trustscript-frontend-reviews-base.php:247
+#: includes/class-trustscript-review-renderer.php:1262
+msgid "Verify on TrustScript"
+msgstr "Verificar no TrustScript"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:43
+#: includes/class-trustscript-memberpress-reviews.php:39
+#: includes/class-trustscript-review-renderer.php:813
+#: includes/class-trustscript-review-renderer.php:821
+#: includes/class-trustscript-webhook.php:700
+msgid "Verified Purchase"
+msgstr "Compra verificada"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:47
+#: includes/class-trustscript-memberpress-reviews.php:43
+msgid "Verified Member"
+msgstr "Membro verificado"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:51
+#: includes/class-trustscript-memberpress-reviews.php:47
+msgid "Verified Purchase Hash"
+msgstr "Hash de compra verificada"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:70
+msgid "TrustScript Member Reviews"
+msgstr "Avaliações dos membros do TrustScript"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:115
+msgid "Display Member Reviews Below This Page"
+msgstr "Mostrar as avaliações dos membros abaixo desta página"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:122
+msgid "Review Display Options"
+msgstr "Ver opções de visualização"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:126
+#: includes/class-trustscript-memberpress-reviews-metabox.php:130
+msgid "Display Method"
+msgstr "Método de exibição"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:133
+msgid "Select from Dropdown"
+msgstr "Selecione a partir do menu suspenso"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:138
+msgid "Paste Shortcode"
+msgstr "Colocar código de atalho"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:146
+#: includes/providers/class-trustscript-memberpress-provider.php:111
+#: includes/providers/class-trustscript-memberpress-provider.php:175
+msgid "Membership"
+msgstr "Afiliação"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:150
+msgid "-- Select a Membership --"
+msgstr "-- Selecione uma adesão --"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:153
+msgid "Choose a membership to display its reviews."
+msgstr "Escolha uma assinatura para ver as suas avaliações."
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:159
+msgid "Shortcode"
+msgstr "Código abreviado"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:164
+msgid "Example: "
+msgstr "Exemplo: "
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:172
+msgid "Reviews Per Page"
+msgstr "Resultados por página"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:176
+msgid "Number of reviews to display per page. Default: 10"
+msgstr "Número de avaliações a apresentar por página. Padrão: 10"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:182
+msgid "Minimum Rating Filter"
+msgstr "Filtro de classificação mínima"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:186
+msgid "Show All Ratings"
+msgstr "Mostrar todas as avaliações"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:193
+msgid "Only show reviews with this minimum rating. Default: Show all"
+msgstr ""
+"Mostrar apenas avaliações com esta classificação mínima. Padrão: Mostrar "
+"todas"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:199
+msgid "💡 Tip:"
+msgstr "💡 Dica:"
+
+#: includes/class-trustscript-memberpress-reviews-metabox.php:200
+msgid ""
+"These reviews will display below the page content, outside of MemberPress "
+"access restrictions. This allows public visibility for SEO and social proof."
+msgstr ""
+"Estas avaliações serão apresentadas abaixo do conteúdo da página, fora das "
+"restrições de acesso do MemberPress. Isto permite a visibilidade pública "
+"para fins de SEO e como prova social."
+
+#: includes/class-trustscript-memberpress-reviews.php:78
+msgid "Review Display Settings"
+msgstr "Verificar as definições de visualização"
+
+#: includes/class-trustscript-memberpress-reviews.php:79
+msgid "Review Display"
+msgstr "Exibir comentários"
+
+#: includes/class-trustscript-memberpress-reviews.php:86
+msgid "MemberPress Review Display"
+msgstr "Exibição da avaliação do MemberPress"
+
+#: includes/class-trustscript-memberpress-reviews.php:87
+msgid "MemberPress Reviews"
+msgstr "Avaliações do MemberPress"
+
+#: includes/class-trustscript-memberpress-reviews.php:120
+msgid "MemberPress Review Display Settings"
+msgstr "Definições de visualização da MemberPress"
+
+#: includes/class-trustscript-memberpress-reviews.php:123
+msgid "How to Display Reviews"
+msgstr "Como apresentar as avaliações"
+
+#: includes/class-trustscript-memberpress-reviews.php:125
+msgid ""
+"Use the shortcode below to display member reviews anywhere on your site. The"
+" shortcode parameters allow full control over what and how reviews are "
+"displayed."
+msgstr ""
+"Utilize o código de atalho abaixo para apresentar as avaliações dos membros "
+"em qualquer parte do seu site. Os parâmetros do código de atalho permitem um"
+" controlo total sobre o conteúdo e a forma como as avaliações são "
+"apresentadas."
+
+#: includes/class-trustscript-memberpress-reviews.php:134
+msgid "Default Layout"
+msgstr "Layout padrão"
+
+#: includes/class-trustscript-memberpress-reviews.php:137
+msgid "List"
+msgstr "Lista"
+
+#: includes/class-trustscript-memberpress-reviews.php:139
+msgid "Reviews display in a vertical list format"
+msgstr "As avaliações são apresentadas numa lista vertical"
+
+#: includes/class-trustscript-memberpress-reviews.php:144
+msgid "Who Can See Reviews"
+msgstr "Quem pode ver as avaliações"
+
+#: includes/class-trustscript-memberpress-reviews.php:147
+msgid "Everyone"
+msgstr "Todos"
+
+#: includes/class-trustscript-memberpress-reviews.php:148
+msgid "Members Only"
+msgstr "Apenas para membros"
+
+#: includes/class-trustscript-memberpress-reviews.php:149
+msgid "Active Members Only"
+msgstr "Apenas para membros ativos"
+
+#: includes/class-trustscript-memberpress-reviews.php:151
+msgid "Control who can view member reviews on your site"
+msgstr "Controle quem pode ver as avaliações dos membros no seu site"
+
+#: includes/class-trustscript-memberpress-reviews.php:157
+msgid "Save Settings"
+msgstr "Guardar definições"
+
+#: includes/class-trustscript-memberpress-reviews.php:163
+msgid "Shortcode Reference"
+msgstr "Referência de códigos de atalho"
+
+#: includes/class-trustscript-memberpress-reviews.php:165
+msgid "Basic Usage"
+msgstr "Utilização básica"
+
+#: includes/class-trustscript-memberpress-reviews.php:166
+msgid "Display member reviews for a specific membership product:"
+msgstr "Mostrar avaliações dos membros sobre um produto de adesão específico:"
+
+#: includes/class-trustscript-memberpress-reviews.php:169
+msgid "Shortcode Parameters"
+msgstr "Parâmetros de shortcode"
+
+#: includes/class-trustscript-memberpress-reviews.php:173
+msgid "Parameter"
+msgstr "Parâmetros"
+
+#: includes/class-trustscript-memberpress-reviews.php:174
+msgid "Description"
+msgstr "Descrição"
+
+#: includes/class-trustscript-memberpress-reviews.php:175
+msgid "Example"
+msgstr "Exemplo"
+
+#: includes/class-trustscript-memberpress-reviews.php:181
+msgid "Membership product ID (required)"
+msgstr "ID do produto de adesão (obrigatório)"
+
+#: includes/class-trustscript-memberpress-reviews.php:186
+msgid "Number of reviews per page. Default: 10"
+msgstr "Número de avaliações por página. Padrão: 10"
+
+#: includes/class-trustscript-memberpress-reviews.php:191
+msgid "Display layout (list). Default: list"
+msgstr "Formato de apresentação (lista). Padrão: lista"
+
+#: includes/class-trustscript-memberpress-reviews.php:196
+msgid "Filter by minimum rating (1-5). Default: 0 (show all)"
+msgstr "Filtrar por classificação mínima (1-5). Padrão: 0 (mostrar tudo)"
+
+#: includes/class-trustscript-memberpress-reviews.php:201
+msgid "Page number for pagination. Default: 1"
+msgstr "Número da página para a paginação. Padrão: 1"
+
+#: includes/class-trustscript-memberpress-reviews.php:207
+msgid "Example Shortcodes"
+msgstr "Exemplos de códigos de atalho"
+
+#: includes/class-trustscript-memberpress-reviews.php:208
+msgid "Show 5 reviews per page:"
+msgstr "Mostrar 5 avaliações por página:"
+
+#: includes/class-trustscript-memberpress-reviews.php:211
+msgid "Show only 4 and 5 star reviews:"
+msgstr "Mostrar apenas avaliações de 4 e 5 estrelas:"
+
+#: includes/class-trustscript-memberpress-reviews.php:214
+msgid "Show 15 reviews per page:"
+msgstr "Mostrar 15 avaliações por página:"
+
+#: includes/class-trustscript-memberpress-reviews.php:266
+msgid "You must be a member to view reviews."
+msgstr "Tem de ser membro para ver as avaliações."
+
+#: includes/class-trustscript-memberpress-reviews.php:341
+msgid "Member Reviews"
+msgstr "Opiniões dos membros"
+
+#. translators: %s: Number of reviews
+#: includes/class-trustscript-memberpress-reviews.php:352
+#, php-format
+msgid "%s review"
+msgid_plural "%s reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-memberpress-reviews.php:386
+msgid "No Reviews Yet"
+msgstr "Ainda não há comentários"
+
+#: includes/class-trustscript-memberpress-reviews.php:387
+msgid "Be the first to share your experience with this membership!"
+msgstr "Seja o primeiro a partilhar a sua experiência com esta assinatura!"
+
+#: includes/class-trustscript-order-status.php:46
+msgctxt "Order status"
+msgid "Delivered"
+msgstr "Entregue"
+
+#. translators: %s: number of orders
+#: includes/class-trustscript-order-status.php:52
+#, php-format
+msgid "Delivered <span class=\"count\">(%s)</span>"
+msgid_plural "Delivered <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-order-status.php:66
+#: includes/class-trustscript-order-status.php:68
+msgid "Delivered"
+msgstr "Entregue"
+
+#: includes/class-trustscript-order-status.php:89
+msgid "Change status to delivered"
+msgstr "Alterar o estado para «entregue»"
+
+#: includes/class-trustscript-order-status.php:107
+#: includes/class-trustscript-order-status.php:132
+msgid "Order marked as delivered by bulk action."
+msgstr "Encomenda marcada como entregue através de uma ação em massa."
+
+#: includes/class-trustscript-order-status.php:154
+msgid "Order status changed to delivered via bulk action."
+msgstr ""
+"O estado da encomenda foi alterado para «entregue» através de uma ação em "
+"massa."
+
+#: includes/class-trustscript-order-status.php:168
+msgid "Mark as Delivered"
+msgstr "Marcar como entregue"
+
+#: includes/class-trustscript-order-status.php:176
+msgid "Order marked as delivered."
+msgstr "Encomenda marcada como entregue."
+
+#: includes/class-trustscript-placeholder-mapper.php:132
+msgid "Image"
+msgstr "Imagem"
+
+#: includes/class-trustscript-placeholder-mapper.php:140
+msgid "Customer name"
+msgstr "Nome do cliente"
+
+#: includes/class-trustscript-placeholder-mapper.php:141
+msgid "Customer email"
+msgstr "E-mail do cliente"
+
+#: includes/class-trustscript-placeholder-mapper.php:142
+msgid "Store name"
+msgstr "Nome da loja"
+
+#: includes/class-trustscript-placeholder-mapper.php:143
+msgid "Store URL"
+msgstr "URL completo"
+
+#: includes/class-trustscript-placeholder-mapper.php:144
+msgid "Review link"
+msgstr "Link para a avaliação"
+
+#: includes/class-trustscript-placeholder-mapper.php:145
+msgid "Item/Product/Service name"
+msgstr "Nome do artigo/produto/serviço"
+
+#: includes/class-trustscript-placeholder-mapper.php:146
+msgid "Item description"
+msgstr "Descrição do artigo"
+
+#: includes/class-trustscript-placeholder-mapper.php:147
+msgid "Item image"
+msgstr "Imagem do artigo"
+
+#: includes/class-trustscript-placeholder-mapper.php:148
+msgid "Order/Transaction/Booking ID"
+msgstr "N.º do pedido/transação/reserva"
+
+#: includes/class-trustscript-placeholder-mapper.php:149
+msgid "Purchase date"
+msgstr "Data de compra"
+
+#: includes/class-trustscript-placeholder-mapper.php:150
+msgid "Purchase total"
+msgstr "Total da compra"
+
+#: includes/class-trustscript-placeholder-mapper.php:158
+msgid "Product name"
+msgstr "Nome do produto"
+
+#: includes/class-trustscript-placeholder-mapper.php:159
+msgid "Product description"
+msgstr "Descrição do produto"
+
+#: includes/class-trustscript-placeholder-mapper.php:160
+msgid "Product image"
+msgstr "Imagem do produto"
+
+#: includes/class-trustscript-placeholder-mapper.php:161
+msgid "Order number"
+msgstr "Número da encomenda"
+
+#: includes/class-trustscript-placeholder-mapper.php:162
+msgid "Order date"
+msgstr "Data da encomenda"
+
+#: includes/class-trustscript-placeholder-mapper.php:163
+msgid "Order total"
+msgstr "Total da encomenda"
+
+#: includes/class-trustscript-placeholder-mapper.php:168
+msgid "Membership name"
+msgstr "Nome do membro"
+
+#: includes/class-trustscript-placeholder-mapper.php:169
+msgid "Membership description"
+msgstr "Descrição da adesão"
+
+#: includes/class-trustscript-placeholder-mapper.php:170
+msgid "Transaction number"
+msgstr "Número da transação"
+
+#: includes/class-trustscript-placeholder-mapper.php:171
+msgid "Transaction total"
+msgstr "Valor total da transação"
+
+#: includes/class-trustscript-placeholder-mapper.php:172
+msgid "Subscription date"
+msgstr "Data de subscrição"
+
+#: includes/class-trustscript-queue.php:344
+msgid "Every 6 hours"
+msgstr "A cada 6 horas"
+
+#: includes/class-trustscript-review-renderer.php:424
+msgid "Customer Reviews"
+msgstr "Opiniões dos clientes"
+
+#: includes/class-trustscript-review-renderer.php:425
+msgid "Honest opinions from verified buyers"
+msgstr "Opiniões sinceras de compradores verificados"
+
+#: includes/class-trustscript-review-renderer.php:454
+msgid "No reviews yet. Be the first!"
+msgstr "Ainda não há comentários. Seja o primeiro!"
+
+#: includes/class-trustscript-review-renderer.php:575
+msgid "Filter by keyword"
+msgstr "Filtrar por palavra-chave"
+
+#: includes/class-trustscript-review-renderer.php:579
+msgid "All Reviews"
+msgstr "Todas as avaliações"
+
+#: includes/class-trustscript-review-renderer.php:594
+msgid "Sort by"
+msgstr "Ordenar por"
+
+#: includes/class-trustscript-review-renderer.php:598
+msgid "Most Helpful"
+msgstr "Mais útil"
+
+#: includes/class-trustscript-review-renderer.php:602
+msgid "Newest"
+msgstr "Mais recentes"
+
+#: includes/class-trustscript-review-renderer.php:606
+#: includes/integration/elementor/widgets/reviews-showcase.php:57
+msgid "Highest Rated"
+msgstr "Mais bem avaliados"
+
+#: includes/class-trustscript-review-renderer.php:610
+msgid "Lowest Rated"
+msgstr "Com a classificação mais baixa"
+
+#. translators: %1$d = reviews shown, %2$d = total reviews
+#: includes/class-trustscript-review-renderer.php:619
+#: includes/class-trustscript-woocommerce-reviews.php:72
+#, php-format
+msgid "Showing %1$d of %2$d reviews"
+msgstr "A exibir %1$d de %2$d avaliações"
+
+#: includes/class-trustscript-review-renderer.php:624
+#: includes/class-trustscript-woocommerce-reviews.php:68
+msgid "Showing 1 review"
+msgstr "Mostrando 1 avaliação"
+
+#. translators: %d = number of reviews
+#: includes/class-trustscript-review-renderer.php:628
+#, php-format
+msgid "Showing %d review"
+msgid_plural "Showing %d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-review-renderer.php:660
+msgctxt "button label"
+msgid "Load more reviews"
+msgstr "Ver mais comentários"
+
+#: includes/class-trustscript-review-renderer.php:666
+msgid "No reviews match your filter."
+msgstr "Não há comentários que correspondam ao seu filtro."
+
+#: includes/class-trustscript-review-renderer.php:808
+msgid "Click to verify this review"
+msgstr "Clique para verificar esta avaliação"
+
+#. translators: %d = star rating number from 1 to 5
+#: includes/class-trustscript-review-renderer.php:833
+#, php-format
+msgid "%d out of 5 stars"
+msgstr "%d de 5 estrelas"
+
+#: includes/class-trustscript-review-renderer.php:853
+msgid "Read more"
+msgstr "Leia mais"
+
+#: includes/class-trustscript-review-renderer.php:870
+#: includes/class-trustscript-review-renderer.php:1197
+msgid "Previous photo"
+msgstr "Foto anterior"
+
+#: includes/class-trustscript-review-renderer.php:897
+#: includes/class-trustscript-webhook.php:798
+#: includes/integration/elementor/widgets/reviews-showcase.php:1106
+msgid "Review photo"
+msgstr "Ver foto"
+
+#: includes/class-trustscript-review-renderer.php:907
+#: includes/class-trustscript-review-renderer.php:1202
+msgid "Next photo"
+msgstr "Próxima foto"
+
+#: includes/class-trustscript-review-renderer.php:924
+msgid "Was this helpful?"
+msgstr "Isto foi útil?"
+
+#: includes/class-trustscript-review-renderer.php:931
+msgid "Yes, helpful"
+msgstr "Sim, útil"
+
+#: includes/class-trustscript-review-renderer.php:933
+#: includes/integration/elementor/widgets/reviews-showcase.php:262
+#: includes/integration/elementor/widgets/reviews-showcase.php:288
+msgid "Yes"
+msgstr "Sim"
+
+#: includes/class-trustscript-review-renderer.php:941
+msgid "No, not helpful"
+msgstr "Não, não ajuda"
+
+#: includes/class-trustscript-review-renderer.php:943
+#: includes/integration/elementor/widgets/reviews-showcase.php:263
+#: includes/integration/elementor/widgets/reviews-showcase.php:289
+msgid "No"
+msgstr "De"
+
+#. translators: 1: total count
+#: includes/class-trustscript-review-renderer.php:1028
+#, php-format
+msgid "out of 5 · %d review"
+msgid_plural "out of 5 · %d reviews"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-trustscript-review-renderer.php:1061
+msgid "Positive"
+msgstr "Positivo"
+
+#: includes/class-trustscript-review-renderer.php:1062
+msgid "Neutral"
+msgstr "Neutro"
+
+#: includes/class-trustscript-review-renderer.php:1067
+msgid "Sentiment"
+msgstr "Sentimento"
+
+#: includes/class-trustscript-review-renderer.php:1115
+msgid "All Product Photos"
+msgstr "Todas as fotos dos produtos"
+
+#. translators: %d is an integer count of photos
+#: includes/class-trustscript-review-renderer.php:1121
+#, php-format
+msgid "%d images"
+msgstr "%d imagens"
+
+#. translators: %d = total count of images in the gallery
+#: includes/class-trustscript-review-renderer.php:1134
+#: includes/class-trustscript-review-renderer.php:1139
+#, php-format
+msgid "View all %d images"
+msgstr "Ver todas as %d imagens"
+
+#: includes/class-trustscript-review-renderer.php:1152
+#: includes/class-trustscript-review-renderer.php:1173
+msgid "Product photo"
+msgstr "Foto do produto"
+
+#: includes/class-trustscript-review-renderer.php:1155
+msgid "+More"
+msgstr "+Mais"
+
+#: includes/class-trustscript-review-renderer.php:1192
+msgid "Photo viewer"
+msgstr "Visualizador de fotos"
+
+#: includes/class-trustscript-review-renderer.php:1207
+#: includes/class-trustscript-review-renderer.php:1252
+msgid "Close"
+msgstr "Fechar"
+
+#: includes/class-trustscript-review-renderer.php:1249
+msgid "Verify review"
+msgstr "Verificar avaliação"
+
+#: includes/class-trustscript-review-renderer.php:1253
+msgid "Verify this review"
+msgstr "Confirmar esta avaliação"
+
+#: includes/class-trustscript-review-renderer.php:1254
+msgid "Authenticity hash for this review:"
+msgstr "Hash de autenticidade desta avaliação:"
+
+#: includes/class-trustscript-review-renderer.php:1308
+msgid "Store Owner"
+msgstr "Proprietário da loja"
+
+#: includes/class-trustscript-review-voting.php:125
+msgid "Invalid or missing nonce."
+msgstr "Nonce inválido ou em falta."
+
+#: includes/class-trustscript-review-voting.php:133
+msgid "You must be logged in to vote."
+msgstr "Tem de estar com a sessão iniciada para votar."
+
+#: includes/class-trustscript-review-voting.php:152
+msgid "Voting is currently disabled"
+msgstr "A votação está atualmente desativada"
+
+#: includes/class-trustscript-review-voting.php:160
+msgid "You must be logged in to vote"
+msgstr "Tem de estar registado para votar"
+
+#: includes/class-trustscript-review-voting.php:172
+#: includes/class-trustscript-review-voting.php:211
+msgid "Invalid request"
+msgstr "Pedido inválido"
+
+#: includes/class-trustscript-review-voting.php:181
+msgid "Could not process your vote. Please try again."
+msgstr "Não foi possível processar o seu voto. Por favor, tente novamente."
+
+#: includes/class-trustscript-review-voting.php:194
+msgid "Vote recorded successfully"
+msgstr "Voto registado com sucesso"
+
+#: includes/class-trustscript-service-manager.php:148
+msgid "No services detected"
+msgstr "Não foram detetados serviços"
+
+#: includes/class-trustscript-webhook.php:804
+msgid "Your browser does not support the video tag."
+msgstr "O seu navegador não suporta a tag de vídeo."
+
+#: includes/class-trustscript-woocommerce-reviews.php:64
+msgid "Thank you for your feedback!"
+msgstr "Obrigado pelo seu feedback!"
+
+#: includes/class-trustscript-woocommerce-reviews.php:65
+msgid "You have already voted on this review"
+msgstr "Já votou nesta avaliação"
+
+#: includes/class-trustscript-woocommerce-reviews.php:66
+msgid "Something went wrong. Please try again."
+msgstr "Ocorreu um erro. Por favor, tente novamente."
+
+#: includes/class-trustscript-woocommerce-reviews.php:67
+msgid "Login to vote"
+msgstr "Inicie sessão para votar"
+
+#. translators: %d = number of reviews
+#: includes/class-trustscript-woocommerce-reviews.php:70
+#, php-format
+msgid "Showing %d reviews"
+msgstr "A exibir %d avaliações"
+
+#: includes/consent-form-template.php:26
+msgid "I agree to the"
+msgstr "Concordo com o"
+
+#: includes/consent-form-template.php:27
+msgid "data sharing terms"
+msgstr "condições de partilha de dados"
+
+#: includes/consent-form-template.php:35
+msgid "Data Sharing & Privacy Policy"
+msgstr "Política de Partilha de Dados e Privacidade"
+
+#: includes/consent-form-template.php:40
+msgid "What Data We Share:"
+msgstr "Que dados partilhamos:"
+
+#: includes/consent-form-template.php:42
+msgid "Required for authentication (sent securely via HTTPS)"
+msgstr ""
+"Necessário para a autenticação (enviado de forma segura através de HTTPS)"
+
+#: includes/consent-form-template.php:43
+msgid "Site URL"
+msgstr "URL do site"
+
+#: includes/consent-form-template.php:43
+msgid "Required to tie the integration to your store"
+msgstr "Necessário para ligar a integração à sua loja"
+
+#: includes/consent-form-template.php:44
+msgid "Order IDs"
+msgstr "Números de referência da encomenda"
+
+#: includes/consent-form-template.php:44
+msgid ""
+"Required for analytics and review verification (masked / never publicly "
+"exposed)"
+msgstr ""
+"Necessário para análise e verificação de avaliações (ocultado / nunca "
+"divulgado publicamente)"
+
+#: includes/consent-form-template.php:45
+msgid "Hashed Customer Email (SHA-256)"
+msgstr "E-mail do cliente com hash (SHA-256)"
+
+#: includes/consent-form-template.php:45
+msgid ""
+"Required for opt-out tracking and duplicate prevention (raw email never sent"
+" or stored)"
+msgstr ""
+"Necessário para o rastreamento de cancelamento de subscrição e para evitar "
+"duplicações (o e-mail em formato bruto nunca é enviado nem armazenado)"
+
+#: includes/consent-form-template.php:46
+msgid "Product Names"
+msgstr "Nomes dos produtos"
+
+#: includes/consent-form-template.php:46
+msgid ""
+"Optional (you can disable in review settings if privacy-sensitive, e.g., "
+"medical/adult products). However, product name is always required when order"
+" contain multiple products."
+msgstr ""
+"Opcional (pode desativar nas definições de comentários se se tratar de "
+"informações confidenciais, por exemplo, produtos médicos ou para adultos). "
+"No entanto, o nome do produto é sempre obrigatório quando a encomenda contém"
+" vários produtos."
+
+#: includes/consent-form-template.php:47
+msgid "Order Dates"
+msgstr "Datas de encomenda"
+
+#: includes/consent-form-template.php:47
+msgid "Suggested but optional (helps with timing review requests)"
+msgstr "Recomendado, mas opcional (ajuda a gerir os pedidos de revisão)"
+
+#: includes/consent-form-template.php:48
+msgid "Review Content"
+msgstr "Conteúdo da avaliação"
+
+#: includes/consent-form-template.php:48
+msgid "Only after customer approval (sent inbound via secure webhook)"
+msgstr ""
+"Apenas após a aprovação do cliente (enviada através de um webhook seguro)"
+
+#: includes/consent-form-template.php:53
+msgid "Important – What we NEVER collect:"
+msgstr "Importante – O que NUNCA recolhemos:"
+
+#: includes/consent-form-template.php:55
+msgid "Raw customer emails"
+msgstr "E-mails dos clientes em formato bruto"
+
+#: includes/consent-form-template.php:56
+msgid "Customer names"
+msgstr "Nomes dos clientes"
+
+#: includes/consent-form-template.php:57
+msgid "Any other personal information"
+msgstr "Quaisquer outras informações pessoais"
+
+#: includes/consent-form-template.php:63
+msgid ""
+"This integration is privacy-first and GDPR/CCPA compliant. TrustScript does "
+"not sell data, use it for marketing, or train AI on your reviews without "
+"explicit permission. You can disable the integration or revoke access "
+"anytime by removing the API key."
+msgstr ""
+"Esta integração privilegia a privacidade e está em conformidade com o RGPD e"
+" a CCPA. A TrustScript não vende dados, não os utiliza para fins de "
+"marketing nem treina IA com base nas suas avaliações sem autorização "
+"expressa. Pode desativar a integração ou revogar o acesso a qualquer "
+"momento, removendo a chave API."
+
+#: includes/consent-form-template.php:73
+msgid "I Agree"
+msgstr "Concordo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:20
+msgid "Reviews Showcase"
+msgstr "Vitrine de Críticas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:46
+msgid "Review Selection"
+msgstr "Seleção de críticas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:51
+msgid "Selection Method"
+msgstr "Método de seleção"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:55
+msgid "Manual Selection"
+msgstr "Seleção manual"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:56
+msgid "Recent Reviews"
+msgstr "Críticas recentes"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:58
+msgid "By Product Category"
+msgstr "Por categoria de produto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:63
+msgid "Select Reviews"
+msgstr "Selecionar críticas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:82
+msgid "Product Category"
+msgstr "Categoria do produto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:90
+msgid "Minimum Star Rating"
+msgstr "Classificação mínima por estrelas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:94
+msgid "3 Stars & Above"
+msgstr "3 estrelas ou mais"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:95
+msgid "4 Stars & Above"
+msgstr "4 estrelas ou mais"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:100
+msgid "Number of Reviews"
+msgstr "Número de avaliações"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:110
+msgid "Display Settings"
+msgstr "Definições de ecrã"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:115
+msgid "Layout"
+msgstr "Disposição"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:119
+msgid "Grid"
+msgstr "Grelha"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:120
+msgid "Marquee (Infinite Scroll)"
+msgstr "Marquee (Deslocamento infinito)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:121
+msgid "Image-First Gallery"
+msgstr "Galeria «Imagens em Destaque»"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:126
+msgid "Columns"
+msgstr "Colunas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:136
+msgid "Gap Between Cards (Rows & Columns)"
+msgstr "Espaço entre cartões (linhas e colunas)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:149
+msgid "Show Verification Badge"
+msgstr "Mostrar selo de verificação"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:151
+#: includes/integration/elementor/widgets/reviews-showcase.php:160
+#: includes/integration/elementor/widgets/reviews-showcase.php:179
+#: includes/integration/elementor/widgets/reviews-showcase.php:188
+msgid "Show"
+msgstr "Mostrar"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:152
+#: includes/integration/elementor/widgets/reviews-showcase.php:161
+#: includes/integration/elementor/widgets/reviews-showcase.php:180
+#: includes/integration/elementor/widgets/reviews-showcase.php:189
+msgid "Hide"
+msgstr "Ocultar"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:158
+msgid "Show Product Name"
+msgstr "Mostrar nome do produto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:167
+msgid "Product Name Length (characters)"
+msgstr "Nome do produto Comprimento (caracteres)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:177
+msgid "Show Customer Name"
+msgstr "Mostrar nome do cliente"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:186
+msgid "Show \"Verified Buyer\" Label"
+msgstr "Mostrar o selo «Comprador verificado»"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:196
+msgid "Review Text Length (characters)"
+msgstr "Comprimento do texto da crítica (caracteres)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:206
+msgid "Image-First Settings"
+msgstr "Definições de prioridade de imagem"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:212
+msgid "Image Height"
+msgstr "Altura da imagem"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:223
+msgid "Image Fit"
+msgstr "Ajuste da imagem"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:227
+msgid "Cover"
+msgstr "Capa"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:228
+msgid "Contain"
+msgstr "Conter"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:229
+msgid "Fill"
+msgstr "Preencher"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:230
+msgid "None (original size)"
+msgstr "Nenhuma (tamanho original)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:231
+msgid "Scale Down"
+msgstr "Reduzir"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:239
+msgid "Image Position"
+msgstr "Posição da imagem"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:243
+msgid "Center Center"
+msgstr "Centro Centro"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:244
+msgid "Center Top"
+msgstr "Centro superior"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:245
+msgid "Center Bottom"
+msgstr "Centro inferior"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:246
+msgid "Left Top"
+msgstr "Canto superior esquerdo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:247
+msgid "Left Center"
+msgstr "Centro-esquerda"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:248
+msgid "Left Bottom"
+msgstr "Canto inferior esquerdo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:249
+msgid "Right Top"
+msgstr "Canto superior direito"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:250
+msgid "Right Center"
+msgstr "Centro-direita"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:251
+msgid "Right Bottom"
+msgstr "Canto inferior direito"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:260
+msgid "Show Only Reviews With Images"
+msgstr "Mostrar apenas comentários com imagens"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:270
+msgid "Marquee Settings"
+msgstr "Configurações do toldo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:276
+msgid "Animation Speed (seconds)"
+msgstr "Velocidade da animação (segundos)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:282
+msgid "Higher = slower animation"
+msgstr "Valor mais alto = animação mais lenta"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:286
+msgid "Pause on Hover"
+msgstr "Pausar ao passar o cursor"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:295
+msgid "Scroll Direction"
+msgstr "Direção de deslocamento"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:299
+msgid "Left (default)"
+msgstr "Esquerda (padrão)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:300
+#: includes/integration/elementor/widgets/reviews-showcase.php:368
+msgid "Right"
+msgstr "Certo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:306
+msgid "Card Width (px)"
+msgstr "Largura do cartão (px)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:318
+msgid "Gap Between Cards (px)"
+msgstr "Espaço entre cartões (px)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:330
+msgid "Edge Fade Color"
+msgstr "Cor do degradê nas laterais"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:331
+msgid "Should match your section background color."
+msgstr "Deve corresponder à cor de fundo da secção."
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:342
+msgid "Edge Fade Width"
+msgstr "Largura do desvanecimento nas bordas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:358
+msgid "Review Card"
+msgstr "Ficha de avaliação"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:363
+msgid "Content Alignment"
+msgstr "Alinhamento do conteúdo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:366
+msgid "Left"
+msgstr "Esquerda"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:367
+msgid "Center"
+msgstr "Centro"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:390
+#: includes/integration/elementor/widgets/reviews-showcase.php:777
+msgid "Background"
+msgstr "Contexto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:411
+#: includes/integration/elementor/widgets/reviews-showcase.php:668
+#: includes/integration/elementor/widgets/reviews-showcase.php:798
+msgid "Border Radius"
+msgstr "Raio da borda"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:427
+#: includes/integration/elementor/widgets/reviews-showcase.php:656
+msgid "Padding"
+msgstr "Acolchoamento"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:438
+msgid "Hover Effects"
+msgstr "Efeitos ao passar o cursor"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:444
+msgid "Scale"
+msgstr "Escala"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:458
+msgid "Hover Shadow"
+msgstr "Sombra ao passar o cursor"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:464
+msgid "Transition Duration (ms)"
+msgstr "Duração da transição (ms)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:478
+msgid "Product Name"
+msgstr "Nome do produto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:483
+#: includes/integration/elementor/widgets/reviews-showcase.php:517
+#: includes/integration/elementor/widgets/reviews-showcase.php:561
+#: includes/integration/elementor/widgets/reviews-showcase.php:701
+#: includes/integration/elementor/widgets/reviews-showcase.php:737
+#: includes/integration/elementor/widgets/reviews-showcase.php:826
+msgid "Color"
+msgstr "Cor"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:498
+#: includes/integration/elementor/widgets/reviews-showcase.php:541
+#: includes/integration/elementor/widgets/reviews-showcase.php:575
+#: includes/integration/elementor/widgets/reviews-showcase.php:681
+#: includes/integration/elementor/widgets/reviews-showcase.php:716
+msgid "Bottom Spacing"
+msgstr "Espaçamento inferior"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:512
+msgid "Star Rating"
+msgstr "Classificação por estrelas"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:528
+#: includes/integration/elementor/widgets/reviews-showcase.php:785
+msgid "Size"
+msgstr "Para si"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:555
+msgid "Review Date"
+msgstr "Data da revisão"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:588
+msgid "Verified Badge"
+msgstr "Emblema de Verificado"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:594
+msgid "Badge Style"
+msgstr "Estilo de crachá"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:598
+msgid "Inline (next to stars)"
+msgstr "Em linha (ao lado das estrelas)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:604
+msgid "Text & Icon Color"
+msgstr "Cor do texto e dos ícones"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:615
+msgid "Background Color"
+msgstr "Cor de fundo"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:626
+#: includes/integration/elementor/widgets/reviews-showcase.php:838
+msgid "Typography"
+msgstr "Tipografia"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:632
+msgid "Icon Size"
+msgstr "Tamanho do ícone"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:644
+msgid "Text Size"
+msgstr "Tamanho do texto"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:696
+msgid "Review Text"
+msgstr "Texto da crítica"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:731
+msgid "Customer Name"
+msgstr "Nome do cliente"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:756
+msgid "Label Font Size"
+msgstr "Tamanho da fonte da etiqueta"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:770
+msgid "Avatar"
+msgstr "Avatar"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:815
+msgid "Border"
+msgstr "Fronteira"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:820
+msgid "Text (Initials)"
+msgstr "Texto (Iniciais)"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:843
+msgid "Gap to Name"
+msgstr "Gap vai mudar de nome"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:864
+msgid "Unknown Product"
+msgstr "Produto desconhecido"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:925
+msgid "No reviews found matching your criteria."
+msgstr "Não foram encontradas avaliações que correspondam aos seus critérios."
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:944
+msgid "No reviews with images found matching your criteria."
+msgstr ""
+"Não foram encontradas avaliações com imagens que correspondam aos seus "
+"critérios."
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:1169
+#: includes/integration/elementor/widgets/reviews-showcase.php:1247
+#: includes/integration/elementor/widgets/reviews-showcase.php:1264
+msgid "Verified Buyer"
+msgstr "Comprador verificado"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:77
+msgid "Complete"
+msgstr "Concluir"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:78
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#: includes/providers/class-trustscript-memberpress-provider.php:81
+msgid "Refunded"
+msgstr "Reembolsado"
+
+#: includes/trustscript-helpers.php:94
+msgid "API request failed"
+msgstr "Falha na solicitação da API"
+
+#: includes/trustscript-helpers.php:97
+msgid "API key authentication failed"
+msgstr "Falha na autenticação da chave API"
+
+#: includes/trustscript-helpers.php:99
+msgid "Access denied"
+msgstr "Acesso negado"
+
+#: includes/trustscript-helpers.php:101
+msgid "Resource not found"
+msgstr "Recurso não encontrado"
+
+#: includes/trustscript-helpers.php:103
+msgid "Rate limit exceeded"
+msgstr "Limite de taxa excedido"
+
+#: includes/trustscript-helpers.php:112
+msgid "Invalid JSON response from API"
+msgstr "Resposta JSON inválida da API"
+
+#: trustscript.php:172
+msgid ""
+"No supported services detected. TrustScript works with WooCommerce, "
+"MemberPress, and more."
+msgstr ""
+"Não foram detetados serviços compatíveis. O TrustScript funciona com o "
+"WooCommerce, o MemberPress e outros."
+
+#: trustscript.php:185
+msgid "Go Pro"
+msgstr "Go Pro"
+
+#: trustscript.php:191
+msgid "Docs"
+msgstr "Documentos"

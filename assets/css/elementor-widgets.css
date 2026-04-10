@@ -1,0 +1,403 @@
+/**
+ * TrustScript Elementor Widgets Styles
+ * 
+ * @package TrustScript
+ * @since 1.0.0
+ */
+
+.trustscript-product-reviews-widget {
+    padding: 20px 0;
+}
+
+.trustscript-product-reviews-widget .woocommerce-Reviews-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.trustscript-product-reviews-widget .woocommerce-Reviews-title .count {
+    font-weight: 600;
+}
+
+.trustscript-product-reviews-widget .woocommerce-Reviews-title .product-name {
+    font-weight: 400;
+}
+
+.trustscript-rating-summary {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.trustscript-rating-summary .woocommerce-product-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trustscript-product-reviews-widget .commentlist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.trustscript-product-reviews-widget .commentlist > li {
+    list-style: none;
+    margin: 0 0 30px 0;
+    padding: 0;
+    position: relative;
+}
+
+.trustscript-product-reviews-widget .comment-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.trustscript-product-reviews-widget .comment-content img.avatar {
+    border-radius: 50%;
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+}
+
+.trustscript-product-reviews-widget[data-show-avatar="no"] .comment-content img.avatar {
+    display: none;
+}
+
+.trustscript-product-reviews-widget .comment-text {
+    flex: 1;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 20px;
+    position: relative;
+}
+
+.trustscript-product-reviews-widget .comment-text .star-rating {
+    float: right;
+    margin-left: 10px;
+}
+
+.trustscript-product-reviews-widget .comment-text .meta {
+    margin-bottom: 12px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.trustscript-product-reviews-widget .comment-author {
+    font-weight: 600;
+    color: #333;
+}
+
+.trustscript-product-reviews-widget .trustscript-verification-badge-inline {
+    display: inline-flex;
+    margin-left: 8px;
+}
+
+.trustscript-product-reviews-widget .trustscript-verify-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 4px;
+    color: #166534;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+
+.trustscript-product-reviews-widget .trustscript-verify-link:hover {
+    background: #dcfce7;
+    border-color: #4ade80;
+    color: #14532d;
+}
+
+.trustscript-product-reviews-widget .trustscript-shield-icon {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+}
+
+.trustscript-product-reviews-widget .woocommerce-review__verified {
+    color: #3d9970;
+    font-style: normal;
+    font-weight: 400;
+}
+
+.trustscript-product-reviews-widget .woocommerce-review__dash {
+    color: #999;
+}
+
+.trustscript-product-reviews-widget .comment-metadata time {
+    color: #666;
+    font-size: 13px;
+}
+
+.trustscript-product-reviews-widget .description {
+    clear: both;
+    margin-top: 10px;
+}
+
+.trustscript-product-reviews-widget .description p {
+    margin: 0 0 10px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.trustscript-product-reviews-widget .description p:last-child {
+    margin-bottom: 0;
+}
+
+.trustscript-product-reviews-widget .woocommerce-noreviews {
+    padding: 20px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    text-align: center;
+    color: #666;
+}
+
+@media (max-width: 768px) {
+    .trustscript-product-reviews-widget .comment-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .trustscript-product-reviews-widget .comment-content img.avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .trustscript-product-reviews-widget .woocommerce-Reviews-title {
+        font-size: 20px;
+    }
+}
+
+.trustscript-reviews-showcase {
+    width: 100%;
+}
+
+.trustscript-reviews-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.trustscript-reviews-grid[data-columns="1"] {
+    grid-template-columns: 1fr;
+}
+
+.trustscript-reviews-grid[data-columns="2"] {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.trustscript-reviews-grid[data-columns="3"] {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.trustscript-reviews-grid[data-columns="4"] {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 1024px) {
+    .trustscript-reviews-grid[data-columns="4"],
+    .trustscript-reviews-grid[data-columns="3"] {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .trustscript-reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.trustscript-elementor-review-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trustscript-elementor-review-card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}
+
+.trustscript-review-product {
+    font-size: 14px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+
+.trustscript-review-rating {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.trustscript-stars {
+    color: #fbbf24;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.trustscript-star-empty {
+    color: #d1d5db;
+}
+
+.trustscript-badge-mini {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 8px;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 4px;
+    color: #166534;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.trustscript-badge-mini svg {
+    width: 12px;
+    height: 12px;
+    flex-shrink: 0;
+}
+
+.trustscript-review-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #4b5563;
+    margin-bottom: 12px;
+}
+
+.trustscript-review-divider {
+    height: 1px;
+    background: #f3f4f6;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.trustscript-review-author {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trustscript-review-author-info {
+    flex-grow: 0;
+}
+
+.trustscript-review-author-label {
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.trustscript-image-first-card-divider {
+    height: 1px;
+    background: #f3f4f6;
+    margin-top: 6px;
+    margin-bottom: 12px;
+}
+
+.trustscript-image-first-card-author {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+}
+
+.trustscript-image-first-card-author-info {
+    flex-grow: 0;
+}
+
+.trustscript-image-first-card-author-label {
+    font-size: 11px;
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.elementor-editor-active .trustscript-reviews-showcase {
+    min-height: 200px;
+}
+
+.trustscript-elementor-alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.trustscript-elementor-alert-info {
+    background-color: #e7f3ff;
+    border-left: 4px solid #2196f3;
+    color: #1976d2;
+}
+
+.trustscript-elementor-alert-warning {
+    background-color: #fff8e1;
+    border-left: 4px solid #ff9800;
+    color: #f57c00;
+}
+
+@media (prefers-color-scheme: dark) {
+    .trustscript-elementor-review-card {
+        background: #1f2937;
+        border-color: #374151;
+        color: #f3f4f6;
+    }
+
+    .trustscript-elementor-review-card:hover {
+        background: #111827;
+    }
+
+    .trustscript-review-product {
+        color: #f9fafb;
+    }
+
+    .trustscript-review-text {
+        color: #d1d5db;
+    }
+
+    .trustscript-review-author {
+        color: #9ca3af;
+    }
+
+    .trustscript-image-first-card-author {
+        color: #9ca3af;
+    }
+
+    .trustscript-review-divider {
+        background-color: #374151;
+    }
+
+    .trustscript-image-first-card-divider {
+        background-color: #374151;
+    }
+}
+
+@media print {
+    .trustscript-elementor-review-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
