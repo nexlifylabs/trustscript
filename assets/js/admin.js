@@ -262,7 +262,7 @@
                 id: 'trustscript-edit-api-key',
                 class: 'button trustscript-edit-button',
                 'data-action': 'edit-api-key'
-            }).text('Edit');
+            }).text(TrustscriptAdmin.i18n.edit);
             $container.empty().append($masked, ' ', $editBtn);
         });
 
@@ -968,6 +968,7 @@
         });
 
         const $consentCheckbox = $('#trustscript-consent-checkbox');
+        const $consentCheckboxLabel = $('.trustscript-consent-checkbox');
         const $saveButton = $('#submit, .trustscript-connect-btn');
         const $consentLink = $('.trustscript-consent-link');
         const $consentModal = $('#trustscript-consent-modal');
@@ -983,6 +984,24 @@
         }
 
         syncSaveButton();
+
+        // Prevent checkbox from being directly checked - open modal instead
+        $consentCheckbox.on('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $consentModal.fadeIn(200).css('display', 'flex');
+            return false;
+        });
+
+        $consentCheckboxLabel.on('click', function(e) {
+            if ($(e.target).closest('.trustscript-consent-link').length) {
+                return true;
+            }
+            e.preventDefault();
+            e.stopPropagation();
+            $consentModal.fadeIn(200).css('display', 'flex');
+            return false;
+        });
 
         $(document).on('submit', '.trustscript-api-form', function(e) {
             if ($consentCheckbox.length && !$consentCheckbox.is(':checked')) {
@@ -1082,12 +1101,9 @@
             $btn.prop('disabled', true).text(TrustscriptAdmin.i18n.queuedForProcessing);
             
             $summary.after(
-                '<div id="trustscript-processing-msg" style="' +
-                    'background:#e8f4fd;border-left:4px solid #3b82f6;border-radius:4px;' +
-                    'padding:12px 16px;margin:12px 0;font-size:14px;color:#1e3a5f;' +
-                '">' +
-                    '⏳ ' + TrustscriptAdmin.i18n.processingBackground +
-                '</div>'
+                $('<div></div>').attr('id', 'trustscript-processing-msg').addClass('trustscript-processing-msg').html(
+                    '⏳ ' + TrustscriptAdmin.i18n.processingBackground
+                )
             );
             
             $.post(TrustscriptAdmin.ajax_url, {
@@ -1140,7 +1156,8 @@
             const $btn  = $(this);
             const id    = $btn.data('id');
             const order = $btn.data('order');
-            if (!window.confirm('Remove order #' + order + ' from the queue? This will not cancel the order, but the review request will NOT be retried.')) {
+            const message = (TrustscriptAdmin.i18n?.confirmClearQueue ?? 'Remove order #' + order + ' from the queue? This will not cancel the order, but the review request will NOT be retried.');
+            if (!window.confirm(message)) {
                 return;
             }
             $btn.prop('disabled', true).text(TrustscriptAdmin.i18n.clearing);

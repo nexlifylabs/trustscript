@@ -165,7 +165,7 @@ class TrustScript_Settings_Page {
 			<div class="trustscript-ob-card <?php echo ! $has_api_key ? 'trustscript-api-key-card-highlight' : ''; ?>">
 
 				<div class="trustscript-api-card-header">
-					<h2 class="trustscript-ob-section-title" style="margin:0;">
+				<h2 class="trustscript-ob-section-title">
 						<?php if ( $has_api_key ): ?>
 							<span class="dashicons dashicons-yes-alt trustscript-icon-connected"></span>
 							<?php esc_html_e( 'API Configuration', 'trustscript' ); ?>
@@ -187,7 +187,7 @@ class TrustScript_Settings_Page {
 					?>
 
 					<?php if ( ! $has_api_key ): ?>
-					<div id="trustscript-api-key-inline-error" style="display:none;"></div>
+					<div id="trustscript-api-key-inline-error" class="trustscript-api-key-inline-error"></div>
 
 					<?php
 					$settings_errors = get_settings_errors( 'trustscript_api_key' );
@@ -254,17 +254,17 @@ class TrustScript_Settings_Page {
 						);
 						?>
 					</p>
-					<div class="trustscript-info-box" style="margin-top:12px;">
+					<div class="trustscript-info-box trustscript-info-box-spaced">
 						<strong>🔐 <?php esc_html_e( 'Security Note:', 'trustscript' ); ?></strong>
 						<p><?php esc_html_e( 'Your API key is masked as you type for security. It will never be displayed in plain text or source code.', 'trustscript' ); ?></p>
 					</div>
-					<div class="trustscript-info-box" style="margin-top:12px;">
+					<div class="trustscript-info-box trustscript-info-box-spaced">
 						<strong>⚠️ 📝 <?php esc_html_e( 'Important:', 'trustscript' ); ?></strong>
 						<p><?php esc_html_e( 'You must provide a valid API key to use TrustScript. The form submission will be blocked until you paste a key.', 'trustscript' ); ?></p>
 					</div>
 
 					<?php else: ?>
-					<div id="trustscript-api-key-inline-error" style="display:none;"></div>
+					<div id="trustscript-api-key-inline-error" class="trustscript-api-key-inline-error"></div>
 					<?php
 					$settings_errors = get_settings_errors( 'trustscript_api_key' );
 					foreach ( $settings_errors as $error ) {
@@ -309,7 +309,7 @@ class TrustScript_Settings_Page {
 							<td>
 								<div id="trustscript-api-key-display" data-api-key-container>
 									<span class="trustscript-key-masked">
-										<span class="dashicons dashicons-lock" style="vertical-align:middle;color:#71717a;font-size:16px;height:16px;width:16px;margin-right:4px;"></span>
+										<span class="dashicons dashicons-lock trustscript-lock-icon"></span>
 										<code>TSK — •••• — •••• — ••••</code>
 									</span>
 									<button type="button" class="button trustscript-btn-replace" data-action="edit-api-key">
@@ -373,12 +373,12 @@ class TrustScript_Settings_Page {
 						</tr>
 					</table>
 
-					<div class="trustscript-alert trustscript-alert-warning" style="margin-bottom: 16px;">
+					<div class="trustscript-alert trustscript-alert-warning">
 						<strong>⚠️ <?php esc_html_e( 'Important:', 'trustscript' ); ?></strong>
-						<p style="margin: 8px 0 0 0;">
+						<p class="trustscript-alert-content">
 							<?php esc_html_e( 'If you enable this option, the following data will be permanently deleted when you uninstall the plugin:', 'trustscript' ); ?>
 						</p>
-						<ul style="margin: 8px 0 0 0; padding-left: 20px;">
+						<ul class="trustscript-alert-list">
 							<li><?php esc_html_e( 'All TrustScript settings and configuration', 'trustscript' ); ?></li>
 							<li><?php esc_html_e( 'API key and connection information', 'trustscript' ); ?></li>
 							<li><?php esc_html_e( 'Review collection history and pending queue items', 'trustscript' ); ?></li>
@@ -430,7 +430,7 @@ class TrustScript_Settings_Page {
 				</a>
 			</div>
 
-			<div id="trustscript-delete-modal" class="trustscript-modal-overlay" style="display: none;" data-modal="delete-api-key">
+			<div id="trustscript-delete-modal" class="trustscript-modal-overlay" data-modal="delete-api-key">
 				<div class="trustscript-modal">
 					<div class="trustscript-modal-header">
 						<h3><?php esc_html_e( 'Delete API Key?', 'trustscript' ); ?></h3>

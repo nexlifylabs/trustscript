@@ -17,7 +17,7 @@
         return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
     }
 
-    function loadAnalytics() {
+    function loadAnalytics(callback) {
         
         $.ajax({
             url: TrustscriptAdmin.ajax_url,
@@ -82,11 +82,19 @@
                 } else {
                     showError(response.data && response.data.message ? response.data.message : 'Failed to load analytics data');
                 }
+                
+                if (typeof callback === 'function') {
+                    callback();
+                }
             },
             error: function(xhr, status, error) {                
                 showError('Failed to load analytics data. Please check your API connection in Settings.');
                 $('#stat-total-requests, #stat-approved, #stat-pending').text('0');
                 $('#stat-conversion').text('0%');
+                
+                if (typeof callback === 'function') {
+                    callback();
+                }
             }
         });
     }
@@ -106,14 +114,15 @@
         
         loadAnalytics();
         $('#trustscript-refresh-analytics').on('click', function() {
+            const $btn = $(this);
             const refreshingText = TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.refreshing ? TrustscriptAdmin.i18n.refreshing : 'Refreshing...';
             const refreshButtonText = TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.refreshButton ? TrustscriptAdmin.i18n.refreshButton : 'Refresh Analytics';
             
-            $(this).prop('disabled', true).text(refreshingText);
-            loadAnalytics();
-            setTimeout(function() {
-                $('#trustscript-refresh-analytics').prop('disabled', false).text(refreshButtonText);
-            }, 1000);
+            $btn.prop('disabled', true).text(refreshingText);
+        
+            loadAnalytics(function() {
+                $btn.prop('disabled', false).text(refreshButtonText);
+            });
         });
     });
 
