@@ -1,7 +1,7 @@
 # 🎉 TrustScript — Early Access (First 100 Users)
 
-> This offer is available to the first 100 annual subscribers only.
-> Once 100 spots are claimed, this deal closes permanently.
+> This offer is available to the first 100 annual subscribers only. 
+> Once 100 spots are claimed, this deal closes permanently. 
 
 ---
 
@@ -30,6 +30,7 @@ your monthly review collection cap is removed — permanently.
 | ⚡ Priority support | Dedicated early-access support queue |
 | ⚡ Priority support | Dedicated early-access support queue |
 | 🏅 Founder badge | Permanent status on your account profile |
+| 🚀 Free access to future plugins | Includes upcoming plugins such as **Live Order Tracking** (currently in development) |
 
 ---
 
