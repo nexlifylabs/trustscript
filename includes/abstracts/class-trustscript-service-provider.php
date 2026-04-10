@@ -824,7 +824,11 @@
 
 			if ( ! empty( $products_html_with_replaced_placeholders ) ) {
 				if ( strpos( $body, '<!-- MULTI_PRODUCT_ITEMS -->' ) !== false ) {
-					$body = str_replace( '<!-- MULTI_PRODUCT_ITEMS -->', $products_html_with_replaced_placeholders, $body );
+					$body = preg_replace(
+						'/<!-- MULTI_PRODUCT_ITEMS -->.*?<!-- \/ MULTI_PRODUCT_ITEMS -->/s',
+						$products_html_with_replaced_placeholders,
+						$body
+					);
 				} else {
 					$fallback_block = '<div style="font-family:Arial,sans-serif;padding:16px 0;">' . $products_html_with_replaced_placeholders . '</div>';
 
@@ -854,32 +858,74 @@
 				return '';
 			}
 
-			$html = '';
+			$is_single = count( $products_for_email ) === 1;
 
-			foreach ( $products_for_email as $product ) {
-				$name = isset( $product['name'] ) ? esc_html( $product['name'] ) : 'Product';
-				$image_url = isset( $product['image'] ) ? esc_url( $product['image'] ) : '';
+			if ( $is_single ) {
+				$product   = $products_for_email[0];
+				$image_src = ! empty( $product['image'] ) ? esc_url( $product['image'] ) : '{product_image}';
+				$name      = ! empty( $product['name'] )  ? esc_html( $product['name'] ) : '{product_name}';
 
-				$html .= '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:0;">';
-				$html .= '<tr>';
-				$html .= '<td width="80" valign="top" style="padding-right:12px;border-bottom:1px solid #e0e0e0;padding-bottom:12px;">';
+				$product_rows =
+					'<tr>' .
+					'<td style="padding:0 32px 16px 32px;">' .
+					'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;">' .
+					'<tr>' .
+					'<td valign="middle" style="padding:16px;width:80px;">' .
+					'<img src="' . $image_src . '" alt="' . $name . '" width="80" height="80" ' .
+					'style="width:80px;height:80px;object-fit:cover;border-radius:6px;display:block;background-color:#f9fafb;">' .
+					'</td>' .
+					'<td valign="middle" style="padding:16px 16px 16px 8px;">' .
+					'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">Your Purchase</p>' .
+					'<p style="margin:0;font-size:15px;font-weight:700;color:#111827;line-height:1.3;">' . $name . '</p>' .
+					'</td>' .
+					'</tr>' .
+					'</table>' .
+					'</td>' .
+					'</tr>';
+			} else {
+				// Multi-product: list all items
+				$rows = '';
+				foreach ( $products_for_email as $product ) {
+					$name      = ! empty( $product['name'] )  ? esc_html( $product['name'] )  : 'Product';
+					$image_src = ! empty( $product['image'] ) ? esc_url( $product['image'] )  : '';
 
-				if ( ! empty( $image_url ) ) {
-					$html .= '<img src="' . $image_url . '" alt="' . $name . '" width="80" height="80" style="display:block;width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #e0e0e0;">';
-				} else {
-					$html .= '<div style="width:80px;height:80px;background-color:#e0e0e0;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#999;font-size:11px;font-weight:bold;">Product</div>';
+					$image_html = $image_src
+						? '<img src="' . $image_src . '" alt="' . $name . '" width="80" height="80" style="display:block;width:80px;height:80px;object-fit:cover;border-radius:4px;border:1px solid #e0e0e0;">'
+						: '<div style="width:80px;height:80px;background-color:#f3f4f6;border-radius:4px;border:1px solid #e0e0e0;"></div>';
+
+					$rows .=
+						'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">' .
+						'<tr>' .
+						'<td width="80" valign="top" style="padding-right:12px;padding-bottom:12px;border-bottom:1px solid #e5e7eb;">' . $image_html . '</td>' .
+						'<td valign="middle" style="padding-bottom:12px;border-bottom:1px solid #e5e7eb;">' .
+						'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">Your Purchase</p>' .
+						'<p style="margin:0;font-size:14px;font-weight:700;color:#111827;">' . $name . '</p>' .
+						'</td>' .
+						'</tr>' .
+						'</table>';
 				}
 
-				$html .= '</td>';
-				$html .= '<td valign="middle" style="border-bottom:1px solid #e0e0e0;padding-bottom:12px;">';
-				$html .= '<p style="margin:0 0 3px 0;font-size:12px;color:#4a90e2;font-weight:bold;letter-spacing:0.5px;text-transform:uppercase;">Your Purchase</p>';
-				$html .= '<p style="margin:0 0 4px;font-size:14px;font-weight:bold;color:#1a1a1a;">' . $name . '</p>';
-				$html .= '</td>';
-				$html .= '</tr>';
-				$html .= '</table>';
+				$product_rows = '<tr><td style="padding:0 32px 16px 32px;">' . $rows . '</td></tr>';
 			}
 
-			return $html;
+			$order_summary =
+				'<tr>' .
+				'<td style="padding:0 32px 24px 32px;">' .
+				'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" ' .
+				'style="border-top:1px solid #e5e7eb;padding-top:12px;">' .
+				'<tr>' .
+				'<td style="font-size:13px;color:#6b7280;line-height:1.6;">' .
+				'Order #{order_number}&nbsp;&nbsp;&middot;&nbsp;&nbsp;{order_date}' .
+				'</td>' .
+				'<td align="right" style="font-size:13px;color:#374151;font-weight:700;line-height:1.6;white-space:nowrap;">' .
+				'Total: {order_total}' .
+				'</td>' .
+				'</tr>' .
+				'</table>' .
+				'</td>' .
+				'</tr>';
+
+			return $product_rows . $order_summary;
 		}
 		
 		/**
