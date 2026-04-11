@@ -20,8 +20,6 @@ sending the review request, collecting feedback, verifying the
 purchase, and publishing the review - all on autopilot. No manual 
 work. No personal data stored. Ever.
 
-Installed and trusted by WooCommerce stores on the free plan today.
-
 = Collect Reviews - Automatically =
 
 * Customer places an order and it's marked as Delivered
@@ -158,6 +156,16 @@ after the customer submits their review.
 - ✅ API key expiration validation (expired keys are rejected with 401 error)
 - ✅ Reviews stored in WordPress comment system with full audit trail metadata
 - ✅ Zero PII: no names, emails, or personal identifiers stored on TrustScript servers
+
+*Optional: AI Writing Assistant*
+When a customer uses the AI suggestion feature, their draft review 
+text is sent to Azure AI Foundry for rewrite suggestions. This only 
+occurs if the customer actively clicks the "Enhance" button in the 
+review form.
+
+Third-party service: Microsoft Azure AI Foundry
+Privacy policy: https://privacy.microsoft.com
+Terms of service: https://azure.microsoft.com/en-us/support/legal/
 
 ***
 
@@ -416,3 +424,5 @@ https://nexlifylabs.com/privacy
 - Documentation: https://nexlifylabs.com/docs
 - Support Portal: https://nexlifylabs.com/contact
 - Email: support@nexlifylabs.com
+- Privacy: https://nexlifylabs.com/privacy
+- Terms of use: https://nexlifylabs.com/terms
