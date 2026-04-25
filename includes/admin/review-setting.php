@@ -58,7 +58,7 @@ class TrustScript_Reviews_Page {
 		$trigger_status = get_option( 'trustscript_review_trigger_status', 'delivered' );
 		$auto_sync_enabled = get_option( 'trustscript_auto_sync_enabled', false );
 		$auto_sync_time = get_option( 'trustscript_auto_sync_time', '02:00' );
-		$auto_sync_lookback = get_option( 'trustscript_auto_sync_lookback', 30 );
+		$auto_sync_lookback = get_option( 'trustscript_auto_sync_lookback', 2 );
 		$review_keywords = get_option( 'trustscript_review_keywords', array() );
 		$available_keywords = TrustScript_Review_Renderer::get_available_keywords();
 		$next_run = TrustScript_Auto_Sync::get_next_run();
@@ -416,84 +416,62 @@ class TrustScript_Reviews_Page {
 				</div>
 			</div>
 
-			<div class="trustscript-card trustscript-auto-sync-card">
-				<h2 class="trustscript-auto-sync-title">
-					<span class="dashicons dashicons-clock trustscript-sync-icon"></span>
-					<?php esc_html_e( 'Automatic Daily Sync', 'trustscript' ); ?>
-				</h2>
+			<div class="trustscript-card trustscript-setting-box">
+				<h2><?php esc_html_e( 'Automatic Daily Sync', 'trustscript' ); ?></h2>
 				
-				<div style="background: white; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-					<h3 style="margin-top: 0; color: #1e293b;">
-						<strong>🔄<?php esc_html_e( 'Two-way synchronization', 'trustscript' ); ?></strong>
+				<div class="trustscript-privacy-notice">
+					<h3 class="trustscript-privacy-title">
+						<strong><?php esc_html_e( 'Two-way synchronization', 'trustscript' ); ?></strong>
 					</h3>
-					<p style="margin-bottom: 12px;"><?php esc_html_e( 'TrustScript runs a complete synchronization once every day. During this cycle, it:', 'trustscript' ); ?></p>
-					<ol style="margin: 0 0 12px 20px; line-height: 1.8;">
+					<p class="trustscript-sync-info-box__body"><?php esc_html_e( 'TrustScript runs a complete synchronization once every day. During this cycle, it:', 'trustscript' ); ?></p>
+					<ol class="trustscript-sync-info-box__list">
 						<li><?php esc_html_e( 'Publishes any approved reviews from TrustScript to your products (WooCommerce, MemberPress, etc.)', 'trustscript' ); ?></li>
 						<li><?php esc_html_e( 'Sends completed orders/bookings to TrustScript (WooCommerce, MemberPress)', 'trustscript' ); ?></li>
 					</ol>
-					<p style="margin: 0; color: #64748b; font-size: 14px;"><?php esc_html_e( 'This ensures all your services stay synced even if webhooks are unavailable or manual sync is not triggered.', 'trustscript' ); ?></p>
+					<p class="trustscript-sync-info-box__note"><?php esc_html_e( 'This ensures all your services stay synced even if webhooks are unavailable or manual sync is not triggered.', 'trustscript' ); ?></p>
 				</div>
 
-				<div style="background: #fef3c7; padding: 16px; border-radius: 8px; margin-bottom: 16px; border: 1px solid #fcd34d;">
-					<h3 style="margin-top: 0; color: #92400e;">
-						<strong>💡<?php esc_html_e( 'Recommended for localhost, staging, and development setups', 'trustscript' ); ?></strong>
-					</h3>
-					<p style="margin-bottom: 12px;"><?php esc_html_e( 'Localhost environments cannot receive webhooks, which means reviews and orders won\'t sync instantly.', 'trustscript' ); ?></p>
-					<p style="margin-bottom: 12px;"><?php esc_html_e( 'The Automatic Daily Sync helps bridge that gap by regularly checking for:', 'trustscript' ); ?></p>
-					<ul style="margin: 0 0 0 20px; line-height: 1.8;">
-						<li><?php esc_html_e( 'Orders that weren\'t sent to TrustScript', 'trustscript' ); ?></li>
-						<li><?php esc_html_e( 'Reviews that were approved but not yet published on your site', 'trustscript' ); ?></li>
-					</ul>
-					<p style="margin: 0; color: #64748b; font-size: 14px;"><?php esc_html_e( 'This makes it easier to test the full review flow without needing live servers or public URLs.', 'trustscript' ); ?></p>
+				<div class="trustscript-setting-row">
+					<div class="trustscript-setting-control">
+						<label class="trustscript-toggle">
+							<input type="checkbox" id="trustscript_auto_sync_enabled" <?php checked( $auto_sync_enabled ); ?>>
+							<span class="trustscript-toggle-slider"></span>
+						</label>
+					</div>
+					<div class="trustscript-setting-label">
+						<label for="trustscript_auto_sync_enabled">
+							<?php esc_html_e( 'Enable automatic daily sync', 'trustscript' ); ?>
+						</label>
+						<p class="trustscript-setting-description">
+							<?php esc_html_e( 'When enabled, TrustScript will automatically check for missed orders once per day.', 'trustscript' ); ?>
+						</p>
+					</div>
 				</div>
 
-				<div style="background: #eff6ff; padding: 16px; border-radius: 8px; border: 1px solid #3b82f6; margin-bottom: 16px;">
-					<h3 style="margin-top: 0; color: #1e40af;">
-						<strong>🛠<?php esc_html_e( 'Reliable fallback for all installations', 'trustscript' ); ?></strong>
-					</h3>
-					<p style="margin-bottom: 12px;"><?php esc_html_e( 'Even on live websites, the daily sync acts as a safety net to ensure nothing is missed due to API delays, hosting limitations, or temporary downtime.', 'trustscript' ); ?></p>
-					<p style="margin: 0; color: #64748b; font-size: 14px;"><?php esc_html_e( 'When enabled, TrustScript automatically processes any pending data once per day_making it especially helpful during plugin development or when testing review workflows on a local machine.', 'trustscript' ); ?></p>
-				</div>
-
-				<div class="trustscript-form-group">
-					<label class="trustscript-toggle">
-						<input type="checkbox" id="trustscript_auto_sync_enabled" <?php checked( $auto_sync_enabled ); ?>>
-						<span class="trustscript-toggle-slider"></span>
-					</label>
-					<label for="trustscript_auto_sync_enabled" style="margin-left: 10px; cursor: pointer;">
-						<?php esc_html_e( 'Enable automatic daily sync', 'trustscript' ); ?>
-					</label>
-					<p class="description"><?php esc_html_e( 'When enabled, TrustScript will automatically check for missed orders once per day.', 'trustscript' ); ?></p>
-				</div>
-
-				<div class="trustscript-form-group">
-					<label for="trustscript_auto_sync_time"><?php esc_html_e( 'Daily Sync Time', 'trustscript' ); ?></label>
-					<input 
-						type="time" 
-						id="trustscript_auto_sync_time" 
-						class="trustscript-form-input" 
-						value="<?php echo esc_attr( $auto_sync_time ); ?>"
-						style="max-width: 200px;"
-					>
-					<p class="description"><?php esc_html_e( 'Time of day to run automatic sync (in your site timezone).', 'trustscript' ); ?></p>
-				</div>
-
-				<div class="trustscript-form-group">
-					<label for="trustscript_auto_sync_lookback"><?php esc_html_e( 'Look Back Period', 'trustscript' ); ?></label>
-					<select id="trustscript_auto_sync_lookback" class="trustscript-form-input" style="max-width: 200px;">
-						<option value="7" <?php selected( $auto_sync_lookback, 7 ); ?>>7 days</option>
-						<option value="14" <?php selected( $auto_sync_lookback, 14 ); ?>>14 days</option>
-						<option value="30" <?php selected( $auto_sync_lookback, 30 ); ?>>30 days (recommended)</option>
-						<option value="60" <?php selected( $auto_sync_lookback, 60 ); ?>>60 days</option>
-						<option value="90" <?php selected( $auto_sync_lookback, 90 ); ?>>90 days</option>
-					</select>
-					<p class="description"><?php esc_html_e( 'How far back to check for missed orders during auto-sync.', 'trustscript' ); ?></p>
+				<div class="trustscript-setting-row">
+					<div class="trustscript-setting-label">
+						<label for="trustscript_auto_sync_time"><?php esc_html_e( 'Daily Sync Time', 'trustscript' ); ?></label>
+						<p class="trustscript-setting-description"><?php esc_html_e( 'Time of day to run automatic sync (in your site timezone).', 'trustscript' ); ?></p>
+					</div>
+					<div class="trustscript-setting-control">
+						<input 
+							type="time" 
+							id="trustscript_auto_sync_time" 
+							class="trustscript-form-input" 
+							value="<?php echo esc_attr( $auto_sync_time ); ?>"
+							style="min-width: 200px;"
+						>
+					</div>
 				</div>
 
 				<?php if ( $next_run ) : ?>
-					<div class="trustscript-alert trustscript-alert-success" style="background: white; border-color: #10b981;">
-						<strong><?php esc_html_e( 'Next Scheduled Sync:', 'trustscript' ); ?></strong>
-						<p style="margin: 4px 0 0 0;"><?php echo esc_html( wp_date( 'F j, Y \a\t g:i A', $next_run ) ); ?></p>
+					<div class="trustscript-alert trustscript-alert-success">
+						<strong class="trustscript-alert-label">
+							<?php esc_html_e( 'Next Scheduled Sync:', 'trustscript' ); ?>
+						</strong>
+						<span class="trustscript-alert-time">
+							<?php echo esc_html( wp_date( 'F j, Y \a\t g:i A', $next_run ) ); ?>
+						</span>
 					</div>
 				<?php endif; ?>
 
@@ -532,7 +510,7 @@ class TrustScript_Reviews_Page {
 					<?php esc_html_e( 'Manual Sync & Test', 'trustscript' ); ?>
 				</h2>
 				<p>
-					<?php esc_html_e( 'Run a complete sync immediately without waiting for the daily schedule. This is helpful for testing on localhost or staging sites.', 'trustscript' ); ?>
+					<?php esc_html_e( 'Run a complete sync immediately without waiting for the daily schedule. This is helpful for testing on staging sites.', 'trustscript' ); ?>
 				</p>
 				<p style="background: #dbeafe; padding: 12px; border-radius: 8px; border-left: 4px solid #3b82f6; margin-bottom: 16px;">
 					<strong>
@@ -545,12 +523,8 @@ class TrustScript_Reviews_Page {
 				<div class="trustscript-form-group">
 					<label for="trustscript-sync-days"><?php esc_html_e( 'Sync orders from the last:', 'trustscript' ); ?></label>
 					<select id="trustscript-sync-days" class="trustscript-form-input trustscript-sync-select">
-						<option value="7">7 days</option>
-						<option value="14">14 days</option>
-						<option value="30" selected>30 days</option>
-						<option value="60">60 days</option>
-						<option value="90">90 days</option>
-						<option value="all">All time</option>
+						<option value="1">1 day (24 hours)</option>
+						<option value="2" selected>2 days (48 hours)</option>
 					</select>
 				</div>
 

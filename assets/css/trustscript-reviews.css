@@ -52,13 +52,61 @@
   align-items: stretch;
 }
 
+/* ── No-media: full-width card with score+bars left / sentiment right ── */
 .trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media {
   grid-template-columns: 1fr;
+}
+
+.trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-summary-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "score score"
+    "bars  sentiment";
+}
+
+.trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-summary-score {
+  grid-area: score;
+}
+
+.trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-bar-rows {
+  grid-area: bars;
+  padding-right: 40px;
+}
+
+.trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-sentiment-wrap {
+  grid-area: sentiment;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+  border-left: 1px solid var(--trustscript-border);
+  padding-left: 40px;
+  align-self: start;
 }
 
 @media (max-width: 780px) {
   .trustscript-reviews-wrap .trustscript-top-grid {
     grid-template-columns: 1fr;
+  }
+
+  /* Collapse no-media 2-col back to a natural stacked flow on tablet/mobile */
+  .trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-summary-card {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-bar-rows {
+    padding-right: 0;
+  }
+
+  .trustscript-reviews-wrap .trustscript-top-grid.trustscript-no-media .trustscript-sentiment-wrap {
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--trustscript-border);
+    border-left: none;
+    padding-left: 0;
+    width: 100%;
   }
 }
 
@@ -421,7 +469,7 @@
 }
 
 .trustscript-reviews-wrap .trustscript-review-count-badge {
-  font-size: 80%;
+  font-size: 90%;
   color: var(--trustscript-ink-3);
   white-space: nowrap;
   margin-left: auto;
@@ -742,93 +790,175 @@ button.trustscript-reviews-wrap .trustscript-verified-badge,
   border-radius: var(--trustscript-radius);
 }
 
-.trustscript-modal {
+/* ── Modal overlay ── */
+.trustscript-modal-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.55);
+  background: rgba(0,0,0,.52);
   z-index: 99998;
   align-items: center;
   justify-content: center;
+  padding: 16px;
 }
 
-.trustscript-modal.active { display: flex !important; }
+.trustscript-modal-overlay.active { display: flex !important; }
 
-.trustscript-modal-inner {
+/* ── Modal card ── */
+.trustscript-modal-overlay .trustscript-modal {
   background: var(--trustscript-base, #fff);
-  border-radius: var(--trustscript-radius, 12px);
-  padding: 28px 24px;
-  max-width: 460px;
-  width: 90%;
+  border-radius: 14px;
+  padding: 0;
+  max-width: 440px;
+  width: 100%;
   position: relative;
-  box-shadow: 0 8px 40px rgba(0,0,0,.2);
+  box-shadow: 0 12px 48px rgba(0,0,0,.22);
   font-family: inherit;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.trustscript-modal-inner h3 {
-  font-size: 1.1rem;
-  margin: 0 0 8px;
-  color: var(--trustscript-ink, #1A1612);
-}
-
-.trustscript-modal-inner p {
-  font-size: 78%;
-  color: var(--trustscript-ink-3, #8A7B6E);
-  padding: 0 0 12px;
-}
-
-.trustscript-modal-inner code {
-  display: block;
-  background: var(--trustscript-warm-0, #F5EFE4);
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: .78rem;
-  word-break: break-all;
-  color: var(--trustscript-ink-2, #4A3F35);
-  margin-bottom: 16px;
-}
-
-.trustscript-modal-close {
+/* ── Close button ── */
+.trustscript-modal-overlay .trustscript-modal-close {
   position: absolute;
   top: 14px;
   right: 16px;
   background: transparent;
   border: none;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+  line-height: 1;
   color: var(--trustscript-ink-3, #8A7B6E);
   cursor: pointer;
-  line-height: 1;
+  z-index: 10;
+  padding: 2px 4px;
+  transition: color .15s;
+}
+.trustscript-modal-overlay .trustscript-modal-close:hover {
+  color: var(--trustscript-ink, #1A1612);
 }
 
-.trustscript-modal-actions {
+/* ── Header row (icon + title) ── */
+.trustscript-modal-overlay .trustscript-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 22px 24px 16px;
+  border-bottom: 1px solid var(--trustscript-border, rgba(0,0,0,.1));
+}
+.trustscript-modal-overlay .trustscript-modal-shield {
+  color: var(--trustscript-green, #2E7D52);
+  flex-shrink: 0;
+}
+.trustscript-modal-overlay .trustscript-modal-title {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--trustscript-ink, #1A1612);
+  line-height: 1.2;
+}
+
+/* ── Reviewer identity row ── */
+.trustscript-modal-overlay .trustscript-modal-reviewer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px 0;
+}
+.trustscript-modal-overlay .trustscript-modal-reviewer-name {
+  font-weight: 600;
+  font-size: .9rem;
+  color: var(--trustscript-ink, #1A1612);
+}
+.trustscript-modal-overlay .trustscript-modal-reviewer-stars {
+  font-size: 1rem;
+  color: var(--trustscript-star, #E8A020);
+  letter-spacing: 1px;
+}
+
+/* ── Body content ── */
+.trustscript-modal-overlay .trustscript-modal-content {
+  padding: 14px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ── Plain-English explanation ── */
+.trustscript-modal-overlay .trustscript-modal-explanation {
+  font-size: .8rem;
+  color: var(--trustscript-ink-3, #8A7B6E);
+  line-height: 1.55;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Hash box ── */
+.trustscript-modal-overlay .trustscript-hash-container {
+  background: var(--trustscript-warm-0, #F5EFE4);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: .72rem;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  word-break: break-all;
+  color: var(--trustscript-ink-2, #4A3F35);
+  line-height: 1.5;
+}
+
+/* ── Actions row (copy button only) ── */
+.trustscript-modal-overlay .trustscript-modal-actions {
   display: flex;
   gap: 10px;
-  flex-wrap: wrap;
 }
 
-.trustscript-modal-actions .trustscript-btn-secondary,
-.trustscript-modal-actions .trustscript-btn-primary {
-  padding: 8px 16px;
+/* ── Copy Hash button ── */
+.trustscript-copy-btn {
+  padding: 9px 20px;
   border-radius: 8px;
-  font-size: .82rem;
-  font-weight: 500;
+  font-size: .83rem;
+  font-weight: 600;
   cursor: pointer;
   font-family: inherit;
-  transition: all .15s;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.trustscript-modal-actions .trustscript-btn-secondary {
-  background: var(--trustscript-warm-0, #F5EFE4);
-  border: 1.5px solid var(--trustscript-border, #E2D8CC);
-  color: var(--trustscript-ink-2, #4A3F35);
-}
-
-.trustscript-modal-actions .trustscript-btn-primary {
   background: var(--trustscript-ink, #1A1612);
   border: 1.5px solid var(--trustscript-ink, #1A1612);
   color: #fff;
+  transition: background .15s, border-color .15s;
+}
+.trustscript-copy-btn:hover {
+  background: var(--trustscript-ink-2, #3A2F25);
+  border-color: var(--trustscript-ink-2, #3A2F25);
+}
+.trustscript-copy-btn.copied {
+  background: var(--trustscript-green, #2E7D52);
+  border-color: var(--trustscript-green, #2E7D52);
+}
+
+/* ── Footer row ── */
+.trustscript-modal-overlay .trustscript-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px 16px;
+  border-top: 1px solid var(--trustscript-border, rgba(0,0,0,.1));
+  gap: 12px;
+}
+.trustscript-modal-overlay .trustscript-modal-powered {
+  font-size: .72rem;
+  color: var(--trustscript-ink-3, #8A7B6E);
+  font-weight: 500;
+}
+
+/* ── "Verify externally" ghost link (secondary / demoted) ── */
+.trustscript-verify-external-link {
+  font-size: .72rem;
+  color: var(--trustscript-ink-3, #8A7B6E);
+  text-decoration: none;
+  transition: color .15s;
+  white-space: nowrap;
+}
+.trustscript-verify-external-link:hover {
+  color: var(--trustscript-ink, #1A1612);
+  text-decoration: underline;
 }
 
 .trustscript-reviews-wrap .trustscript-review-replies {
@@ -1030,7 +1160,7 @@ button.trustscript-reviews-wrap .trustscript-verified-badge,
     grid-auto-rows: auto;
   }
 
-  .trustscript-reviews-wrap .trustscript-gallery-grid.trustscript-mobile-layout > [onclick*="trustscriptOpenLightbox"]:nth-child(5) {
+  .trustscript-reviews-wrap .trustscript-gallery-grid.trustscript-mobile-layout > [data-gallery-lightbox]:nth-child(5) {
     display: none;
   }
 
@@ -1263,4 +1393,25 @@ button.trustscript-reviews-wrap .trustscript-verified-badge,
 
 .trustscript-lb-video-play:hover {
     background: rgba(0, 0, 0, 0.85);
+}
+
+.trustscript-reviews-wrap .trustscript-gallery-thumb img,
+.trustscript-reviews-wrap .trustscript-gallery-overflow-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    max-width: none !important;
+}
+
+.trustscript-reviews-wrap .trustscript-gallery-card {
+    height: 450px !important;
+    overflow: hidden !important;
+}
+
+.trustscript-reviews-wrap .trustscript-carousel-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    max-width: none !important;
 }

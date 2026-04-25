@@ -3,7 +3,7 @@
  * TrustScript Frontend Reviews Base Class
  *
  * @package TrustScript
- * @since   1.1.0
+ * @since   1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -13,58 +13,52 @@ if ( ! defined( 'ABSPATH' ) ) {
 abstract class TrustScript_Frontend_Reviews_Base {
 
 	/**
-	 * Unique CSS handle for this module's stylesheet, used to prevent double-enqueue.
+	 * Unique CSS handle for this module's stylesheet.
 	 *
-	 * @return string  e.g. 'trustscript-memberpress-reviews'
+	 * Used to prevent double-enqueue across modules.
+	 *
+	 * @return string e.g. 'trustscript-memberpress-reviews'
 	 */
 	abstract protected function get_css_handle();
 
-	/**
-	 * Path to this module's stylesheet, relative to the plugin root. Used for enqueueing.
-	 *
-	 * @return string  e.g. 'assets/css/memberpress-reviews.css'
+	/** 
+	 * @return string e.g. 'assets/css/memberpress-reviews.css' 
 	 */
 	abstract protected function get_css_path();
 
-	/**
-	 * The shortcode tag registered by this module.
-	 *
-	 * @return string  e.g. 'trustscript_memberpress_reviews'
+	/** 
+	 * @return string e.g. 'trustscript_memberpress_reviews' 
 	 */
 	abstract protected function get_shortcode_tag();
 
-	/**
-	 * Label shown when a review is verified and has a verification hash stored.
-	 *
-	 * @return string  e.g. 'Verified Purchase'
+	/** 
+	 * @return string e.g. 'Verified Purchase' 
 	 */
 	abstract protected function get_verified_label();
 
 	/**
-	 * Label shown when a review is verified but does not have a verification hash 
-	 *
 	 * @return string  e.g. 'Verified Member'
 	 */
 	abstract protected function get_verified_simple_label();
 
 	/**
-	 * Title shown at the top of the verification modal when a user clicks to view a review's verification hash.
-	 *
 	 * @return string  e.g. 'Verified Purchase Hash'
 	 */
 	abstract protected function get_modal_title();
 
 	/**
-	 * Whether to render the verification hash modal HTML in wp_footer. 
-	 * Subclasses that don't use the modal can return false to avoid unnecessary HTML output.
+	 * Whether to render the verification hash modal HTML in wp_footer.
+	 *
+	 * Subclasses that do not use the modal can return false to skip the output.
 	 *
 	 * @return bool
 	 */
 	abstract protected function should_render_modal();
 
 	/**
-	 * Whether to enqueue the shared verification badge CSS. 
-	 * Subclasses that render the badge in their own stylesheet 
+	 * Whether to enqueue the shared verification badge CSS.
+	 *
+	 * Subclasses that bundle the badge styles in their own stylesheet
 	 * can return false to avoid double-enqueue.
 	 *
 	 * @return bool
@@ -75,7 +69,9 @@ abstract class TrustScript_Frontend_Reviews_Base {
 
 
 	/**
-	 * Enqueu CSS and JS assets if not already enqueued by another module.
+	 * Enqueue this module's CSS and JS assets if not already loaded.
+	 *
+	 * @since 1.0.0
 	 */
 	protected function maybe_enqueue_assets_inline() {
 		if ( wp_style_is( $this->get_css_handle(), 'enqueued' ) ) {
@@ -107,12 +103,13 @@ abstract class TrustScript_Frontend_Reviews_Base {
 		);
 	}
 
-
+ 
 	/**
-	 * Render a single review as an HTML string, including verification badge if applicable.
+	 * Render a single review as an HTML string, including the verification badge.
 	 *
-	 * @param  WP_Comment $review
-	 * @return string 
+	 * @since 1.0.0
+	 * @param WP_Comment $review Review comment object.
+	 * @return string HTML markup for the review item.
 	 */
 	protected function render_single_review( $review ) {
 		$rating            = get_comment_meta( $review->comment_ID, 'rating', true );
@@ -133,8 +130,10 @@ abstract class TrustScript_Frontend_Reviews_Base {
 						<span class="trustscript-verification-badge-inline">
 							<button type="button"
 								class="trustscript-verify-link"
-								title="<?php esc_attr_e( 'Click to view verification hash', 'trustscript' ); ?>"
+								title="<?php esc_attr_e( 'View verification hash', 'trustscript' ); ?>"
 								data-hash="<?php echo esc_attr( $verification_hash ); ?>"
+								data-author="<?php echo esc_attr( $review->comment_author ); ?>"
+								data-rating="<?php echo esc_attr( (int) $rating ); ?>"
 								data-verify-url="<?php echo esc_url( $verify_url ); ?>">
 								<svg class="trustscript-shield-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -145,9 +144,20 @@ abstract class TrustScript_Frontend_Reviews_Base {
 						</span>
 
 					<?php elseif ( $verified ) : ?>
-						<span class="trustscript-review-verified-simple">
-							<span role="img" aria-label="<?php esc_attr_e( 'Verified', 'trustscript' ); ?>">✓</span>
-							<?php echo esc_html( $this->get_verified_simple_label() ); ?>
+						<span class="trustscript-verification-badge-inline">
+							<button type="button"
+								class="trustscript-verify-link"
+								title="<?php esc_attr_e( 'View verification details', 'trustscript' ); ?>"
+								data-hash="<?php esc_attr_e( 'Internal Membership Verification', 'trustscript' ); ?>"
+								data-author="<?php echo esc_attr( $review->comment_author ); ?>"
+								data-rating="<?php echo esc_attr( (int) $rating ); ?>"
+								data-verify-url="<?php echo esc_url( $verify_url ); ?>">
+								<svg class="trustscript-shield-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+									<path d="m9 12 2 2 4-4"/>
+								</svg>
+								<span class="trustscript-verify-text"><?php echo esc_html( $this->get_verified_simple_label() ); ?></span>
+							</button>
 						</span>
 					<?php endif; ?>
 				</div>
@@ -171,11 +181,12 @@ abstract class TrustScript_Frontend_Reviews_Base {
 	}
 
 	/**
-	 * Render pagination links for reviews listing pages.
+	 * Render previous/next pagination links for a reviews listing.
 	 *
-	 * @param  int $current_page
-	 * @param  int $total_pages
-	 * @return string
+	 * @since 1.0.0
+	 * @param int $current_page Current page number (1-based).
+	 * @param int $total_pages  Total number of pages.
+	 * @return string HTML markup for the pagination wrapper.
 	 */
 	protected function render_pagination( $current_page, $total_pages ) {
 		ob_start();
@@ -208,9 +219,15 @@ abstract class TrustScript_Frontend_Reviews_Base {
 
 
 	/**
-	 * Render the verification modal HTML, which will be populated and triggered by JS 
-	 * when a user clicks to view a review's verification hash.
+	 * Output the verification hash modal HTML to the page.
 	 *
+	 * Populated and triggered by JS when a user clicks a verification badge.
+	 * Guarded by `should_render_modal()` and a static flag to ensure it is
+	 * output at most once per page load.
+	 *
+	 * Uses the shared utility method from TrustScript_Review_Renderer to avoid code duplication.
+	 *
+	 * @since 1.0.0
 	 */
 	public function render_verification_modal() {
 		if ( ! $this->should_render_modal() ) {
@@ -223,43 +240,20 @@ abstract class TrustScript_Frontend_Reviews_Base {
 		}
 		$modal_rendered = true;
 
-		$verify_url = trustscript_get_base_url() . '/verify-review';
-		?>
+		$this->maybe_enqueue_assets_inline();
 
-		<div class="trustscript-modal-overlay" id="trustscript-verify-modal">
-			<div class="trustscript-modal">
-				<button class="trustscript-modal-close">&times;</button>
-				<h3 class="trustscript-modal-title">
-					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-						<path d="m9 12 2 2 4-4"/>
-					</svg>
-					<?php echo esc_html( $this->get_modal_title() ); ?>
-				</h3>
-				<div class="trustscript-modal-content">
-					<p><?php esc_html_e( "This review is cryptographically verified. Use this hash to verify the review's authenticity:", 'trustscript' ); ?></p>
-					<div class="trustscript-hash-container" id="trustscript-modal-hash"></div>
-					<div class="trustscript-modal-actions">
-						<button class="trustscript-copy-btn" id="trustscript-copy-hash">
-							<?php esc_html_e( 'Copy Hash', 'trustscript' ); ?>
-						</button>
-						<a href="<?php echo esc_url( $verify_url ); ?>" id="trustscript-verify-link-btn" class="trustscript-verify-link-btn" target="_blank" rel="noopener">
-							<?php esc_html_e( 'Verify on TrustScript', 'trustscript' ); ?>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<?php
+		if ( class_exists( 'TrustScript_Review_Renderer' ) ) {
+			echo TrustScript_Review_Renderer::get_verification_modal_html( $this->get_modal_title() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		}
 	}
 
 
 	/**
-	 * Build a meta query array for filtering reviews by minimum rating.
-	 * 
-	 * @param  int $rating  Minimum rating (1–5). Callers should only call this when > 0.
-	 * @return array
+	 * Build a `meta_query` array for filtering comments by minimum star rating.
+	 *
+	 * @since 1.0.0
+	 * @param int $rating Minimum rating threshold (1–5).
+	 * @return array Single-element meta_query array ready for use in `get_comments()`.
 	 */
 	protected function build_rating_meta_query( $rating ) {
 		return array(

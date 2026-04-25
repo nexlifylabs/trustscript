@@ -12,6 +12,10 @@ class TrustScript_Sync_Service {
 
 	public function sync_service_orders( $provider, $service_id, $days ) {
 
+		if ( $days !== 'all' ) {
+			$days = absint( $days );
+		}
+
 		$registry_published_ids = TrustScript_Order_Registry::get_published_order_ids( $service_id );
 
 		$existing_orders = $this->fetch_existing_orders_from_trustscript( $service_id, $days );
@@ -165,7 +169,7 @@ class TrustScript_Sync_Service {
 	 * @return array|false Array of existing orders, or false on failure
 	 */
 	private function fetch_existing_orders_from_trustscript( $service_id, $days ) {
-		$api_key = get_option( 'trustscript_api_key', '' );
+		$api_key = trustscript_get_api_key();
 		$base_url = trustscript_get_base_url();
 		
 		if ( empty( $api_key ) || empty( $base_url ) ) {

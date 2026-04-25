@@ -19,7 +19,7 @@ class TrustScript_MemberPress_Reviews extends TrustScript_Frontend_Reviews_Base 
 		add_shortcode( 'trustscript_memberpress_reviews', array( $this, 'render_reviews_shortcode' ) );
 		add_action( 'admin_menu', array( $this, 'add_settings_page' ), 20 );
 		add_action( 'admin_init', array( $this, 'register_settings' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_verification_assets' ) );
+		add_action( 'wp_footer', array( $this, 'enqueue_verification_assets' ), 5 );
 		add_action( 'wp_footer', array( $this, 'render_verification_modal' ), 100 );
 	}
 
@@ -227,6 +227,10 @@ class TrustScript_MemberPress_Reviews extends TrustScript_Frontend_Reviews_Base 
 			$should_enqueue = true;
 		}
 
+		if ( $this->is_shortcode_rendered ) {
+			$should_enqueue = true;
+		}
+
 		if ( ! $should_enqueue && ( is_singular() || is_page() || is_single() ) ) {
 			$should_enqueue = apply_filters( 'trustscript_memberpress_should_enqueue_assets', false );
 		}
@@ -354,7 +358,7 @@ class TrustScript_MemberPress_Reviews extends TrustScript_Frontend_Reviews_Base 
 					</span>
 				</div>
 			</div>
-
+ 
 			<div class="trustscript-reviews-list <?php echo esc_attr( 'layout-' . $args['layout'] ); ?>">
 				<?php foreach ( $reviews as $review ) : ?>
 					<?php echo wp_kses_post( $this->render_single_review( $review ) ); ?>

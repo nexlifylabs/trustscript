@@ -26,8 +26,18 @@ $wpdb->query( "DROP TABLE IF EXISTS {$trustscript_prefix}trustscript_order_regis
 // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Intentional cleanup on uninstall, table names cannot be parameterized.
 $wpdb->query( "DROP TABLE IF EXISTS {$trustscript_prefix}trustscript_queue" );
 
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Intentional cleanup on uninstall, table names cannot be parameterized.
+$wpdb->query( "DROP TABLE IF EXISTS {$trustscript_prefix}trustscript_optouts" );
+
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Intentional cleanup on uninstall, table names cannot be parameterized.
+$wpdb->query( "DROP TABLE IF EXISTS {$trustscript_prefix}trustscript_consent_log" );
+
+// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Intentional cleanup on uninstall, table names cannot be parameterized.
+$wpdb->query( "DROP TABLE IF EXISTS {$trustscript_prefix}trustscript_votes" );
+
 $trustscript_options_to_delete = array(
 	'trustscript_api_key',
+	'trustscript_api_key_expires_at',
 	'trustscript_data_consent',
 	'trustscript_delete_data_on_uninstall',
 	'trustscript_reviews_enabled',
@@ -46,12 +56,38 @@ $trustscript_options_to_delete = array(
 	'trustscript_review_keywords',
 	'trustscript_base_url',
 	'trustscript_user_plan',
+	'trustscript_current_plan',
 	'trustscript_last_quota',
 	'trustscript_review_voting_enabled',
+	'trustscript_enable_voting',
 	'trustscript_woocommerce_enabled',
+	'trustscript_woocommerce_min_value',
+	'trustscript_woocommerce_exclude_free',
 	'trustscript_memberpress_enabled',
+	'trustscript_memberpress_memberships',
+	'trustscript_memberpress_delay_days',
+	'trustscript_memberpress_who_can_see',
 	'trustscript_enable_international_handling',
 	'trustscript_international_delay_hours',
+	'trustscript_consent_mode',
+	'trustscript_email_send_mode',
+	'trustscript_email_send_mode_updated_at',
+	'trustscript_include_product_names',
+	'trustscript_include_order_dates',
+	'trustscript_registry_schema_version',
+	'trustscript_optout_db_version',
+	'trustscript_physical_address',
+	'trustscript_require_physical_address',
+	'trustscript_project_id',
+	'trustscript_enable_service_woocommerce',
+	'trustscript_enable_service_memberpress',
+	'trustscript_trigger_status_woocommerce',
+	'trustscript_trigger_status_memberpress',
+	'trustscript_webhook_secret',
+    'trustscript_encryption_key',
+    'trustscript_consent_schema_version',
+    'trustscript_queue_db_version',
+    'trustscript_votes_table_version',
 );
 
 foreach ( $trustscript_options_to_delete as $trustscript_option_name ) {
@@ -64,6 +100,7 @@ $trustscript_transients_to_delete = array(
 	'trustscript_user_plan',
 	'trustscript_base_url',
 	'trustscript_last_quota',
+	'trustscript_compatibility_check',
 );
 
 foreach ( $trustscript_transients_to_delete as $trustscript_transient_name ) {

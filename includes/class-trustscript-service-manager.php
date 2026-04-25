@@ -41,9 +41,6 @@ class TrustScript_Service_Manager {
 		$provider_files = array(
 			'woocommerce' => 'providers/class-trustscript-woocommerce-provider.php',
 			'memberpress' => 'providers/class-trustscript-memberpress-provider.php',
-			'events-calendar' => 'providers/class-trustscript-events-calendar-provider.php',
-			'gravity-forms' => 'providers/class-trustscript-gravity-forms-provider.php',
-			'wpforms' => 'providers/class-trustscript-wpforms-provider.php',
 		);
 		
 		foreach ( $provider_files as $provider_id => $file_path ) {

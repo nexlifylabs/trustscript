@@ -4,10 +4,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trustscript 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/trustscript\n"
-"POT-Creation-Date: 2026-04-08T12:46:13+00:00\n"
+"POT-Creation-Date: 2026-04-25T11:58:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,12 +16,15 @@ msgstr ""
 "X-Generator: WP-CLI 2.12.0\n"
 
 #. Plugin Name of the plugin
-#: trustscript.php
-msgid "trustscript"
-msgstr "trustscript"
+#: trustscript.php includes/admin/settings.php:30
+#: includes/class-trustscript-admin.php:123
+#: includes/class-trustscript-immutability.php:121
+#: includes/integration/elementor/class-trustscript-elementor.php:59
+#: trustscript.php:186
+msgid "TrustScript"
+msgstr "TrustScript"
 
 #. Plugin URI of the plugin
-#. Author URI of the plugin
 #: trustscript.php
 msgid "https://nexlifylabs.com"
 msgstr "https://nexlifylabs.com"
@@ -28,10 +32,10 @@ msgstr "https://nexlifylabs.com"
 #. Description of the plugin
 #: trustscript.php
 msgid ""
-"Automated review collection for WooCommerce — verified, visual, AI-assisted,"
+"Automated review collection for WooCommerce - verified, visual, AI-assisted,"
 " and 100% privacy compliant. No PII. No manual work."
 msgstr ""
-"Geautomatiseerde verzameling van recensies voor WooCommerce — geverifieerd, "
+"Geautomatiseerde verzameling van recensies voor WooCommerce – geverifieerd, "
 "visueel, met behulp van AI en 100% in overeenstemming met de "
 "privacywetgeving. Geen persoonsgegevens. Geen handmatig werk."
 
@@ -40,566 +44,34 @@ msgstr ""
 msgid "NexlifyLabs"
 msgstr "NexlifyLabs"
 
-#: includes/admin/branding.php:18
-msgid "TrustScript Branding"
-msgstr "TrustScript-branding"
-
-#: includes/admin/branding.php:21
-msgid "Loading your account information..."
-msgstr "Uw accountgegevens worden geladen..."
-
-#: includes/admin/branding.php:25
-msgid "⚠️ Unable to Verify Plan"
-msgstr "⚠️ Kan abonnement niet verifiëren"
-
-#: includes/admin/branding.php:29
-msgid "Check API Settings"
-msgstr "API-instellingen controleren"
-
-#: includes/admin/branding.php:32 includes/admin/branding.php:71
-msgid "Refresh Plan Information"
-msgstr "Informatie over het vernieuwingsplan"
-
-#: includes/admin/branding.php:39
-msgid "Upgrade to Pro or Business Plan"
-msgstr "Upgrade naar het Pro- of Business-abonnement"
-
-#: includes/admin/branding.php:42
-msgid ""
-"Custom branding is available for Pro and Business plan users. Customize your"
-" review pages with your own logo, colors, and domain to create a "
-"professional branded experience."
-msgstr ""
-"Gebruikers met een Pro- of Business-abonnement kunnen hun merkidentiteit "
-"aanpassen. Pas je beoordelingspagina’s aan met je eigen logo, kleuren en "
-"domeinnaam om een professionele merkbeleving te creëren."
-
-#: includes/admin/branding.php:47
-msgid "Custom logo and business name"
-msgstr "Aangepast logo en bedrijfsnaam"
-
-#: includes/admin/branding.php:51
-msgid "Custom subdomain or domain"
-msgstr "Aangepast subdomein of domein"
-
-#: includes/admin/branding.php:55
-msgid "Custom brand colors"
-msgstr "Aangepaste merkkleuren"
-
-#: includes/admin/branding.php:59
-msgid "White-label review pages"
-msgstr "White-label-beoordelingspagina’s"
-
-#: includes/admin/branding.php:63
-msgid "Pro: 500 reviews/month | Business: 2,000 reviews/month"
-msgstr ""
-"Pro: 500 beoordelingen per maand | Zakelijk: 2.000 beoordelingen per maand"
-
-#: includes/admin/branding.php:68
-msgid "View Plans & Upgrade →"
-msgstr "Bekijk abonnementen en upgrade →"
-
-#: includes/admin/branding.php:78
-msgid "✨ Your White-Label Branding"
-msgstr "✨ Uw white-label-branding"
-
-#: includes/admin/branding.php:79
-msgid ""
-"Customize how your review pages appear to customers. Changes sync "
-"automatically to TrustScript."
-msgstr ""
-"Pas de weergave van uw beoordelingspagina’s voor klanten aan. Wijzigingen "
-"worden automatisch gesynchroniseerd met TrustScript."
-
-#: includes/admin/branding.php:86
-msgid "Business Name"
-msgstr "Bedrijfsnaam"
-
-#: includes/admin/branding.php:89
-msgid "Your business name shown on review pages"
-msgstr "Uw bedrijfsnaam op beoordelingspagina’s"
-
-#: includes/admin/branding.php:93
-msgid "Logo"
-msgstr "Logo"
-
-#: includes/admin/branding.php:97
-msgid "Upload Logo"
-msgstr "Logo uploaden"
-
-#: includes/admin/branding.php:98
-msgid "Remove"
-msgstr "Verwijderen"
-
-#: includes/admin/branding.php:103
-msgid "Upload your logo (PNG, JPG, or SVG recommended). Max 5MB."
-msgstr ""
-"Upload uw logo (bij voorkeur in PNG-, JPG- of SVG-formaat). Max. 5 MB."
-
-#: includes/admin/branding.php:107
-msgid "Custom Subdomain"
-msgstr "Aangepast subdomein"
-
-#: includes/admin/branding.php:114
-msgid ""
-"Your custom subdomain (e.g., \"yourbrand\" for yourbrand.nexlifylabs.com). "
-"Checks availability in real-time."
-msgstr ""
-"Uw eigen subdomein (bijvoorbeeld \"uwmerk\" voor uwmerk.nexlifylabs.com). "
-"Controleert de beschikbaarheid in realtime."
-
-#: includes/admin/branding.php:120
-msgid "🎨 Brand Colors"
-msgstr "🎨 Merkkleuren"
-
-#: includes/admin/branding.php:121
-msgid "Customize the colors of your review pages to match your brand identity"
-msgstr ""
-"Pas de kleuren van uw beoordelingspagina’s aan zodat ze aansluiten bij uw "
-"huisstijl"
-
-#: includes/admin/branding.php:126
-msgid "Title & Sub heading"
-msgstr "Titel en ondertitel"
-
-#: includes/admin/branding.php:132
-msgid "Title & Sub heading color"
-msgstr "Kleur van titel en ondertitel"
-
-#: includes/admin/branding.php:137
-msgid "Accent Color"
-msgstr "Accentkleur"
-
-#: includes/admin/branding.php:143
-msgid "Secondary accent color for interactive elements"
-msgstr "Tweede accentkleur voor interactieve elementen"
-
-#: includes/admin/branding.php:148
-msgid "Page Background"
-msgstr "Achtergrond van de pagina"
-
-#: includes/admin/branding.php:154
-msgid "Main page background color"
-msgstr "Achtergrondkleur van de hoofdpagina"
-
-#: includes/admin/branding.php:159
-msgid "Header Background"
-msgstr "Achtergrond van de koptekst"
-
-#: includes/admin/branding.php:165
-msgid "Header section background color"
-msgstr "Achtergrondkleur van de koptekst"
-
-#: includes/admin/branding.php:170
-msgid "Card Background"
-msgstr "Achtergrond van de kaart"
-
-#: includes/admin/branding.php:176
-msgid "Card and content area background color"
-msgstr "Achtergrondkleur van de kaart en het inhoudsgebied"
-
-#: includes/admin/branding.php:181
-msgid "Text Color"
-msgstr "Tekstkleur"
-
-#: includes/admin/branding.php:187
-msgid "Primary text color"
-msgstr "Kleur van de hoofdtekst"
-
-#: includes/admin/branding.php:192
-msgid "Secondary Text Color"
-msgstr "Kleur van de secundaire tekst"
-
-#: includes/admin/branding.php:198
-msgid "Secondary/dimmed text color"
-msgstr "Secundaire/gedimde tekstkleur"
-
-#: includes/admin/branding.php:203
-msgid "Border Color"
-msgstr "Randkleur"
-
-#: includes/admin/branding.php:209
-msgid "Border and divider color"
-msgstr "Kleur van randen en scheidingslijnen"
-
-#: includes/admin/branding.php:214
-msgid "Button Background"
-msgstr "Achtergrond van de knop"
-
-#: includes/admin/branding.php:220
-msgid "Button background color"
-msgstr "Achtergrondkleur van de knop"
-
-#: includes/admin/branding.php:225
-msgid "Button Text"
-msgstr "Tekst op de knop"
-
-#: includes/admin/branding.php:231
-msgid "Button text color"
-msgstr "Kleur van de knoptekst"
-
-#: includes/admin/branding.php:236
-msgid "Button Border"
-msgstr "Knoprand"
-
-#: includes/admin/branding.php:242
-msgid "Button border color"
-msgstr "Kleur van de knoprand"
-
-#: includes/admin/branding.php:247
-msgid "Success Color"
-msgstr "Succeskleur"
-
-#: includes/admin/branding.php:253
-msgid "Color for success messages and indicators"
-msgstr "Kleur voor succesmeldingen en indicatoren"
-
-#: includes/admin/branding.php:258
-msgid "Error Color"
-msgstr "Foutkleur"
-
-#: includes/admin/branding.php:264
-msgid "Color for error messages and alerts"
-msgstr "Kleur voor foutmeldingen en waarschuwingen"
-
-#: includes/admin/branding.php:269
-msgid "Star Color (Filled)"
-msgstr "Sterkleur (gevuld)"
-
-#: includes/admin/branding.php:275
-msgid "Color for filled rating stars"
-msgstr "Kleur voor gevulde beoordelingssterren"
-
-#: includes/admin/branding.php:280
-msgid "Star Color (Empty)"
-msgstr "Sterkleur (leeg)"
-
-#: includes/admin/branding.php:286
-msgid "Color for empty rating stars"
-msgstr "Kleur voor lege beoordelingssterren"
-
-#: includes/admin/branding.php:292
-msgid "⚙️ Layout & Display"
-msgstr "⚙️ Indeling & Weergave"
-
-#: includes/admin/branding.php:297
-msgid "Display Logo Only"
-msgstr "Alleen logo weergeven"
-
-#: includes/admin/branding.php:301
-msgid "Show only the logo without business name"
-msgstr "Alleen het logo weergeven, zonder bedrijfsnaam"
-
-#: includes/admin/branding.php:307
-msgid "Display Name Only"
-msgstr "Alleen weergavenaam"
-
-#: includes/admin/branding.php:311
-msgid "Show only the business name without logo"
-msgstr "Alleen de bedrijfsnaam weergeven, zonder logo"
-
-#: includes/admin/branding.php:317
-msgid "Remove Footer"
-msgstr "Voettekst verwijderen"
-
-#: includes/admin/branding.php:321
-msgid "Remove footer text from review pages"
-msgstr "Voettekst verwijderen van beoordelingspagina’s"
-
-#: includes/admin/branding.php:327
-msgid "Footer Text"
-msgstr "Tekst in de voettekst"
-
-#: includes/admin/branding.php:330
-msgid "Custom footer text shown on review pages (optional)"
-msgstr "Aangepaste voettekst op beoordelingspagina’s (optioneel)"
-
-#: includes/admin/branding.php:337 includes/admin/settings.php:342
-msgid "Save Changes"
-msgstr "Wijzigingen opslaan"
-
-#: includes/admin/class-analytics-page.php:48
-msgid "TrustScript Analytics"
-msgstr "TrustScript Analytics"
-
-#: includes/admin/class-analytics-page.php:51
-msgid "Welcome to TrustScript"
-msgstr "Welkom bij TrustScript"
-
-#: includes/admin/class-analytics-page.php:52
-msgid ""
-"Transform your WooCommerce customer reviews with AI-powered content "
-"generation. TrustScript automatically creates authentic, engaging review "
-"options that help customers express their genuine experiences-making it "
-"easier to gather valuable feedback."
-msgstr ""
-"Geef uw WooCommerce-klantbeoordelingen een nieuwe impuls met AI-gestuurde "
-"contentgeneratie. TrustScript genereert automatisch authentieke, "
-"aansprekende beoordelingsopties waarmee klanten hun echte ervaringen kunnen "
-"delen, waardoor het eenvoudiger wordt om waardevolle feedback te verzamelen."
-
-#: includes/admin/class-analytics-page.php:58
-msgid "Review Requests Sent"
-msgstr "Verzoeken om beoordeling verzonden"
-
-#: includes/admin/class-analytics-page.php:62
-msgid "Approved Reviews"
-msgstr "Goedgekeurde beoordelingen"
-
-#: includes/admin/class-analytics-page.php:66
-msgid "Pending Reviews"
-msgstr "In behandeling zijnde beoordelingen"
-
-#: includes/admin/class-analytics-page.php:70
-#: includes/admin/review-request.php:59
-msgid "Conversion Rate"
-msgstr "Conversieratio"
-
-#: includes/admin/class-analytics-page.php:76
-msgid "How It Works"
-msgstr "Hoe het werkt"
-
-#: includes/admin/class-analytics-page.php:81
-msgid "Order Delivered"
-msgstr "Bestelling geleverd"
-
-#: includes/admin/class-analytics-page.php:82
-msgid ""
-"When order is marked as \"Delivered\", TrustScript sends review request "
-"email to customer (configured by admin)."
-msgstr ""
-"Zodra een bestelling als \"Geleverd\" wordt gemarkeerd, stuurt TrustScript "
-"een e-mail met een verzoek om een beoordeling naar de klant (zoals ingesteld"
-" door de beheerder)."
-
-#: includes/admin/class-analytics-page.php:88
-msgid "Customer Clicks Link"
-msgstr "Klant klikt op de link"
-
-#: includes/admin/class-analytics-page.php:89
-msgid ""
-"Customer opens email and clicks the secure review link to access the review "
-"page."
-msgstr ""
-"De klant opent de e-mail en klikt op de beveiligde link naar de "
-"beoordelingspagina om deze te openen."
-
-#: includes/admin/class-analytics-page.php:95
-msgid "Write Review"
-msgstr "Schrijf een recensie"
-
-#: includes/admin/class-analytics-page.php:96
-msgid ""
-"Customer types their honest review in their own words - anything from a few "
-"words to detailed feedback."
-msgstr ""
-"Klanten schrijven hun eerlijke beoordeling in hun eigen woorden – van een "
-"paar woorden tot uitgebreide feedback."
-
-#: includes/admin/class-analytics-page.php:102
-msgid "Select Tone & Variant"
-msgstr "Kies kleur en uitvoering"
-
-#: includes/admin/class-analytics-page.php:103
-msgid ""
-"Customer chooses writing tone (Professional, Casual, Enthusiastic). AI "
-"generates 3 enhanced versions."
-msgstr ""
-"De klant kiest de schrijfstijl (professioneel, informeel, enthousiast). De "
-"AI genereert 3 verbeterde versies."
-
-#: includes/admin/class-analytics-page.php:109
-msgid "Choose Version"
-msgstr "Kies versie"
-
-#: includes/admin/class-analytics-page.php:110
-msgid ""
-"Customer picks their favorite: original text or one of the AI-enhanced "
-"versions. Can edit before submitting."
-msgstr ""
-"De klant kiest zijn of haar favoriet: de originele tekst of een van de door "
-"AI verbeterde versies. Kan worden bewerkt voordat het wordt ingediend."
-
-#: includes/admin/class-analytics-page.php:116
-msgid "Auto-Publish"
-msgstr "Automatisch publiceren"
-
-#: includes/admin/class-analytics-page.php:117
-msgid ""
-"Once approved, review automatically publishes to your WooCommerce product "
-"page via webhook or daily sync."
-msgstr ""
-"Zodra de beoordeling is goedgekeurd, wordt deze automatisch via een webhook "
-"of dagelijkse synchronisatie op je WooCommerce-productpagina geplaatst."
-
-#: includes/admin/class-analytics-page.php:123
-msgid "Cryptographic Verification"
-msgstr "Cryptografische verificatie"
-
-#: includes/admin/class-analytics-page.php:124
-msgid ""
-"Each review gets a unique SHA-256 hash for authenticity verification. "
-"Customers can verify at nexlifylabs.com/verify-review."
-msgstr ""
-"Elke recensie krijgt een unieke SHA-256-hash voor authenticiteitscontrole. "
-"Klanten kunnen dit controleren op nexlifylabs.com/verify-review."
-
-#: includes/admin/class-analytics-page.php:132
-msgid "Recent Activity (Last 10)"
-msgstr "Recente activiteit (laatste 10)"
-
-#: includes/admin/class-analytics-page.php:134
-msgid "View All Review Requests →"
-msgstr "Alle beoordelingsverzoeken bekijken →"
-
-#: includes/admin/class-analytics-page.php:141
-msgid "Loading activity..."
-msgstr "Bezig met laden..."
-
-#: includes/admin/class-analytics-page.php:142
-msgid "Please wait"
-msgstr "Even geduld a.u.b."
-
-#: includes/admin/class-analytics-page.php:151
-#: includes/class-trustscript-admin.php:595
-msgid "Refresh Analytics"
-msgstr "Analytics vernieuwen"
-
-#: includes/admin/class-analytics-page.php:154
-#: includes/admin/pending-queue.php:135 includes/admin/settings.php:158
-#: includes/admin/settings.php:429
-msgid "Upgrade Plan"
-msgstr "Upgradeplan"
-
-#: includes/admin/class-analytics-page.php:157
-#: includes/admin/review-setting.php:87 includes/admin/review-setting.php:90
-#: includes/class-trustscript-admin.php:135
-#: includes/class-trustscript-admin.php:136
-msgid "Review Settings"
-msgstr "Instellingen bekijken"
-
-#: includes/admin/email-template.php:53
-msgid "Email Template Management"
-msgstr "Beheer van e-mailsjablonen"
-
-#: includes/admin/email-template.php:60
-msgid "Email Template Customization - Pro & Business Plans Only"
-msgstr ""
-"Aanpassing van e-mailsjablonen – Alleen voor Pro- en Business-abonnementen"
-
-#: includes/admin/email-template.php:63
-msgid ""
-"Email template customization is available for Pro and Business plan users. "
-"Upgrade your plan to create and manage custom, compliance-checked email "
-"templates in your TrustScript dashboard."
-msgstr ""
-"Het aanpassen van e-mailsjablonen is beschikbaar voor gebruikers met een "
-"Pro- of Business-abonnement. Upgrade uw abonnement om in uw TrustScript-"
-"dashboard aangepaste, op naleving gecontroleerde e-mailsjablonen te maken en"
-" te beheren."
-
-#: includes/admin/email-template.php:67
-msgid "Upgrade Your Plan →"
-msgstr "Upgrade je abonnement →"
-
-#: includes/admin/email-template.php:76
-msgid "Manage Your Email Templates"
-msgstr "Beheer uw e-mailsjablonen"
-
-#: includes/admin/email-template.php:79
-msgid ""
-"Email templates are centrally managed in your TrustScript dashboard for all "
-"your platforms (WordPress, Wix, Shopify, API). Create custom, compliance-"
-"checked templates with built-in FTC & GDPR protection."
-msgstr ""
-"E-mailsjablonen worden centraal beheerd in uw TrustScript-dashboard voor al "
-"uw platforms (WordPress, Wix, Shopify, API). Maak aangepaste, op naleving "
-"gecontroleerde sjablonen met ingebouwde bescherming tegen de FTC en de AVG."
-
-#: includes/admin/email-template.php:84
-msgid "Go to Email Template Dashboard →"
-msgstr "Ga naar het dashboard voor e-mailsjablonen →"
-
-#: includes/admin/email-template.php:94
-msgid "Privacy & GDPR/FTC Compliance"
-msgstr "Privacy en naleving van de AVG/FTC"
-
-#: includes/admin/email-template.php:97
-msgid "🔒 No Customer Data Collection:"
-msgstr "🟔 Geen verzameling van klantgegevens:"
-
-#: includes/admin/email-template.php:97
-msgid ""
-"TrustScript never collects, or stores customer personal information (names, "
-"emails, addresses, phone numbers, etc.)."
-msgstr ""
-"TrustScript verzamelt of bewaart nooit persoonlijke gegevens van klanten "
-"(namen, e-mailadressen, adressen, telefoonnummers, enz.)."
-
-#: includes/admin/email-template.php:98
-msgid "🔐 Hashed Emails Only:"
-msgstr "🟔 Alleen gehasht e-mailadressen:"
-
-#: includes/admin/email-template.php:98
-msgid ""
-"We only store secure hashes of email addresses for opt-out purposes - the "
-"original email is never stored or accessible."
-msgstr ""
-"We slaan uitsluitend beveiligde hashwaarden van e-mailadressen op voor het "
-"afmelden; het oorspronkelijke e-mailadres wordt nooit opgeslagen en is nooit"
-" toegankelijk."
-
-#: includes/admin/email-template.php:99
-msgid "📊 Order IDs Only:"
-msgstr "📊 Alleen bestelnummers:"
-
-#: includes/admin/email-template.php:99
-msgid ""
-"We track order IDs to manage review requests and match approved reviews back"
-" to products."
-msgstr ""
-"We houden bestelnummers bij om beoordelingsverzoeken te beheren en "
-"goedgekeurde beoordelingen aan producten te koppelen."
-
-#: includes/admin/email-template.php:100
-msgid "✓ FTC & GDPR Compliant:"
-msgstr "✓ Voldoet aan de FTC- en GDPR-voorschriften:"
-
-#: includes/admin/email-template.php:100
-msgid ""
-"All emails include mandatory GDPR footer, opt-out links, and honest feedback"
-" language - automatically enforced by the system."
-msgstr ""
-"Alle e-mails bevatten een verplichte AVG-voettekst, afmeldlinks en een tekst"
-" waarin om eerlijke feedback wordt gevraagd – dit wordt automatisch door het"
-" systeem afgedwongen."
-
-#: includes/admin/email-template.php:101
-msgid "✓ Automatic Privacy Footer:"
-msgstr "✓ Automatische privacyverklaring in de voettekst:"
-
-#: includes/admin/email-template.php:101
-msgid ""
-"Privacy notice, opt-out links, and transactional disclosures are added to "
-"every email automatically and cannot be removed."
-msgstr ""
-"Privacyverklaringen, links om je af te melden en informatie over transacties"
-" worden automatisch aan elke e-mail toegevoegd en kunnen niet worden "
-"verwijderd."
-
-#: includes/admin/pending-queue.php:24 includes/admin/settings.php:10
+#: includes/abstracts/class-trustscript-service-provider.php:984
+#: includes/abstracts/class-trustscript-service-provider.php:1006
+msgid "Your Purchase"
+msgstr "Uw aankoop"
+
+#: includes/abstracts/class-trustscript-service-provider.php:1023
+#: includes/admin/pending-queue.php:210
+msgid "Order #"
+msgstr "Bestelnummer"
+
+#: includes/abstracts/class-trustscript-service-provider.php:1026
+msgid "Total:"
+msgstr "Totaal:"
+
+#: includes/admin/pending-queue.php:27 includes/admin/settings.php:10
+#: includes/consent/privacy-settings.php:42
 msgid "Sorry, you are not allowed to access this page."
 msgstr "Sorry, u hebt geen toegang tot deze pagina."
 
 #. translators: %d = number of processed review requests
-#: includes/admin/pending-queue.php:62
+#: includes/admin/pending-queue.php:65
 #, php-format
 msgid "All done! %d review request(s) were sent successfully."
 msgstr "Klaar! Er zijn %d beoordelingsverzoeken succesvol verzonden."
 
 #. translators: 1: number of processed review requests, 2: number of still
 #. pending orders
-#: includes/admin/pending-queue.php:70
+#: includes/admin/pending-queue.php:73
 #, php-format
 msgid ""
 "%1$d review request(s) sent. %2$d order(s) still pending — quota may still "
@@ -609,26 +81,26 @@ msgstr ""
 " open — het quotum kan nog steeds beperkt zijn."
 
 #. translators: %d = number of failed orders
-#: includes/admin/pending-queue.php:79
+#: includes/admin/pending-queue.php:82
 #, php-format
 msgid "%d order(s) could not be processed. Check the Failed tab for details."
 msgstr ""
 "%d bestelling(en) kon(nen) niet worden verwerkt. Kijk op het tabblad "
 "'Mislukt' voor meer informatie."
 
-#: includes/admin/pending-queue.php:84
+#: includes/admin/pending-queue.php:88
 msgid ""
 "Queue processed — no new orders were sent (quota may still be limited)."
 msgstr ""
 "De wachtrij is verwerkt — er zijn geen nieuwe bestellingen verzonden (het "
 "quotum kan nog steeds beperkt zijn)."
 
-#: includes/admin/pending-queue.php:92
+#: includes/admin/pending-queue.php:96
 msgid "Pending Review Queue"
 msgstr "Wachtrij voor beoordeling"
 
 #. translators: %d number of pending orders
-#: includes/admin/pending-queue.php:99
+#: includes/admin/pending-queue.php:103
 #, php-format
 msgid "%d order pending"
 msgid_plural "%d orders pending"
@@ -636,23 +108,28 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s formatted reset date
-#: includes/admin/pending-queue.php:109
+#: includes/admin/pending-queue.php:113
 #, php-format
 msgid "&nbsp;&middot;&nbsp; Quota resets %s"
 msgstr "&nbsp;&middot;&nbsp; Quota wordt gereset %s"
 
 #. translators: 1: next plan name 2: limit
-#: includes/admin/pending-queue.php:124
+#: includes/admin/pending-queue.php:128
 #, php-format
 msgid "Upgrade to %1$s for %2$s reviews/mo"
 msgstr "Upgrade naar %1$s voor %2$s beoordelingen per maand"
 
-#: includes/admin/pending-queue.php:144
-#: includes/class-trustscript-admin.php:629
+#: includes/admin/pending-queue.php:139 includes/admin/settings.php:158
+#: includes/admin/settings.php:475
+msgid "Upgrade Plan"
+msgstr "Upgradeplan"
+
+#: includes/admin/pending-queue.php:146
+#: includes/class-trustscript-admin.php:712
 msgid "Process Queue Now"
 msgstr "Wachtrij nu verwerken"
 
-#: includes/admin/pending-queue.php:147
+#: includes/admin/pending-queue.php:149
 msgid ""
 "Processes quota failures and other non-scheduled errors only. To process "
 "scheduled items early, use the Retry button on each individual item."
@@ -661,202 +138,200 @@ msgstr ""
 "fouten. Als u geplande items vervroegd wilt verwerken, gebruikt u de knop "
 "„Opnieuw proberen“ bij elk afzonderlijk item."
 
-#: includes/admin/pending-queue.php:152
+#: includes/admin/pending-queue.php:154
 msgid "✅ Queue is empty — all review requests are up to date."
 msgstr "✅ De wachtrij is leeg — alle beoordelingsverzoeken zijn bijgewerkt."
 
 #. translators: %d = number of pending items
-#: includes/admin/pending-queue.php:177
+#: includes/admin/pending-queue.php:181
 #, php-format
 msgid "Pending (%d)"
 msgstr "In behandeling (%d)"
 
 #. translators: %d = number of failed items
-#: includes/admin/pending-queue.php:180
+#: includes/admin/pending-queue.php:186
 #, php-format
 msgid "Failed (%d)"
 msgstr "Mislukt (%d)"
 
 #. translators: %d = number of completed items
-#: includes/admin/pending-queue.php:183
+#: includes/admin/pending-queue.php:191
 #, php-format
 msgid "Completed (%d)"
 msgstr "Voltooid (%d)"
 
-#: includes/admin/pending-queue.php:184
+#: includes/admin/pending-queue.php:194
 msgid "All"
 msgstr "Alles"
 
-#: includes/admin/pending-queue.php:199
+#: includes/admin/pending-queue.php:209
 msgid "ID"
 msgstr "Identificatienummer"
 
-#: includes/admin/pending-queue.php:200
-msgid "Order #"
-msgstr "Bestelnummer"
-
-#: includes/admin/pending-queue.php:201
+#: includes/admin/pending-queue.php:211
 msgid "Service"
 msgstr "Service"
 
-#: includes/admin/pending-queue.php:202
+#: includes/admin/pending-queue.php:212
 msgid "Reason"
 msgstr "Reden"
 
-#: includes/admin/pending-queue.php:203
+#: includes/admin/pending-queue.php:213
 msgid "Queued At"
 msgstr "In de wachtrij bij"
 
-#: includes/admin/pending-queue.php:204
+#: includes/admin/pending-queue.php:214
 msgid "Scheduled For"
 msgstr "Gepland voor"
 
-#: includes/admin/pending-queue.php:205
+#: includes/admin/pending-queue.php:215
 msgid "Last Attempt"
 msgstr "Laatste poging"
 
-#: includes/admin/pending-queue.php:206
+#: includes/admin/pending-queue.php:216
 msgid "Retries"
 msgstr "Herhalingen"
 
-#: includes/admin/pending-queue.php:207 includes/admin/review-request.php:83
-#: includes/admin/review-request.php:122
+#: includes/admin/pending-queue.php:217 includes/admin/review-request.php:84
+#: includes/admin/review-request.php:127
 msgid "Status"
 msgstr "Status"
 
-#: includes/admin/pending-queue.php:208 includes/admin/review-request.php:125
+#: includes/admin/pending-queue.php:218
 msgid "Actions"
 msgstr "Acties"
 
-#: includes/admin/pending-queue.php:217
+#: includes/admin/pending-queue.php:227
 msgid "No permanently failed items."
 msgstr "Er zijn geen items die definitief defect zijn."
 
-#: includes/admin/pending-queue.php:219
+#: includes/admin/pending-queue.php:229
 msgid "No completed review requests yet."
 msgstr "Er zijn nog geen voltooide beoordelingsverzoeken."
 
-#: includes/admin/pending-queue.php:221
+#: includes/admin/pending-queue.php:231
 msgid "The queue is empty."
 msgstr "De wachtrij is leeg."
 
-#: includes/admin/pending-queue.php:223
+#: includes/admin/pending-queue.php:233
 msgid ""
 "No pending orders. New quota-exceeded orders will appear here automatically."
 msgstr ""
 "Er zijn geen lopende bestellingen. Nieuwe bestellingen waarbij de quota is "
 "overschreden, verschijnen hier automatisch."
 
-#: includes/admin/pending-queue.php:248
+#: includes/admin/pending-queue.php:259
 msgid "Quota"
 msgstr "Hoogte"
 
-#: includes/admin/pending-queue.php:249
+#: includes/admin/pending-queue.php:260
 msgid "Rate limit"
 msgstr "Verwerkingslimiet"
 
-#: includes/admin/pending-queue.php:250
+#: includes/admin/pending-queue.php:261
 msgid "Network"
 msgstr "Netwerk"
 
-#: includes/admin/pending-queue.php:251
+#: includes/admin/pending-queue.php:262
 msgid "API error"
 msgstr "API-fout"
 
-#: includes/admin/pending-queue.php:252
+#: includes/admin/pending-queue.php:263 includes/admin/review-request.php:46
+#: includes/admin/review-request.php:88
 msgid "Scheduled"
 msgstr "Gepland"
 
-#: includes/admin/pending-queue.php:276
+#: includes/admin/pending-queue.php:288
 msgid "Immediate"
 msgstr "Onmiddellijk"
 
-#: includes/admin/pending-queue.php:280
+#: includes/admin/pending-queue.php:292
 msgid "Never"
 msgstr "Nooit"
 
-#: includes/admin/pending-queue.php:285 includes/admin/review-request.php:51
-#: includes/admin/review-request.php:87
+#: includes/admin/pending-queue.php:298 includes/admin/review-request.php:50
+#: includes/admin/review-request.php:412
 #: includes/providers/class-trustscript-memberpress-provider.php:79
 msgid "Pending"
 msgstr "In behandeling"
 
-#: includes/admin/pending-queue.php:286
+#: includes/admin/pending-queue.php:299
 #: includes/providers/class-trustscript-memberpress-provider.php:80
 msgid "Failed"
 msgstr "Mislukt"
 
-#: includes/admin/pending-queue.php:287
+#: includes/admin/pending-queue.php:300
 msgid "Completed"
 msgstr "Voltooid"
 
-#: includes/admin/pending-queue.php:309
-#: includes/class-trustscript-admin.php:627
+#: includes/admin/pending-queue.php:321
+#: includes/class-trustscript-admin.php:710
 msgid "Retry"
 msgstr "Opnieuw proberen"
 
-#: includes/admin/pending-queue.php:316
-#: includes/class-trustscript-admin.php:628
+#: includes/admin/pending-queue.php:327
+#: includes/class-trustscript-admin.php:711
 msgid "Clear"
 msgstr "Wissen"
 
-#: includes/admin/pending-queue.php:319
+#: includes/admin/pending-queue.php:331
 msgid "No actions available"
 msgstr "Er zijn geen acties beschikbaar"
 
 #. translators: %d = total number of items
-#: includes/admin/pending-queue.php:346
+#: includes/admin/pending-queue.php:358
 #, php-format
 msgid "%d item"
 msgid_plural "%d items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/admin/pending-queue.php:361 includes/admin/pending-queue.php:421
+#: includes/admin/pending-queue.php:374 includes/admin/pending-queue.php:435
 msgid "Security verification failed. Please refresh the page."
 msgstr "De beveiligingscontrole is mislukt. Vernieuw de pagina."
 
-#: includes/admin/pending-queue.php:365 includes/admin/pending-queue.php:425
-#: includes/admin/pending-queue.php:458
-#: includes/class-trustscript-admin.php:643
-#: includes/class-trustscript-admin.php:669
-#: includes/class-trustscript-admin.php:2018
+#: includes/admin/pending-queue.php:378 includes/admin/pending-queue.php:439
+#: includes/admin/pending-queue.php:473
+#: includes/class-trustscript-admin.php:736
+#: includes/class-trustscript-admin.php:762
+#: includes/class-trustscript-admin.php:1287
+#: includes/class-trustscript-admin.php:1794
 msgid "Permission denied"
 msgstr "Toegang geweigerd"
 
-#: includes/admin/pending-queue.php:370 includes/admin/pending-queue.php:430
+#: includes/admin/pending-queue.php:383 includes/admin/pending-queue.php:444
 msgid "Invalid ID"
 msgstr "Ongeldige ID"
 
-#: includes/admin/pending-queue.php:379
+#: includes/admin/pending-queue.php:392
 msgid "Queue item not found"
 msgstr "Wachtrijitem niet gevonden"
 
-#: includes/admin/pending-queue.php:384
+#: includes/admin/pending-queue.php:397
 msgid "This order has already been completed. No retry needed."
 msgstr ""
 "Deze bestelling is al afgehandeld. U hoeft het niet opnieuw te proberen."
 
 #. translators: %s: service ID
-#: includes/admin/pending-queue.php:393
+#: includes/admin/pending-queue.php:406
 #, php-format
 msgid "Service provider not active: %s"
 msgstr "Dienstverlener niet actief: %s"
 
 #. translators: %d: order ID
-#: includes/admin/pending-queue.php:403
+#: includes/admin/pending-queue.php:416
 #, php-format
 msgid "Order #%d processed successfully."
 msgstr "Bestelling #%d is succesvol verwerkt."
 
 #. translators: %s: error message
-#: includes/admin/pending-queue.php:411
+#: includes/admin/pending-queue.php:424
 #, php-format
 msgid "Request failed (%s). Order remains in queue."
 msgstr ""
 "Het verzoek is mislukt (%s). De bestelling staat nog steeds in de wachtrij."
 
-#: includes/admin/pending-queue.php:439
+#: includes/admin/pending-queue.php:453
 msgid ""
 "Completed items cannot be cleared (kept for audit trail). Use the Completed "
 "tab to view processed orders."
@@ -865,21 +340,21 @@ msgstr ""
 "controlespoor). Gebruik het tabblad ‘Voltooid’ om verwerkte bestellingen te "
 "bekijken."
 
-#: includes/admin/pending-queue.php:443
+#: includes/admin/pending-queue.php:457
 msgid "Item removed from queue."
 msgstr "Item uit de wachtrij verwijderd."
 
-#: includes/admin/pending-queue.php:445
+#: includes/admin/pending-queue.php:459
 msgid "Item not found or already removed."
 msgstr "Het item is niet gevonden of is al verwijderd."
 
-#: includes/admin/pending-queue.php:454
+#: includes/admin/pending-queue.php:469
 msgid "Security verification failed. Please refresh the page and try again."
 msgstr ""
 "De beveiligingscontrole is mislukt. Vernieuw de pagina en probeer het "
 "opnieuw."
 
-#: includes/admin/pending-queue.php:491
+#: includes/admin/pending-queue.php:506
 msgid ""
 "An error occurred while processing the queue. Check the error logs for "
 "details."
@@ -887,110 +362,156 @@ msgstr ""
 "Er is een fout opgetreden tijdens het verwerken van de wachtrij. Raadpleeg "
 "de foutenlogboeken voor meer informatie."
 
-#: includes/admin/review-request.php:25
-#: includes/class-trustscript-admin.php:144
-#: includes/class-trustscript-admin.php:145
+#: includes/admin/review-request.php:27
 msgid "Review Requests"
 msgstr "Verzoeken om beoordeling"
 
-#: includes/admin/review-request.php:28
-msgid "Review Request"
-msgstr "Verzoek om beoordeling"
+#: includes/admin/review-request.php:30
+msgid "Track Synced Orders"
+msgstr "Bestellingen volgen"
 
-#: includes/admin/review-request.php:31
-msgid "Quick Operations Dashboard"
-msgstr "Dashboard voor snelle bewerkingen"
+#: includes/admin/review-request.php:32
+msgid ""
+"View orders synced with your TrustScript account, including pending, "
+"scheduled, published, and opt-out statuses."
+msgstr ""
+"Bekijk bestellingen die met uw TrustScript-account zijn gesynchroniseerd, "
+"inclusief bestellingen met de status ‘in behandeling’, ‘gepland’, "
+"‘gepubliceerd’ en ‘afgemeld’."
 
 #: includes/admin/review-request.php:33
 msgid ""
-"Manage review requests for this store. For complete report, and cross-"
-"platform analytics, visit your TrustScript dashboard."
+"For deeper insights such as review request activity, link open rates, and "
+"conversion tracking, explore the"
 msgstr ""
-"Beheer beoordelingsverzoeken voor deze winkel. Ga naar je TrustScript-"
-"dashboard voor een volledig rapport en platformoverschrijdende analyses."
+"Voor meer gedetailleerde inzichten, zoals het aantal verzoeken om "
+"beoordelingen, het percentage geopende links en conversietracking, kun je de"
 
-#: includes/admin/review-request.php:38
-msgid "Open TrustScript Compliance Dashboard →"
-msgstr "Open het TrustScript-nalevingsdashboard →"
+#: includes/admin/review-request.php:35
+msgid "TrustScript Analytics Dashboard"
+msgstr "TrustScript Analytics-dashboard"
 
-#: includes/admin/review-request.php:47
+#: includes/admin/review-request.php:42
 msgid "Total Requests"
 msgstr "Totaal aantal verzoeken"
 
-#: includes/admin/review-request.php:55 includes/admin/review-request.php:88
-msgid "Approved"
-msgstr "Goedgekeurd"
+#: includes/admin/review-request.php:54 includes/admin/review-request.php:90
+msgid "Published"
+msgstr "Gepubliceerd"
 
-#: includes/admin/review-request.php:65
+#: includes/admin/review-request.php:58 includes/admin/review-request.php:91
+msgid "Opt-Out"
+msgstr "Afmelden"
+
+#: includes/admin/review-request.php:62 includes/admin/review-request.php:92
+msgid "Awaiting Consent"
+msgstr "In afwachting van toestemming"
+
+#: includes/admin/review-request.php:69
 msgid "All Review Requests"
 msgstr "Alle beoordelingsverzoeken"
 
-#: includes/admin/review-request.php:72
+#: includes/admin/review-request.php:73
 msgid "Search"
 msgstr "Zoeken"
 
-#: includes/admin/review-request.php:78
-msgid "Product name or order ID..."
-msgstr "Productnaam of bestelnummer..."
+#: includes/admin/review-request.php:79
+msgid "Order # or customer..."
+msgstr "Bestelnummer of klant..."
 
-#: includes/admin/review-request.php:86
+#: includes/admin/review-request.php:87
 msgid "All Statuses"
 msgstr "Alle statussen"
 
-#: includes/admin/review-request.php:93
+#: includes/admin/review-request.php:89
+msgid "Pending Review"
+msgstr "In behandeling"
+
+#: includes/admin/review-request.php:97
 msgid "Date Range"
 msgstr "Datumperiode"
 
-#: includes/admin/review-request.php:96
+#: includes/admin/review-request.php:100
 msgid "All Time"
 msgstr "All-time"
 
-#: includes/admin/review-request.php:97
+#: includes/admin/review-request.php:101
 msgid "Last 7 Days"
 msgstr "Afgelopen 7 dagen"
 
-#: includes/admin/review-request.php:98
+#: includes/admin/review-request.php:102
 msgid "Last 30 Days"
 msgstr "Afgelopen 30 dagen"
 
-#: includes/admin/review-request.php:99
+#: includes/admin/review-request.php:103
 msgid "Last 90 Days"
 msgstr "De afgelopen 90 dagen"
 
-#: includes/admin/review-request.php:104
+#: includes/admin/review-request.php:108
 msgid "Apply Filters"
 msgstr "Filters toepassen"
 
-#: includes/admin/review-request.php:111
-msgid "Loading review requests..."
-msgstr "Beoordelingsverzoeken worden geladen..."
-
-#: includes/admin/review-request.php:120
-msgid "Order ID"
-msgstr "Bestelnummer"
+#: includes/admin/review-request.php:113
+msgid "Loading orders..."
+msgstr "Bestellingen worden geladen..."
 
 #: includes/admin/review-request.php:121
+msgid "Order"
+msgstr "Bestellen"
+
+#: includes/admin/review-request.php:122
+msgid "Customer"
+msgstr "Klant"
+
+#: includes/admin/review-request.php:123
 msgid "Product"
 msgstr "Product"
 
-#: includes/admin/review-request.php:123
-msgid "Project"
-msgstr "Project"
-
 #: includes/admin/review-request.php:124
-msgid "Date"
-msgstr "Gegevens"
+msgid "Order Date"
+msgstr "Besteldatum"
 
-#: includes/admin/review-request.php:144
-msgid ""
-"No review requests found. They will appear here after orders are completed."
-msgstr ""
-"Er zijn geen beoordelingsverzoeken gevonden. Deze verschijnen hier zodra de "
-"bestellingen zijn afgerond."
+#: includes/admin/review-request.php:125
+msgid "Sent"
+msgstr "Verzonden"
 
-#: includes/admin/review-request.php:150
+#: includes/admin/review-request.php:126
+msgid "Consent"
+msgstr "Toestemming"
+
+#: includes/admin/review-request.php:128
+msgid "Action"
+msgstr "Actie"
+
+#: includes/admin/review-request.php:141
+msgid "No tracked orders found."
+msgstr "Er zijn geen bestellingen met trackinggegevens gevonden."
+
+#: includes/admin/review-request.php:148
 msgid "Refresh"
 msgstr "Vernieuwen"
+
+#: includes/admin/review-request.php:409
+msgid "Opted Out"
+msgstr "Afgemeld"
+
+#: includes/admin/review-request.php:416
+msgid "Opted In"
+msgstr "Aangemeld"
+
+#: includes/admin/review-request.php:434
+msgid "Guest"
+msgstr "Gast"
+
+#: includes/admin/review-request.php:435
+msgid "Unknown product"
+msgstr "Onbekend product"
+
+#: includes/admin/review-setting.php:87 includes/admin/review-setting.php:90
+#: includes/class-trustscript-admin.php:133
+#: includes/class-trustscript-admin.php:134
+msgid "Review Settings"
+msgstr "Instellingen bekijken"
 
 #: includes/admin/review-setting.php:91
 msgid ""
@@ -1169,7 +690,7 @@ msgid "Domestic Review Request Delay"
 msgstr "Vertraging bij het verzoek om herziening in binnenlandse zaken"
 
 #: includes/admin/review-setting.php:215
-#: includes/class-trustscript-admin.php:1993
+#: includes/class-trustscript-admin.php:1769
 msgid "Immediately"
 msgstr "Onmiddellijk"
 
@@ -1409,15 +930,16 @@ msgstr ""
 msgid "✓ Users must be logged in to vote"
 msgstr "✓ Gebruikers moeten ingelogd zijn om te kunnen stemmen"
 
-#: includes/admin/review-setting.php:422
+#: includes/admin/review-setting.php:420
+#: includes/class-trustscript-immutability.php:118
 msgid "Automatic Daily Sync"
 msgstr "Automatische dagelijkse synchronisatie"
 
-#: includes/admin/review-setting.php:427
+#: includes/admin/review-setting.php:424
 msgid "Two-way synchronization"
 msgstr "Tweerichtingssynchronisatie"
 
-#: includes/admin/review-setting.php:429
+#: includes/admin/review-setting.php:426
 msgid ""
 "TrustScript runs a complete synchronization once every day. During this "
 "cycle, it:"
@@ -1425,7 +947,7 @@ msgstr ""
 "TrustScript voert één keer per dag een volledige synchronisatie uit. Tijdens"
 " deze cyclus:"
 
-#: includes/admin/review-setting.php:431
+#: includes/admin/review-setting.php:428
 msgid ""
 "Publishes any approved reviews from TrustScript to your products "
 "(WooCommerce, MemberPress, etc.)"
@@ -1433,14 +955,14 @@ msgstr ""
 "Plaatst alle goedgekeurde beoordelingen van TrustScript bij je producten "
 "(WooCommerce, MemberPress, enz.)"
 
-#: includes/admin/review-setting.php:432
+#: includes/admin/review-setting.php:429
 msgid ""
 "Sends completed orders/bookings to TrustScript (WooCommerce, MemberPress)"
 msgstr ""
 "Verzendt voltooide bestellingen/boekingen naar TrustScript (WooCommerce, "
 "MemberPress)"
 
-#: includes/admin/review-setting.php:434
+#: includes/admin/review-setting.php:431
 msgid ""
 "This ensures all your services stay synced even if webhooks are unavailable "
 "or manual sync is not triggered."
@@ -1448,73 +970,11 @@ msgstr ""
 "Zo blijven al je diensten gesynchroniseerd, zelfs als webhooks niet "
 "beschikbaar zijn of er geen handmatige synchronisatie wordt geactiveerd."
 
-#: includes/admin/review-setting.php:439
-msgid "Recommended for localhost, staging, and development setups"
-msgstr "Aanbevolen voor localhost-, staging- en ontwikkelomgevingen"
-
-#: includes/admin/review-setting.php:441
-msgid ""
-"Localhost environments cannot receive webhooks, which means reviews and "
-"orders won't sync instantly."
-msgstr ""
-"Localhost-omgevingen kunnen geen webhooks ontvangen, wat betekent dat "
-"beoordelingen en bestellingen niet direct worden gesynchroniseerd."
-
-#: includes/admin/review-setting.php:442
-msgid ""
-"The Automatic Daily Sync helps bridge that gap by regularly checking for:"
-msgstr ""
-"De automatische dagelijkse synchronisatie helpt die kloof te overbruggen "
-"door regelmatig te controleren of:"
-
-#: includes/admin/review-setting.php:444
-msgid "Orders that weren't sent to TrustScript"
-msgstr "Bestellingen die niet naar TrustScript zijn verzonden"
-
-#: includes/admin/review-setting.php:445
-msgid "Reviews that were approved but not yet published on your site"
-msgstr ""
-"Beoordelingen die zijn goedgekeurd maar nog niet op uw site zijn "
-"gepubliceerd"
-
-#: includes/admin/review-setting.php:447
-msgid ""
-"This makes it easier to test the full review flow without needing live "
-"servers or public URLs."
-msgstr ""
-"Hierdoor kun je de volledige beoordelingsprocedure gemakkelijker testen "
-"zonder dat je daarvoor live servers of openbare URL’s nodig hebt."
-
-#: includes/admin/review-setting.php:452
-msgid "Reliable fallback for all installations"
-msgstr "Betrouwbare noodoplossing voor alle installaties"
-
-#: includes/admin/review-setting.php:454
-msgid ""
-"Even on live websites, the daily sync acts as a safety net to ensure nothing"
-" is missed due to API delays, hosting limitations, or temporary downtime."
-msgstr ""
-"Zelfs bij live websites fungeert de dagelijkse synchronisatie als een "
-"vangnet om ervoor te zorgen dat er niets over het hoofd wordt gezien als "
-"gevolg van vertragingen bij de API, beperkingen van de hostingprovider of "
-"tijdelijke uitval."
-
-#: includes/admin/review-setting.php:455
-msgid ""
-"When enabled, TrustScript automatically processes any pending data once per "
-"day_making it especially helpful during plugin development or when testing "
-"review workflows on a local machine."
-msgstr ""
-"Als deze functie is ingeschakeld, verwerkt TrustScript alle in behandeling "
-"zijnde gegevens één keer per dag, wat vooral handig is tijdens de "
-"ontwikkeling van plug-ins of bij het testen van beoordelingsworkflows op een"
-" lokale computer."
-
-#: includes/admin/review-setting.php:464
+#: includes/admin/review-setting.php:443
 msgid "Enable automatic daily sync"
 msgstr "Automatische dagelijkse synchronisatie inschakelen"
 
-#: includes/admin/review-setting.php:466
+#: includes/admin/review-setting.php:446
 msgid ""
 "When enabled, TrustScript will automatically check for missed orders once "
 "per day."
@@ -1522,69 +982,58 @@ msgstr ""
 "Als deze functie is ingeschakeld, controleert TrustScript één keer per dag "
 "automatisch of er bestellingen zijn gemist."
 
-#: includes/admin/review-setting.php:470
+#: includes/admin/review-setting.php:453
 msgid "Daily Sync Time"
 msgstr "Dagelijkse synchronisatietijd"
 
-#: includes/admin/review-setting.php:478
+#: includes/admin/review-setting.php:454
 msgid "Time of day to run automatic sync (in your site timezone)."
 msgstr ""
 "Tijdstip waarop de automatische synchronisatie moet worden uitgevoerd (in de"
 " tijdzone van uw site)."
 
-#: includes/admin/review-setting.php:482
-msgid "Look Back Period"
-msgstr "Referentieperiode"
-
-#: includes/admin/review-setting.php:490
-msgid "How far back to check for missed orders during auto-sync."
-msgstr ""
-"Hoe ver terug moet er worden gecontroleerd op gemiste bestellingen tijdens "
-"de automatische synchronisatie?"
-
-#: includes/admin/review-setting.php:495
+#: includes/admin/review-setting.php:470
 msgid "Next Scheduled Sync:"
 msgstr "Volgende geplande synchronisatie:"
 
-#: includes/admin/review-setting.php:504
+#: includes/admin/review-setting.php:482
 msgid "Last Run: Processed"
 msgstr "Laatste run: Verwerkt"
 
-#: includes/admin/review-setting.php:508
+#: includes/admin/review-setting.php:486
 msgid "Last Run: Skipped"
 msgstr "Laatste ronde: overgeslagen"
 
-#: includes/admin/review-setting.php:512
+#: includes/admin/review-setting.php:490
 msgid "Last Run: Errors"
 msgstr "Laatste run: fouten"
 
-#: includes/admin/review-setting.php:516
+#: includes/admin/review-setting.php:494
 msgid "Last run:"
 msgstr "Laatste rit:"
 
-#: includes/admin/review-setting.php:524
-#: includes/class-trustscript-admin.php:597
+#: includes/admin/review-setting.php:502
+#: includes/class-trustscript-admin.php:682
 msgid "Save Review Settings"
 msgstr "Beoordelingsinstellingen opslaan"
 
-#: includes/admin/review-setting.php:532
+#: includes/admin/review-setting.php:510
 msgid "Manual Sync & Test"
 msgstr "Handmatige synchronisatie en test"
 
-#: includes/admin/review-setting.php:535
+#: includes/admin/review-setting.php:513
 msgid ""
 "Run a complete sync immediately without waiting for the daily schedule. This"
-" is helpful for testing on localhost or staging sites."
+" is helpful for testing on staging sites."
 msgstr ""
 "Voer onmiddellijk een volledige synchronisatie uit zonder te wachten op het "
-"dagelijkse schema. Dit is handig voor het testen op localhost of "
-"testomgevingen."
+"dagelijkse schema. Dit is handig voor het testen op testomgevingen."
 
-#: includes/admin/review-setting.php:539
+#: includes/admin/review-setting.php:517
 msgid "What happens when you click:"
 msgstr "Wat gebeurt er als je klikt:"
 
-#: includes/admin/review-setting.php:541
+#: includes/admin/review-setting.php:519
 msgid ""
 "1. Fetches any approved reviews from TrustScript and publishes them to your "
 "products/services"
@@ -1592,7 +1041,7 @@ msgstr ""
 "1. Haalt alle goedgekeurde beoordelingen op uit TrustScript en publiceert "
 "deze bij uw producten/diensten"
 
-#: includes/admin/review-setting.php:542
+#: includes/admin/review-setting.php:520
 msgid ""
 "2. Sends existing orders/bookings from all enabled services (WooCommerce, "
 "MemberPress, etc.) to TrustScript"
@@ -1600,28 +1049,22 @@ msgstr ""
 "2. Stuurt bestaande bestellingen/boekingen van alle ingeschakelde diensten "
 "(WooCommerce, MemberPress, enz.) naar TrustScript"
 
-#: includes/admin/review-setting.php:546
+#: includes/admin/review-setting.php:524
 msgid "Sync orders from the last:"
 msgstr "Bestellingen synchroniseren vanaf de laatste:"
 
-#: includes/admin/review-setting.php:559
+#: includes/admin/review-setting.php:533
 msgid "Run Complete Sync Now"
 msgstr "Voer nu volledige synchronisatie uit"
 
-#: includes/admin/review-setting.php:566
+#: includes/admin/review-setting.php:540
 msgid "TOTAL PROCESSED"
 msgstr "TOTAAL VERWERKT"
 
 #: includes/admin/settings.php:22 includes/admin/settings.php:151
+#: includes/class-trustscript-admin.php:122
 msgid "TrustScript Settings"
 msgstr "TrustScript-instellingen"
-
-#: includes/admin/settings.php:30 includes/class-trustscript-admin.php:106
-#: includes/class-trustscript-admin.php:107
-#: includes/integration/elementor/class-trustscript-elementor.php:59
-#: trustscript.php:171
-msgid "TrustScript"
-msgstr "TrustScript"
 
 #: includes/admin/settings.php:31
 msgid "AI-powered review collection for WooCommerce &amp; MemberPress"
@@ -1730,70 +1173,73 @@ msgstr "Koppel je API-sleutel"
 msgid "Don't have a key? Get one free →"
 msgstr "Heb je geen sleutel? Vraag er dan gratis een aan →"
 
-#: includes/admin/settings.php:200 includes/admin/settings.php:276
+#: includes/admin/settings.php:200 includes/admin/settings.php:287
 msgid "API Key Save Failed"
 msgstr "Het opslaan van de API-sleutel is mislukt"
 
-#: includes/admin/settings.php:211 includes/admin/settings.php:287
+#: includes/admin/settings.php:211 includes/admin/settings.php:298
 msgid "Connected Successfully"
 msgstr "Verbinding tot stand gebracht"
 
-#: includes/admin/settings.php:221 includes/admin/settings.php:297
+#: includes/admin/settings.php:221 includes/admin/settings.php:308
 msgid "Connected — Quota Limit Reached"
 msgstr "Verbonden — Quotumlimiet bereikt"
 
-#: includes/admin/settings.php:243
+#: includes/admin/settings.php:255
 msgid "Save &amp; Connect"
 msgstr "Opslaan &amp; verbinden"
 
-#. translators: %1$s dashboard link open, %2$s close
-#: includes/admin/settings.php:250
+#. translators: %s dashboard link open, %s close
+#: includes/admin/settings.php:262
 #, php-format
 msgid ""
-"Your key is tied to this domain. It looks like %1$s. Generate one from your "
-"%2$sTrustScript Dashboard%3$s."
+"Generate a new API key from your %1$sTrustScript Dashboard%2$s. You will "
+"receive both an API Key (TSK-...) and a Webhook Secret (TSS-...). Paste both"
+" above."
 msgstr ""
-"Uw sleutel is aan dit domein gekoppeld. Deze ziet er als volgt uit: %1$s. "
-"Genereer er een via uw %2$sTrustScript Dashboard%3$s."
+"Maak een nieuwe API-sleutel aan via uw %1$sTrustScript-dashboard%2$s. U "
+"ontvangt zowel een API-sleutel (TSK-...) als een webhook-geheim (TSS-...). "
+"Plak beide hierboven."
 
-#: includes/admin/settings.php:258
+#: includes/admin/settings.php:269
 msgid "Security Note:"
 msgstr "Beveiligingsopmerking:"
 
-#: includes/admin/settings.php:259
+#: includes/admin/settings.php:270
 msgid ""
-"Your API key is masked as you type for security. It will never be displayed "
-"in plain text or source code."
+"Your API key and webhook secret are masked as you type for security. They "
+"will never be displayed in plain text or source code."
 msgstr ""
-"Om veiligheidsredenen wordt uw API-sleutel tijdens het typen gemaskeerd. "
-"Deze wordt nooit in platte tekst of broncode weergegeven."
+"Om veiligheidsredenen worden je API-sleutel en webhook-geheim tijdens het "
+"typen verborgen. Ze worden nooit in platte tekst of broncode weergegeven."
 
-#: includes/admin/settings.php:262 includes/admin/settings.php:377
+#: includes/admin/settings.php:273 includes/admin/settings.php:423
 msgid "Important:"
 msgstr "Belangrijk:"
 
-#: includes/admin/settings.php:263
+#: includes/admin/settings.php:274
 msgid ""
-"You must provide a valid API key to use TrustScript. The form submission "
-"will be blocked until you paste a key."
+"Both your API Key and Webhook Secret are required to use TrustScript "
+"securely. The form submission will be blocked until you paste both "
+"credentials."
 msgstr ""
-"U moet een geldige API-sleutel opgeven om TrustScript te kunnen gebruiken. "
-"Het verzenden van het formulier wordt geblokkeerd totdat u een sleutel hebt "
-"ingevoerd."
+"Zowel uw API-sleutel als uw webhook-geheim zijn vereist om TrustScript "
+"veilig te kunnen gebruiken. Het verzenden van het formulier wordt "
+"geblokkeerd totdat u beide inloggegevens hebt ingevoerd."
 
-#: includes/admin/settings.php:308 includes/consent-form-template.php:42
+#: includes/admin/settings.php:319 includes/consent-form-template.php:42
 msgid "API Key"
 msgstr "API-sleutel"
 
-#: includes/admin/settings.php:316
+#: includes/admin/settings.php:327
 msgid "Replace Key"
 msgstr "Sleutel vervangen"
 
-#: includes/admin/settings.php:319
+#: includes/admin/settings.php:330
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: includes/admin/settings.php:323
+#: includes/admin/settings.php:334
 msgid ""
 "Click \"Replace Key\" to paste a new key. Leave the field blank to keep the "
 "current key unchanged."
@@ -1801,27 +1247,56 @@ msgstr ""
 "Klik op \"Sleutel vervangen\" om een nieuwe sleutel in te voeren. Laat het "
 "veld leeg om de huidige sleutel ongewijzigd te laten."
 
-#: includes/admin/settings.php:328
+#: includes/admin/settings.php:339
+msgid "Webhook Secret"
+msgstr "Webhook-geheim"
+
+#: includes/admin/settings.php:352
+msgid ""
+"Used to verify webhook signatures from TrustScript. Update this by "
+"generating a new API key in your dashboard and replacing your API key above."
+msgstr ""
+"Wordt gebruikt om de handtekeningen van webhooks van TrustScript te "
+"verifiëren. Werk dit bij door in je dashboard een nieuwe API-sleutel te "
+"genereren en de bovenstaande API-sleutel te vervangen."
+
+#: includes/admin/settings.php:358
+msgid ""
+"No webhook secret configured. Update your API key in the form above to "
+"enable webhook signature verification."
+msgstr ""
+"Er is geen webhook-geheim geconfigureerd. Werk je API-sleutel bij in het "
+"bovenstaande formulier om verificatie van de webhook-handtekening in te "
+"schakelen."
+
+#: includes/admin/settings.php:366
 msgid "TrustScript Server"
 msgstr "TrustScript Server"
 
-#: includes/admin/settings.php:331
-msgid "Your site is connected to the TrustScript server at nexlifylabs.com"
-msgstr "Uw site is verbonden met de TrustScript-server op nexlifylabs.com"
+#. translators: %s: TrustScript server URL
+#: includes/admin/settings.php:373
+#, php-format
+msgid "Your site is connected to the TrustScript server at %s"
+msgstr "Uw site is verbonden met de TrustScript-server op %s"
 
-#: includes/admin/settings.php:335
+#: includes/admin/settings.php:381
 msgid "Webhook Endpoint"
 msgstr "Webhook-eindpunt"
 
-#: includes/admin/settings.php:338
+#: includes/admin/settings.php:384
 msgid "Webhooks from TrustScript will be delivered to this URL."
 msgstr "Webhooks van TrustScript worden naar deze URL verzonden."
 
-#: includes/admin/settings.php:349
+#: includes/admin/settings.php:388 includes/class-trustscript-admin.php:719
+#: includes/consent/privacy-settings.php:231
+msgid "Save Changes"
+msgstr "Wijzigingen opslaan"
+
+#: includes/admin/settings.php:395
 msgid "Plugin Uninstall & Data"
 msgstr "Plug-ins verwijderen & gegevens"
 
-#: includes/admin/settings.php:350
+#: includes/admin/settings.php:396
 msgid ""
 "Choose how TrustScript should handle your data if you decide to uninstall "
 "the plugin."
@@ -1829,16 +1304,16 @@ msgstr ""
 "Kies hoe TrustScript met uw gegevens moet omgaan als u besluit de plug-in te"
 " verwijderen."
 
-#: includes/admin/settings.php:355
+#: includes/admin/settings.php:401
 msgid "Delete Data on Uninstall"
 msgstr "Gegevens verwijderen bij het verwijderen van het programma"
 
-#: includes/admin/settings.php:366
+#: includes/admin/settings.php:412
 msgid "Completely remove all TrustScript data when I uninstall the plugin"
 msgstr ""
 "Verwijder alle TrustScript-gegevens volledig wanneer ik de plug-in verwijder"
 
-#: includes/admin/settings.php:370
+#: includes/admin/settings.php:416
 msgid ""
 "If unchecked (recommended), your TrustScript data will be preserved when you"
 " uninstall the plugin. This lets you reinstall later without losing your "
@@ -1849,7 +1324,7 @@ msgstr ""
 "later opnieuw installeren zonder je instellingen en beoordelingsgeschiedenis"
 " te verliezen."
 
-#: includes/admin/settings.php:379
+#: includes/admin/settings.php:425
 msgid ""
 "If you enable this option, the following data will be permanently deleted "
 "when you uninstall the plugin:"
@@ -1857,36 +1332,36 @@ msgstr ""
 "Als je deze optie inschakelt, worden de volgende gegevens definitief "
 "verwijderd wanneer je de plug-in verwijdert:"
 
-#: includes/admin/settings.php:382
+#: includes/admin/settings.php:428
 msgid "All TrustScript settings and configuration"
 msgstr "Alle TrustScript-instellingen en -configuratie"
 
-#: includes/admin/settings.php:383
+#: includes/admin/settings.php:429
 msgid "API key and connection information"
 msgstr "API-sleutel en verbindingsgegevens"
 
-#: includes/admin/settings.php:384
+#: includes/admin/settings.php:430
 msgid "Review collection history and pending queue items"
 msgstr "Bekijk de verzendgeschiedenis en de items in de wachtrij"
 
-#: includes/admin/settings.php:385
+#: includes/admin/settings.php:431
 msgid "Database tables (order registry, queue, and related data)"
 msgstr "Databasetabellen (orderregister, wachtrij en bijbehorende gegevens)"
 
-#: includes/admin/settings.php:386
+#: includes/admin/settings.php:432
 msgid "Scheduled automation tasks (auto-sync, quota checks)"
 msgstr ""
 "Geplande automatiseringstaken (automatische synchronisatie, quotumcontroles)"
 
-#: includes/admin/settings.php:391 includes/class-trustscript-admin.php:630
+#: includes/admin/settings.php:437 includes/class-trustscript-admin.php:713
 msgid "Save Preference"
 msgstr "Voorkeuren opslaan"
 
-#: includes/admin/settings.php:398
+#: includes/admin/settings.php:444
 msgid "Privacy-First Architecture (GDPR Compliant)"
 msgstr "Privacygerichte architectuur (voldoet aan de AVG)"
 
-#: includes/admin/settings.php:403
+#: includes/admin/settings.php:449
 msgid ""
 "TrustScript follows privacy-by-design principles. We do NOT store customer "
 "names or email addresses — only Order IDs for merchant analytics."
@@ -1895,7 +1370,7 @@ msgstr ""
 "namen of e-mailadressen van klanten op — alleen bestelnummers voor analyse "
 "door de verkoper."
 
-#: includes/admin/settings.php:406
+#: includes/admin/settings.php:452
 msgid ""
 "✓ Customer emails are hashed (SHA-256) for opt-out checking only, then "
 "immediately discarded"
@@ -1903,21 +1378,21 @@ msgstr ""
 "✓ E-mailadressen van klanten worden uitsluitend voor het controleren van "
 "afmeldingen gehasht (SHA-256) en vervolgens onmiddellijk verwijderd"
 
-#: includes/admin/settings.php:407
+#: includes/admin/settings.php:453
 msgid ""
 "✓ No customer PII (personally identifiable information) is stored in our "
 "database"
 msgstr ""
 "✓ Er worden geen persoonsgegevens van klanten opgeslagen in onze database"
 
-#: includes/admin/settings.php:408
+#: includes/admin/settings.php:454
 msgid ""
 "✓ Reviews are published as \"Verified Buyer\" — no customer names displayed"
 msgstr ""
 "✓ Recensies worden gepubliceerd onder de vermelding \"Geverifieerde koper\" "
 "— er worden geen namen van klanten weergegeven"
 
-#: includes/admin/settings.php:409
+#: includes/admin/settings.php:455
 msgid ""
 "✓ Full compliance with GDPR Article 5 (data minimization) and Article 25 "
 "(privacy by design)"
@@ -1925,23 +1400,23 @@ msgstr ""
 "✓ Volledige naleving van artikel 5 (gegevensminimalisatie) en artikel 25 "
 "(privacy by design) van de AVG"
 
-#: includes/admin/settings.php:417
+#: includes/admin/settings.php:463
 msgid "Documentation"
 msgstr "Documentatie"
 
-#: includes/admin/settings.php:421 trustscript.php:194
+#: includes/admin/settings.php:467 trustscript.php:210
 msgid "Support"
 msgstr "Ondersteuning"
 
-#: includes/admin/settings.php:425
+#: includes/admin/settings.php:471
 msgid "Manage API Keys"
 msgstr "API-sleutels beheren"
 
-#: includes/admin/settings.php:436
+#: includes/admin/settings.php:482
 msgid "Delete API Key?"
 msgstr "API-sleutel verwijderen?"
 
-#: includes/admin/settings.php:443
+#: includes/admin/settings.php:489
 msgid ""
 "Are you sure you want to delete your API key? You will need to enter a new "
 "API key to use TrustScript."
@@ -1949,29 +1424,26 @@ msgstr ""
 "Weet u zeker dat u uw API-sleutel wilt verwijderen? U moet een nieuwe API-"
 "sleutel invoeren om TrustScript te kunnen gebruiken."
 
-#: includes/admin/settings.php:446 includes/class-trustscript-admin.php:624
+#: includes/admin/settings.php:492 includes/class-trustscript-admin.php:707
 #: includes/consent-form-template.php:70
 msgid "Cancel"
 msgstr "Annuleren"
 
-#: includes/admin/settings.php:447
+#: includes/admin/settings.php:493
 msgid "Delete API Key"
 msgstr "API-sleutel verwijderen"
 
-#: includes/class-trustscript-admin.php:117
-#: includes/class-trustscript-admin.php:118 trustscript.php:188
-msgid "Settings"
-msgstr "Instellingen"
-
-#: includes/class-trustscript-admin.php:126
-#: includes/class-trustscript-admin.php:127
-msgid "Branding"
-msgstr "Branding"
+#: includes/class-trustscript-admin.php:142
+#: includes/class-trustscript-admin.php:143
+msgid "Analytics"
+msgstr "Analytics"
 
 #: includes/class-trustscript-admin.php:153
 #: includes/class-trustscript-admin.php:154
-msgid "Email Templates"
-msgstr "E-mailsjablonen"
+#: includes/consent/privacy-settings.php:64
+#: includes/consent/privacy-settings.php:69
+msgid "Privacy & Compliance"
+msgstr "Privacy en naleving"
 
 #: includes/class-trustscript-admin.php:161
 #: includes/class-trustscript-admin.php:167
@@ -2008,28 +1480,25 @@ msgstr "Ga naar Instellingen en sleutel bijwerken"
 msgid "Generate New Key"
 msgstr "Nieuwe sleutel genereren"
 
-#. translators: %s: current plan name
 #. translators: %s: plan name
 #: includes/class-trustscript-admin.php:245
-#: includes/class-trustscript-admin.php:431
+#: includes/class-trustscript-admin.php:513
 #, php-format
 msgid "Monthly review limit reached for your %s plan."
 msgstr "De maandelijkse limiet voor uw %s-abonnement is bereikt."
 
-#. translators: 1: next plan name, 2: review limit
 #. translators: %1$s: next plan name, %2$d: review limit
 #: includes/class-trustscript-admin.php:253
-#: includes/class-trustscript-admin.php:439
+#: includes/class-trustscript-admin.php:521
 #, php-format
 msgid " Upgrade to %1$s for %2$d reviews per month."
 msgstr " Upgrade naar %1$s voor %2$d beoordelingen per maand."
 
-#. translators: %s: date when quota resets
 #. translators: %s: reset date
 #: includes/class-trustscript-admin.php:265
 #: includes/class-trustscript-admin.php:271
-#: includes/class-trustscript-admin.php:451
-#: includes/class-trustscript-admin.php:457
+#: includes/class-trustscript-admin.php:533
+#: includes/class-trustscript-admin.php:539
 #, php-format
 msgid " Or wait until %s for your limit to reset."
 msgstr " Of wacht tot %s om je limiet te resetten."
@@ -2042,19 +1511,51 @@ msgstr "Beoordelingslimiet bereikt"
 msgid "Upgrade Your Plan"
 msgstr "Upgrade je abonnement"
 
-#: includes/class-trustscript-admin.php:336
+#: includes/class-trustscript-admin.php:339
+#: includes/class-trustscript-admin.php:421
+msgid ""
+"Invalid webhook secret format. Webhook secrets should look like: TSS-XXXX-"
+"XXXX-XXXX"
+msgstr ""
+"Ongeldig formaat voor het webhook-geheim. Webhook-geheimen moeten er als "
+"volgt uitzien: TSS-XXXX-XXXX-XXXX"
+
+#: includes/class-trustscript-admin.php:350
+msgid "Failed to encrypt webhook secret. Please try again."
+msgstr ""
+"Het versleutelen van het webhook-geheim is mislukt. Probeer het nog eens."
+
+#: includes/class-trustscript-admin.php:384
 msgid "Invalid API key format. API keys should look like: TSK-XXXX-XXXX-XXXX"
 msgstr ""
 "Ongeldig API-sleutelformaat. API-sleutels moeten er als volgt uitzien: TSK-"
 "XXXX-XXXX-XXXX"
 
-#: includes/class-trustscript-admin.php:349
+#: includes/class-trustscript-admin.php:399
 msgid "You must agree to data sharing before verifying your API key."
 msgstr ""
 "U moet akkoord gaan met het delen van gegevens voordat u uw API-sleutel kunt"
 " verifiëren."
 
-#: includes/class-trustscript-admin.php:414
+#: includes/class-trustscript-admin.php:412
+msgid ""
+"Webhook secret is required. Please generate both an API key and webhook "
+"secret from the TrustScript dashboard."
+msgstr ""
+"Een webhook-geheim is vereist. Genereer zowel een API-sleutel als een "
+"webhook-geheim via het TrustScript-dashboard."
+
+#. translators: %s: error message
+#: includes/class-trustscript-admin.php:450
+#, php-format
+msgid ""
+"Could not verify your API key with TrustScript: %s. Please check your "
+"internet connection and try again."
+msgstr ""
+"Je API-sleutel kon niet worden geverifieerd met TrustScript: %s. Controleer "
+"je internetverbinding en probeer het opnieuw."
+
+#: includes/class-trustscript-admin.php:491
 msgid ""
 "API key verified successfully! Your site is now connected to TrustScript."
 msgstr ""
@@ -2062,62 +1563,70 @@ msgstr ""
 "TrustScript."
 
 #. translators: 1: remaining reviews, 2: total limit, 3: reset date
-#: includes/class-trustscript-admin.php:475
+#: includes/class-trustscript-admin.php:557
 #, php-format
 msgid " You have %1$d/%2$d reviews remaining this month (resets on %3$s)."
 msgstr ""
 " Je hebt deze maand nog %1$d van de %2$d beoordelingen over (wordt op %3$s "
 "gereset)."
 
-#: includes/class-trustscript-admin.php:590
+#: includes/class-trustscript-admin.php:598
+msgid "Failed to encrypt API key. Please try again."
+msgstr "Het versleutelen van de API-sleutel is mislukt. Probeer het nog eens."
+
+#: includes/class-trustscript-admin.php:675
 msgid "No recent activity"
 msgstr "Geen recente activiteit"
 
-#: includes/class-trustscript-admin.php:591
+#: includes/class-trustscript-admin.php:676
 msgid "Start by configuring review settings"
 msgstr "Begin met het configureren van de beoordelingsinstellingen"
 
-#: includes/class-trustscript-admin.php:592
+#: includes/class-trustscript-admin.php:677
 msgid "Reviews Generated"
 msgstr "Gegenereerde beoordelingen"
 
-#: includes/class-trustscript-admin.php:593
+#: includes/class-trustscript-admin.php:678
 msgid ""
 "Failed to load analytics data. Please check your API connection in Settings."
 msgstr ""
 "Het laden van de analysegegevens is mislukt. Controleer je API-verbinding in"
 " de instellingen."
 
-#: includes/class-trustscript-admin.php:594
+#: includes/class-trustscript-admin.php:679
 msgid "Refreshing..."
 msgstr "Verfrissend..."
 
-#: includes/class-trustscript-admin.php:596
+#: includes/class-trustscript-admin.php:680
+msgid "Refresh Analytics"
+msgstr "Analytics vernieuwen"
+
+#: includes/class-trustscript-admin.php:681
 msgid "Saving..."
 msgstr "Bezig met opslaan..."
 
-#: includes/class-trustscript-admin.php:598
+#: includes/class-trustscript-admin.php:683
 #: includes/class-trustscript-memberpress-reviews.php:112
 msgid "Settings saved successfully!"
 msgstr "Instellingen succesvol opgeslagen!"
 
-#: includes/class-trustscript-admin.php:599
+#: includes/class-trustscript-admin.php:684
 msgid "Failed to save"
 msgstr "Opslaan is mislukt"
 
-#: includes/class-trustscript-admin.php:600
+#: includes/class-trustscript-admin.php:685
 msgid "Network error"
 msgstr "Netwerkfout"
 
-#: includes/class-trustscript-admin.php:601
+#: includes/class-trustscript-admin.php:686
 msgid "Syncing..."
 msgstr "Bezig met synchroniseren..."
 
-#: includes/class-trustscript-admin.php:602
+#: includes/class-trustscript-admin.php:687
 msgid "Sync Completed Orders"
 msgstr "Voltooide bestellingen synchroniseren"
 
-#: includes/class-trustscript-admin.php:603
+#: includes/class-trustscript-admin.php:688
 msgid ""
 "This will create review requests for all completed orders in the selected "
 "time range. Continue?"
@@ -2125,18 +1634,18 @@ msgstr ""
 "Hierdoor worden beoordelingsverzoeken aangemaakt voor alle voltooide "
 "bestellingen binnen de geselecteerde periode. Wilt u doorgaan?"
 
-#: includes/class-trustscript-admin.php:604
+#: includes/class-trustscript-admin.php:689
 msgid "Failed to sync"
 msgstr "Synchronisatie mislukt"
 
-#: includes/class-trustscript-admin.php:605
+#: includes/class-trustscript-admin.php:690
 msgid ""
 "Short delay recommended (1-2 days) - customers already have the product."
 msgstr ""
 "Een korte wachttijd wordt aanbevolen (1-2 dagen) – klanten hebben het "
 "product al in hun bezit."
 
-#: includes/class-trustscript-admin.php:606
+#: includes/class-trustscript-admin.php:691
 msgid ""
 "Longer delay recommended to ensure product delivery before review request. "
 "International orders use this same delay by default. To use a different "
@@ -2150,19 +1659,28 @@ msgstr ""
 "gebruiken, schakelt u hieronder de optie \"Internationale bestellingen "
 "anders behandelen\" in."
 
-#: includes/class-trustscript-admin.php:607
+#: includes/class-trustscript-admin.php:692
 msgid "Are you sure? This will remove the item from the queue."
 msgstr "Weet je het zeker? Hiermee wordt het item uit de wachtrij verwijderd."
 
-#: includes/class-trustscript-admin.php:608
+#: includes/class-trustscript-admin.php:693
+msgid ""
+"Remove this order from the queue? This will not cancel the order, but the "
+"review request will NOT be retried."
+msgstr ""
+"Wilt u deze bestelling uit de wachtrij verwijderen? Dit leidt niet tot "
+"annulering van de bestelling, maar het verzoek om herziening wordt NIET "
+"opnieuw uitgevoerd."
+
+#: includes/class-trustscript-admin.php:694
 msgid "Please paste your TrustScript API key (TSK-XXXX-XXXX-XXXX)."
 msgstr "Plak hier uw TrustScript API-sleutel (TSK-XXXX-XXXX-XXXX)."
 
-#: includes/class-trustscript-admin.php:609
+#: includes/class-trustscript-admin.php:695
 msgid "API Key Required"
 msgstr "API-sleutel vereist"
 
-#: includes/class-trustscript-admin.php:610
+#: includes/class-trustscript-admin.php:696
 msgid ""
 "Invalid format. Your key should look like: TSK-XXXX-XXXX-XXXX. Copy it from "
 "your TrustScript dashboard."
@@ -2170,39 +1688,27 @@ msgstr ""
 "Ongeldige indeling. Uw sleutel moet er als volgt uitzien: TSK-XXXX-XXXX-"
 "XXXX. Kopieer deze uit uw TrustScript-dashboard."
 
-#: includes/class-trustscript-admin.php:611
+#: includes/class-trustscript-admin.php:697
 msgid "Invalid API Key Format"
 msgstr "Ongeldig formaat van de API-sleutel"
 
-#: includes/class-trustscript-admin.php:612
-msgid "Media library not available"
-msgstr "Mediabibliotheek niet beschikbaar"
-
-#: includes/class-trustscript-admin.php:613
-msgid "Select Logo"
-msgstr "Logo selecteren"
-
-#: includes/class-trustscript-admin.php:614
-msgid "Use this logo"
-msgstr "Gebruik dit logo"
-
-#: includes/class-trustscript-admin.php:615
+#: includes/class-trustscript-admin.php:698
 msgid "Deleting..."
 msgstr "Bezig met verwijderen..."
 
-#: includes/class-trustscript-admin.php:616
+#: includes/class-trustscript-admin.php:699
 msgid "Failed to delete API key"
 msgstr "Het verwijderen van de API-sleutel is mislukt"
 
-#: includes/class-trustscript-admin.php:617
-msgid "Failed to refresh plan information. Please try again."
-msgstr "Het vernieuwen van de planning is mislukt. Probeer het nog eens."
+#: includes/class-trustscript-admin.php:700
+msgid "Unknown error"
+msgstr "Onbekende fout"
 
-#: includes/class-trustscript-admin.php:618
+#: includes/class-trustscript-admin.php:701
 msgid "Queued for processing..."
 msgstr "In de wachtrij voor verwerking..."
 
-#: includes/class-trustscript-admin.php:619
+#: includes/class-trustscript-admin.php:702
 msgid ""
 "Processing your orders in the background — please check back in a few "
 "minutes."
@@ -2210,102 +1716,102 @@ msgstr ""
 "Je bestellingen worden op dit moment verwerkt — kom over een paar minuten "
 "nog eens terug."
 
-#: includes/class-trustscript-admin.php:620
+#: includes/class-trustscript-admin.php:703
 msgid "All categories"
 msgstr "Alle categorieën"
 
-#: includes/class-trustscript-admin.php:621
+#: includes/class-trustscript-admin.php:704
 msgid "1 category"
 msgstr "1 categorie"
 
 #. translators: %d: number of categories
-#: includes/class-trustscript-admin.php:623
-#: includes/class-trustscript-admin.php:1835
+#: includes/class-trustscript-admin.php:706
+#: includes/class-trustscript-admin.php:1682
 #, php-format
 msgid "%d categories"
 msgstr "%d categorieën"
 
-#: includes/class-trustscript-admin.php:625
+#: includes/class-trustscript-admin.php:708
 msgid "Retrying..."
 msgstr "Opnieuw proberen..."
 
-#: includes/class-trustscript-admin.php:626
+#: includes/class-trustscript-admin.php:709
 msgid "Clearing..."
 msgstr "Bezig met opschonen..."
 
-#: includes/class-trustscript-admin.php:654
+#: includes/class-trustscript-admin.php:714
+msgid "Failed to retry"
+msgstr "Herhaling mislukt"
+
+#: includes/class-trustscript-admin.php:715
+msgid "Failed to clear"
+msgstr "Wissen mislukt"
+
+#: includes/class-trustscript-admin.php:716
+msgid "Failed to process queue"
+msgstr "Het verwerken van de wachtrij is mislukt"
+
+#: includes/class-trustscript-admin.php:717
+msgid "Failed to save preference"
+msgstr "Het opslaan van de instelling is mislukt"
+
+#: includes/class-trustscript-admin.php:718
+msgid "Paste new API key to replace current key…"
+msgstr "Plak de nieuwe API-sleutel om de huidige sleutel te vervangen…"
+
+#: includes/class-trustscript-admin.php:720
+msgid "Breakdown:"
+msgstr "Overzicht:"
+
+#: includes/class-trustscript-admin.php:721
+msgid "review(s) published"
+msgstr "recensie(s) gepubliceerd"
+
+#: includes/class-trustscript-admin.php:722
+msgid "new order(s) sent to TrustScript"
+msgstr "nieuwe bestelling(en) verzonden naar TrustScript"
+
+#: includes/class-trustscript-admin.php:723
+msgid "order(s) already published (skipped)"
+msgstr "reeds gepubliceerde bestelling(en) (overgeslagen)"
+
+#: includes/class-trustscript-admin.php:747
 msgid "Unknown notice"
 msgstr "Onbekende mededeling"
 
-#: includes/class-trustscript-admin.php:675
+#: includes/class-trustscript-admin.php:768
 msgid "enabled"
 msgstr "ingeschakeld"
 
-#: includes/class-trustscript-admin.php:675
+#: includes/class-trustscript-admin.php:768
 msgid "disabled"
 msgstr "gehandicapt"
 
 #. translators: %s is the status of data deletion (enabled or disabled)
-#: includes/class-trustscript-admin.php:678
+#: includes/class-trustscript-admin.php:771
 #, php-format
 msgid "Data deletion on uninstall %s"
 msgstr "Gegevens verwijderen bij het verwijderen van %s"
 
-#: includes/class-trustscript-admin.php:694
-msgid "API key deleted successfully"
-msgstr "API-sleutel succesvol verwijderd"
-
-#: includes/class-trustscript-admin.php:702
+#: includes/class-trustscript-admin.php:781
+#: includes/class-trustscript-admin.php:810
 #: includes/class-trustscript-admin.php:998
-#: includes/class-trustscript-admin.php:1280
 msgid "Unauthorized"
 msgstr "Ongeautoriseerd"
 
-#: includes/class-trustscript-admin.php:740
-msgid "Subdomain is required"
-msgstr "Een subdomein is verplicht"
-
-#: includes/class-trustscript-admin.php:744
-msgid ""
-"Invalid subdomain format. Use alphanumeric characters and hyphens only (3-63"
-" characters)."
-msgstr ""
-"Ongeldige indeling van het subdomein. Gebruik uitsluitend alfanumerieke "
-"tekens en koppeltekens (3-63 tekens)."
-
 #: includes/class-trustscript-admin.php:788
-msgid "logo_url is required"
-msgstr "logo_url is verplicht"
+msgid "API key deleted successfully"
+msgstr "API-sleutel succesvol verwijderd"
 
-#: includes/class-trustscript-admin.php:796
-#: includes/trustscript-helpers.php:62
-msgid "Please set your API key in settings."
-msgstr "Stel je API-sleutel in via de instellingen."
-
-#. translators: %s: error message
-#: includes/class-trustscript-admin.php:818
-#, php-format
-msgid "Failed to verify plan: %s"
-msgstr "Het plan kon niet worden geverifieerd: %s"
-
-#: includes/class-trustscript-admin.php:825
-msgid ""
-"Custom branding is available for Pro and Business plan users only. Please "
-"upgrade your plan to access this feature."
-msgstr ""
-"Aangepaste huisstijl is alleen beschikbaar voor gebruikers van het Pro- en "
-"Business-abonnement. Upgrade uw abonnement om toegang te krijgen tot deze "
-"functie."
-
-#: includes/class-trustscript-admin.php:992
+#: includes/class-trustscript-admin.php:804
 msgid "Security check failed"
 msgstr "De veiligheidscontrole is mislukt"
 
-#: includes/class-trustscript-admin.php:1148
+#: includes/class-trustscript-admin.php:970
 msgid "Review settings saved successfully"
 msgstr "De instellingen zijn succesvol opgeslagen"
 
-#: includes/class-trustscript-admin.php:1288
+#: includes/class-trustscript-admin.php:1006
 msgid ""
 "No active service providers detected. Please enable at least one service "
 "(WooCommerce or MemberPress)."
@@ -2313,22 +1819,22 @@ msgstr ""
 "Er zijn geen actieve serviceproviders gevonden. Schakel ten minste één "
 "service in (WooCommerce of MemberPress)."
 
-#: includes/class-trustscript-admin.php:1300
+#: includes/class-trustscript-admin.php:1020
 msgid "Sync service not available"
 msgstr "Synchronisatieservice niet beschikbaar"
 
-#: includes/class-trustscript-admin.php:1333
+#: includes/class-trustscript-admin.php:1053
 msgid "No new data to sync"
 msgstr "Er zijn geen nieuwe gegevens om te synchroniseren"
 
 #. translators: %d: number of orders that were already published
-#: includes/class-trustscript-admin.php:1337
+#: includes/class-trustscript-admin.php:1057
 #, php-format
 msgid " (but %d order(s) were already published and skipped)"
 msgstr " (maar %d bestelling(en) waren al gepubliceerd en zijn overgeslagen)"
 
 #. translators: %1$d: reviews published, %2$d: orders synced
-#: includes/class-trustscript-admin.php:1354
+#: includes/class-trustscript-admin.php:1074
 #, php-format
 msgid "Sync complete! Reviews published: %1$d, New orders sent: %2$d"
 msgstr ""
@@ -2336,39 +1842,44 @@ msgstr ""
 " bestellingen: %2$d"
 
 #. translators: %d: orders that were already published and skipped
-#: includes/class-trustscript-admin.php:1362
+#: includes/class-trustscript-admin.php:1082
 #, php-format
 msgid ", %d order(s) already published (skipped re-sync)"
 msgstr ", %d bestelling(en) al gepubliceerd (her synchronisatie overgeslagen)"
 
-#: includes/class-trustscript-admin.php:1590
+#: includes/class-trustscript-admin.php:1294
+#: includes/class-trustscript-service-manager.php:145
+msgid "No services detected"
+msgstr "Er zijn geen diensten gevonden"
+
+#: includes/class-trustscript-admin.php:1313
 msgid "Service settings saved successfully!"
 msgstr "De service-instellingen zijn succesvol opgeslagen!"
 
-#: includes/class-trustscript-admin.php:1607
+#: includes/class-trustscript-admin.php:1330
 msgid "No Supported Services Detected"
 msgstr "Er zijn geen ondersteunde diensten gevonden"
 
-#: includes/class-trustscript-admin.php:1610
+#: includes/class-trustscript-admin.php:1333
 msgid "TrustScript works with WooCommerce, MemberPress, and more."
 msgstr ""
 "TrustScript werkt samen met WooCommerce, MemberPress en nog veel meer."
 
-#: includes/class-trustscript-admin.php:1613 trustscript.php:175
+#: includes/class-trustscript-admin.php:1336 trustscript.php:190
 msgid "Install and activate a supported plugin to start collecting reviews."
 msgstr ""
 "Installeer en activeer een ondersteunde plug-in om beoordelingen te gaan "
 "verzamelen."
 
-#: includes/class-trustscript-admin.php:1616 trustscript.php:176
+#: includes/class-trustscript-admin.php:1339 trustscript.php:192
 msgid "View Supported Platforms"
 msgstr "Bekijk ondersteunde platforms"
 
-#: includes/class-trustscript-admin.php:1627
+#: includes/class-trustscript-admin.php:1350
 msgid "Detected Services"
 msgstr "Gedetecteerde diensten"
 
-#: includes/class-trustscript-admin.php:1630
+#: includes/class-trustscript-admin.php:1353
 msgid ""
 "TrustScript has detected the following services on your site. Configure "
 "trigger statuses for each service to automatically collect reviews."
@@ -2377,30 +1888,30 @@ msgstr ""
 " elke dienst de trigger-statussen in om automatisch beoordelingen te "
 "verzamelen."
 
-#: includes/class-trustscript-admin.php:1664
+#: includes/class-trustscript-admin.php:1387
 msgid "Trigger Status:"
 msgstr "Status van de trigger:"
 
-#: includes/class-trustscript-admin.php:1666
+#: includes/class-trustscript-admin.php:1389
 msgid "Send review request when order reaches this status"
 msgstr ""
 "Een beoordelingsverzoek versturen zodra de bestelling deze status bereikt"
 
 #. translators: %s is the number of available statuses
-#: includes/class-trustscript-admin.php:1684
+#: includes/class-trustscript-admin.php:1407
 #, php-format
 msgid "%d status options available"
 msgstr "%d statusopties beschikbaar"
 
-#: includes/class-trustscript-admin.php:1697
+#: includes/class-trustscript-admin.php:1420
 msgid "Save Service Settings"
 msgstr "Service-instellingen opslaan"
 
-#: includes/class-trustscript-admin.php:1706
+#: includes/class-trustscript-admin.php:1429
 msgid "Optional Data Collection"
 msgstr "Optionele gegevensverzameling"
 
-#: includes/class-trustscript-admin.php:1709
+#: includes/class-trustscript-admin.php:1432
 msgid ""
 "Enhance review requests with additional context. You can disable these "
 "options for privacy-sensitive products (e.g., medical, adult content)."
@@ -2409,11 +1920,11 @@ msgstr ""
 "uitschakelen voor producten waarbij privacy een belangrijke rol speelt "
 "(bijvoorbeeld medische producten of inhoud voor volwassenen)."
 
-#: includes/class-trustscript-admin.php:1723
+#: includes/class-trustscript-admin.php:1446
 msgid "Include Product Names"
 msgstr "Productnamen vermelden"
 
-#: includes/class-trustscript-admin.php:1726
+#: includes/class-trustscript-admin.php:1449
 msgid ""
 "Show specific product names in review requests (e.g., \"Blue Wireless "
 "Headphones\"). If disabled, customers will see generic text like \"your "
@@ -2425,11 +1936,11 @@ msgstr ""
 "aankoop“. Schakel deze optie uit voor producten waarbij privacy een "
 "belangrijke rol speelt."
 
-#: includes/class-trustscript-admin.php:1732
+#: includes/class-trustscript-admin.php:1455
 msgid "Why this matters:"
 msgstr "Waarom dit belangrijk is:"
 
-#: includes/class-trustscript-admin.php:1733
+#: includes/class-trustscript-admin.php:1456
 msgid ""
 "Specific product names help customers write better, more relevant reviews. "
 "However, for sensitive items (health, personal care, gifts), you may want to"
@@ -2440,11 +1951,11 @@ msgstr ""
 "persoonlijke verzorging, cadeaus) wilt u aankopen wellicht echter privé "
 "houden."
 
-#: includes/class-trustscript-admin.php:1749
+#: includes/class-trustscript-admin.php:1472
 msgid "Include Order Dates"
 msgstr "Besteldata opnemen"
 
-#: includes/class-trustscript-admin.php:1751
+#: includes/class-trustscript-admin.php:1474
 msgid ""
 "Share the purchase date with customers. This helps with timing review "
 "requests and adds context to their feedback."
@@ -2453,11 +1964,11 @@ msgstr ""
 "moment voor verzoeken om beoordelingen en geeft meer context aan hun "
 "feedback."
 
-#: includes/class-trustscript-admin.php:1760
+#: includes/class-trustscript-admin.php:1483
 msgid "Save Privacy Settings"
 msgstr "Privacyinstellingen opslaan"
 
-#: includes/class-trustscript-admin.php:1792
+#: includes/class-trustscript-admin.php:1515
 msgid ""
 "No additional filters available for this service. All orders/bookings will "
 "be processed."
@@ -2465,11 +1976,11 @@ msgstr ""
 "Er zijn geen extra filters beschikbaar voor deze dienst. Alle "
 "bestellingen/boekingen worden verwerkt."
 
-#: includes/class-trustscript-admin.php:1816
+#: includes/class-trustscript-admin.php:1661
 msgid "Product Category Filtering"
 msgstr "Filteren op productcategorie"
 
-#: includes/class-trustscript-admin.php:1818
+#: includes/class-trustscript-admin.php:1663
 msgid ""
 "Select specific product categories to collect reviews for. Leave all "
 "unchecked to include all products."
@@ -2477,33 +1988,45 @@ msgstr ""
 "Selecteer de productcategorieën waarvoor u beoordelingen wilt verzamelen. "
 "Laat alle vakjes leeg om alle producten mee te nemen."
 
-#: includes/class-trustscript-admin.php:1825
+#: includes/class-trustscript-admin.php:1664
+msgid ""
+"Note: When you select a parent category, all products in that category tree "
+"are included. Child categories should not be selected alongside their "
+"parent."
+msgstr ""
+"Opmerking: Wanneer u een hoofdcategorie selecteert, worden alle producten in"
+" die categorieboom meegenomen. Subcategorieën mogen niet samen met hun "
+"hoofdcategorie worden geselecteerd."
+
+#: includes/class-trustscript-admin.php:1670
 msgid "Search categories..."
 msgstr "Zoekcategorieën..."
 
-#: includes/class-trustscript-admin.php:1827
+#: includes/class-trustscript-admin.php:1673
+#: includes/consent/privacy-settings.php:249
 msgid "Select All"
 msgstr "Alles selecteren"
 
-#: includes/class-trustscript-admin.php:1830
+#: includes/class-trustscript-admin.php:1677
+#: includes/consent/privacy-settings.php:252
 msgid "Deselect All"
 msgstr "Alles deselecteren"
 
-#: includes/class-trustscript-admin.php:1915
+#: includes/class-trustscript-admin.php:1691
 msgid "No product categories found."
 msgstr "Er zijn geen productcategorieën gevonden."
 
-#: includes/class-trustscript-admin.php:1919
+#: includes/class-trustscript-admin.php:1695
 msgid "Order Value Filtering"
 msgstr "Filteren op orderwaarde"
 
 #. translators: %s: store currency symbol
-#: includes/class-trustscript-admin.php:1925
+#: includes/class-trustscript-admin.php:1701
 #, php-format
 msgid "Minimum Order Value (%s):"
 msgstr "Minimale bestelwaarde (%s):"
 
-#: includes/class-trustscript-admin.php:1932
+#: includes/class-trustscript-admin.php:1708
 msgid ""
 "Only send review requests for orders above this amount. Set to 0 to disable."
 msgstr ""
@@ -2511,20 +2034,20 @@ msgstr ""
 "deze waarde in op 0 om deze functie uit te schakelen."
 
 #. translators: %s: store currency symbol
-#: includes/class-trustscript-admin.php:1943
+#: includes/class-trustscript-admin.php:1719
 #, php-format
 msgid "Exclude free products and %s0 orders"
 msgstr "Sluit gratis producten en bestellingen van %s0 uit"
 
-#: includes/class-trustscript-admin.php:1954
+#: includes/class-trustscript-admin.php:1730
 msgid "MemberPress is not properly loaded."
 msgstr "MemberPress is niet correct geladen."
 
-#: includes/class-trustscript-admin.php:1964
+#: includes/class-trustscript-admin.php:1740
 msgid "Membership Tier Filtering"
 msgstr "Filteren op lidmaatschapsniveau"
 
-#: includes/class-trustscript-admin.php:1966
+#: includes/class-trustscript-admin.php:1742
 msgid ""
 "Select which membership tiers should trigger review requests. Leave all "
 "unchecked to include all memberships."
@@ -2533,79 +2056,79 @@ msgstr ""
 "activeren. Laat alle selectievakjes leeg om alle lidmaatschappen mee te "
 "nemen."
 
-#: includes/class-trustscript-admin.php:1980
+#: includes/class-trustscript-admin.php:1756
 msgid "No memberships found."
 msgstr "Er zijn geen lidmaatschappen gevonden."
 
-#: includes/class-trustscript-admin.php:1985
+#: includes/class-trustscript-admin.php:1761
 msgid "Review Request Timing"
 msgstr "Het tijdstip van het verzoek om beoordeling"
 
-#: includes/class-trustscript-admin.php:1988
+#: includes/class-trustscript-admin.php:1764
 msgid "Send review request after:"
 msgstr "Verzoek om beoordeling verzenden na:"
 
-#: includes/class-trustscript-admin.php:1995
+#: includes/class-trustscript-admin.php:1771
 msgid "7 days"
 msgstr "7 dagen"
 
-#: includes/class-trustscript-admin.php:1997
+#: includes/class-trustscript-admin.php:1773
 msgid "14 days"
 msgstr "14 dagen"
 
-#: includes/class-trustscript-admin.php:1999
+#: includes/class-trustscript-admin.php:1775
 msgid "30 days"
 msgstr "30 dagen"
 
-#: includes/class-trustscript-admin.php:2003
+#: includes/class-trustscript-admin.php:1779
 msgid ""
 "Allow members time to experience your content before requesting a review."
 msgstr ""
 "Geef leden de tijd om je content te bekijken voordat je om een beoordeling "
 "vraagt."
 
-#: includes/class-trustscript-admin.php:2031
+#: includes/class-trustscript-admin.php:1807
 msgid "Privacy settings saved successfully!"
 msgstr "De privacy-instellingen zijn succesvol opgeslagen!"
 
 #. translators: %s: Plugin/Component name
-#: includes/class-trustscript-compatibility.php:252
+#: includes/class-trustscript-compatibility.php:341
 #, php-format
 msgid "TrustScript Compatibility: %s"
 msgstr "Compatibiliteit met TrustScript: %s"
 
-#: includes/class-trustscript-compatibility.php:257
+#: includes/class-trustscript-compatibility.php:346
 msgid "Solution:"
 msgstr "Oplossing:"
 
-#: includes/class-trustscript-compatibility.php:263
+#: includes/class-trustscript-compatibility.php:352
 msgid "View Documentation"
 msgstr "Documentatie bekijken"
 
-#: includes/class-trustscript-compatibility.php:267
+#: includes/class-trustscript-compatibility.php:356
 msgid "Configure Compatibility Settings"
 msgstr "Compatibiliteitsinstellingen configureren"
 
-#: includes/class-trustscript-compatibility.php:293
-#: includes/class-trustscript-review-renderer.php:1063
+#: includes/class-trustscript-compatibility.php:382
+#: includes/class-trustscript-review-renderer.php:1056
 msgid "Critical"
 msgstr "Kritisch"
 
-#: includes/class-trustscript-compatibility.php:294
-#: includes/class-trustscript-compatibility.php:299
+#: includes/class-trustscript-compatibility.php:383
+#: includes/class-trustscript-compatibility.php:388
 msgid "Warning"
 msgstr "Waarschuwing"
 
-#: includes/class-trustscript-compatibility.php:295
+#: includes/class-trustscript-compatibility.php:384
 msgid "Caution"
 msgstr "Let op"
 
-#: includes/class-trustscript-compatibility.php:296
+#: includes/class-trustscript-compatibility.php:385
 msgid "Information"
 msgstr "Informatie"
 
 #. translators: %d = number of minutes
-#: includes/class-trustscript-date-formatter.php:60
+#: includes/class-trustscript-date-formatter.php:80
 #, php-format
 msgid "%d minute ago"
 msgid_plural "%d minutes ago"
@@ -2613,7 +2136,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d = number of hours
-#: includes/class-trustscript-date-formatter.php:69
+#: includes/class-trustscript-date-formatter.php:89
 #, php-format
 msgid "%d hour ago"
 msgid_plural "%d hours ago"
@@ -2621,7 +2144,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d = number of days
-#: includes/class-trustscript-date-formatter.php:78
+#: includes/class-trustscript-date-formatter.php:98
 #, php-format
 msgid "%d day ago"
 msgid_plural "%d days ago"
@@ -2629,7 +2152,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d = number of weeks
-#: includes/class-trustscript-date-formatter.php:87
+#: includes/class-trustscript-date-formatter.php:107
 #, php-format
 msgid "%d week ago"
 msgid_plural "%d weeks ago"
@@ -2637,76 +2160,124 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %d = number of months
-#: includes/class-trustscript-date-formatter.php:95
+#: includes/class-trustscript-date-formatter.php:115
 #, php-format
 msgid "%d month ago"
 msgid_plural "%d months ago"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-trustscript-date-formatter.php:107
+#: includes/class-trustscript-date-formatter.php:128
 msgid "Relative (e.g., \"2 weeks ago\")"
 msgstr "Relatief (bijv. „2 weken geleden“)"
 
-#: includes/class-trustscript-date-formatter.php:108
+#: includes/class-trustscript-date-formatter.php:129
 msgid "Full (e.g., \"January 15, 2024\")"
 msgstr "Volledig (bijv. \"15 januari 2024\")"
 
-#: includes/class-trustscript-date-formatter.php:109
+#: includes/class-trustscript-date-formatter.php:130
 msgid "Short (e.g., \"Jan 15, 2024\")"
 msgstr "Kort (bijv. \"15 jan. 2024\")"
 
-#: includes/class-trustscript-date-formatter.php:110
+#: includes/class-trustscript-date-formatter.php:131
+msgid "Date & Time (e.g., \"Jan 15, 2024 4:26 PM\")"
+msgstr "Datum en tijd (bijv. &quot;15 jan. 2024 16:26&quot;)"
+
+#: includes/class-trustscript-date-formatter.php:132
 msgid "Numeric (e.g., \"01/15/2024\")"
 msgstr "Getal (bijv. \"15-01-2024\")"
 
-#: includes/class-trustscript-frontend-reviews-base.php:136
-#: includes/class-trustscript-webhook.php:693
-msgid "Click to view verification hash"
-msgstr "Klik hier om de verificatie-hash te bekijken"
+#: includes/class-trustscript-frontend-reviews-base.php:133
+msgid "View verification hash"
+msgstr "Bekijk de verificatie-hash"
 
-#: includes/class-trustscript-frontend-reviews-base.php:149
-#: includes/integration/elementor/widgets/reviews-showcase.php:934
-msgid "Verified"
-msgstr "Geverifieerd"
+#: includes/class-trustscript-frontend-reviews-base.php:150
+msgid "View verification details"
+msgstr "Bekijk de verificatiegegevens"
 
-#: includes/class-trustscript-frontend-reviews-base.php:187
+#: includes/class-trustscript-frontend-reviews-base.php:151
+msgid "Internal Membership Verification"
+msgstr "Interne controle van het lidmaatschap"
+
+#: includes/class-trustscript-frontend-reviews-base.php:198
 msgid "Previous"
 msgstr "Vorige"
 
 #. translators: 1: Current page number, 2: Total pages
-#: includes/class-trustscript-frontend-reviews-base.php:194
+#: includes/class-trustscript-frontend-reviews-base.php:205
 #, php-format
 msgid "Page %1$d of %2$d"
 msgstr "Pagina %1 van %2"
 
-#: includes/class-trustscript-frontend-reviews-base.php:200
+#: includes/class-trustscript-frontend-reviews-base.php:211
 msgid "Next"
 msgstr "Volgende"
 
-#: includes/class-trustscript-frontend-reviews-base.php:240
+#: includes/class-trustscript-immutability.php:31
 msgid ""
-"This review is cryptographically verified. Use this hash to verify the "
-"review's authenticity:"
+"This review is locked by TrustScript and cannot be edited. TrustScript "
+"reviews are immutable to maintain authenticity and customer trust. You can "
+"delete this review if needed, but the text cannot be modified."
 msgstr ""
-"Deze recensie is cryptografisch geverifieerd. Gebruik deze hash om de "
-"authenticiteit van de recensie te controleren:"
+"Deze beoordeling is vergrendeld door TrustScript en kan niet worden bewerkt."
+" Beoordelingen van TrustScript zijn onveranderlijk om de authenticiteit en "
+"het vertrouwen van klanten te waarborgen. U kunt deze beoordeling indien "
+"nodig verwijderen, maar de tekst kan niet worden gewijzigd."
 
-#: includes/class-trustscript-frontend-reviews-base.php:244
-#: includes/class-trustscript-review-renderer.php:1258
-msgid "Copy Hash"
-msgstr "Hash kopiëren"
+#: includes/class-trustscript-immutability.php:116
+msgid "TrustScript App (Webhook)"
+msgstr "TrustScript-app (webhook)"
 
-#: includes/class-trustscript-frontend-reviews-base.php:247
-#: includes/class-trustscript-review-renderer.php:1262
-msgid "Verify on TrustScript"
-msgstr "Controleer op TrustScript"
+#: includes/class-trustscript-immutability.php:117
+msgid "Manual Sync (WordPress Admin)"
+msgstr "Handmatige synchronisatie (WordPress-beheer)"
+
+#: includes/class-trustscript-media-upload.php:36
+#: includes/class-trustscript-webhook.php:147
+msgid "Missing authentication headers (X-API-Key and X-Site-URL required)"
+msgstr "Ontbrekende authenticatieheaders (X-API-Key en X-Site-URL vereist)"
+
+#: includes/class-trustscript-media-upload.php:55
+msgid "Too many uploads. Rate limit: 50 per minute"
+msgstr "Te veel uploads. Limiet: 50 per minuut"
+
+#: includes/class-trustscript-media-upload.php:67
+#: includes/class-trustscript-webhook.php:177
+#: includes/class-trustscript-webhook.php:1010
+msgid "No API key configured"
+msgstr "Er is geen API-sleutel geconfigureerd"
+
+#: includes/class-trustscript-media-upload.php:75
+#: includes/class-trustscript-webhook.php:185
+#: includes/class-trustscript-webhook.php:1014
+msgid "Invalid API key"
+msgstr "Ongeldige API-sleutel"
+
+#: includes/class-trustscript-media-upload.php:84
+#: includes/class-trustscript-webhook.php:194
+#: includes/class-trustscript-webhook.php:1023
+msgid ""
+"API key has expired. Please generate a new API key in TrustScript dashboard."
+msgstr ""
+"De API-sleutel is verlopen. Genereer een nieuwe API-sleutel in het "
+"TrustScript-dashboard."
+
+#: includes/class-trustscript-media-upload.php:92
+#: includes/class-trustscript-webhook.php:202
+msgid "Domain mismatch: API key is not valid for this domain"
+msgstr ""
+"Domein komt niet overeen: de API-sleutel is niet geldig voor dit domein"
+
+#: includes/class-trustscript-media-upload.php:129
+msgid "Review token not found or not associated with this API key"
+msgstr ""
+"Het verificatietoken is niet gevonden of is niet gekoppeld aan deze API-"
+"sleutel"
 
 #: includes/class-trustscript-memberpress-reviews-metabox.php:43
 #: includes/class-trustscript-memberpress-reviews.php:39
-#: includes/class-trustscript-review-renderer.php:813
-#: includes/class-trustscript-review-renderer.php:821
-#: includes/class-trustscript-webhook.php:700
+#: includes/class-trustscript-review-renderer.php:808
+#: includes/class-trustscript-review-renderer.php:816
 msgid "Verified Purchase"
 msgstr "Geverifieerde aankoop"
 
@@ -2747,7 +2318,7 @@ msgstr "Shortcode plakken"
 
 #: includes/class-trustscript-memberpress-reviews-metabox.php:146
 #: includes/providers/class-trustscript-memberpress-provider.php:111
-#: includes/providers/class-trustscript-memberpress-provider.php:175
+#: includes/providers/class-trustscript-memberpress-provider.php:187
 msgid "Membership"
 msgstr "Lidmaatschap"
 
@@ -2938,27 +2509,27 @@ msgstr "Alleen 4- en 5-sterrenrecensies weergeven:"
 msgid "Show 15 reviews per page:"
 msgstr "15 beoordelingen per pagina weergeven:"
 
-#: includes/class-trustscript-memberpress-reviews.php:266
+#: includes/class-trustscript-memberpress-reviews.php:270
 msgid "You must be a member to view reviews."
 msgstr "Je moet lid zijn om beoordelingen te kunnen bekijken."
 
-#: includes/class-trustscript-memberpress-reviews.php:341
+#: includes/class-trustscript-memberpress-reviews.php:345
 msgid "Member Reviews"
 msgstr "Beoordelingen van leden"
 
 #. translators: %s: Number of reviews
-#: includes/class-trustscript-memberpress-reviews.php:352
+#: includes/class-trustscript-memberpress-reviews.php:356
 #, php-format
 msgid "%s review"
 msgid_plural "%s reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-trustscript-memberpress-reviews.php:386
+#: includes/class-trustscript-memberpress-reviews.php:390
 msgid "No Reviews Yet"
 msgstr "Nog geen beoordelingen"
 
-#: includes/class-trustscript-memberpress-reviews.php:387
+#: includes/class-trustscript-memberpress-reviews.php:391
 msgid "Be the first to share your experience with this membership!"
 msgstr ""
 "Wees de eerste die zijn of haar ervaringen met dit lidmaatschap deelt!"
@@ -2986,310 +2557,337 @@ msgid "Change status to delivered"
 msgstr "De status wijzigen in 'geleverd'"
 
 #: includes/class-trustscript-order-status.php:107
-#: includes/class-trustscript-order-status.php:132
 msgid "Order marked as delivered by bulk action."
 msgstr "Bestelling via een bulkactie als geleverd gemarkeerd."
 
-#: includes/class-trustscript-order-status.php:154
+#: includes/class-trustscript-order-status.php:129
 msgid "Order status changed to delivered via bulk action."
 msgstr "De bestelstatus is via een bulkactie gewijzigd in 'geleverd'."
 
-#: includes/class-trustscript-order-status.php:168
+#: includes/class-trustscript-order-status.php:143
 msgid "Mark as Delivered"
 msgstr "Markeren als bezorgd"
 
-#: includes/class-trustscript-order-status.php:176
+#: includes/class-trustscript-order-status.php:151
 msgid "Order marked as delivered."
 msgstr "Bestelling gemarkeerd als geleverd."
 
-#: includes/class-trustscript-placeholder-mapper.php:132
+#: includes/class-trustscript-placeholder-mapper.php:136
 msgid "Image"
 msgstr "Afbeelding"
 
-#: includes/class-trustscript-placeholder-mapper.php:140
+#: includes/class-trustscript-placeholder-mapper.php:144
 msgid "Customer name"
 msgstr "Naam klant"
 
-#: includes/class-trustscript-placeholder-mapper.php:141
+#: includes/class-trustscript-placeholder-mapper.php:145
 msgid "Customer email"
 msgstr "E-mailadres van de klant"
 
-#: includes/class-trustscript-placeholder-mapper.php:142
+#: includes/class-trustscript-placeholder-mapper.php:146
 msgid "Store name"
 msgstr "Winkelnaam"
 
-#: includes/class-trustscript-placeholder-mapper.php:143
+#: includes/class-trustscript-placeholder-mapper.php:147
 msgid "Store URL"
 msgstr "Volledige URL"
 
-#: includes/class-trustscript-placeholder-mapper.php:144
+#: includes/class-trustscript-placeholder-mapper.php:148
 msgid "Review link"
 msgstr "Link naar recensie"
 
-#: includes/class-trustscript-placeholder-mapper.php:145
+#: includes/class-trustscript-placeholder-mapper.php:149
 msgid "Item/Product/Service name"
 msgstr "Naam van het artikel/product/de dienst"
 
-#: includes/class-trustscript-placeholder-mapper.php:146
+#: includes/class-trustscript-placeholder-mapper.php:150
 msgid "Item description"
 msgstr "Productbeschrijving"
 
-#: includes/class-trustscript-placeholder-mapper.php:147
+#: includes/class-trustscript-placeholder-mapper.php:151
 msgid "Item image"
 msgstr "Afbeelding van het artikel"
 
-#: includes/class-trustscript-placeholder-mapper.php:148
+#: includes/class-trustscript-placeholder-mapper.php:152
 msgid "Order/Transaction/Booking ID"
 msgstr "Bestel-/transactie-/boekingsnummer"
 
-#: includes/class-trustscript-placeholder-mapper.php:149
+#: includes/class-trustscript-placeholder-mapper.php:153
 msgid "Purchase date"
 msgstr "Aankoopdatum"
 
-#: includes/class-trustscript-placeholder-mapper.php:150
+#: includes/class-trustscript-placeholder-mapper.php:154
 msgid "Purchase total"
 msgstr "Totaalbedrag"
 
-#: includes/class-trustscript-placeholder-mapper.php:158
+#: includes/class-trustscript-placeholder-mapper.php:155
+msgid "Physical mailing address"
+msgstr "Postadres"
+
+#: includes/class-trustscript-placeholder-mapper.php:163
 msgid "Product name"
 msgstr "Productnaam"
 
-#: includes/class-trustscript-placeholder-mapper.php:159
+#: includes/class-trustscript-placeholder-mapper.php:164
 msgid "Product description"
 msgstr "Productbeschrijving"
 
-#: includes/class-trustscript-placeholder-mapper.php:160
+#: includes/class-trustscript-placeholder-mapper.php:165
 msgid "Product image"
 msgstr "Productafbeelding"
 
-#: includes/class-trustscript-placeholder-mapper.php:161
+#: includes/class-trustscript-placeholder-mapper.php:166
 msgid "Order number"
 msgstr "Bestelnummer"
 
-#: includes/class-trustscript-placeholder-mapper.php:162
+#: includes/class-trustscript-placeholder-mapper.php:167
 msgid "Order date"
 msgstr "Besteldatum"
 
-#: includes/class-trustscript-placeholder-mapper.php:163
+#: includes/class-trustscript-placeholder-mapper.php:168
 msgid "Order total"
 msgstr "Totaalbedrag"
 
-#: includes/class-trustscript-placeholder-mapper.php:168
+#: includes/class-trustscript-placeholder-mapper.php:173
 msgid "Membership name"
 msgstr "Naam van het lid"
 
-#: includes/class-trustscript-placeholder-mapper.php:169
+#: includes/class-trustscript-placeholder-mapper.php:174
 msgid "Membership description"
 msgstr "Beschrijving van het lidmaatschap"
 
-#: includes/class-trustscript-placeholder-mapper.php:170
+#: includes/class-trustscript-placeholder-mapper.php:175
 msgid "Transaction number"
 msgstr "Transactienummer"
 
-#: includes/class-trustscript-placeholder-mapper.php:171
+#: includes/class-trustscript-placeholder-mapper.php:176
 msgid "Transaction total"
 msgstr "Totaalbedrag van de transactie"
 
-#: includes/class-trustscript-placeholder-mapper.php:172
+#: includes/class-trustscript-placeholder-mapper.php:177
 msgid "Subscription date"
 msgstr "Inschrijfdatum"
 
-#: includes/class-trustscript-queue.php:344
+#: includes/class-trustscript-queue.php:331
 msgid "Every 6 hours"
 msgstr "Om de 6 uur"
 
-#: includes/class-trustscript-review-renderer.php:424
+#: includes/class-trustscript-review-renderer.php:421
 msgid "Customer Reviews"
 msgstr "Klantenbeoordelingen"
 
-#: includes/class-trustscript-review-renderer.php:425
+#: includes/class-trustscript-review-renderer.php:422
 msgid "Honest opinions from verified buyers"
 msgstr "Eerlijke beoordelingen van geverifieerde kopers"
 
-#: includes/class-trustscript-review-renderer.php:454
+#: includes/class-trustscript-review-renderer.php:451
 msgid "No reviews yet. Be the first!"
 msgstr "Er zijn nog geen beoordelingen. Wees de eerste!"
 
-#: includes/class-trustscript-review-renderer.php:575
+#: includes/class-trustscript-review-renderer.php:572
 msgid "Filter by keyword"
 msgstr "Filter op trefwoord"
 
-#: includes/class-trustscript-review-renderer.php:579
+#: includes/class-trustscript-review-renderer.php:575
 msgid "All Reviews"
 msgstr "Alle recensies"
 
-#: includes/class-trustscript-review-renderer.php:594
+#: includes/class-trustscript-review-renderer.php:589
 msgid "Sort by"
 msgstr "Sorteren op"
 
-#: includes/class-trustscript-review-renderer.php:598
+#: includes/class-trustscript-review-renderer.php:592
 msgid "Most Helpful"
 msgstr "Meest nuttig"
 
-#: includes/class-trustscript-review-renderer.php:602
+#: includes/class-trustscript-review-renderer.php:595
 msgid "Newest"
 msgstr "Nieuwste"
 
-#: includes/class-trustscript-review-renderer.php:606
+#: includes/class-trustscript-review-renderer.php:598
 #: includes/integration/elementor/widgets/reviews-showcase.php:57
 msgid "Highest Rated"
 msgstr "Best beoordeeld"
 
-#: includes/class-trustscript-review-renderer.php:610
+#: includes/class-trustscript-review-renderer.php:601
 msgid "Lowest Rated"
 msgstr "Laagst beoordeeld"
 
 #. translators: %1$d = reviews shown, %2$d = total reviews
-#: includes/class-trustscript-review-renderer.php:619
-#: includes/class-trustscript-woocommerce-reviews.php:72
+#: includes/class-trustscript-review-renderer.php:610
+#: includes/class-trustscript-woocommerce-reviews.php:93
 #, php-format
 msgid "Showing %1$d of %2$d reviews"
 msgstr "%1$d van %2$d beoordelingen weergeven"
 
-#: includes/class-trustscript-review-renderer.php:624
-#: includes/class-trustscript-woocommerce-reviews.php:68
+#: includes/class-trustscript-review-renderer.php:615
+#: includes/class-trustscript-woocommerce-reviews.php:89
 msgid "Showing 1 review"
 msgstr "Er wordt 1 recensie weergegeven"
 
 #. translators: %d = number of reviews
-#: includes/class-trustscript-review-renderer.php:628
+#: includes/class-trustscript-review-renderer.php:619
 #, php-format
 msgid "Showing %d review"
 msgid_plural "Showing %d reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-trustscript-review-renderer.php:660
+#: includes/class-trustscript-review-renderer.php:651
 msgctxt "button label"
 msgid "Load more reviews"
 msgstr "Meer beoordelingen laden"
 
-#: includes/class-trustscript-review-renderer.php:666
+#: includes/class-trustscript-review-renderer.php:657
 msgid "No reviews match your filter."
 msgstr "Er zijn geen beoordelingen die aan uw filter voldoen."
 
-#: includes/class-trustscript-review-renderer.php:808
+#: includes/class-trustscript-review-renderer.php:803
 msgid "Click to verify this review"
 msgstr "Klik hier om deze beoordeling te verifiëren"
 
 #. translators: %d = star rating number from 1 to 5
-#: includes/class-trustscript-review-renderer.php:833
+#: includes/class-trustscript-review-renderer.php:828
 #, php-format
 msgid "%d out of 5 stars"
 msgstr "%d van de 5 sterren"
 
-#: includes/class-trustscript-review-renderer.php:853
+#: includes/class-trustscript-review-renderer.php:848
 msgid "Read more"
 msgstr "Lees meer"
 
-#: includes/class-trustscript-review-renderer.php:870
-#: includes/class-trustscript-review-renderer.php:1197
+#: includes/class-trustscript-review-renderer.php:866
+#: includes/class-trustscript-review-renderer.php:1191
 msgid "Previous photo"
 msgstr "Vorige foto"
 
-#: includes/class-trustscript-review-renderer.php:897
-#: includes/class-trustscript-webhook.php:798
-#: includes/integration/elementor/widgets/reviews-showcase.php:1106
+#: includes/class-trustscript-review-renderer.php:893
+#: includes/class-trustscript-webhook.php:950
+#: includes/integration/elementor/widgets/reviews-showcase.php:1132
 msgid "Review photo"
 msgstr "Foto bekijken"
 
-#: includes/class-trustscript-review-renderer.php:907
-#: includes/class-trustscript-review-renderer.php:1202
+#: includes/class-trustscript-review-renderer.php:904
+#: includes/class-trustscript-review-renderer.php:1196
 msgid "Next photo"
 msgstr "Volgende foto"
 
-#: includes/class-trustscript-review-renderer.php:924
+#: includes/class-trustscript-review-renderer.php:921
 msgid "Was this helpful?"
 msgstr "Was dit nuttig?"
 
-#: includes/class-trustscript-review-renderer.php:931
+#: includes/class-trustscript-review-renderer.php:928
 msgid "Yes, helpful"
 msgstr "Ja, nuttig"
 
-#: includes/class-trustscript-review-renderer.php:933
+#: includes/class-trustscript-review-renderer.php:930
 #: includes/integration/elementor/widgets/reviews-showcase.php:262
-#: includes/integration/elementor/widgets/reviews-showcase.php:288
+#: includes/integration/elementor/widgets/reviews-showcase.php:272
+#: includes/integration/elementor/widgets/reviews-showcase.php:299
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/class-trustscript-review-renderer.php:941
+#: includes/class-trustscript-review-renderer.php:938
 msgid "No, not helpful"
 msgstr "Nee, dat helpt niet"
 
-#: includes/class-trustscript-review-renderer.php:943
+#: includes/class-trustscript-review-renderer.php:940
 #: includes/integration/elementor/widgets/reviews-showcase.php:263
-#: includes/integration/elementor/widgets/reviews-showcase.php:289
+#: includes/integration/elementor/widgets/reviews-showcase.php:273
+#: includes/integration/elementor/widgets/reviews-showcase.php:300
 msgid "No"
 msgstr "van"
 
 #. translators: 1: total count
-#: includes/class-trustscript-review-renderer.php:1028
+#: includes/class-trustscript-review-renderer.php:1022
 #, php-format
 msgid "out of 5 · %d review"
 msgid_plural "out of 5 · %d reviews"
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-trustscript-review-renderer.php:1061
+#: includes/class-trustscript-review-renderer.php:1054
 msgid "Positive"
 msgstr "Positief"
 
-#: includes/class-trustscript-review-renderer.php:1062
+#: includes/class-trustscript-review-renderer.php:1055
 msgid "Neutral"
 msgstr "Neutraal"
 
-#: includes/class-trustscript-review-renderer.php:1067
+#: includes/class-trustscript-review-renderer.php:1060
 msgid "Sentiment"
 msgstr "Gevoel"
 
-#: includes/class-trustscript-review-renderer.php:1115
+#: includes/class-trustscript-review-renderer.php:1105
 msgid "All Product Photos"
 msgstr "Alle productfoto's"
 
 #. translators: %d is an integer count of photos
-#: includes/class-trustscript-review-renderer.php:1121
+#: includes/class-trustscript-review-renderer.php:1111
 #, php-format
 msgid "%d images"
 msgstr "%d afbeeldingen"
 
 #. translators: %d = total count of images in the gallery
-#: includes/class-trustscript-review-renderer.php:1134
-#: includes/class-trustscript-review-renderer.php:1139
+#: includes/class-trustscript-review-renderer.php:1125
+#: includes/class-trustscript-review-renderer.php:1130
 #, php-format
 msgid "View all %d images"
 msgstr "Bekijk alle %d afbeeldingen"
 
-#: includes/class-trustscript-review-renderer.php:1152
-#: includes/class-trustscript-review-renderer.php:1173
+#: includes/class-trustscript-review-renderer.php:1143
+#: includes/class-trustscript-review-renderer.php:1165
 msgid "Product photo"
 msgstr "Productfoto"
 
-#: includes/class-trustscript-review-renderer.php:1155
+#: includes/class-trustscript-review-renderer.php:1146
 msgid "+More"
 msgstr "+Meer"
 
-#: includes/class-trustscript-review-renderer.php:1192
+#: includes/class-trustscript-review-renderer.php:1186
 msgid "Photo viewer"
 msgstr "Fotobekijker"
 
-#: includes/class-trustscript-review-renderer.php:1207
-#: includes/class-trustscript-review-renderer.php:1252
+#: includes/class-trustscript-review-renderer.php:1201
+#: includes/class-trustscript-review-renderer.php:1259
 msgid "Close"
 msgstr "Sluiten"
 
+#: includes/class-trustscript-review-renderer.php:1223
+msgid "✓ Verified Buyer"
+msgstr "✓ Geverifieerde koper"
+
 #: includes/class-trustscript-review-renderer.php:1249
-msgid "Verify review"
-msgstr "Beoordeling controleren"
+msgid "Review Verified by TrustScript"
+msgstr "Beoordeling geverifieerd door TrustScript"
 
-#: includes/class-trustscript-review-renderer.php:1253
-msgid "Verify this review"
-msgstr "Bevestig deze recensie"
+#: includes/class-trustscript-review-renderer.php:1270
+msgid "Star rating"
+msgstr "Sterrenbeoordeling"
 
-#: includes/class-trustscript-review-renderer.php:1254
-msgid "Authenticity hash for this review:"
-msgstr "Authenticiteitshash voor deze recensie:"
+#: includes/class-trustscript-review-renderer.php:1276
+msgid ""
+"This code ties the review to its original submission on TrustScript. You can"
+" use it to confirm the review is genuine and unedited."
+msgstr ""
+"Deze code koppelt de recensie aan de oorspronkelijke inzending op "
+"TrustScript. Je kunt deze gebruiken om te controleren of de recensie "
+"authentiek en ongewijzigd is."
 
-#: includes/class-trustscript-review-renderer.php:1308
+#: includes/class-trustscript-review-renderer.php:1283
+#: includes/class-trustscript-woocommerce-reviews.php:95
+msgid "Copy Hash"
+msgstr "Hash kopiëren"
+
+#: includes/class-trustscript-review-renderer.php:1290
+msgid "Powered by TrustScript"
+msgstr "Aangedreven door TrustScript"
+
+#: includes/class-trustscript-review-renderer.php:1292
+msgid "Verify externally ↗"
+msgstr "Extern controleren ↗"
+
+#: includes/class-trustscript-review-renderer.php:1345
 msgid "Store Owner"
 msgstr "Winkeleigenaar"
 
@@ -3322,35 +2920,148 @@ msgstr "Uw stem kon niet worden verwerkt. Probeer het nog eens."
 msgid "Vote recorded successfully"
 msgstr "Stem succesvol geregistreerd"
 
-#: includes/class-trustscript-service-manager.php:148
-msgid "No services detected"
-msgstr "Er zijn geen diensten gevonden"
+#: includes/class-trustscript-webhook.php:165
+#: includes/class-trustscript-webhook.php:1002
+msgid "Too many requests. Rate limit: 100 requests per minute"
+msgstr "Te veel verzoeken. Limiet: 100 verzoeken per minuut"
 
-#: includes/class-trustscript-webhook.php:804
+#: includes/class-trustscript-webhook.php:223
+#: includes/class-trustscript-webhook.php:346
+msgid "Missing uniqueToken or productToken"
+msgstr "Het veld `uniqueToken` of `productToken` ontbreekt"
+
+#: includes/class-trustscript-webhook.php:256
+#: includes/class-trustscript-webhook.php:379
+msgid "Invalid productToken format"
+msgstr "Ongeldig productToken-formaat"
+
+#: includes/class-trustscript-webhook.php:262
+#: includes/class-trustscript-webhook.php:383
+msgid "This product token has already been used to publish a review"
+msgstr "Dit producttoken is al gebruikt om een recensie te plaatsen"
+
+#: includes/class-trustscript-webhook.php:295
+msgid "Invalid uniqueToken format"
+msgstr "Ongeldige indeling van uniqueToken"
+
+#: includes/class-trustscript-webhook.php:315
+#: includes/class-trustscript-webhook.php:545
+msgid "Order not found for this token, or API key mismatch"
+msgstr ""
+"Er is geen opdracht gevonden voor dit token, of de API-sleutel komt niet "
+"overeen"
+
+#: includes/class-trustscript-webhook.php:325
+msgid "Failed to send email"
+msgstr "Het verzenden van de e-mail is mislukt"
+
+#: includes/class-trustscript-webhook.php:334
+msgid "Reminder email sent successfully"
+msgstr "Herinneringsmail succesvol verzonden"
+
+#: includes/class-trustscript-webhook.php:350
+msgid "Missing reviewText"
+msgstr "Ontbrekende recensietekst"
+
+#: includes/class-trustscript-webhook.php:389
+msgid "No order found for this product token"
+msgstr "Er is geen bestelling gevonden voor dit producttoken"
+
+#: includes/class-trustscript-webhook.php:408
+msgid "WooCommerce provider not active"
+msgstr "WooCommerce-provider is niet actief"
+
+#: includes/class-trustscript-webhook.php:427
+msgid "Failed to insert review comment for product #"
+msgstr "Het is niet gelukt om een recensie op te geven voor product #"
+
+#: includes/class-trustscript-webhook.php:472
+#: includes/class-trustscript-webhook.php:707
+msgid "published"
+msgstr "gepubliceerd"
+
+#: includes/class-trustscript-webhook.php:472
+#: includes/class-trustscript-webhook.php:707
+msgid "submitted for moderation"
+msgstr "ter beoordeling ingediend"
+
+#. translators: %1$d: number of reviews published, %2$s: status text
+#. (published or submitted for moderation)
+#: includes/class-trustscript-webhook.php:476
+#: includes/class-trustscript-webhook.php:711
+#, php-format
+msgid "%1$d review(s) %2$s successfully"
+msgstr "%1$d beoordeling(en) %2$s succesvol"
+
+#: includes/class-trustscript-webhook.php:488
+msgid "Invalid token format"
+msgstr "Ongeldig tokenformaat"
+
+#: includes/class-trustscript-webhook.php:498
+#: includes/class-trustscript-webhook.php:521
+msgid "This token has already been used to publish a review"
+msgstr "Dit token is al gebruikt om een recensie te publiceren"
+
+#: includes/class-trustscript-webhook.php:556
+msgid "No eligible items found in order"
+msgstr ""
+"Er zijn geen in aanmerking komende artikelen gevonden in de bestelling"
+
+#: includes/class-trustscript-webhook.php:565
+msgid "No items found in order"
+msgstr "Er zijn geen artikelen gevonden in de bestelling"
+
+#: includes/class-trustscript-webhook.php:731
+msgid "All reviews for this token have already been published"
+msgstr "Alle beoordelingen voor dit token zijn al gepubliceerd"
+
+#. translators: %s: list of error messages
+#: includes/class-trustscript-webhook.php:739
+#, php-format
+msgid "No reviews were created. Errors: %s"
+msgstr "Er zijn geen beoordelingen geplaatst. Fouten: %s"
+
+#: includes/class-trustscript-webhook.php:956
 msgid "Your browser does not support the video tag."
 msgstr "Uw browser ondersteunt de videotag niet."
 
-#: includes/class-trustscript-woocommerce-reviews.php:64
+#: includes/class-trustscript-webhook.php:991
+msgid "Missing X-TrustScript-Api-Key or X-Site-URL header"
+msgstr "De header X-TrustScript-Api-Key of X-Site-URL ontbreekt"
+
+#: includes/class-trustscript-webhook.php:1028
+msgid "X-Site-URL does not match this site"
+msgstr "De URL van deze site komt niet overeen met deze site"
+
+#: includes/class-trustscript-woocommerce-reviews.php:85
 msgid "Thank you for your feedback!"
 msgstr "Bedankt voor je feedback!"
 
-#: includes/class-trustscript-woocommerce-reviews.php:65
+#: includes/class-trustscript-woocommerce-reviews.php:86
 msgid "You have already voted on this review"
 msgstr "Je hebt al op deze recensie gestemd"
 
-#: includes/class-trustscript-woocommerce-reviews.php:66
+#: includes/class-trustscript-woocommerce-reviews.php:87
 msgid "Something went wrong. Please try again."
 msgstr "Er is een fout opgetreden. Probeer het nog eens."
 
-#: includes/class-trustscript-woocommerce-reviews.php:67
+#: includes/class-trustscript-woocommerce-reviews.php:88
 msgid "Login to vote"
 msgstr "Log in om te stemmen"
 
 #. translators: %d = number of reviews
-#: includes/class-trustscript-woocommerce-reviews.php:70
+#: includes/class-trustscript-woocommerce-reviews.php:91
 #, php-format
 msgid "Showing %d reviews"
 msgstr "%d beoordelingen weergeven"
+
+#: includes/class-trustscript-woocommerce-reviews.php:94
+msgid "Image unavailable"
+msgstr "Afbeelding niet beschikbaar"
+
+#: includes/class-trustscript-woocommerce-reviews.php:96
+msgid "✓ Copied!"
+msgstr "✓ Gekopieerd!"
 
 #: includes/consent-form-template.php:26
 msgid "I agree to the"
@@ -3471,6 +3182,389 @@ msgstr ""
 msgid "I Agree"
 msgstr "Ik ga akkoord"
 
+#: includes/consent/consent-block-checkout.php:64
+msgid "Whether the customer opted in for a review request."
+msgstr ""
+"Of de klant toestemming heeft gegeven voor een verzoek om een beoordeling."
+
+#: includes/consent/consent-block-checkout.php:71
+msgid "Customer billing country code at time of consent."
+msgstr "Landcode van de klant op het moment van toestemming."
+
+#: includes/consent/consent-block-checkout.php:78
+msgid "Consent type: single_optin, double_optin, or not_required."
+msgstr "Type toestemming: single_optin, double_optin of not_required."
+
+#: includes/consent/consent-block-checkout.php:85
+msgid "WordPress nonce for server-side verification."
+msgstr "WordPress-nonce voor verificatie aan de serverzijde."
+
+#: includes/consent/consent-block-checkout.php:135
+#: includes/consent/consent.php:113
+msgid "Privacy Policy"
+msgstr "Privacybeleid"
+
+#: includes/consent/consent-confirmation.php:46
+msgid "Invalid confirmation link. Missing required parameters."
+msgstr "Ongeldige bevestigingslink. Vereiste parameters ontbreken."
+
+#: includes/consent/consent-confirmation.php:72
+msgid "Preference Confirmed"
+msgstr "Voorkeur bevestigd"
+
+#: includes/consent/consent-confirmation.php:75
+msgid ""
+"Thank you! Your review request preference has been confirmed. You will "
+"receive a review request after your order is delivered."
+msgstr ""
+"Bedankt! Je voorkeur voor een beoordelingsverzoek is bevestigd. Je ontvangt "
+"een beoordelingsverzoek zodra je bestelling is geleverd."
+
+#: includes/consent/consent-confirmation.php:79
+#: includes/consent/consent-confirmation.php:109
+msgid "Return to Store"
+msgstr "Terug naar de winkel"
+
+#: includes/consent/consent-confirmation.php:98
+msgid "Confirmation Failed"
+msgstr "Bevestiging mislukt"
+
+#: includes/consent/consent-confirmation.php:100
+msgid "We encountered an issue with your confirmation request:"
+msgstr "Er is een probleem opgetreden bij uw bevestigingsverzoek:"
+
+#: includes/consent/consent-confirmation.php:106
+msgid ""
+"No review request will be sent for this order. If you believe this is an "
+"error, please contact our support team."
+msgstr ""
+"Er wordt voor deze bestelling geen beoordelingsverzoek verzonden. Als u "
+"denkt dat dit een fout is, neem dan contact op met onze klantenservice."
+
+#. translators: 1: store name, 2: order number
+#: includes/consent/consent-manager.php:481
+#, php-format
+msgid "%1$s – Confirm your review request for order #%2$s"
+msgstr "%1$s – Bevestig uw verzoek om een beoordeling voor bestelling #%2$s"
+
+#. translators: Greeting line at the top of the confirmation email. %s:
+#. customer name
+#: includes/consent/consent-manager.php:488
+#, php-format
+msgid "Hello %s!"
+msgstr "Hallo %s!"
+
+#: includes/consent/consent-manager.php:489
+msgid "Hello!"
+msgstr "Hallo!"
+
+#: includes/consent/consent-manager.php:491
+msgid ""
+"You recently indicated that you'd like to receive a review request after "
+"your order is delivered.<br><br>We'd love to hear about your experience with"
+" us! To proceed, please confirm your preference by clicking the button "
+"below."
+msgstr ""
+"U heeft onlangs aangegeven dat u graag een verzoek om een beoordeling wilt "
+"ontvangen nadat uw bestelling is geleverd.<br><br>We horen graag hoe uw "
+"ervaring bij ons was! Bevestig uw voorkeur door op de onderstaande knop te "
+"klikken."
+
+#. translators: CTA button label in the confirmation email.
+#: includes/consent/consent-manager.php:498
+msgid "Confirm"
+msgstr "Bevestigen"
+
+#. translators: Heading of the privacy/security note box.
+#: includes/consent/consent-manager.php:501
+msgid "Why are we asking this?"
+msgstr "Waarom vragen we dit?"
+
+#. translators: Body of the privacy/security note box.
+#: includes/consent/consent-manager.php:504
+msgid ""
+"To protect your privacy and comply with regulations, we need you to confirm "
+"this preference. This link expires in 7 days."
+msgstr ""
+"Om uw privacy te beschermen en aan de regelgeving te voldoen, vragen wij u "
+"deze voorkeur te bevestigen. Deze link verloopt over 7 dagen."
+
+#. translators: %s: HTML anchor linking to the store homepage.
+#: includes/consent/consent-manager.php:511
+#, php-format
+msgid ""
+"If you did not request this, simply ignore this email. No review request "
+"will be sent to your account. Questions? Contact us at %s"
+msgstr ""
+"Als u hier niet om hebt gevraagd, kunt u deze e-mail gewoon negeren. Er "
+"wordt geen beoordelingsverzoek naar uw account gestuurd. Vragen? Neem "
+"contact met ons op via %s"
+
+#. translators: 1: store name, 2: order number.
+#: includes/consent/consent-manager.php:522
+#, php-format
+msgid "%1$s – Confirm your review preference for order #%2$s"
+msgstr "%1$s – Bevestig uw beoordelingsvoorkeur voor bestelling #%2$s"
+
+#: includes/consent/consent-manager.php:661
+msgid "Order not found."
+msgstr "Bestelling niet gevonden."
+
+#: includes/consent/consent-manager.php:666
+msgid "No confirmation pending for this order."
+msgstr "Er is nog geen bevestiging voor deze bestelling."
+
+#: includes/consent/consent-manager.php:670
+msgid "Invalid confirmation link."
+msgstr "Ongeldige bevestigingslink."
+
+#: includes/consent/consent-manager.php:675
+msgid "This preference has already been confirmed."
+msgstr "Deze voorkeur is al bevestigd."
+
+#: includes/consent/consent-manager.php:683
+msgid "This confirmation link has expired. No review request will be sent."
+msgstr ""
+"Deze bevestigingslink is verlopen. Er wordt geen beoordelingsverzoek "
+"verzonden."
+
+#: includes/consent/privacy-settings.php:49
+msgid ""
+"Send me a one-time review request after my order is delivered. No personal "
+"data is stored."
+msgstr ""
+"Stuur me een eenmalig verzoek om een beoordeling nadat mijn bestelling is "
+"geleverd. Er worden geen persoonsgegevens opgeslagen."
+
+#: includes/consent/privacy-settings.php:79
+msgid "Physical Mailing Address"
+msgstr "Postadres"
+
+#: includes/consent/privacy-settings.php:82
+msgid ""
+"Required under CAN-SPAM for customers in the United States. This address is "
+"passed to the TrustScript server and injected into the footer of every "
+"review request email via the {physical_address} template placeholder."
+msgstr ""
+"Vereist op grond van de CAN-SPAM-wetgeving voor klanten in de Verenigde "
+"Staten. Dit adres wordt doorgegeven aan de TrustScript-server en via de "
+"sjabloonplaatshouder {physical_address} toegevoegd aan de voettekst van elke"
+" e-mail met een verzoek om een beoordeling."
+
+#: includes/consent/privacy-settings.php:87
+msgid "Business Address"
+msgstr "Bedrijfsadres"
+
+#: includes/consent/privacy-settings.php:94
+msgid "e.g. Acme Inc, 123 Main St, Springfield, IL 62701, USA"
+msgstr "bijv. Acme Inc, Main St. 123, Springfield, IL 62701, VS"
+
+#: includes/consent/privacy-settings.php:97
+msgid ""
+"Keep this on a single line or use commas to separate parts. It will appear "
+"exactly as typed in the email footer."
+msgstr ""
+"Zorg ervoor dat dit op één regel staat of gebruik komma’s om de "
+"verschillende delen van elkaar te scheiden. Het wordt precies zo weergegeven"
+" in de voettekst van de e-mail."
+
+#: includes/consent/privacy-settings.php:103
+msgid "No address saved yet."
+msgstr "Er is nog geen adres opgeslagen."
+
+#: includes/consent/privacy-settings.php:105
+msgid ""
+"Review request emails sent to US customers will be missing the required CAN-"
+"SPAM footer address until you save one here."
+msgstr ""
+"In e-mails met verzoeken om beoordelingen die naar Amerikaanse klanten "
+"worden verzonden, ontbreekt het vereiste CAN-SPAM-voettekstadres totdat u "
+"hier een adres opslaat."
+
+#: includes/consent/privacy-settings.php:114
+msgid "Require address for all countries"
+msgstr "Adres verplicht voor alle landen"
+
+#: includes/consent/privacy-settings.php:117
+msgid ""
+"When enabled, the physical address will be included in all review emails "
+"regardless of customer country. When disabled (recommended), the address is "
+"only included for US customers (CAN-SPAM requirement) and other countries "
+"where you explicitly require it."
+msgstr ""
+"Als deze optie is ingeschakeld, wordt het fysieke adres in alle "
+"beoordelingsmails opgenomen, ongeacht het land van de klant. Als deze optie "
+"is uitgeschakeld (aanbevolen), wordt het adres alleen opgenomen voor klanten"
+" in de VS (vereiste van de CAN-SPAM-wet) en in andere landen waar u dit "
+"expliciet vereist."
+
+#: includes/consent/privacy-settings.php:124
+msgid "Consent Mode"
+msgstr "Toestemmingsmodus"
+
+#: includes/consent/privacy-settings.php:127
+msgid ""
+"Controls when a consent checkbox appears at checkout. In Auto mode, "
+"TrustScript detects the billing country and applies the correct flow — no "
+"checkbox for US customers, single opt-in for EU/UK, double opt-in for "
+"Germany and Austria."
+msgstr ""
+"Bepaalt wanneer er bij het afrekenen een selectievakje voor toestemming "
+"wordt weergegeven. In de automatische modus detecteert TrustScript het land "
+"van facturering en past het de juiste procedure toe: geen selectievakje voor"
+" klanten in de VS, eenmalige opt-in voor de EU/het VK en dubbele opt-in voor"
+" Duitsland en Oostenrijk."
+
+#: includes/consent/privacy-settings.php:134
+msgid "Auto (Recommended)"
+msgstr "Automatisch (aanbevolen)"
+
+#: includes/consent/privacy-settings.php:135
+msgid ""
+"— TrustScript detects the billing country and applies the correct consent "
+"flow automatically."
+msgstr ""
+"— TrustScript detecteert het land van facturering en past automatisch de "
+"juiste toestemmingsprocedure toe."
+
+#: includes/consent/privacy-settings.php:140
+msgid "Always Show Checkbox"
+msgstr "Selectievakje &#x27;Altijd weergeven&#x27;"
+
+#: includes/consent/privacy-settings.php:141
+msgid ""
+"— Show a consent checkbox at checkout for all customers regardless of "
+"country. Use this if your store sells globally and you prefer uniform "
+"treatment."
+msgstr ""
+"— Laat bij het afrekenen voor alle klanten, ongeacht hun land, een "
+"selectievakje voor toestemming zien. Gebruik deze optie als je winkel "
+"wereldwijd verkoopt en je de voorkeur geeft aan een uniforme aanpak."
+
+#: includes/consent/privacy-settings.php:146
+msgid "Disabled — Opt-Out Link Only"
+msgstr "Uitgeschakeld — Alleen link om af te melden"
+
+#: includes/consent/privacy-settings.php:147
+msgid ""
+"— Never show a consent checkbox. Use only if your store exclusively serves "
+"jurisdictions where prior consent is not required (e.g. US-only stores)."
+msgstr ""
+"— Geef nooit een selectievakje voor toestemming weer. Gebruik dit alleen als"
+" je winkel uitsluitend actief is in rechtsgebieden waar voorafgaande "
+"toestemming niet vereist is (bijvoorbeeld winkels die alleen in de VS actief"
+" zijn)."
+
+#: includes/consent/privacy-settings.php:154
+msgid "Consent Checkbox Label"
+msgstr "Label voor het selectievakje &#x27;Toestemming&#x27;"
+
+#: includes/consent/privacy-settings.php:157
+msgid ""
+"The text shown next to the opt-in checkbox at checkout. Keep this neutral — "
+"do not mention discounts, incentives, or ratings. The opt-out link is "
+"appended automatically by TrustScript."
+msgstr ""
+"De tekst die naast het selectievakje voor aanmelding wordt weergegeven bij "
+"het afrekenen. Houd deze tekst neutraal — vermeld geen kortingen, incentives"
+" of beoordelingen. De link voor afmelding wordt automatisch toegevoegd door "
+"TrustScript."
+
+#: includes/consent/privacy-settings.php:170
+msgid "Custom Country Rules"
+msgstr "Aangepaste landregels"
+
+#: includes/consent/privacy-settings.php:173
+msgid ""
+"By default, TrustScript uses built-in rules for EU/UK/DE/AT countries. Use "
+"these pickers to add extra countries to each tier — useful if your legal "
+"team requires stricter treatment for specific markets."
+msgstr ""
+"Standaard maakt TrustScript gebruik van ingebouwde regels voor de landen EU,"
+" VK, DE en AT. Gebruik deze keuzelijsten om extra landen aan elke categorie "
+"toe te voegen — handig als uw juridische afdeling strengere maatregelen "
+"vereist voor bepaalde markten."
+
+#: includes/consent/privacy-settings.php:179
+msgid "Built-in coverage (always active):"
+msgstr "Ingebouwde dekking (altijd actief):"
+
+#: includes/consent/privacy-settings.php:182
+msgid "Double opt-in:"
+msgstr "Dubbele bevestiging:"
+
+#: includes/consent/privacy-settings.php:186
+msgid "Single opt-in:"
+msgstr "Eenmalige aanmelding:"
+
+#: includes/consent/privacy-settings.php:194
+msgid "Additional Single Opt-In Countries"
+msgstr "Andere landen waar eenmalige aanmelding geldt"
+
+#: includes/consent/privacy-settings.php:197
+msgid ""
+"Customers from these countries will see an unchecked consent checkbox at "
+"checkout. No review is sent if they do not tick it."
+msgstr ""
+"Klanten uit deze landen zien bij het afrekenen een selectievakje voor "
+"toestemming dat niet is aangevinkt. Als ze dit vakje niet aanvinken, wordt "
+"er geen beoordeling verzonden."
+
+#: includes/consent/privacy-settings.php:210
+msgid "Additional Double Opt-In Countries"
+msgstr "Landen waar dubbele opt-in verplicht is"
+
+#: includes/consent/privacy-settings.php:213
+msgid ""
+"Customers from these countries must tick the checkbox AND click a "
+"confirmation link in a follow-up email before a review request is sent."
+msgstr ""
+"Klanten uit deze landen moeten het selectievakje aanvinken EN op een "
+"bevestigingslink in een vervolg-e-mail klikken voordat een verzoek om een "
+"beoordeling wordt verzonden."
+
+#: includes/consent/privacy-settings.php:225
+msgid ""
+"WooCommerce country list unavailable. Activate WooCommerce to use this "
+"feature."
+msgstr ""
+"De landenlijst van WooCommerce is niet beschikbaar. Schakel WooCommerce in "
+"om deze functie te gebruiken."
+
+#: includes/consent/privacy-settings.php:246
+msgid "Search countries…"
+msgstr "Zoek landen…"
+
+#: includes/consent/privacy-settings.php:262
+msgid "Already covered by built-in rules — cannot be unchecked"
+msgstr ""
+"Wordt al gedekt door ingebouwde regels — kan niet worden uitgeschakeld"
+
+#: includes/consent/privacy-settings.php:286
+msgid "Permission denied."
+msgstr "Toegang geweigerd."
+
+#: includes/consent/privacy-settings.php:345
+msgid "Privacy settings saved."
+msgstr "Privacy-instellingen opgeslagen."
+
+#: includes/consent/privacy-settings.php:428
+msgid ""
+"I agree to receive a one-time review request after my order is delivered."
+msgstr ""
+"Ik ga ermee akkoord dat ik na levering van mijn bestelling een eenmalig "
+"verzoek om een beoordeling ontvang."
+
+#. translators: %s: Order ID
+#: includes/consent/privacy-settings.php:441
+#, php-format
+msgid "Confirm your review request for order #%s"
+msgstr "Bevestig uw verzoek om een beoordeling voor bestelling #%s"
+
+#: includes/consent/privacy-settings.php:443
+msgid "Confirm your review request"
+msgstr "Bevestig uw verzoek om een beoordeling"
+
 #: includes/integration/elementor/widgets/reviews-showcase.php:20
 msgid "Reviews Showcase"
 msgstr "Overzicht van recensies"
@@ -3570,8 +3664,8 @@ msgid "Show Product Name"
 msgstr "Productnaam weergeven"
 
 #: includes/integration/elementor/widgets/reviews-showcase.php:167
-msgid "Product Name Length (characters)"
-msgstr "Productnaam Lengte (tekens)"
+msgid "Product Name Length (words)"
+msgstr "Productnaam Lengte (woorden)"
 
 #: includes/integration/elementor/widgets/reviews-showcase.php:177
 msgid "Show Customer Name"
@@ -3582,8 +3676,8 @@ msgid "Show \"Verified Buyer\" Label"
 msgstr "Het label 'Geverifieerde koper' weergeven"
 
 #: includes/integration/elementor/widgets/reviews-showcase.php:196
-msgid "Review Text Length (characters)"
-msgstr "Lengte van de recensie (tekens)"
+msgid "Review Text Length (words)"
+msgstr "Lengte van de recensie (woorden)"
 
 #: includes/integration/elementor/widgets/reviews-showcase.php:206
 msgid "Image-First Settings"
@@ -3661,215 +3755,229 @@ msgstr "Rechtsonder"
 msgid "Show Only Reviews With Images"
 msgstr "Alleen beoordelingen met afbeeldingen weergeven"
 
+#: includes/integration/elementor/widgets/reviews-showcase.php:269
+msgid "Darken Image on Card Hover"
+msgstr "Afbeelding donkerder maken bij muisaanwijzer op kaart"
+
 #: includes/integration/elementor/widgets/reviews-showcase.php:270
+msgid "Shows a subtle dark gradient over the photo when the card is hovered."
+msgstr ""
+"Er verschijnt een subtiel donker kleurverloop over de foto wanneer de "
+"muisaanwijzer boven de kaart wordt gehouden."
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:281
 msgid "Marquee Settings"
 msgstr "Instellingen voor de tent"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:276
+#: includes/integration/elementor/widgets/reviews-showcase.php:287
 msgid "Animation Speed (seconds)"
 msgstr "Animatiesnelheid (seconden)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:282
+#: includes/integration/elementor/widgets/reviews-showcase.php:293
 msgid "Higher = slower animation"
 msgstr "Hoger = langzamere animatie"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:286
+#: includes/integration/elementor/widgets/reviews-showcase.php:297
 msgid "Pause on Hover"
 msgstr "Pauzeren bij aanwijzen"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:295
+#: includes/integration/elementor/widgets/reviews-showcase.php:306
 msgid "Scroll Direction"
 msgstr "Scrollrichting"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:299
+#: includes/integration/elementor/widgets/reviews-showcase.php:310
 msgid "Left (default)"
 msgstr "Links (standaard)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:300
-#: includes/integration/elementor/widgets/reviews-showcase.php:368
+#: includes/integration/elementor/widgets/reviews-showcase.php:311
+#: includes/integration/elementor/widgets/reviews-showcase.php:379
 msgid "Right"
 msgstr "Juist"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:306
+#: includes/integration/elementor/widgets/reviews-showcase.php:317
 msgid "Card Width (px)"
 msgstr "Breedte van de kaart (px)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:318
+#: includes/integration/elementor/widgets/reviews-showcase.php:329
 msgid "Gap Between Cards (px)"
 msgstr "Afstand tussen kaarten (px)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:330
+#: includes/integration/elementor/widgets/reviews-showcase.php:341
 msgid "Edge Fade Color"
 msgstr "Kantvervaging"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:331
+#: includes/integration/elementor/widgets/reviews-showcase.php:342
 msgid "Should match your section background color."
 msgstr "Moet overeenkomen met de achtergrondkleur van uw sectie."
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:342
+#: includes/integration/elementor/widgets/reviews-showcase.php:353
 msgid "Edge Fade Width"
 msgstr "Breedte van de randvervaging"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:358
+#: includes/integration/elementor/widgets/reviews-showcase.php:369
 msgid "Review Card"
 msgstr "Beoordelingskaart"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:363
+#: includes/integration/elementor/widgets/reviews-showcase.php:374
 msgid "Content Alignment"
 msgstr "Afstemming van de inhoud"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:366
+#: includes/integration/elementor/widgets/reviews-showcase.php:377
 msgid "Left"
 msgstr "Links"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:367
+#: includes/integration/elementor/widgets/reviews-showcase.php:378
 msgid "Center"
 msgstr "Midden"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:390
-#: includes/integration/elementor/widgets/reviews-showcase.php:777
+#: includes/integration/elementor/widgets/reviews-showcase.php:402
+#: includes/integration/elementor/widgets/reviews-showcase.php:789
 msgid "Background"
 msgstr "Achtergrond"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:411
-#: includes/integration/elementor/widgets/reviews-showcase.php:668
-#: includes/integration/elementor/widgets/reviews-showcase.php:798
+#: includes/integration/elementor/widgets/reviews-showcase.php:423
+#: includes/integration/elementor/widgets/reviews-showcase.php:680
+#: includes/integration/elementor/widgets/reviews-showcase.php:810
 msgid "Border Radius"
 msgstr "Randstraal"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:427
-#: includes/integration/elementor/widgets/reviews-showcase.php:656
+#: includes/integration/elementor/widgets/reviews-showcase.php:439
+#: includes/integration/elementor/widgets/reviews-showcase.php:668
 msgid "Padding"
 msgstr "Opvulling"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:438
+#: includes/integration/elementor/widgets/reviews-showcase.php:450
 msgid "Hover Effects"
 msgstr "Hover-effecten"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:444
+#: includes/integration/elementor/widgets/reviews-showcase.php:456
 msgid "Scale"
 msgstr "Schaal"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:458
+#: includes/integration/elementor/widgets/reviews-showcase.php:470
 msgid "Hover Shadow"
 msgstr "Schaduw bij aanwijzen"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:464
+#: includes/integration/elementor/widgets/reviews-showcase.php:476
 msgid "Transition Duration (ms)"
 msgstr "Overgangsduur (ms)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:478
+#: includes/integration/elementor/widgets/reviews-showcase.php:490
 msgid "Product Name"
 msgstr "Productnaam"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:483
-#: includes/integration/elementor/widgets/reviews-showcase.php:517
-#: includes/integration/elementor/widgets/reviews-showcase.php:561
-#: includes/integration/elementor/widgets/reviews-showcase.php:701
-#: includes/integration/elementor/widgets/reviews-showcase.php:737
-#: includes/integration/elementor/widgets/reviews-showcase.php:826
+#: includes/integration/elementor/widgets/reviews-showcase.php:495
+#: includes/integration/elementor/widgets/reviews-showcase.php:529
+#: includes/integration/elementor/widgets/reviews-showcase.php:573
+#: includes/integration/elementor/widgets/reviews-showcase.php:713
+#: includes/integration/elementor/widgets/reviews-showcase.php:749
+#: includes/integration/elementor/widgets/reviews-showcase.php:838
 msgid "Color"
 msgstr "Kleur"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:498
-#: includes/integration/elementor/widgets/reviews-showcase.php:541
-#: includes/integration/elementor/widgets/reviews-showcase.php:575
-#: includes/integration/elementor/widgets/reviews-showcase.php:681
-#: includes/integration/elementor/widgets/reviews-showcase.php:716
+#: includes/integration/elementor/widgets/reviews-showcase.php:510
+#: includes/integration/elementor/widgets/reviews-showcase.php:553
+#: includes/integration/elementor/widgets/reviews-showcase.php:587
+#: includes/integration/elementor/widgets/reviews-showcase.php:693
+#: includes/integration/elementor/widgets/reviews-showcase.php:728
 msgid "Bottom Spacing"
 msgstr "Afstand onderaan"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:512
+#: includes/integration/elementor/widgets/reviews-showcase.php:524
 msgid "Star Rating"
 msgstr "Sterrenbeoordeling"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:528
-#: includes/integration/elementor/widgets/reviews-showcase.php:785
+#: includes/integration/elementor/widgets/reviews-showcase.php:540
+#: includes/integration/elementor/widgets/reviews-showcase.php:797
 msgid "Size"
 msgstr "Aan u"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:555
+#: includes/integration/elementor/widgets/reviews-showcase.php:567
 msgid "Review Date"
 msgstr "Beoordelingsdatum"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:588
+#: includes/integration/elementor/widgets/reviews-showcase.php:600
 msgid "Verified Badge"
 msgstr "Geverifieerd-badge"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:594
+#: includes/integration/elementor/widgets/reviews-showcase.php:606
 msgid "Badge Style"
 msgstr "Badgestijl"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:598
+#: includes/integration/elementor/widgets/reviews-showcase.php:610
 msgid "Inline (next to stars)"
 msgstr "In de tekst (naast de sterretjes)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:604
+#: includes/integration/elementor/widgets/reviews-showcase.php:616
 msgid "Text & Icon Color"
 msgstr "Tekst- en pictogramkleur"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:615
+#: includes/integration/elementor/widgets/reviews-showcase.php:627
 msgid "Background Color"
 msgstr "Achtergrondkleur"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:626
-#: includes/integration/elementor/widgets/reviews-showcase.php:838
+#: includes/integration/elementor/widgets/reviews-showcase.php:638
+#: includes/integration/elementor/widgets/reviews-showcase.php:850
 msgid "Typography"
 msgstr "Typografie"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:632
+#: includes/integration/elementor/widgets/reviews-showcase.php:644
 msgid "Icon Size"
 msgstr "Grootte van het pictogram"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:644
+#: includes/integration/elementor/widgets/reviews-showcase.php:656
 msgid "Text Size"
 msgstr "Tekstgrootte"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:696
+#: includes/integration/elementor/widgets/reviews-showcase.php:708
 msgid "Review Text"
 msgstr "Recensietekst"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:731
+#: includes/integration/elementor/widgets/reviews-showcase.php:743
 msgid "Customer Name"
 msgstr "Naam klant"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:756
+#: includes/integration/elementor/widgets/reviews-showcase.php:768
 msgid "Label Font Size"
 msgstr "Lettergrootte van het label"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:770
+#: includes/integration/elementor/widgets/reviews-showcase.php:782
 msgid "Avatar"
 msgstr "Avatar"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:815
+#: includes/integration/elementor/widgets/reviews-showcase.php:827
 msgid "Border"
 msgstr "Grens"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:820
+#: includes/integration/elementor/widgets/reviews-showcase.php:832
 msgid "Text (Initials)"
 msgstr "Tekst (Initialen)"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:843
+#: includes/integration/elementor/widgets/reviews-showcase.php:855
 msgid "Gap to Name"
 msgstr "Naam van het merk"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:864
+#: includes/integration/elementor/widgets/reviews-showcase.php:876
 msgid "Unknown Product"
 msgstr "Onbekend product"
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:925
+#: includes/integration/elementor/widgets/reviews-showcase.php:937
 msgid "No reviews found matching your criteria."
 msgstr "Er zijn geen beoordelingen gevonden die aan uw criteria voldoen."
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:944
+#: includes/integration/elementor/widgets/reviews-showcase.php:946
+msgid "Verified"
+msgstr "Geverifieerd"
+
+#: includes/integration/elementor/widgets/reviews-showcase.php:956
 msgid "No reviews with images found matching your criteria."
 msgstr ""
 "Er zijn geen beoordelingen met afbeeldingen gevonden die aan uw criteria "
 "voldoen."
 
-#: includes/integration/elementor/widgets/reviews-showcase.php:1169
-#: includes/integration/elementor/widgets/reviews-showcase.php:1247
-#: includes/integration/elementor/widgets/reviews-showcase.php:1264
+#: includes/integration/elementor/widgets/reviews-showcase.php:1198
+#: includes/integration/elementor/widgets/reviews-showcase.php:1276
+#: includes/integration/elementor/widgets/reviews-showcase.php:1293
 msgid "Verified Buyer"
 msgstr "Geverifieerde koper"
 
@@ -3885,31 +3993,76 @@ msgstr "Bevestigd"
 msgid "Refunded"
 msgstr "Terugbetaald"
 
-#: includes/trustscript-helpers.php:94
+#: includes/trustscript-helpers.php:58
+msgid "Please set your API key in settings."
+msgstr "Stel je API-sleutel in via de instellingen."
+
+#: includes/trustscript-helpers.php:90
 msgid "API request failed"
 msgstr "API-verzoek mislukt"
 
-#: includes/trustscript-helpers.php:97
+#: includes/trustscript-helpers.php:93
 msgid "API key authentication failed"
 msgstr "De authenticatie met de API-sleutel is mislukt"
 
-#: includes/trustscript-helpers.php:99
+#: includes/trustscript-helpers.php:95
 msgid "Access denied"
 msgstr "Toegang geweigerd"
 
-#: includes/trustscript-helpers.php:101
+#: includes/trustscript-helpers.php:97
 msgid "Resource not found"
 msgstr "Pagina niet gevonden"
 
-#: includes/trustscript-helpers.php:103
+#: includes/trustscript-helpers.php:99
 msgid "Rate limit exceeded"
 msgstr "Het aantal toegestane verzoeken is overschreden"
 
-#: includes/trustscript-helpers.php:112
+#: includes/trustscript-helpers.php:108
 msgid "Invalid JSON response from API"
 msgstr "Ongeldig JSON-antwoord van de API"
 
-#: trustscript.php:172
+#: includes/trustscript-helpers.php:133
+msgid ""
+"Webhook secret not configured. Please save your Webhook Secret in "
+"TrustScript settings."
+msgstr ""
+"Webhook-geheim niet geconfigureerd. Sla uw Webhook-geheim op in de "
+"TrustScript-instellingen."
+
+#: includes/trustscript-helpers.php:142
+msgid "X-Webhook-Timestamp header is missing."
+msgstr "De X-Webhook-Timestamp-header ontbreekt."
+
+#: includes/trustscript-helpers.php:150
+msgid "X-Webhook-Timestamp header must be numeric (Unix seconds)."
+msgstr "De X-Webhook-Timestamp-header moet een getal zijn (Unix-seconden)."
+
+#. translators: %d: number of seconds for allowed timestamp skew
+#: includes/trustscript-helpers.php:166
+#, php-format
+msgid "Webhook timestamp is outside acceptable window (max ±%d seconds)."
+msgstr ""
+"De tijdstempel van de webhook valt buiten het toegestane bereik (max. ±%d "
+"seconden)."
+
+#: includes/trustscript-helpers.php:175
+msgid "X-Webhook-Signature header is missing."
+msgstr "De X-Webhook-Signature-header ontbreekt."
+
+#: includes/trustscript-helpers.php:184
+msgid "Could not read request body."
+msgstr "De inhoud van het verzoek kon niet worden gelezen."
+
+#: includes/trustscript-helpers.php:195
+msgid ""
+"Webhook signature verification failed. Possible causes: wrong webhook "
+"secret, modified payload, or request tampering."
+msgstr ""
+"De verificatie van de webhook-handtekening is mislukt. Mogelijke oorzaken: "
+"verkeerde webhook-geheimcode, gewijzigde payload of manipulatie van het "
+"verzoek."
+
+#: trustscript.php:187
 msgid ""
 "No supported services detected. TrustScript works with WooCommerce, "
 "MemberPress, and more."
@@ -3917,10 +4070,14 @@ msgstr ""
 "Er zijn geen ondersteunde diensten gevonden. TrustScript werkt met "
 "WooCommerce, MemberPress en nog veel meer."
 
-#: trustscript.php:185
+#: trustscript.php:201
 msgid "Go Pro"
 msgstr "Go Pro"
 
-#: trustscript.php:191
+#: trustscript.php:204
+msgid "Settings"
+msgstr "Instellingen"
+
+#: trustscript.php:207
 msgid "Docs"
 msgstr "Documenten"

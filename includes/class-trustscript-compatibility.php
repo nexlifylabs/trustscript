@@ -79,6 +79,9 @@ class TrustScript_Compatibility {
 
 	public function on_any_plugin_activated() {
 		delete_transient( 'trustscript_compatibility_check' );
+		// Reset dismissed notices when any plugin is activated, as this may resolve compatibility issues
+		$notice_id = 'trustscript-compat-email-configuration';
+		delete_user_meta( get_current_user_id(), 'dismissed_' . $notice_id );
 	}
 
 	public function on_any_plugin_deactivated() {
@@ -119,6 +122,7 @@ class TrustScript_Compatibility {
 		$this->check_wordpress_version();
 		$this->check_php_version();
 		$this->check_required_functions();
+		$this->check_smtp_configuration();
 		
 		set_transient( 'trustscript_compatibility_check', $this->detected_issues, YEAR_IN_SECONDS );
 	}
@@ -213,6 +217,79 @@ class TrustScript_Compatibility {
 		}
 	}
 
+	/**
+	 * Check if SMTP/email is properly configured
+	 */
+	private function check_smtp_configuration() {
+		$email_plugins = array(
+			// Tier 1 — most popular
+			'wp-mail-smtp/wp_mail_smtp.php'                                         => 'WP Mail SMTP',
+			'wp-mail-smtp-pro/wp_mail_smtp.php'                                     => 'WP Mail SMTP Pro',
+			'fluent-smtp/fluent-smtp.php'                                           => 'FluentSMTP',
+			'post-smtp/postman-smtp.php'                                            => 'Post SMTP (Postman SMTP)',
+			'postman-smtp/postman-smtp.php'                                         => 'Postman SMTP (legacy)',
+			'easy-wp-smtp/easy-wp-smtp.php'                                         => 'Easy WP SMTP',
+			'smtp-mailer/main.php'                                                  => 'SMTP Mailer',
+
+			// Tier 2 — provider-specific / newer
+			'mailgun/mailgun.php'                                                   => 'Mailgun',
+			'sendgrid-email-delivery-simplified/sendgrid-email-delivery-simplified.php' => 'SendGrid',
+			'suremail/suremail.php'                                                 => 'SureMail',
+			'solid-mail/solid-mail.php'                                             => 'Solid Mail',
+			'gmail-smtp/main.php'                                                   => 'Gmail SMTP (gmailer)',
+			'gmailer/gmailer.php'                                                   => 'GMail SMTP by BestWebSoft',
+			'mailpoet/mailpoet.php'                                                 => 'MailPoet',
+			'sparkpost/sparkpost.php'                                               => 'SparkPost',
+			'elasticmail-sender/elasticmail-sender.php'                             => 'Elastic Email',
+			'wp-amazon-ses/wp-amazon-ses.php'                                       => 'WP Amazon SES',
+			'wordpress-ses/wp-ses.php'                                              => 'WP SES (10Web)',
+			'brevo-woocommerce/brevo.php'                                           => 'Brevo (Sendinblue)',
+			'mailchimp-for-wp/mailchimp-for-wp.php'                                 => 'Mailchimp for WP',
+		);
+
+		$has_email_plugin  = false;
+		$email_plugin_name = '';
+
+		foreach ( $email_plugins as $plugin_file => $plugin_name ) {
+			if ( $this->is_plugin_active( $plugin_file ) ) {
+				$has_email_plugin  = true;
+				$email_plugin_name = $plugin_name;
+				break;
+			}
+		}
+
+		if ( ! $has_email_plugin && has_filter( 'phpmailer_init' ) ) {
+			$has_email_plugin  = true;
+			$email_plugin_name = 'custom phpmailer_init hook';
+		}
+
+		if ( ! $has_email_plugin ) {
+			$disabled = array_map( 'trim', explode( ',', (string) ini_get( 'disable_functions' ) ) );
+			if ( function_exists( 'mail' ) && ! in_array( 'mail', $disabled, true ) ) {
+				$this->detected_issues[] = array(
+					'type'        => 'email_not_configured',
+					'severity'    => 'info',
+					'plugin'      => 'Email Configuration',
+					'description' => 'No dedicated SMTP plugin detected. WordPress is using PHP\'s native mail() function, which works on many hosts but may have lower deliverability or land in spam.',
+					'solution'    => 'For best deliverability, consider WP Mail SMTP or FluentSMTP — both have free tiers. If your emails are already arriving reliably, you can dismiss this.',
+					'docs_url'    => '',
+				);
+				return;
+			}
+		}
+
+		if ( ! $has_email_plugin ) {
+			$this->detected_issues[] = array(
+				'type'        => 'email_not_configured',
+				'severity'    => 'high',
+				'plugin'      => 'Email Configuration',
+				'description' => 'TrustScript sends review request emails, but WordPress email does not appear to be configured AND PHP mail() is disabled on this server. Emails will fail silently.',
+				'solution'    => 'Install and configure an SMTP plugin — WP Mail SMTP, FluentSMTP, Post SMTP, or Easy WP SMTP are recommended.',
+				'docs_url'    => '',
+			);
+		}
+	}
+
 	private function is_plugin_active( $plugin_file ) {
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			include_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -222,7 +299,7 @@ class TrustScript_Compatibility {
 
 	public function display_compatibility_notices() {
 		$screen = get_current_screen();
-		if ( ! $screen || strpos( $screen->id, 'trustscript' ) === false ) {
+		if ( ! $screen ) {
 			return;
 		}
 
@@ -230,8 +307,20 @@ class TrustScript_Compatibility {
 			return;
 		}
 
+		$is_trustscript_page = strpos( $screen->id, 'trustscript' ) !== false;
+
 		foreach ( $this->detected_issues as $issue ) {
-			$this->display_notice( $issue );
+			if ( 'email_not_configured' === $issue['type'] && 'high' === $issue['severity'] ) {
+				// This is critical and should be shown on all admin pages since it can cause silent email failures, so admins are aware of the issue even if they don't visit TrustScript settings right away
+				$this->display_notice( $issue );
+			} elseif ( 'email_not_configured' === $issue['type'] && 'info' === $issue['severity'] ) {
+				// mail() is enabled but no SMTP plugin detected — show only on TrustScript pages to avoid confusion for users who may have working email but just no SMTP plugin
+				if ( $is_trustscript_page ) {
+					$this->display_notice( $issue );
+				}
+			} elseif ( $is_trustscript_page ) {
+				$this->display_notice( $issue );
+			}
 		}
 	}
 

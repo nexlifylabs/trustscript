@@ -79,7 +79,7 @@ class TrustScript_WooCommerce_Provider extends TrustScript_Service_Provider {
 			return;
 		}
 
-		$api_key  = get_option( 'trustscript_api_key', '' );
+		$api_key  = trustscript_get_api_key();
 		$base_url = trustscript_get_base_url();
 
 		if ( empty( $api_key ) || empty( $base_url ) ) {
@@ -158,7 +158,7 @@ class TrustScript_WooCommerce_Provider extends TrustScript_Service_Provider {
 			return;
 		}
 
-		$api_key  = get_option( 'trustscript_api_key', '' );
+		$api_key  = trustscript_get_api_key();
 		$base_url = trustscript_get_base_url();
 
 		if ( empty( $api_key ) || empty( $base_url ) ) {
@@ -361,11 +361,15 @@ class TrustScript_WooCommerce_Provider extends TrustScript_Service_Provider {
 				}
 			}
 
+			$image_id = $product->get_image_id();
+			$image_url = $image_id ? wp_get_attachment_url( $image_id ) : '';
+
 			$products[] = array(
-				'productId'   => $product->get_id(),
-				'productName' => $item->get_name(),
-				'productSku'  => $product->get_sku(),
-				'quantity'    => $qty_remaining, 
+				'productId'       => $product->get_id(),
+				'productName'     => $item->get_name(),
+				'productSku'      => $product->get_sku(),
+				'productImageUrl' => $image_url,
+				'quantity'        => $qty_remaining,
 			);
 		}
 
@@ -572,9 +576,10 @@ class TrustScript_WooCommerce_Provider extends TrustScript_Service_Provider {
 			'order_number' => $order->get_order_number(),
 			'product_id' => $product_id,
 			'product_image_url' => $product_image_url,
+			'billing_country' => $order->get_billing_country(),
 		);
 	}
-	
+
 	/**
 	 * Get customer email
 	 */
@@ -681,16 +686,10 @@ class TrustScript_WooCommerce_Provider extends TrustScript_Service_Provider {
 				$product_categories = array_map( 'intval', $product_categories );
 				
 				// Check if this product is in ANY of the allowed categories
-				$is_in_allowed_category = false;
-				foreach ( $allowed_categories as $allowed_cat_id ) {
-					if ( in_array( $allowed_cat_id, $product_categories, true ) ) {
-						$is_in_allowed_category = true;
-						break;
-					}
-				}
+				$has_match = ! empty( array_intersect( $allowed_categories, $product_categories ) );
 
-				// Skip this product if it's not in any allowed category
-				if ( ! $is_in_allowed_category ) {
+				// ONLY process products that ARE in the allowed categories
+				if ( ! $has_match ) {
 					continue;
 				}
 			}

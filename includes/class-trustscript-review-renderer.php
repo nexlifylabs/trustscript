@@ -1,14 +1,7 @@
 <?php
 /**
- * Review Rendering Engine
- *
- * Handles centralized rendering of review display components including summary cards,
- * photo galleries, filter chips, sort controls, and individual review cards. Supports
- * both theme-integrated display and legacy shortcode contexts.
- *
- * Interactive functionality (filtering, sorting, carousel navigation, lightbox display,
- * review voting, and verification modals) is implemented in assets/js/trustscript-reviews.js
- * and coordinated via REST API endpoints.
+ * Handles rendering of review display components: summary cards, photo galleries,
+ * filter chips, sort controls, and individual review cards.
  *
  * @package TrustScript
  * @since   1.0.0
@@ -19,6 +12,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class TrustScript_Review_Renderer {
+	/** 
+	 * Flag to prevent nested rendering which can cause performance issues.
+	 */
+	private static $rendering_card = false;
 
 	public static function boot() {
 		add_action( 'rest_api_init', array( __CLASS__, 'register_rest_routes' ) );
@@ -65,10 +62,11 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Intermediate handler for wp_insert_comment hook. Flushes stats cache when a new comment/review is added.
+	 * Flushes stats cache when a new review is added.
 	 *
-	 * @param int $comment_id
-	 * @param WP_Comment $comment
+	 * @since 1.0.0
+	 * @param int        $comment_id Comment ID.
+	 * @param WP_Comment $comment    Comment object.
 	 */
 	public static function _on_insert_comment( $comment_id, $comment ) {
 		$product_id = (int) $comment->comment_post_ID;
@@ -80,10 +78,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Intermediate handler for edit_comment and deleted_comment hooks. 
-	 * Flushes stats cache when a comment/review is edited or deleted.
+	 * Flushes stats cache when a review is edited.
 	 *
-	 * @param int $comment_id
+	 * @since 1.0.0
+	 * @param int $comment_id Comment ID.
 	 */
 	public static function _on_edit_comment( $comment_id ) {
 		$c = get_comment( $comment_id );
@@ -98,10 +96,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Intermediate handler for wp_set_comment_status hook. 
-	 * Flushes stats cache when a comment/review's approval status changes.
+	 * Flushes stats cache when a review status changes.
 	 *
-	 * @param int $comment_id
+	 * @since 1.0.0
+	 * @param int $comment_id Comment ID.
 	 */
 	public static function _on_comment_status( $comment_id ) {
 		$c = get_comment( $comment_id );
@@ -116,13 +114,13 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Intermediate handler for added_comment_meta and updated_comment_meta hooks.
-	 * Flushes stats cache when relevant comment meta changes (ratings, media, verification status).
+	 * Flushes stats cache when a relevant review meta key is added or updated.
 	 *
-	 * @param int $meta_id
-	 * @param int $comment_id
-	 * @param string $meta_key
-	 * @param mixed $meta_value
+	 * @since 1.0.0
+	 * @param int    $meta_id    Meta ID.
+	 * @param int    $comment_id Comment ID.
+	 * @param string $meta_key   Meta key.
+	 * @param mixed  $meta_value Meta value.
 	 */
 	public static function _on_comment_meta_change( $meta_id, $comment_id, $meta_key, $meta_value ) {
 		$watched_keys = array( '_trustscript', 'rating', '_wc_star_rating', 'verified' );
@@ -149,9 +147,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Intermediate handler for woocommerce_new_comment_added hook.
+	 * Flushes stats cache when a WooCommerce review is added.
 	 *
-	 * @param int $comment_id
+	 * @since 1.0.0
+	 * @param int $comment_id Comment ID.
 	 */
 	public static function _on_wc_comment_added( $comment_id ) {
 		$c = get_comment( $comment_id );
@@ -161,11 +160,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Flush the cached stats for a product. This should be called whenever a review 
-	 * is added, edited, deleted, or has relevant meta changed to ensure that the displayed 
-	 * summary data remains accurate.
+	 * Flush the stats transient cache for a product.
 	 *
-	 * @param int $product_id
+	 * @since 1.0.0
+	 * @param int $product_id WooCommerce product ID.
 	 */
 	public static function flush_stats_cache( $product_id ) {
 		delete_transient( 'trustscript_stats_' . (int) $product_id );
@@ -174,14 +172,7 @@ class TrustScript_Review_Renderer {
 	/**
 	 * Render JSON-LD schema markup for search engine optimization.
 	 *
-	 * Outputs structured data (Product, AggregateRating, and Review schemas) on WooCommerce
-	 * single product pages. Hooked to the wp_head action for inclusion in page head section.
-	 *
-	 * Aggregate statistics are retrieved from cached transients to eliminate redundant database
-	 * queries. Individual review content is fetched fresh (limited to 50 reviews) to ensure
-	 * search engines always index the most current review data. All data is validated per the
-	 * Google Rich Results schema specification.
-	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function render_schema_markup() {
@@ -320,11 +311,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Extract keywords from a sample of reviews for a product. 
-	 * This is used to identify commonly mentioned aspects of the 
-	 * product that can be used for filtering and display purposes.
+	 * Get the configured keywords for a product, falling back to global settings then defaults.
 	 *
-	 * @param int $product_id WooCommerce product post ID.
+	 * @since 1.0.0
+	 * @param int $product_id WooCommerce product ID.
 	 * @return string[] Array of keyword strings.
 	 */
 	public static function get_configured_keywords( $product_id ) {
@@ -358,10 +348,9 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Get the list of available keyword candidates for review analysis. 
-	 * This can be used in admin settings to allow merchants to select which 
-	 * keywords they want to track and display for their products.
+	 * Get all available keyword candidates.
 	 *
+	 * @since 1.0.0
 	 * @return string[] Array of keyword strings.
 	 */
 	public static function get_available_keywords() {
@@ -369,17 +358,11 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Normalize media URLs to ensure they are accessible regardless of the environment. 
-	 * This is particularly important for localhost or staging environments where the 
-	 * original media URLs may not be valid. The function replaces the domain of the URL 
-	 * with the current site's domain while preserving the path and query parameters.
+	 * Normalize a media URL to the current site domain.
 	 *
-	 * Example:
-	 *   Input:  https://www.production.com/wp-content/uploads/2024/image.jpg
-	 *   Output: http://localhost/wp-content/uploads/2024/image.jpg (if accessed from localhost)
-	 *
-	 * @param string $url The media URL to normalize.
-	 * @return string The normalized URL using current site domain.
+	 * @since 1.0.0
+	 * @param string $url Media URL to normalize.
+	 * @return string Normalized URL, or empty string on failure.
 	 */
 	public static function normalize_media_url( $url ) {
 		if ( empty( $url ) || ! is_string( $url ) ) {
@@ -404,12 +387,26 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Render the full review section for a product, including summary card, 
-	 * filter chips, sort controls, and review cards.
+	 * Render the full review section for a product.
 	 *
-	 * @param int   $product_id WooCommerce product post ID.
-	 * @param array $options    Optional rendering options.
-	 * @return string Full HTML markup.
+	 * Outputs the summary card, photo gallery, filter chips, sort controls,
+	 * and paginated review cards.
+	 *
+	 * @since 1.0.0
+	 * @param int   $product_id WooCommerce product ID.
+	 * @param array $options    Optional rendering options. {
+	 *     @type bool   $show_stars          Show star ratings. Default true.
+	 *     @type bool   $show_verification   Show verification badge. Default true.
+	 *     @type bool   $show_product_name   Show product name on card. Default false.
+	 *     @type bool   $show_verified_label Show verified label. Default true.
+	 *     @type bool   $show_voting         Show helpful voting. Default true.
+	 *     @type string $date_format         Date display format. Default 'full'.
+	 *     @type int    $excerpt_length      Excerpt character limit. Default 0 (no limit).
+	 *     @type array  $keywords            Override keyword chips. Default empty.
+	 *     @type string $heading             Section heading text.
+	 *     @type string $subheading          Section subheading text.
+	 * }
+	 * @return string HTML markup for the full review section.
 	 */
 	public static function render_review_section( $product_id, $options = array() ) {
 		$defaults = array(
@@ -548,13 +545,13 @@ class TrustScript_Review_Renderer {
 			set_transient( $stats_key, $cached_stats, self::STATS_CACHE_TTL );
 		}
 
-	$avg_rating    = $cached_stats['avg_rating'];
-	$rated_total   = $cached_stats['rated_total'];
-	$rating_counts = $cached_stats['rating_counts'];
-	$keywords      = $cached_stats['keywords'];
-	$all_media         = array_slice( $cached_stats['all_media'], 0, self::GALLERY_MEDIA_CAP );
-	$all_media_meta    = array_slice( $cached_stats['all_media_meta'] ?? array(), 0, self::GALLERY_MEDIA_CAP );
-	$total_media_count = count( $cached_stats['all_media'] );
+		$avg_rating    = $cached_stats['avg_rating'];
+		$rated_total   = $cached_stats['rated_total'];
+		$rating_counts = $cached_stats['rating_counts'];
+		$keywords      = $cached_stats['keywords'];
+		$all_media         = array_slice( $cached_stats['all_media'], 0, self::GALLERY_MEDIA_CAP );
+		$all_media_meta    = array_slice( $cached_stats['all_media_meta'] ?? array(), 0, self::GALLERY_MEDIA_CAP );
+		$total_media_count = count( $cached_stats['all_media'] );
 
 		ob_start();
 		?>
@@ -574,15 +571,13 @@ class TrustScript_Review_Renderer {
 			<div class="trustscript-filter-section">
 				<div class="trustscript-filter-label"><?php esc_html_e( 'Filter by keyword', 'trustscript' ); ?></div>
 				<div class="trustscript-filter-chips">
-					<button class="trustscript-chip trustscript-chip-active" data-keyword="all"
-					        onclick="trustscriptFilterKeyword('all',this)">
+					<button class="trustscript-chip trustscript-chip-active" data-keyword="all">
 						<?php esc_html_e( 'All Reviews', 'trustscript' ); ?>
 					</button>
 					<?php foreach ( $keywords as $kw ) :
 						$kw_slug = strtolower( $kw );
 					?>
-					<button class="trustscript-chip" data-keyword="<?php echo esc_attr( $kw_slug ); ?>"
-					        onclick="trustscriptFilterKeyword('<?php echo esc_js( $kw_slug ); ?>',this)">
+					<button class="trustscript-chip" data-keyword="<?php echo esc_attr( $kw_slug ); ?>">
 						<?php echo esc_html( $kw ); ?>
 					</button>
 					<?php endforeach; ?>
@@ -593,20 +588,16 @@ class TrustScript_Review_Renderer {
 			<div class="trustscript-sort-bar">
 				<span class="trustscript-sort-label"><?php esc_html_e( 'Sort by', 'trustscript' ); ?></span>
 				<div class="trustscript-sort-buttons">
-					<button class="trustscript-sort-btn trustscript-sort-active" data-sort="helpful"
-					        onclick="trustscriptSortReviews('helpful',this)">
+					<button class="trustscript-sort-btn trustscript-sort-active" data-sort="helpful">
 						<?php esc_html_e( 'Most Helpful', 'trustscript' ); ?>
 					</button>
-					<button class="trustscript-sort-btn" data-sort="newest"
-					        onclick="trustscriptSortReviews('newest',this)">
+					<button class="trustscript-sort-btn" data-sort="newest">
 						<?php esc_html_e( 'Newest', 'trustscript' ); ?>
 					</button>
-					<button class="trustscript-sort-btn" data-sort="highest"
-					        onclick="trustscriptSortReviews('highest',this)">
+					<button class="trustscript-sort-btn" data-sort="highest">
 						<?php esc_html_e( 'Highest Rated', 'trustscript' ); ?>
 					</button>
-					<button class="trustscript-sort-btn" data-sort="lowest"
-					        onclick="trustscriptSortReviews('lowest',this)">
+					<button class="trustscript-sort-btn" data-sort="lowest">
 						<?php esc_html_e( 'Lowest Rated', 'trustscript' ); ?>
 					</button>
 				</div>
@@ -656,7 +647,7 @@ class TrustScript_Review_Renderer {
 
 			<?php if ( $total > $initial_visible ) : ?>
 			<div class="trustscript-load-more-wrap" id="trustscript-load-more-wrap">
-				<button class="trustscript-load-more-btn" onclick="trustscriptLoadMore()">
+				<button class="trustscript-load-more-btn">
 					<?php echo esc_html_x( 'Load more reviews', 'button label', 'trustscript' ); ?>
 				</button>
 			</div>
@@ -675,16 +666,20 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Render an individual review card with all relevant data and metadata. 
-	 * This includes the review content, author, rating, verification status, media attachments, 
-	 * keywords, and helpfulness votes. The card is designed to be visually consistent and informative, 
-	 * providing users with a clear and engaging presentation of each review. The function also handles 
-	 * normalization of media URLs and ensures that all necessary data is available for rendering, 
-	 * even if some fields are missing from the original comment object.
+	 * Render an individual review card.
 	 *
-	 * @param WP_Comment $review
-	 * @param array      $options
-	 * @return string
+	 * @since 1.0.0
+	 * @param WP_Comment $review  Comment object representing the review.
+	 * @param array      $options Optional rendering options. {
+	 *     @type bool   $show_stars          Show star rating. Default true.
+	 *     @type bool   $show_verification   Show verified badge. Default true.
+	 *     @type bool   $show_product_name   Show product name. Default false.
+	 *     @type bool   $show_verified_label Show verified label. Default true.
+	 *     @type bool   $show_voting         Show helpful voting. Default true.
+	 *     @type string $date_format         Date display format. Default 'full'.
+	 *     @type int    $excerpt_length      Word limit for review text. Default 0 (no limit).
+	 * }
+	 * @return string HTML markup for the review card.
 	 */
 	public static function render_card( $review, $options = array() ) {
 		$defaults = array(
@@ -776,7 +771,7 @@ class TrustScript_Review_Renderer {
 		$videos     = array_values( array_diff( $review->media_urls, $images ) );
 		$all_media  = array_merge( $images, $videos );
 
-		$GLOBALS['trustscript_rendering_card'] = true;
+		self::$rendering_card = true;
 
 		ob_start();
 		?>
@@ -854,123 +849,121 @@ class TrustScript_Review_Renderer {
 				</a>
 			<?php endif; ?>
 
-<?php if ( ! empty( $all_media ) ) :
-			$count   = count( $all_media );
-			$multi   = $count > 1;
-			$max_off = max( 0, $count - 3 );
-		?>
-		<div class="trustscript-photo-carousel"
-		     id="trustscript-carousel-<?php echo esc_attr( $review->comment_ID ); ?>"
-		     data-images="<?php echo esc_attr( wp_json_encode( $all_media ) ); ?>">
-
-			<?php if ( $multi ) : ?>
-			<button class="trustscript-carousel-arrow trustscript-carousel-prev"
-			        onclick="trustscriptCarouselMove(<?php echo esc_js( (string) $review->comment_ID ); ?>,-1)"
-			        disabled
-			        aria-label="<?php esc_attr_e( 'Previous photo', 'trustscript' ); ?>">&#8249;</button>
-			<?php endif; ?>
-
-			<div class="trustscript-carousel-viewport"
-			     id="trustscript-cvp-<?php echo esc_attr( $review->comment_ID ); ?>">
-				<?php foreach ( $all_media as $i => $media_url ) : 
-					$is_video = preg_match( '/\.(mp4|webm|mov|avi|mkv|flv|m4v|wmv|ogv)$/i', $media_url );
-				?>
-				<div class="trustscript-carousel-thumb<?php echo $i === 0 ? ' trustscript-thumb-active' : ''; ?>"
-				     onclick="trustscriptOpenLightbox(<?php echo esc_js( wp_json_encode( $all_media ) ); ?>,<?php echo (int) $i; ?>)"
-				     style="position:relative;">
-					<?php if ( $is_video ) : ?>
-					<video src="<?php echo esc_url( $media_url ); ?>"
-					       width="88"
-					       height="88"
-					       loading="lazy"
-					       preload="metadata"
-					       style="width:100%;height:100%;object-fit:cover;background:#111;"></video>
-					<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:6px;">
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-					</div>
-					<?php else : ?>
-					<img src="<?php echo esc_url( $media_url ); ?>"
-					     width="88"
-					     height="88"
-					     loading="lazy"
-					     decoding="async"
-					     alt="<?php esc_attr_e( 'Review photo', 'trustscript' ); ?>">
-					<?php endif; ?>
-					</div>
-					<?php endforeach; ?>
-				</div>
+			<?php if ( ! empty( $all_media ) ) :
+				$count   = count( $all_media );
+				$multi   = $count > 1;
+				$max_off = max( 0, $count - 3 );
+			?>
+			<div class="trustscript-photo-carousel"
+				id="trustscript-carousel-<?php echo esc_attr( $review->comment_ID ); ?>"
+				data-images="<?php echo esc_attr( wp_json_encode( $all_media ) ); ?>">
 
 				<?php if ( $multi ) : ?>
-				<button class="trustscript-carousel-arrow trustscript-carousel-next"
-				        onclick="trustscriptCarouselMove(<?php echo esc_js( (string) $review->comment_ID ); ?>,1)"
-				        <?php echo $count <= 3 ? 'disabled' : ''; ?>
-				        aria-label="<?php esc_attr_e( 'Next photo', 'trustscript' ); ?>">&#8250;</button>
+				<button class="trustscript-carousel-arrow trustscript-carousel-prev"
+						data-carousel-id="<?php echo esc_attr( $review->comment_ID ); ?>"
+						data-dir="-1"
+						disabled
+						aria-label="<?php esc_attr_e( 'Previous photo', 'trustscript' ); ?>">&#8249;</button>
 				<?php endif; ?>
 
+				<div class="trustscript-carousel-viewport"
+					id="trustscript-cvp-<?php echo esc_attr( $review->comment_ID ); ?>">
+					<?php foreach ( $all_media as $i => $media_url ) : 
+						$is_video = preg_match( '/\.(mp4|webm|mov|avi|mkv|flv|m4v|wmv|ogv)$/i', $media_url );
+					?>
+					<div class="trustscript-carousel-thumb<?php echo $i === 0 ? ' trustscript-thumb-active' : ''; ?>"
+						data-lightbox-index="<?php echo (int) $i; ?>"
+						style="position:relative;">
+						<?php if ( $is_video ) : ?>
+						<video src="<?php echo esc_url( $media_url ); ?>"
+							width="88"
+							height="88"
+							loading="lazy"
+							preload="metadata"
+							style="width:100%;height:100%;object-fit:cover;background:#111;"></video>
+						<div style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:6px;">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+						</div>
+						<?php else : ?>
+						<img src="<?php echo esc_url( $media_url ); ?>"
+							width="88"
+							height="88"
+							loading="lazy"
+							decoding="async"
+							alt="<?php esc_attr_e( 'Review photo', 'trustscript' ); ?>">
+						<?php endif; ?>
+						</div>
+						<?php endforeach; ?>
+					</div>
+
+					<?php if ( $multi ) : ?>
+					<button class="trustscript-carousel-arrow trustscript-carousel-next"
+							data-carousel-id="<?php echo esc_attr( $review->comment_ID ); ?>"
+							data-dir="1"
+							<?php echo $count <= 3 ? 'disabled' : ''; ?>
+							aria-label="<?php esc_attr_e( 'Next photo', 'trustscript' ); ?>">&#8250;</button>
+					<?php endif; ?>
+
+				</div>
+				<?php endif; ?>
+
+
+
+				<?php if ( $options['show_voting'] ) :
+					$user_vote  = isset( $review->user_vote ) ? $review->user_vote : false;
+					$is_logged  = is_user_logged_in();
+					$voted_up   = ( $user_vote === 'upvote' )   ? ' trustscript-voted-up'   : '';
+					$voted_down = ( $user_vote === 'downvote' ) ? ' trustscript-voted-down' : '';
+					$disabled_class = ! $is_logged ? ' trustscript-btn-disabled' : '';
+				?>
+				<div class="trustscript-helpful-row">
+					<span class="trustscript-helpful-label">
+						<?php esc_html_e( 'Was this helpful?', 'trustscript' ); ?>
+					</span>
+
+					<button type="button"
+							class="trustscript-helpful-btn trustscript-helpful-up<?php echo esc_attr( $voted_up . $disabled_class ); ?>"
+							data-comment-id="<?php echo esc_attr( $review->comment_ID ); ?>"
+							data-vote-type="upvote"
+							aria-label="<?php esc_attr_e( 'Yes, helpful', 'trustscript' ); ?>">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+						<span class="trustscript-vote-label"><?php esc_html_e( 'Yes', 'trustscript' ); ?></span>
+						<span class="trustscript-vote-count" id="trustscript-up-<?php echo esc_attr( $review->comment_ID ); ?>"><?php echo $review->helpful_yes > 0 ? esc_html( $review->helpful_yes ) : ''; ?></span>
+					</button>
+
+					<button type="button"
+							class="trustscript-helpful-btn trustscript-helpful-down<?php echo esc_attr( $voted_down . $disabled_class ); ?>"
+							data-comment-id="<?php echo esc_attr( $review->comment_ID ); ?>"
+							data-vote-type="downvote"
+							aria-label="<?php esc_attr_e( 'No, not helpful', 'trustscript' ); ?>">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+						<span class="trustscript-vote-label"><?php esc_html_e( 'No', 'trustscript' ); ?></span>
+						<span class="trustscript-vote-count" id="trustscript-dn-<?php echo esc_attr( $review->comment_ID ); ?>"><?php echo $review->helpful_no > 0 ? esc_html( $review->helpful_no ) : ''; ?></span>
+					</button>
+
+					<span class="trustscript-vote-msg" id="trustscript-msg-<?php echo esc_attr( $review->comment_ID ); ?>" aria-live="polite"></span>
+				</div>
+				<?php endif; ?>
+
+				<?php
+				$replies = self::get_review_replies( $review->comment_ID );
+				if ( ! empty( $replies ) ) {
+					echo self::render_replies( $replies ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				}
+				?>
+
 			</div>
-			<?php endif; ?>
-
-
-
-			<?php if ( $options['show_voting'] ) :
-				$user_vote  = isset( $review->user_vote ) ? $review->user_vote : false;
-				$is_logged  = is_user_logged_in();
-				$voted_up   = ( $user_vote === 'upvote' )   ? ' trustscript-voted-up'   : '';
-				$voted_down = ( $user_vote === 'downvote' ) ? ' trustscript-voted-down' : '';
-				$disabled_class = ! $is_logged ? ' trustscript-btn-disabled' : '';
-			?>
-			<div class="trustscript-helpful-row">
-				<span class="trustscript-helpful-label">
-					<?php esc_html_e( 'Was this helpful?', 'trustscript' ); ?>
-				</span>
-
-				<button type="button"
-				        class="trustscript-helpful-btn trustscript-helpful-up<?php echo esc_attr( $voted_up . $disabled_class ); ?>"
-				        data-comment-id="<?php echo esc_attr( $review->comment_ID ); ?>"
-				        data-vote-type="upvote"
-				        aria-label="<?php esc_attr_e( 'Yes, helpful', 'trustscript' ); ?>">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
-					<span class="trustscript-vote-label"><?php esc_html_e( 'Yes', 'trustscript' ); ?></span>
-					<span class="trustscript-vote-count" id="trustscript-up-<?php echo esc_attr( $review->comment_ID ); ?>"><?php echo $review->helpful_yes > 0 ? esc_html( $review->helpful_yes ) : ''; ?></span>
-				</button>
-
-				<button type="button"
-				        class="trustscript-helpful-btn trustscript-helpful-down<?php echo esc_attr( $voted_down . $disabled_class ); ?>"
-				        data-comment-id="<?php echo esc_attr( $review->comment_ID ); ?>"
-				        data-vote-type="downvote"
-				        aria-label="<?php esc_attr_e( 'No, not helpful', 'trustscript' ); ?>">
-					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3H10z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
-					<span class="trustscript-vote-label"><?php esc_html_e( 'No', 'trustscript' ); ?></span>
-					<span class="trustscript-vote-count" id="trustscript-dn-<?php echo esc_attr( $review->comment_ID ); ?>"><?php echo $review->helpful_no > 0 ? esc_html( $review->helpful_no ) : ''; ?></span>
-				</button>
-
-				<span class="trustscript-vote-msg" id="trustscript-msg-<?php echo esc_attr( $review->comment_ID ); ?>" aria-live="polite"></span>
-			</div>
-			<?php endif; ?>
-
 			<?php
-			$replies = self::get_review_replies( $review->comment_ID );
-			if ( ! empty( $replies ) ) {
-				echo self::render_replies( $replies ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-			}
-			?>
 
-		</div>
-		<?php
-
-		$html = ob_get_clean();
-		$GLOBALS['trustscript_rendering_card'] = false;
+			$html = ob_get_clean();
+			self::$rendering_card = false;
 		return $html;
 	}
 
 	/**
-	 * Render multiple review cards in a list or grid format, applying any necessary 
-	 * batch processing for performance optimization. This function takes an array of 
-	 * WP_Comment objects representing individual reviews and renders each one using 
-	 * the render_card function. It also ensures that any required metadata is pre-
-	 * fetched to minimize database queries during rendering and improve overall performance, 
-	 * especially when dealing with a large number of reviews.
-	 * 
+	 * Render multiple review cards in a list or grid format.
+	 *
+	 * @since 1.0.0
 	 * @param WP_Comment[] $reviews
 	 * @param array        $options
 	 * @return string
@@ -1006,6 +999,7 @@ class TrustScript_Review_Renderer {
 	/**
 	 * Rating summary card.
 	 *
+	 * @since 1.0.0
 	 * @param float $avg   Average rating.
 	 * @param int   $total Total review count.
 	 * @param array $counts Per-star counts keyed 1-5.
@@ -1037,8 +1031,7 @@ class TrustScript_Review_Renderer {
 					$count = isset( $counts[ $star ] ) ? (int) $counts[ $star ] : 0;
 					$pct   = $total > 0 ? round( ( $count / $total ) * 100 ) : 0;
 				?>
-				<div class="trustscript-bar-row" data-rating="<?php echo esc_attr( (string) $star ); ?>"
-				     onclick="trustscriptFilterRating(<?php echo esc_js( (string) $star ); ?>,this)">
+				<div class="trustscript-bar-row" data-rating="<?php echo esc_attr( (string) $star ); ?>">
 					<span class="trustscript-bar-label">
 						<?php echo esc_html( (string) $star ); ?> <span class="trustscript-mini-star" aria-hidden="true">★</span>
 					</span>
@@ -1084,16 +1077,13 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Aggregated photo gallery card. Displays a preview grid of up to 5 images from reviews, 
-	 * with an overlay indicating the total number of photos available. Clicking the card opens 
-	 * a lightbox gallery showing all images. The function accepts an array of image URLs to 
-	 * display, along with metadata and counts for proper labeling and accessibility. It also 
-	 * ensures that the data is properly encoded for use in JavaScript interactions, allowing for
-	 * dynamic loading of additional images as needed.
+	 * Render aggregated photo gallery card with up to 5 image previews.
 	 *
+	 * @since 1.0.0
 	 * @param string[] $display_media    Inline image URL array (GALLERY_MEDIA_CAP items max).
+	 * @param array    $display_meta     Associated metadata for images.
 	 * @param int      $total_media_count True total image count across ALL reviews (for header + lazy-load).
-	 * @param int      $product_id        Product ID passed to JS so REST /gallery knows what to fetch.
+	 * @param int      $product_id       Product ID passed to JS so REST /gallery knows what to fetch.
 	 * @return string
 	 */
 	private static function render_gallery_card( $display_media, $display_meta = array(), $total_media_count = 0, $product_id = 0 ) {
@@ -1128,7 +1118,8 @@ class TrustScript_Review_Renderer {
 				?>
 					<?php if ( $i === 4 && $has_more ) : ?>
 					<div class="trustscript-gallery-overflow-thumb"
-					     onclick="trustscriptOpenLightbox(trustscriptAllMedia,4)"
+					     data-gallery-lightbox="true"
+					     data-lightbox-index="4"
 					     title="<?php echo esc_attr(
 							/* translators: %d = total count of images in the gallery */
 							sprintf( __( 'View all %d images', 'trustscript' ), $total_count ) ); ?>"
@@ -1157,7 +1148,8 @@ class TrustScript_Review_Renderer {
 					</div>
 					<?php else : ?>
 					<div class="trustscript-gallery-thumb"
-					     onclick="trustscriptOpenLightbox(trustscriptAllMedia,<?php echo (int) $i; ?>)">
+					     data-gallery-lightbox="true"
+					     data-lightbox-index="<?php echo (int) $i; ?>">
 						<?php if ( $is_video ) : ?>
 							<video src="<?php echo esc_url( $url ); ?>"
 							       loading="lazy"
@@ -1181,10 +1173,12 @@ class TrustScript_Review_Renderer {
 		return ob_get_clean();
 	}
 
-	/** Lightbox gallery HTML shell. The actual images and metadata are loaded dynamically 
-	 * via JS when a user clicks on a photo thumbnail or gallery card. 
-	 * 
-	 * */
+	/**
+	 * Lightbox gallery HTML shell.
+	 *
+	 * @since 1.0.0
+	 * @return string
+	 */
 	private static function render_lightbox_shell() {
 		ob_start();
 		?>
@@ -1208,12 +1202,14 @@ class TrustScript_Review_Renderer {
 			</div>
 
 			<div class="trustscript-lb-main">
+				<div class="trustscript-lb-media-wrap">
 				<img id="trustscript-lb-img" src="" alt="...">
 				<!-- Shown over video before user clicks play -->
 				<div id="trustscript-lb-video-play" class="trustscript-lb-video-play" style="display:none">
-					<svg viewBox="0 0 24 24" fill="white" width="64" height="64">
+					<svg viewBox="0 0 24 24" fill="white" width="36" height="36">
 						<path d="M8 5v14l11-7z"/>
 					</svg>
+				</div>
 				</div>
 
 				<div class="trustscript-lb-info" id="trustscript-lb-info" style="display:none">
@@ -1224,7 +1220,7 @@ class TrustScript_Review_Renderer {
 							<span class="trustscript-lb-info-stars" id="trustscript-lb-info-stars"></span>
 						</div>
 						<span class="trustscript-lb-info-verified" id="trustscript-lb-info-verified" style="display:none">
-							✓ Verified Buyer
+							<?php esc_html_e( '✓ Verified Buyer', 'trustscript' ); ?>
 						</span>
 					</div>
 
@@ -1241,31 +1237,70 @@ class TrustScript_Review_Renderer {
 		return ob_get_clean();
 	}
 
-	private static function render_verify_modal_shell() {
+	/**
+	 * Render the verification modal HTML shell.
+	 *
+	 * @since 1.0.0
+	 * @param string $title Optional modal title. Default: 'Review Verified by TrustScript'
+	 * @return string HTML markup for the verification modal.
+	 */
+	public static function get_verification_modal_html( $title = '' ) {
+		if ( empty( $title ) ) {
+			$title = __( 'Review Verified by TrustScript', 'trustscript' );
+		}
+
+		$verify_url = trustscript_get_base_url() . '/verify-review';
+
 		ob_start();
 		?>
-		<div id="trustscript-verify-modal" class="trustscript-modal"
-		     style="display:none" role="dialog" aria-modal="true"
-		     aria-label="<?php esc_attr_e( 'Verify review', 'trustscript' ); ?>">
-			<div class="trustscript-modal-inner">
-				<button class="trustscript-modal-close"
-				        aria-label="<?php esc_attr_e( 'Close', 'trustscript' ); ?>">✕</button>
-				<h3><?php esc_html_e( 'Verify this review', 'trustscript' ); ?></h3>
-				<p><?php esc_html_e( 'Authenticity hash for this review:', 'trustscript' ); ?></p>
-				<code id="trustscript-modal-hash"></code>
-				<div class="trustscript-modal-actions">
-					<button id="trustscript-copy-hash" class="trustscript-btn-secondary">
-						<?php esc_html_e( 'Copy Hash', 'trustscript' ); ?>
-					</button>
-					<a id="trustscript-verify-link-btn" href="#" target="_blank" rel="noopener noreferrer"
-					   class="trustscript-btn-primary">
-						<?php esc_html_e( 'Verify on TrustScript', 'trustscript' ); ?>
+		<div class="trustscript-modal-overlay" id="trustscript-verify-modal">
+			<div class="trustscript-modal">
+
+				<button class="trustscript-modal-close" aria-label="<?php esc_attr_e( 'Close', 'trustscript' ); ?>">&times;</button>
+				<div class="trustscript-modal-header">
+					<svg class="trustscript-modal-shield" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+						<path d="m9 12 2 2 4-4"/>
+					</svg>
+					<h3 class="trustscript-modal-title"><?php echo esc_html( $title ); ?></h3>
+				</div>
+
+				<div class="trustscript-modal-reviewer" id="trustscript-modal-reviewer">
+					<span class="trustscript-modal-reviewer-name" id="trustscript-modal-author"></span>
+					<span class="trustscript-modal-reviewer-stars" id="trustscript-modal-stars" aria-label="<?php esc_attr_e( 'Star rating', 'trustscript' ); ?>"></span>
+				</div>
+
+				<div class="trustscript-modal-content">
+
+					<p class="trustscript-modal-explanation">
+						<?php esc_html_e( 'This code ties the review to its original submission on TrustScript. You can use it to confirm the review is genuine and unedited.', 'trustscript' ); ?>
+					</p>
+
+					<div class="trustscript-hash-container" id="trustscript-modal-hash"></div>
+
+					<div class="trustscript-modal-actions">
+						<button class="trustscript-copy-btn" id="trustscript-copy-hash">
+							<?php esc_html_e( 'Copy Hash', 'trustscript' ); ?>
+						</button>
+					</div>
+
+				</div>
+
+				<div class="trustscript-modal-footer">
+					<span class="trustscript-modal-powered"><?php esc_html_e( 'Powered by TrustScript', 'trustscript' ); ?></span>
+					<a href="<?php echo esc_url( $verify_url ); ?>" id="trustscript-verify-link-btn" class="trustscript-verify-external-link" target="_blank" rel="noopener noreferrer">
+						<?php esc_html_e( 'Verify externally ↗', 'trustscript' ); ?>
 					</a>
 				</div>
+
 			</div>
 		</div>
 		<?php
 		return ob_get_clean();
+	}
+
+	private static function render_verify_modal_shell() {
+		return self::get_verification_modal_html();
 	}
 
 
@@ -1275,6 +1310,7 @@ class TrustScript_Review_Renderer {
 	 *
 	 * @param int $parent_comment_id The review comment ID.
 	 * @return WP_Comment[]
+	 * @since 1.0.0
 	 */
 	private static function get_review_replies( $parent_comment_id ) {
 		return get_comments( array(
@@ -1288,6 +1324,7 @@ class TrustScript_Review_Renderer {
 	/**
 	 * Render merchant/admin replies to a review.
 	 *
+	 * @since 1.0.0
 	 * @param WP_Comment[] $replies
 	 * @return string
 	 */
@@ -1327,12 +1364,12 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Extract keywords from a batch of reviews by checking for the presence of 
-	 * configured keywords in the review texts. 
+	 * Extract which configured keywords appear in a sample of review texts.
 	 *
-	 * @param WP_Comment[] $reviews (should already be a sample slice)
-	 * @param string[] $keyword_candidates List of keywords to check for (default: available keywords)
-	 * @return string[] Keywords found in reviews that are also in the candidates list
+	 * @since 1.0.0
+	 * @param WP_Comment[] $reviews            Sample of review comment objects.
+	 * @param string[]     $keyword_candidates Keywords to check against.
+	 * @return string[] Keywords found in the review sample.
 	 */
 	private static function extract_keywords( $reviews, $keyword_candidates = array() ) {
 		if ( empty( $keyword_candidates ) ) {
@@ -1352,9 +1389,11 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Get keywords for a single review by checking the review body against a list of candidate keywords.
+	 * Get keywords found in a single review body.
 	 *
-	 * @param string $text Review body.
+	 * @since 1.0.0
+	 * @param string        $text       Review body text.
+	 * @param string[]|null $candidates Keywords to check against. Defaults to all candidates.
 	 * @return string Comma-separated lowercase keywords found.
 	 */
 	private static function get_card_keywords( $text, $candidates = null ) {
@@ -1372,13 +1411,11 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Generate initials for avatar placeholder based on the reviewer's name. 
-	 * For names with multiple words, use the first letter of the first two words. 
-	 * For single-word names, use the first two letters of the name. The initials 
-	 * are returned in uppercase for better visibility in the avatar circle.
+	 * Generate two-character initials from a reviewer's name.
 	 *
-	 * @param string $name
-	 * @return string
+	 * @since 1.0.0
+	 * @param string $name Reviewer display name.
+	 * @return string Uppercase initials.
 	 */
 	private static function get_initials( $name ) {
 		$words = preg_split( '/\s+/', trim( $name ), -1, PREG_SPLIT_NO_EMPTY );
@@ -1389,9 +1426,10 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Pick a consistent avatar background colour from name.
+	 * Get a consistent avatar background colour derived from a name.
 	 *
-	 * @param string $name
+	 * @since 1.0.0
+	 * @param string $name Reviewer display name.
 	 * @return string Hex colour string.
 	 */
 	private static function get_avatar_color( $name ) {
@@ -1399,7 +1437,9 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * Register the /trustscript/v1/reviews GET route.
+	 * Register REST API routes for reviews and gallery endpoints.
+	 *
+	 * @since 1.0.0
 	 */
 	public static function register_rest_routes() {
 		register_rest_route(
@@ -1454,11 +1494,11 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * REST endpoint callback to fetch a batch of reviews for a given product, 
-	 * including pagination support via offset and count parameters.
+	 * Fetch a paginated batch of rendered review cards for a product.
 	 *
-	 * @param WP_REST_Request $request
-	 * @return WP_REST_Response
+	 * @since 1.0.0
+	 * @param WP_REST_Request $request Request object with product_id, offset, and count params.
+	 * @return WP_REST_Response Response containing HTML markup, has_more flag, and total count.
 	 */
 	public static function rest_fetch_reviews( WP_REST_Request $request ) {
 		while ( ob_get_level() > 0 ) {
@@ -1567,7 +1607,7 @@ class TrustScript_Review_Renderer {
 				array(
 					'html'    => '',
 					'has_more' => false,
-					'error'   => $e->getMessage(),
+					'error'   => 'Unable to load reviews',
 				),
 				200  
 			);
@@ -1575,16 +1615,14 @@ class TrustScript_Review_Renderer {
 	}
 
 	/**
-	 * REST endpoint to fetch paginated media URLs for a product's reviews.
+	 * Fetch a paginated batch of media URLs from a product's reviews.
 	 *
-	 * Retrieves media URLs from cached transient for performance. Falls back to 
-	 * querying all approved reviews if cache is unavailable. Returns a batch of 
-	 * media URLs with metadata, total count, and pagination flag.
+	 * Serves from the cached stats transient when available. Falls back to
+	 * querying all approved reviews directly when the cache is cold.
 	 *
 	 * @since 1.0.0
-	 *
 	 * @param WP_REST_Request $request Request object with product_id, offset, and count params.
-	 * @return WP_REST_Response Response with urls, meta, total, and has_more fields.
+	 * @return WP_REST_Response Response containing urls, meta, total, and has_more fields.
 	 */
 	public static function rest_fetch_gallery( WP_REST_Request $request ) {
 		while ( ob_get_level() > 0 ) {
@@ -1653,6 +1691,17 @@ class TrustScript_Review_Renderer {
 		}
 	}
 
+	/**
+	 * Flush all product stats transients when the review keywords setting changes.
+	 *
+	 * Hooked to `update_option` / `add_option` for `trustscript_review_keywords`.
+	 *
+	 * @since 1.0.0
+	 * @param string $option    Option name being updated.
+	 * @param mixed  $old_value Previous option value (unused).
+	 * @param mixed  $value     New option value (unused).
+	 * @return void
+	 */
 	public static function maybe_flush_stats_on_keywords_change( $option, $old_value = null, $value = null ) {
 		if ( $option !== 'trustscript_review_keywords' ) {
 			return;

@@ -12,6 +12,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 class TrustScript_Placeholder_Mapper {
 	
 	public static function map_placeholders( $service_data, $service_type, $review_link, $products = array() ) {
+		// Get physical address based on country and setting
+		$physical_address = self::get_physical_address_for_email( $service_data );
+		
 		$placeholders = array(
 			'customer_name' => $service_data['customer_name'] ?? '',
 			'customer_email' => $service_data['customer_email'] ?? '',
@@ -24,6 +27,7 @@ class TrustScript_Placeholder_Mapper {
 			'purchase_id' => $service_data['order_number'] ?? '',
 			'purchase_date' => isset( $service_data['order_date'] ) ? wp_date( 'F j, Y', strtotime( $service_data['order_date'] ) ) : '',
 			'purchase_total' => self::format_price( $service_data['order_total'] ?? 0, $service_type ),
+			'physical_address' => $physical_address,
 		);
 		
 		$service_specific = self::get_service_specific_placeholders( $service_data, $service_type );
@@ -148,6 +152,7 @@ class TrustScript_Placeholder_Mapper {
 			'purchase_id' => __( 'Order/Transaction/Booking ID', 'trustscript' ),
 			'purchase_date' => __( 'Purchase date', 'trustscript' ),
 			'purchase_total' => __( 'Purchase total', 'trustscript' ),
+			'physical_address' => __( 'Physical mailing address', 'trustscript' ),
 		);
 	}
 	
@@ -176,5 +181,41 @@ class TrustScript_Placeholder_Mapper {
 			default:
 				return array();
 		}
+	}
+
+	/**
+	 * Determine if physical address should be included in email based on country and settings.
+	 * 
+	 * Always includes for US (CAN-SPAM requirement).
+	 * For other countries, includes only if explicitly enabled.
+	 *
+	 * @param array $service_data Service/order data with 'billing_country' key
+	 * @return string Physical address or empty string
+	 */
+	private static function get_physical_address_for_email( $service_data ) {
+		$country = $service_data['billing_country'] ?? '';
+		$include_address = false;
+
+		// Always include for US customers (CAN-SPAM requirement)
+		if ( $country === 'US' ) {
+			$include_address = true;
+		} else {
+			// For other countries, check if explicitly enabled
+			$require_address = get_option( 'trustscript_require_physical_address', '0' );
+			$include_address = $require_address === '1';
+		}
+
+		if ( ! $include_address ) {
+			return '';
+		}
+
+		// Get the physical address from settings
+		if ( class_exists( 'TrustScript_Privacy_Settings_Page' ) ) {
+			$address = TrustScript_Privacy_Settings_Page::get_physical_address();
+		} else {
+			$address = get_option( 'trustscript_physical_address', '' );
+		}
+
+		return $address;
 	}
 }

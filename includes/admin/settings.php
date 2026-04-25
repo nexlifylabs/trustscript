@@ -154,7 +154,7 @@ class TrustScript_Settings_Page {
 					<a href="<?php echo esc_url( $app_url . '/dashboard' ); ?>" target="_blank" class="button">
 						<?php esc_html_e( 'Open Dashboard', 'trustscript' ); ?>
 					</a>
-					<a href="<?php echo esc_url( 'https://nexlifylabs.com/pricing' ); ?>" target="_blank" class="button button-primary trustscript-upgrade-btn">
+					<a href="<?php echo esc_url( TRUSTSCRIPT_PRICING_URL ); ?>" target="_blank" class="button button-primary trustscript-upgrade-btn">
 						⭐ <?php esc_html_e( 'Upgrade Plan', 'trustscript' ); ?>
 					</a>
 				</div>
@@ -228,17 +228,29 @@ class TrustScript_Settings_Page {
 					?>
 
 					<div class="trustscript-api-key-input-row">
-						<input
-							type="password"
-							id="trustscript_api_key"
-							name="trustscript_api_key"
-							value="<?php echo isset( $_POST['trustscript_api_key'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_POST['trustscript_api_key'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified by settings_fields() in form ?>"
-							class="trustscript-api-key-input"
-							placeholder="TSK-XXXX-XXXX-XXXX"
-							autocomplete="off"
-							spellcheck="false"
-							required
-						/>
+						<div class="trustscript-api-key-input-group">
+							<input
+								type="password"
+								id="trustscript_api_key"
+								name="trustscript_api_key"
+								value="<?php echo isset( $_POST['trustscript_api_key'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_POST['trustscript_api_key'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified by settings_fields() in form ?>"
+								class="trustscript-api-key-input"
+								placeholder="TSK-XXXX-XXXX-XXXX (paste API key here)"
+								autocomplete="off"
+								spellcheck="false"
+								required
+							/>
+							<input
+								type="password"
+								id="trustscript_webhook_secret"
+								name="trustscript_webhook_secret"
+								value="<?php echo isset( $_POST['trustscript_webhook_secret'] ) ? esc_attr( sanitize_text_field( wp_unslash( $_POST['trustscript_webhook_secret'] ) ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified by settings_fields() in form ?>"
+								class="trustscript-webhook-secret-input"
+								placeholder="TSS-XXXX-XXXX-XXXX (paste webhook secret)"
+								autocomplete="off"
+								spellcheck="false"
+							/>
+						</div>
 						<button type="submit" class="button button-primary trustscript-connect-btn">
 							<?php esc_html_e( 'Save &amp; Connect', 'trustscript' ); ?>
 						</button>
@@ -246,9 +258,8 @@ class TrustScript_Settings_Page {
 					<p class="trustscript-api-key-hint">
 						<?php
 						printf(
-							/* translators: %1$s dashboard link open, %2$s close */
-							esc_html__( 'Your key is tied to this domain. It looks like %1$s. Generate one from your %2$sTrustScript Dashboard%3$s.', 'trustscript' ),
-							'<code>TSK-XXXX-XXXX-XXXX</code>',
+							/* translators: %s dashboard link open, %s close */
+							esc_html__( 'Generate a new API key from your %1$sTrustScript Dashboard%2$s. You will receive both an API Key (TSK-...) and a Webhook Secret (TSS-...). Paste both above.', 'trustscript' ),
 							'<a href="' . esc_url( $api_keys_url ) . '" target="_blank">',
 							'</a>'
 						);
@@ -256,11 +267,11 @@ class TrustScript_Settings_Page {
 					</p>
 					<div class="trustscript-info-box trustscript-info-box-spaced">
 						<strong>🔐 <?php esc_html_e( 'Security Note:', 'trustscript' ); ?></strong>
-						<p><?php esc_html_e( 'Your API key is masked as you type for security. It will never be displayed in plain text or source code.', 'trustscript' ); ?></p>
+						<p><?php esc_html_e( 'Your API key and webhook secret are masked as you type for security. They will never be displayed in plain text or source code.', 'trustscript' ); ?></p>
 					</div>
 					<div class="trustscript-info-box trustscript-info-box-spaced">
-						<strong>⚠️ 📝 <?php esc_html_e( 'Important:', 'trustscript' ); ?></strong>
-						<p><?php esc_html_e( 'You must provide a valid API key to use TrustScript. The form submission will be blocked until you paste a key.', 'trustscript' ); ?></p>
+						<strong>⚠️ 🔐 <?php esc_html_e( 'Important:', 'trustscript' ); ?></strong>
+						<p><?php esc_html_e( 'Both your API Key and Webhook Secret are required to use TrustScript securely. The form submission will be blocked until you paste both credentials.', 'trustscript' ); ?></p>
 					</div>
 
 					<?php else: ?>
@@ -325,10 +336,45 @@ class TrustScript_Settings_Page {
 							</td>
 						</tr>
 						<tr>
+							<th scope="row"><?php esc_html_e( 'Webhook Secret', 'trustscript' ); ?></th>
+							<td>
+								<?php
+									$has_webhook_secret = ! empty( get_option( 'trustscript_webhook_secret', '' ) );
+									if ( $has_webhook_secret ) {
+										?>
+										<div id="trustscript-webhook-secret-display">
+											<span class="trustscript-key-masked">
+												<span class="dashicons dashicons-lock trustscript-lock-icon"></span>
+												<code>TSS — •••• — •••• — ••••</code>
+											</span>
+										</div>
+										<p class="description">
+											<?php esc_html_e( 'Used to verify webhook signatures from TrustScript. Update this by generating a new API key in your dashboard and replacing your API key above.', 'trustscript' ); ?>
+										</p>
+										<?php
+									} else {
+										?>
+										<div class="trustscript-info-box">
+											<p><?php esc_html_e( 'No webhook secret configured. Update your API key in the form above to enable webhook signature verification.', 'trustscript' ); ?></p>
+										</div>
+										<?php
+									}
+								?>
+							</td>
+						</tr>
+						<tr>
 							<th scope="row"><?php esc_html_e( 'TrustScript Server', 'trustscript' ); ?></th>
 							<td>
-								<code class="trustscript-code-pill">https://nexlifylabs.com</code>
-								<p class="description"><?php esc_html_e( 'Your site is connected to the TrustScript server at nexlifylabs.com', 'trustscript' ); ?></p>
+								<code class="trustscript-code-pill"><?php echo esc_html( TRUSTSCRIPT_API_BASE_URL ); ?></code>
+								<p class="description">
+									<?php
+									printf(
+										/* translators: %s: TrustScript server URL */
+										esc_html__( 'Your site is connected to the TrustScript server at %s', 'trustscript' ),
+										esc_html( TRUSTSCRIPT_API_BASE_URL )
+									);
+									?>
+								</p>
 							</td>
 						</tr>
 						<tr>
@@ -424,7 +470,7 @@ class TrustScript_Settings_Page {
 					<span class="dashicons dashicons-admin-network"></span>
 					<?php esc_html_e( 'Manage API Keys', 'trustscript' ); ?>
 				</a>
-				<a href="https://nexlifylabs.com/pricing" target="_blank" class="trustscript-support-link trustscript-support-upgrade">
+				<a href="<?php echo esc_url( TRUSTSCRIPT_PRICING_URL ); ?>" target="_blank" class="trustscript-support-link trustscript-support-upgrade">
 					<span class="dashicons dashicons-star-filled"></span>
 					<?php esc_html_e( 'Upgrade Plan', 'trustscript' ); ?>
 				</a>

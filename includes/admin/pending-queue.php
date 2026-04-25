@@ -52,7 +52,7 @@ class TrustScript_Pending_Queue_Page
 		$notice_key = 'trustscript_queue_processed_notice_' . get_current_user_id();
 		$process_notice = get_transient($notice_key);
 		if ($process_notice) {
-			delete_transient($notice_key); // show once only
+			delete_transient($notice_key);
 			$processed = (int) $process_notice['processed'];
 			$failed = (int) $process_notice['failed'];
 			$still_pending = (int) $process_notice['still_pending'];
@@ -278,17 +278,18 @@ class TrustScript_Pending_Queue_Page
 									}
 									?>
 								</td>
-								<td><?php echo esc_html($item['queued_at']); ?></td>
+								<td><?php echo esc_html( $item['queued_at'] ? TrustScript_Date_Formatter::format( $item['queued_at'], 'datetime' ) : '—' ); ?></td>
 								<td>
 									<?php
 									if (!empty($item['scheduled_for'])) {
-										echo '<code class=\"trustscript-queue-status-scheduled\">' . esc_html($item['scheduled_for']) . '</code>';
+										$sf_formatted = TrustScript_Date_Formatter::format( $item['scheduled_for'], 'datetime' );
+										echo '<code class=\"trustscript-queue-status-scheduled\">' . esc_html( $sf_formatted ) . '</code>';
 									} else {
 										echo '<em class=\"trustscript-queue-placeholder-text\">' . esc_html__('Immediate', 'trustscript') . '</em>';
 									}
 									?>
 								</td>
-								<td><?php echo $item['last_attempt_at'] ? esc_html($item['last_attempt_at']) : '<em class=\"trustscript-queue-placeholder-text\">' . esc_html__('Never', 'trustscript') . '</em>'; ?>
+								<td><?php echo $item['last_attempt_at'] ? esc_html( TrustScript_Date_Formatter::format( $item['last_attempt_at'], 'datetime' ) ) : '<em class=\"trustscript-queue-placeholder-text\">' . esc_html__('Never', 'trustscript') . '</em>'; ?>
 								</td>
 								<td class=\"trustscript-queue-retry-count\"><?php echo esc_html($item['retry_count']); ?></td>
 								<td>

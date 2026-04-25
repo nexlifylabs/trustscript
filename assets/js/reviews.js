@@ -88,14 +88,14 @@
             if (delay_hours === 'custom') {
                 const customValue = $('#trustscript_custom_delay_value').val() || '0';
                 const customUnit = $('#trustscript_custom_delay_unit').val() || 'days';
-                delay_hours = customUnit === 'hours' ? customValue : (parseInt(customValue) * 24);
+                delay_hours = customUnit === 'hours' ? customValue : (parseInt(customValue, 10) * 24);
             }
 
             let intl_delay_hours = $('#trustscript_international_delay_hours').val();
             if (intl_delay_hours === 'custom') {
                 const customIntlValue = $('#trustscript_custom_intl_delay_value').val() || '0';
                 const customIntlUnit = $('#trustscript_custom_intl_delay_unit').val() || 'days';
-                intl_delay_hours = customIntlUnit === 'hours' ? customIntlValue : (parseInt(customIntlValue) * 24);
+                intl_delay_hours = customIntlUnit === 'hours' ? customIntlValue : (parseInt(customIntlValue, 10) * 24);
             }
 
             const data = {
@@ -126,7 +126,7 @@
                     $status.empty().append(createStatusBadge(TrustscriptAdmin.i18n.saveSuccess, 'success'));
                     setTimeout(function() { $status.empty(); }, 3000);
                 } else {
-                    const message = response.data?.message || TrustscriptAdmin.i18n.syncFailed;
+                    var message = (response.data && response.data.message) ? response.data.message : TrustscriptAdmin.i18n.syncFailed;
                     $status.empty().append(createStatusBadge(message, 'danger'));
                 }
             }).fail(function() {
@@ -143,9 +143,29 @@
             const $results = $('#trustscript-sync-results');
             const $count = $('#sync-count');
             
-            if (!confirm(TrustscriptAdmin.i18n.syncConfirm)) {
+            if (!$btn.data('syncConfirmed')) {
+                $status.html(
+                    '<div style="padding:12px;background:#fff3cd;border:1px solid #ffc107;border-radius:4px;margin-bottom:12px;">' +
+                    '<p style="margin:0 0 8px 0;font-weight:600;">' + TrustscriptAdmin.i18n.syncConfirm + '</p>' +
+                    '<button type="button" class="sync-confirm-yes button button-primary" style="margin-right:6px;">Yes, Sync</button>' +
+                    '<button type="button" class="sync-confirm-no button">Cancel</button>' +
+                    '</div>'
+                ).show();
+                
+                $status.find('.sync-confirm-yes').on('click', function() {
+                    $btn.data('syncConfirmed', true);
+                    $btn.click();
+                });
+                
+                $status.find('.sync-confirm-no').on('click', function() {
+                    $btn.data('syncConfirmed', false);
+                    $status.empty();
+                });
+                
                 return;
             }
+            
+            $btn.data('syncConfirmed', false);
             
             $btn.prop('disabled', true).empty();
             const spinIcon = document.createElement('span');
@@ -178,10 +198,10 @@
                     let fullMessage = response.data.message;
                     
                     if (reviewsPublished > 0 || ordersSynced > 0 || ordersSkipped > 0) {
-                        fullMessage += '\n\n📊 Breakdown:';
-                        if (reviewsPublished > 0) fullMessage += '\n✅ ' + reviewsPublished + ' review(s) published';
-                        if (ordersSynced > 0) fullMessage += '\n📤 ' + ordersSynced + ' new order(s) sent to TrustScript';
-                        if (ordersSkipped > 0) fullMessage += '\n⏭️ ' + ordersSkipped + ' order(s) already published (skipped)';
+                        fullMessage += '\n\n📊 ' + TrustscriptAdmin.i18n.syncBreakdown;
+                        if (reviewsPublished > 0) fullMessage += '\n✅ ' + reviewsPublished + ' ' + TrustscriptAdmin.i18n.syncReviewsPublished;
+                        if (ordersSynced > 0) fullMessage += '\n📤 ' + ordersSynced + ' ' + TrustscriptAdmin.i18n.syncOrdersSent;
+                        if (ordersSkipped > 0) fullMessage += '\n⏭️ ' + ordersSkipped + ' ' + TrustscriptAdmin.i18n.syncOrdersSkipped;
                     }
                     
                     const statusDiv = createStatusBadge(fullMessage, 'success');
@@ -192,7 +212,7 @@
                     $status.empty().append(statusDiv);
                     setTimeout(function() { $status.empty(); }, 8000);
                 } else {
-                    const message = response.data?.message || TrustscriptAdmin.i18n.syncFailed;
+                    var message = (response.data && response.data.message) ? response.data.message : TrustscriptAdmin.i18n.syncFailed;
                     $status.empty().append(createStatusBadge(message, 'danger'));
                 }
             }).fail(function() {

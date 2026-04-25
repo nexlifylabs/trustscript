@@ -295,12 +295,34 @@
 				$delay_seconds = 0;
 			}
 
+			if ( class_exists( 'TrustScript_Consent_Manager' ) ) {
+				$consent_status = TrustScript_Consent_Manager::get_order_consent_status( $order_id );
+
+				if ( 'declined' === $consent_status ) {
+					$meta_key = "_trustscript_processed_{$this->service_id}";
+					$this->update_order_meta( $order_id, $meta_key, '1' );
+					$this->update_order_meta( $order_id, '_trustscript_customer_opted_out', '1' );
+					return true;
+				}
+
+				if ( 'pending' === $consent_status ) {
+					$meta_key = "_trustscript_processed_{$this->service_id}";
+					$this->update_order_meta( $order_id, $meta_key, '1' );
+					$this->update_order_meta( $order_id, '_trustscript_consent_deferred_delay', (string) $delay_seconds );
+					$this->update_order_meta( $order_id, '_trustscript_consent_deferred_service', $this->service_id );
+					return true;
+				}
+			}
+
 			TrustScript_Queue::add(
 				$order_id,
 				$this->service_id,
 				'delay',
 				$delay_seconds
 			);
+
+			$meta_key = "_trustscript_processed_{$this->service_id}";
+			$this->update_order_meta( $order_id, $meta_key, '1' );
 
 			return true;
 		}
@@ -370,48 +392,56 @@
 		private function handle_api_response( $code, $body, $order_id ) {
 			if ( $code === 429 ) {
 				$data = json_decode( $body, true );
-				
+
 				if ( isset( $data['quotaExceeded'] ) && $data['quotaExceeded'] === true ) {
 					$this->last_api_error = 'quota';
 					$this->store_quota_error( $order_id, $data );
 					return false;
 				}
-				
+
 				$retry_after = isset( $data['retryAfter'] ) ? intval( $data['retryAfter'] ) : 60;
-				$this->last_api_error = 'rate_limit';
 				TrustScript_Queue::add( $order_id, $this->service_id, 'rate_limit', $retry_after );
 				return false;
 			}
-			
+
 			if ( $code >= 200 && $code < 300 ) {
 				delete_transient( 'trustscript_api_key_invalid_notice' );
 				delete_transient( 'trustscript_quota_exceeded_notice' );
 				return true;
 			}
-			
+
+			if ( $code === 403 ) {
+				$data = json_decode( $body, true );
+				if ( isset( $data['isOptedOut'] ) && $data['isOptedOut'] === true ) {
+					return true;
+				}
+				$this->last_api_error = 'forbidden';
+				TrustScript_Queue::add( $order_id, $this->service_id, 'api_error' );
+				return false;
+			}
+
 			if ( $code === 401 ) {
 				$this->last_api_error = 'api_key_invalid';
 				set_transient( 'trustscript_api_key_invalid_notice', array( 'timestamp' => current_time( 'mysql' ), 'order_id' => $order_id ), 24 * HOUR_IN_SECONDS );
 				TrustScript_Queue::add( $order_id, $this->service_id, 'api_error' );
 				return false;
 			}
-			
+
 			$this->last_api_error = 'api_error';
 			TrustScript_Queue::add( $order_id, $this->service_id, 'api_error' );
 			return false;
 		}
 
-		/**
-		 * Send review request to TrustScript API
-		 *
-		 * @param int $order_id Order/booking ID
-		 * @return bool True if successfully sent, false otherwise
-		 */
-		protected function send_review_request( $order_id ) {
+	/**
+	 * Send review request to TrustScript API
+	 *
+	 * @param int $order_id Order/booking ID
+	 * @return bool True if successfully sent, false otherwise
+	 */
+	protected function send_review_request( $order_id ) {
+		$this->last_api_error = null;
 
-			$this->last_api_error = null;
-
-			$order_data = $this->extract_order_data( $order_id );
+		$order_data = $this->extract_order_data( $order_id );
 
 			if ( ! $order_data ) {
 				return false;
@@ -421,21 +451,28 @@
 				return false;
 			}
 
-			$api_key = get_option( 'trustscript_api_key', '' );
-			$base_url = trailingslashit( trustscript_get_base_url() );
+				$api_key = trustscript_get_api_key();
+				$base_url = trailingslashit( trustscript_get_base_url() );
 
-			if ( empty( $api_key ) || empty( $base_url ) ) {
-				return false;
-			}
+				if ( empty( $api_key ) || empty( $base_url ) ) {
+					return false;
+				}
 
-			$review_request_url = $base_url . 'api/review-requests';
-			$webhook_url = get_site_url() . '/wp-json/trustscript/v1/publish-review';
+				$review_request_url = $base_url . 'api/review-requests';
+				$webhook_url = get_site_url() . '/wp-json/trustscript/v1/publish-review';
 
-			$email_hash = $this->get_or_generate_email_hash( $order_id, $order_data['customer_email'] );
+				$email_hash = $this->get_or_generate_email_hash( $order_id, $order_data['customer_email'] );
 
-			$all_products = $this->extract_all_products( $order_id );
+				if ( TrustScript_Opt_Out::is_opted_out( $email_hash ) ) {
+					$meta_key = "_trustscript_processed_{$this->service_id}";
+					$this->update_order_meta( $order_id, $meta_key, '1' );
+					$this->update_order_meta( $order_id, '_trustscript_customer_opted_out', '1' );
+					$this->update_order_meta( $order_id, '_trustscript_opt_out_message', 'Customer email is in the opt-out list.' );
+					return true;
+				}
 
-			if ( ! empty( $all_products ) && count( $all_products ) > 1 ) {
+					$all_products = $this->extract_all_products( $order_id );
+					if ( ! empty( $all_products ) && count( $all_products ) > 1 ) {
 					$products_by_id = array();
 					$products_payload = array();
 					foreach ( $all_products as $product ) {
@@ -470,31 +507,43 @@
 					$multi_request_data['orderDate'] = $order_data['order_date'];
 				}
 
-				$response = wp_remote_post( $review_request_url, array(
-					'headers' => array(
-						'Authorization' => 'Bearer ' . $api_key,
-						'Content-Type'  => 'application/json',
-						'X-Site-URL'    => get_site_url(),
-					),
-					'body'    => wp_json_encode( $multi_request_data ),
-					'timeout' => 30,
-					'sslverify' => true,
-				) );
+			$request_body = wp_json_encode( $multi_request_data );
 
-				if ( is_wp_error( $response ) ) {
-					$this->last_api_error = 'network';
-					TrustScript_Queue::add( $order_id, $this->service_id, 'network' );
-					return false;
-				}
+			$response = wp_remote_post( $review_request_url, array(
+				'headers' => array(
+					'Authorization' => 'Bearer ' . $api_key,
+					'Content-Type'  => 'application/json',
+					'X-Site-URL'    => get_site_url(),
+				),
+				'body'    => $request_body,
+				'timeout' => 30,
+				'sslverify' => true,
+			) );
 
-				$code = wp_remote_retrieve_response_code( $response );
-				$body = wp_remote_retrieve_body( $response );
+			if ( is_wp_error( $response ) ) {
+				$error_msg = $response->get_error_message();
+				$error_data = $response->get_error_data();
+				$this->last_api_error = 'network';
+				TrustScript_Queue::add( $order_id, $this->service_id, 'network' );
+				return false;
+			}
+
+			$code = wp_remote_retrieve_response_code( $response );
+			$body = wp_remote_retrieve_body( $response );
+			$headers = wp_remote_retrieve_headers( $response );
 
 				if ( ! $this->handle_api_response( $code, $body, $order_id ) ) {
 					return false;
 				}
 
 				$data = json_decode( $body, true );
+				$json_error = json_last_error();
+
+				if ( $json_error !== JSON_ERROR_NONE ) {
+					$this->last_api_error = 'api_error';
+					TrustScript_Queue::add( $order_id, $this->service_id, 'api_error' );
+					return false;
+				}
 
 				if ( empty( $data['orderToken'] ) ) {
 					$this->last_api_error = 'missing_order_token';
@@ -536,6 +585,7 @@
 				if ( $is_duplicate ) {
 					$this->update_order_meta( $order_id, '_trustscript_email_sent', '1' );
 				} elseif ( $send_email_now && ! empty( $session_url ) ) {
+					$this->update_order_meta( $order_id, '_trustscript_approval_url', $session_url );
 					$email_data = array(
 						'approval_url' => $session_url,
 						'opt_out_link' => isset( $data['opt_out_link'] ) ? $data['opt_out_link'] : '',
@@ -576,18 +626,22 @@
 				}
 			}
 
+		$request_body = wp_json_encode( $request_data );
+
 			$response = wp_remote_post( $review_request_url, array(
 				'headers' => array(
 					'Authorization' => 'Bearer ' . $api_key,
 					'Content-Type' => 'application/json',
 					'X-Site-URL' => get_site_url(),
 				),
-				'body' => wp_json_encode( $request_data ),
+				'body' => $request_body,
 				'timeout' => 30,
 				'sslverify' => true,
 			) );
 
 			if ( is_wp_error( $response ) ) {
+				$error_msg = $response->get_error_message();
+				$error_data = $response->get_error_data();
 				$this->last_api_error = 'network';
 				TrustScript_Queue::add( $order_id, $this->service_id, 'network' );
 				return false;
@@ -595,12 +649,20 @@
 
 			$code = wp_remote_retrieve_response_code( $response );
 			$body = wp_remote_retrieve_body( $response );
+			$headers = wp_remote_retrieve_headers( $response );
 
 			if ( ! $this->handle_api_response( $code, $body, $order_id ) ) {
 				return false;
 			}
 
 			$data = json_decode( $body, true );
+			$json_error = json_last_error();
+
+			if ( $json_error !== JSON_ERROR_NONE ) {
+				$this->last_api_error = 'api_error';
+				TrustScript_Queue::add( $order_id, $this->service_id, 'api_error' );
+				return false;
+			}
 
 			if ( isset( $data['uniqueToken'] ) || isset( $data['reviewRequest']['uniqueToken'] ) ) {
 					$is_duplicate = isset( $data['reviewRequest']['isDuplicate'] ) && $data['reviewRequest']['isDuplicate'];
@@ -623,6 +685,13 @@
 					$send_email_now = isset( $data['sendEmailNow'] ) && $data['sendEmailNow'] === true;
 					$existing_email_sent = $is_duplicate && isset( $data['reviewRequest']['existingEmailSent'] ) &&
 						$data['reviewRequest']['existingEmailSent'];
+
+					if ( ! empty( $data['approval_url'] ) ) {
+						$this->update_order_meta( $order_id, '_trustscript_approval_url', $data['approval_url'] );
+					}
+					if ( ! empty( $data['uniqueToken'] ) ) {
+						$this->update_order_meta( $order_id, '_trustscript_review_token', $data['uniqueToken'] );
+					}
 
 					if ( $existing_email_sent ) {
 						$this->update_order_meta( $order_id, '_trustscript_email_sent', '1' );
@@ -650,10 +719,14 @@
 			$order_data = $this->extract_order_data( $order_id );
 
 			if ( ! $order_data ) {
+				$this->update_order_meta( $order_id, '_trustscript_email_status', 'failed_order_data' );
+				$this->update_order_meta( $order_id, '_trustscript_email_failed_at', current_time( 'mysql' ) );
 				return false;
 			}
 
 			if ( empty( $order_data['customer_email'] ) ) {
+				$this->update_order_meta( $order_id, '_trustscript_email_status', 'failed_no_email' );
+				$this->update_order_meta( $order_id, '_trustscript_email_failed_at', current_time( 'mysql' ) );
 				return false;
 			}
 
@@ -662,6 +735,8 @@
 				$email_body = $review_data['email_html'];
 			} else {
 				if ( empty( $review_data['approval_url'] ) ) {
+					$this->update_order_meta( $order_id, '_trustscript_email_status', 'failed_no_url' );
+					$this->update_order_meta( $order_id, '_trustscript_email_failed_at', current_time( 'mysql' ) );
 					return false;
 				}
 
@@ -673,6 +748,8 @@
 				$template = $this->get_email_template( $order_data, $review_link, $review_data, $all_products, $is_multi_product );
 
 				if ( $template === false ) {
+					$this->update_order_meta( $order_id, '_trustscript_email_status', 'failed_template' );
+					$this->update_order_meta( $order_id, '_trustscript_email_failed_at', current_time( 'mysql' ) );
 					return false;
 				}
 
@@ -694,12 +771,42 @@
 				'X-Mailer: TrustScript/1.0 (Transactional)',
 			);
 
+			$mail_error_detail = '';
+			$mail_failed_handler = function( $wp_error ) use ( &$mail_error_detail ) {
+				$mail_error_detail = $wp_error->get_error_message();
+			};
+			add_action( 'wp_mail_failed', $mail_failed_handler, 10, 1 );
+
 			$sent = wp_mail(
 				$order_data['customer_email'],
 				$email_subject,
 				$email_body,
 				$headers
 			);
+
+			remove_action( 'wp_mail_failed', $mail_failed_handler, 10 );
+
+			if ( $sent ) {
+				$this->update_order_meta( $order_id, '_trustscript_email_status', 'sent' );
+				$this->update_order_meta( $order_id, '_trustscript_email_sent_at', current_time( 'mysql' ) );
+				$this->update_order_meta( $order_id, '_trustscript_email_sent', '1' );
+				delete_transient( 'trustscript_email_failed_notice_' . $order_id );
+			} else {
+				$this->update_order_meta( $order_id, '_trustscript_email_status', 'failed_smtp' );
+				$this->update_order_meta( $order_id, '_trustscript_email_failed_at', current_time( 'mysql' ) );
+				if ( ! empty( $mail_error_detail ) ) {
+					$this->update_order_meta( $order_id, '_trustscript_email_error_detail', $mail_error_detail );
+				}
+
+				$existing = get_transient( 'trustscript_email_delivery_failed_notice' );
+				$failed_orders = is_array( $existing ) ? $existing : array();
+				$failed_orders[ $order_id ] = array(
+					'order_id'  => $order_id,
+					'failed_at' => current_time( 'mysql' ),
+					'error'     => $mail_error_detail ?: 'wp_mail() returned false — check SMTP configuration.',
+				);
+				set_transient( 'trustscript_email_delivery_failed_notice', $failed_orders, DAY_IN_SECONDS );
+			}
 
 			return $sent;
 		}
@@ -715,8 +822,7 @@
 		 * @return array|false Array with 'subject' and 'body' keys if successful, false on failure
 		 */
 		protected function get_email_template( $order_data, $review_link, $review_data = array(), $all_products = array(), $is_multi_product = false ) {
-			$api_key = get_option( 'trustscript_api_key', '' );
-
+		$api_key = trustscript_get_api_key();
 			$base_url = trustscript_get_base_url();
 
 			if ( empty( $api_key ) || empty( $base_url ) ) {
@@ -847,7 +953,7 @@
 		}
 
 		/**
-		 * Generate HTML for products list to be injected into multi-product email template
+		 * Generate HTML for products list to be placed into multi-product email template
 		 *
 		 * @param array $products_for_email Products array from build_products_for_email()
 		 * @param string $service_id Service identifier for styling
@@ -875,7 +981,7 @@
 					'style="width:80px;height:80px;object-fit:cover;border-radius:6px;display:block;background-color:#f9fafb;">' .
 					'</td>' .
 					'<td valign="middle" style="padding:16px 16px 16px 8px;">' .
-					'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">Your Purchase</p>' .
+					'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">' . esc_html__( 'Your Purchase', 'trustscript' ) . '</p>' .
 					'<p style="margin:0;font-size:15px;font-weight:700;color:#111827;line-height:1.3;">' . $name . '</p>' .
 					'</td>' .
 					'</tr>' .
@@ -883,7 +989,6 @@
 					'</td>' .
 					'</tr>';
 			} else {
-				// Multi-product: list all items
 				$rows = '';
 				foreach ( $products_for_email as $product ) {
 					$name      = ! empty( $product['name'] )  ? esc_html( $product['name'] )  : 'Product';
@@ -898,7 +1003,7 @@
 						'<tr>' .
 						'<td width="80" valign="top" style="padding-right:12px;padding-bottom:12px;border-bottom:1px solid #e5e7eb;">' . $image_html . '</td>' .
 						'<td valign="middle" style="padding-bottom:12px;border-bottom:1px solid #e5e7eb;">' .
-						'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">Your Purchase</p>' .
+						'<p style="margin:0 0 3px 0;font-size:11px;color:#4a90e2;font-weight:700;letter-spacing:0.6px;text-transform:uppercase;">' . esc_html__( 'Your Purchase', 'trustscript' ) . '</p>' .
 						'<p style="margin:0;font-size:14px;font-weight:700;color:#111827;">' . $name . '</p>' .
 						'</td>' .
 						'</tr>' .
@@ -915,10 +1020,10 @@
 				'style="border-top:1px solid #e5e7eb;padding-top:12px;">' .
 				'<tr>' .
 				'<td style="font-size:13px;color:#6b7280;line-height:1.6;">' .
-				'Order #{order_number}&nbsp;&nbsp;&middot;&nbsp;&nbsp;{order_date}' .
+				esc_html__( 'Order #', 'trustscript' ) . '{order_number}&nbsp;&nbsp;&middot;&nbsp;&nbsp;{order_date}' .
 				'</td>' .
 				'<td align="right" style="font-size:13px;color:#374151;font-weight:700;line-height:1.6;white-space:nowrap;">' .
-				'Total: {order_total}' .
+				esc_html__( 'Total:', 'trustscript' ) . ' {order_total}' .
 				'</td>' .
 				'</tr>' .
 				'</table>' .
@@ -996,10 +1101,6 @@
 
 		/**
 		 * Find order ID by review token
-		 * 
-		 * NOTE: Default implementation queries WooCommerce only via wc_get_orders().
-		 * Non-WooCommerce service providers MUST override this method with their own
-		 * implementation to query their respective database tables.
 		 * 
 		 * @param string $unique_token Unique review token
 		 * @return int|false Order/transaction ID if found, false otherwise

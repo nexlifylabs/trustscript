@@ -72,59 +72,63 @@ class TrustScript_Shop_Display {
 	}
 
 	/**
-	 * Get rating data for a product
+	 * Get rating data for a product.
 	 *
-	 * @param int $product_id
-	 * @return array Array with 'average_rating' and 'total_reviews'
+	 * Uses a single SQL query to compute COUNT and AVG directly in the database,
+	 * avoiding loading comment objects into PHP memory. This is efficient even for
+	 * products with thousands of reviews. Results are cached for 1 hour.
+	 *
+	 * We query the 'rating' meta key (standard WooCommerce) and fall back to
+	 * '_trustscript_rating' if the standard key is absent. Both are checked in
+	 * a single pass via COALESCE.
+	 *
+	 * @param int $product_id Product ID.
+	 * @return array Array with 'average_rating' (float) and 'total_reviews' (int).
 	 */
 	private function get_product_rating_data( $product_id ) {
 		$product_id = (int) $product_id;
-		$cache_key = 'ts_shop_rating_' . $product_id;
+		$cache_key  = 'ts_shop_rating_' . $product_id;
 		$cached_data = get_transient( $cache_key );
 
 		if ( false !== $cached_data ) {
 			return $cached_data;
 		}
 
-		$reviews = get_comments( array(
-			'post_id' => $product_id,
-			'status'  => 'approve',
-			'type'    => 'review',
-			'parent'  => 0,
-		) );
+		global $wpdb;
 
-		$total_reviews = count( $reviews );
+		// Single query: count approved reviews and compute average rating.
+		// COALESCE checks the standard WooCommerce 'rating' meta first, then
+		// falls back to '_trustscript_rating' for TrustScript-only reviews.
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Aggregation query with no WP API equivalent; result is cached via transient.
+		$row = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT
+					COUNT(*) AS total_reviews,
+					AVG(
+						CAST(
+							COALESCE(
+								cm_wc.meta_value,
+								cm_ts.meta_value
+							) AS UNSIGNED
+						)
+					) AS average_rating
+				FROM {$wpdb->comments} c
+				LEFT JOIN {$wpdb->commentmeta} cm_wc
+					ON c.comment_ID = cm_wc.comment_id AND cm_wc.meta_key = 'rating'
+				LEFT JOIN {$wpdb->commentmeta} cm_ts
+					ON c.comment_ID = cm_ts.comment_id AND cm_ts.meta_key = '_trustscript_rating'
+				WHERE c.comment_post_ID = %d
+					AND c.comment_approved = '1'
+					AND c.comment_type = 'review'
+					AND c.comment_parent = 0
+					AND COALESCE(cm_wc.meta_value, cm_ts.meta_value) IS NOT NULL
+					AND CAST(COALESCE(cm_wc.meta_value, cm_ts.meta_value) AS UNSIGNED) BETWEEN 1 AND 5",
+				$product_id
+			)
+		);
 
-		if ( empty( $reviews ) ) {
-			$data = array(
-				'average_rating' => 0,
-				'total_reviews'  => 0,
-			);
-			set_transient( $cache_key, $data, HOUR_IN_SECONDS );
-			return $data;
-		}
-
-		$rating_sum = 0;
-		$rated_count = 0;
-
-		foreach ( $reviews as $review ) {
-			$rating = 0;
-			if ( ! empty( $review->rating ) ) {
-				$rating = (int) $review->rating;
-			} else {
-				$rating = (int) get_comment_meta( $review->comment_ID, '_trustscript_rating', true );
-				if ( ! $rating ) {
-					$rating = (int) get_comment_meta( $review->comment_ID, 'rating', true );
-				}
-			}
-
-			if ( $rating >= 1 && $rating <= 5 ) {
-				$rating_sum += $rating;
-				$rated_count++;
-			}
-		}
-
-		$average_rating = $rated_count > 0 ? round( $rating_sum / $rated_count, 1 ) : 0;
+		$total_reviews  = $row ? (int) $row->total_reviews : 0;
+		$average_rating = ( $row && $total_reviews > 0 ) ? round( (float) $row->average_rating, 1 ) : 0;
 
 		$data = array(
 			'average_rating' => $average_rating,
@@ -172,7 +176,7 @@ class TrustScript_Shop_Display {
 
 			// Half star
 			if ( $has_half ) {
-				echo '<span class="trustscript-shop-star trustscript-shop-star-half" aria-hidden="true"></span>';
+				echo '<span class="trustscript-shop-star trustscript-shop-star-half" aria-hidden="true">★</span>';
 			}
 
 			// Empty stars

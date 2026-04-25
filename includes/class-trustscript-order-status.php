@@ -117,31 +117,6 @@ class TrustScript_Order_Status {
 		return $redirect_to;
 	}
 
-	public function handle_hpos_bulk_action_delivered( $redirect_url, $action, $order_ids ) {
-		if ( $action !== 'mark_delivered' ) {
-			return $redirect_url;
-		}
-
-		$status_slug = self::get_delivered_status_name();
-		$changed = 0;
-		
-		foreach ( $order_ids as $order_id ) {
-			$order = wc_get_order( $order_id );
-			
-			if ( $order ) {
-				$order->update_status( $status_slug, __( 'Order marked as delivered by bulk action.', 'trustscript' ), true );
-				$changed++;
-			}
-		}
-
-		$redirect_url = add_query_arg( array(
-			'bulk_action' => 'marked_delivered',
-			'changed'     => $changed,
-		), $redirect_url );
-
-		return $redirect_url;
-	}
-
 	public function handle_bulk_action_delivered_hpos( $redirect_url, $action, $order_ids ) {
 		if ( $action !== 'mark_delivered' ) {
 			return $redirect_url;

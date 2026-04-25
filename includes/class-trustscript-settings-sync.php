@@ -32,7 +32,7 @@ class TrustScript_Settings_Sync {
 
 	public function verify_request( $request ) {
 		$api_key_header = $request->get_header( 'X-TrustScript-Api-Key' );
-		$stored_api_key = get_option( 'trustscript_api_key', '' );
+		$stored_api_key = trustscript_get_api_key();
 
 		if ( empty( $stored_api_key ) ) {
 			return new WP_Error( 'no_api_key', 'API key not configured', array( 'status' => 500 ) );
@@ -44,6 +44,13 @@ class TrustScript_Settings_Sync {
 
 		if ( ! hash_equals( $stored_api_key, $api_key_header ) ) {
 			return new WP_Error( 'invalid_api_key', 'Invalid API key', array( 'status' => 401 ) );
+		}
+
+		// Verify webhook HMAC signature using the stored webhook secret
+		$webhook_secret = trustscript_get_webhook_secret();
+		$signature_validation = trustscript_verify_webhook_signature( $request, $webhook_secret );
+		if ( is_wp_error( $signature_validation ) ) {
+			return $signature_validation;
 		}
 
 		return true;
@@ -127,21 +134,31 @@ class TrustScript_Settings_Sync {
 		$event     = isset( $params['event'] )     ? sanitize_text_field( $params['event'] )     : 'upgrade';
 		$reset_date = isset( $params['resetDate'] ) ? sanitize_text_field( $params['resetDate'] ) : '';
 
-		delete_transient( 'trustscript_quota_exceeded_notice' );
-		delete_transient( 'trustscript_api_key_invalid_notice' );
-		delete_transient( 'trustscript_user_plan' );
+		$cleared_transients = array();
+		if ( delete_transient( 'trustscript_quota_exceeded_notice' ) ) {
+			$cleared_transients[] = 'trustscript_quota_exceeded_notice';
+		}
+		if ( delete_transient( 'trustscript_api_key_invalid_notice' ) ) {
+			$cleared_transients[] = 'trustscript_api_key_invalid_notice';
+		}
+		if ( delete_transient( 'trustscript_user_plan' ) ) {
+			$cleared_transients[] = 'trustscript_user_plan';
+		}
 
 		if ( ! empty( $new_plan ) ) {
+			$old_plan = get_option( 'trustscript_current_plan', 'free' );
 			update_option( 'trustscript_current_plan', $new_plan );
+			set_transient( 'trustscript_user_plan', $new_plan, WEEK_IN_SECONDS );
 		}
 
 		if ( in_array( $event, array( 'upgrade', 'reset' ), true ) ) {
 			$pending = TrustScript_Queue::count_pending();
+
 			if ( $pending > 0 ) {
 				if ( ! wp_next_scheduled( 'trustscript_process_quota_queue' ) ) {
 					wp_schedule_single_event( time(), 'trustscript_process_quota_queue' );
-				}
-			}
+				} 
+			} 
 		}
 
 		$final_pending = TrustScript_Queue::count_pending();
@@ -159,5 +176,3 @@ class TrustScript_Settings_Sync {
 		);
 	}
 }
-
-new TrustScript_Settings_Sync();

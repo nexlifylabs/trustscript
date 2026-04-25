@@ -28,9 +28,10 @@ class TrustScript_Immutability {
 		if ( $new_content !== $original_content ) {
 			return new WP_Error(
 				'trustscript_comment_locked',
-				'This review is locked by TrustScript and cannot be edited. TrustScript reviews are immutable to maintain authenticity and customer trust. You can delete this review if needed, but the text cannot be modified.',
+				__( 'This review is locked by TrustScript and cannot be edited. TrustScript reviews are immutable to maintain authenticity and customer trust. You can delete this review if needed, but the text cannot be modified.', 'trustscript' ),
 				array( 'status' => 403 )
 			);
+
 		}
 		
 		return $data;
@@ -112,11 +113,11 @@ class TrustScript_Immutability {
 
 	private function get_publishing_mode_label( $mode ) {
 		$modes = array(
-			'webhook'     => 'TrustScript App (Webhook)',
-			'manual_sync'  => 'Manual Sync (WordPress Admin)',
-			'auto_sync'    => 'Automatic Daily Sync',
+			'webhook'     => __('TrustScript App (Webhook)', 'trustscript'),
+			'manual_sync'  => __('Manual Sync (WordPress Admin)', 'trustscript'),
+			'auto_sync'    => __('Automatic Daily Sync', 'trustscript'),
 		);
 
-		return isset( $modes[ $mode ] ) ? $modes[ $mode ] : 'TrustScript';
+		return isset( $modes[ $mode ] ) ? $modes[ $mode ] : __('TrustScript', 'trustscript');
 	}
 }

@@ -20,7 +20,7 @@ class TrustScript_Review_Voting {
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 
 		if ( is_admin() ) {
-			add_action( 'admin_init', array( $this, 'create_votes_table' ) );
+			add_action( 'admin_init', array( __CLASS__, 'create_votes_table' ) );
 		}
 	}
 
@@ -37,7 +37,7 @@ class TrustScript_Review_Voting {
 	/**
 	 * Create the custom votes table if it doesn't exist or if the version is outdated.
 	 */
-	public function create_votes_table() {
+	public static function create_votes_table() {
 		$current_version = get_option( 'trustscript_votes_table_version', '0' );
 		if ( version_compare( $current_version, self::TABLE_VERSION, '>=' ) && self::votes_table_exists() ) {
 			return;
@@ -96,7 +96,7 @@ class TrustScript_Review_Voting {
 			array(
 				'methods'             => 'GET',
 				'callback'            => array( $this, 'get_vote_count' ),
-				'permission_callback' => '__return_true',
+				'permission_callback' => '__return_true', // Public read-only endpoint - vote counts are non-sensitive
 				'args'                => array(
 					'comment_id' => array(
 						'required'          => true,

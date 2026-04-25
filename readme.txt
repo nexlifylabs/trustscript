@@ -1,6 +1,6 @@
 === TrustScript ===
-Contributors: nexlifycreater, tssaini
-Tags: woocommerce reviews, review automation, product reviews, verified reviews, ai reviews
+Contributors: nexlifycreator, tssaini
+Tags: woocommerce reviews, review plugin, product reviews, customer reviews, review reminders
 Requires at least: 6.2
 Tested up to: 6.9
 Stable tag: 1.0.0
@@ -11,6 +11,15 @@ Requires PHP: 8.0
 Automate WooCommerce review collection with photo & video, verified badges, AI writing assistant, rich snippets, zero PII by design.
 
 == Description ==
+
+= Important: External Service Required =
+
+This plugin requires a TrustScript account (https://nexlifylabs.com).
+A free plan is available with 25 review requests/month. Paid plans are
+available for higher volume. By using this plugin, you agree to
+TrustScript's Terms of Service: https://nexlifylabs.com/terms
+
+---
 
 Real reviews from real customers - collected automatically, verified 
 by design, and private by default.
@@ -71,36 +80,36 @@ The Elementor widget lets you showcase reviews anywhere on your site
 in slider, grid, or masonry layouts - updating automatically as new 
 reviews come in.
 
-A free plan is available that includes **25 review requests per month**.  
-The limit resets automatically on the **1st day of each month** for free users.
+A free plan is available that includes 25 review requests per month.  
+The limit resets automatically on the 1st day of each month for free users.
 
 View all plans: https://nexlifylabs.com/pricing  
 Full documentation: https://nexlifylabs.com/docs
 
-***
+---
 
 *A free plan is available. On paid plans, the AI writing assistant is 
 capped monthly - but annual subscribers can collect unlimited standard 
 reviews beyond their AI quota. View all plans at https://nexlifylabs.com/pricing*
 
-**Key Features:**
+Key Features:
 
-* **Photo & Video Reviews** - Customers can attach photos and videos directly to their review in one click
-* **Verified Purchase Badges** - Every review is tied to a real order, with a publicly verifiable verification token
-* **AI Writing Assistant** - Optional AI helps customers write clearer reviews; always their words, always their choice
-* **Zero PII Collection** - No names, emails, or personal identifiers ever stored on TrustScript servers
-* **Smart Analytics** - Full dashboard tracking requests, views, conversions, AI usage, and per-order timelines
-* **Auto-Saving Drafts** - Customer progress is saved instantly; they can return days later and pick up where they left off
-* **Google Rich Snippets** - JSON-LD structured data added automatically for star ratings in search results
-* **Helpful Voting** - Optional thumbs up/down voting on reviews (logged-in users only)
-* **Review Count on Product Cards** - Star ratings and review counts shown on shop, category, and search pages
-* **Elementor Widget** - Drag-and-drop review showcase with slider, grid, and masonry layouts
-* **Smart Refund Handling** - Review links auto-expire when orders are refunded or cancelled in WooCommerce
-* **Full Automation** - Review requests, reminders, verification, and publishing all run on autopilot
+* Photo & Video Reviews - Customers can attach photos and videos directly to their review in one click
+* Verified Purchase Badges - Every review is tied to a real order, with a publicly verifiable verification token
+* AI Writing Assistant - Optional AI helps customers write clearer reviews; always their words, always their choice
+* Zero PII Collection - No names, emails, or personal identifiers ever stored on TrustScript servers
+* Smart Analytics - Full dashboard tracking requests, views, conversions, AI usage, and per-order timelines
+* Auto-Saving Drafts - Customer progress is saved instantly; they can return days later and pick up where they left off
+* Google Rich Snippets - JSON-LD structured data added automatically for star ratings in search results
+* Helpful Voting - Optional thumbs up/down voting on reviews (logged-in users only)
+* Review Count on Product Cards - Star ratings and review counts shown on shop, category, and search pages
+* Elementor Widget - Drag-and-drop review showcase with slider, grid, and masonry layouts
+* Smart Refund Handling - Review links auto-expire when orders are refunded or cancelled in WooCommerce
+* Full Automation - Review requests, reminders, verification, and publishing all run on autopilot
 
-***
+---
 
-**How It Works:**
+How It Works:
 
 1. Customer places an order and it's marked as "Delivered"
 2. TrustScript automatically sends a branded review request email from your own domain
@@ -109,71 +118,78 @@ reviews beyond their AI quota. View all plans at https://nexlifylabs.com/pricing
 5. If they choose, AI offers 3 polished rewrite suggestions - they pick one, edit it, or keep their original
 6. Review is verified, published to your WooCommerce product page, and appears with a Verified Purchase badge
 
-***
+---
 
 == External Services ==
 
-This plugin connects to the TrustScript API to verify review authenticity.
+This plugin connects to the following external services to function:
 
-*Data Sent to TrustScript Service:*
+= 1. TrustScript API (nexlifylabs.com) =
+
+Used to register review requests, verify purchases, and receive completed
+reviews via webhook.
+
+Service URL: https://nexlifylabs.com
+Privacy Policy: https://nexlifylabs.com/privacy
+Terms of Service: https://nexlifylabs.com/terms
+
+= Data Sent to TrustScript =
+
 - Order number (used solely for purchase verification and analytics)
-- One-way hashed email address
+- One-way hashed email address (irreversible; used only for opt-out tracking)
 - Webhook URL (where TrustScript posts the completed review back to your site)
 - Source identifier (platform type, e.g. woocommerce)
-- Rating collection flag (controls whether the rating field is shown in the TrustScript review form)
-- Photo collection flag (controls whether photo upload is shown in the review form)
-- Video collection flag (controls whether video upload is shown in the review form)
-- Product name (optional; controlled by plugin settings)
-- Order date (optional; controlled by plugin settings)
-- Product image URL (optional; sent if product has an image)
-- Product name, product ID, product SKU, and a per-product token (required for multi-product orders only)
+- Rating, photo, and video collection flags (control which fields appear in the review form)
+- Product name and order date (optional; can be disabled in settings)
+- Product image URL (optional; sent if the product has an image)
+- For multi-product orders: product name, product ID, product SKU, and a per-product token
 
-Note: Customer review text and star rating are NOT sent by the plugin in the initial request.
-They are collected directly by TrustScript's review form and returned to your site via webhook
-after the customer submits their review.
+Note: Customer review text and star rating are NOT sent by the plugin in the
+initial request. They are collected directly by TrustScript's review form and
+returned to your site via webhook after the customer submits their review.
 
-*Data Received from TrustScript - Step 1 (Initial API Response):*
-- Unique security token (stored for tracking and duplicate prevention; `uniqueToken` for single-product orders, `orderToken` for multi-product orders)
+= What Is Never Sent =
+
+- Customer names
+- Email addresses in plain text
+- Postal addresses or phone numbers
+- Payment information
+- Any other personally identifiable information
+
+= Data Received from TrustScript =
+
+Step 1 - Initial API response (when review request is registered):
+- Unique security token (used for tracking and duplicate prevention)
 - Duplicate flag (indicates if this order was already processed)
-- Customer opted-out flag (indicates if customer has unsubscribed)
+- Customer opted-out flag (indicates if customer has opted out)
 
-*Data Received from TrustScript - Step 2 (Webhook, after customer submits review):*
+Step 2 - Webhook (after customer submits their review):
 - Final review text (customer-written, optionally AI-enhanced)
-- Star rating (1–5)
-- Verification token (for the public review verification page)
+- Star rating (1-5)
+- Verification token (for the public authenticity check page)
 - Uploaded media URLs (photos and/or videos attached by the customer)
 - Verification hash (for webhook authenticity validation)
 
-*Security & Verification:*
-- ✅ Unique token format validated (32+ alphanumeric characters)
-- ✅ Webhook timestamp verified (must be within 60 minutes to prevent replay attacks)
-- ✅ API key authentication via Bearer token with timing-safe comparison
-- ✅ Domain validation ensures API key only works for the registered WordPress site
-- ✅ Duplicate prevention: reviews cannot be published twice with the same token
-- ✅ Verification tokens allow public review authenticity checks at nexlifylabs.com/verify-review
-- ✅ All data transmitted securely over HTTPS only
-- ✅ Rate limiting (100 requests per minute per API key to prevent abuse)
-- ✅ API key expiration validation (expired keys are rejected with 401 error)
-- ✅ Reviews stored in WordPress comment system with full audit trail metadata
-- ✅ Zero PII: no names, emails, or personal identifiers stored on TrustScript servers
+---
 
-*Optional: AI Writing Assistant*
-When a customer uses the AI suggestion feature, their draft review 
-text is sent to Azure AI Foundry for rewrite suggestions. This only 
-occurs if the customer actively clicks the "Enhance" button in the 
-review form.
+= 2. Microsoft Azure AI Foundry (Optional) =
 
-Third-party service: Microsoft Azure AI Foundry
-Privacy policy: https://privacy.microsoft.com
-Terms of service: https://azure.microsoft.com/en-us/support/legal/
+When a customer clicks "Enhance", their draft review text is sent to
+Microsoft Azure AI Foundry to generate rewrite suggestions. This is
+entirely optional and customer-initiated — never triggered automatically.
 
-***
+Privacy Policy: https://privacy.microsoft.com
+Terms of Service: https://azure.microsoft.com/en-us/support/legal/
 
-**Page Builder Integration:**
+By using this plugin, you agree to TrustScript's Privacy Policy: https://nexlifylabs.com/privacy
+
+---
+
+Page Builder Integration:
 
 TrustScript works seamlessly with Elementor. Create beautiful social proof sections anywhere on your site with real reviews that update automatically - no manual changes needed.
 
-**Benefits:**
+Benefits:
 
 * Display real WooCommerce reviews anywhere on your site
 * Automatic updates - new approved reviews appear instantly, no manual work
@@ -198,7 +214,7 @@ For complete setup guides, visit: https://nexlifylabs.com/docs/wordpress
 == Frequently Asked Questions ==
 
 = Do I need a TrustScript account? =
-Yes, this plugin connects your WooCommerce store to the TrustScript 
+Yes, this plugin connects your WordPress site to the TrustScript 
 service. You can sign up for free at https://nexlifylabs.com and get 
 25 review requests per month at no cost.
 
@@ -273,6 +289,25 @@ WordPress site, which then fills in the placeholders with real order
 data and sends the email from your own domain using your own SMTP or 
 transactional email service.
 
+= Does TrustScript add a consent checkbox at checkout? =
+
+By default, no - for most countries (including the USA) no consent 
+checkbox is shown, because TrustScript never collects personal data.
+
+For customers in the EU, UK, Germany, and Austria, TrustScript 
+automatically shows an unchecked opt-in checkbox at checkout. 
+German and Austrian customers go through a double opt-in flow 
+(checkbox + confirmation email) because German courts have 
+classified review request emails as marketing emails under UWG §7.
+
+The correct flow is applied automatically based on billing country. 
+Consent records are stored with timestamps for your audit trail.
+
+= What happens if a customer doesn't tick the consent box? =
+
+No review request email is sent. The order is marked as consent 
+declined in TrustScript's audit log and is permanently excluded 
+from the review queue. No workarounds, no retries.
 
 = Does TrustScript place any restrictions on what I can put in review 
 request emails? =
@@ -360,64 +395,6 @@ updates.
 
 = 1.0.0 =
 Initial public release of TrustScript for WooCommerce.
-
-== Privacy Policy & Data Security ==
-
-This plugin connects to the TrustScript service
-(https://nexlifylabs.com) to collect and manage product reviews.
-
-**Data Sent TO TrustScript Service:**
-- Order number (used for purchase verification and analytics only)
-- One-way hashed email address (irreversible; used only for opt-out
-  tracking - cannot be decoded back to the original address)
-- Webhook URL (tells TrustScript where to send the completed review)
-- Source identifier (platform type, e.g. woocommerce)
-- Collection flags for rating, photos, and videos (control which fields
-  appear in the customer review form)
-- Product name and order date (optional; can be disabled in settings)
-- Product image URL (optional; sent if the product has an image)
-- For multi-product orders: product name, product ID, product SKU, and
-  a per-product token are required for each item in the order
-
-**What Is Never Sent:**
-- Customer names
-- Email addresses in plain text
-- Postal addresses or phone numbers
-- Payment information
-- Any other personally identifiable information
-
-**Data Received FROM TrustScript Service:**
-
-*Step 1 - Initial API response (when review request is registered):*
-- Unique security token (used for tracking and duplicate prevention)
-- Duplicate flag (indicates if this order was already processed)
-- Customer opted-out flag (indicates if customer has unsubscribed)
-
-*Step 2 - Webhook (after customer submits their review):*
-- Final review text (customer-written, optionally AI-enhanced)
-- Star rating (1–5)
-- Verification token (for the public authenticity check page)
-- Uploaded media URLs (photos and/or videos attached by the customer)
-- AI-generated review variants (if the customer used the writing assistant)
-- Verification hash (for webhook authenticity validation)
-
-**GDPR & Privacy Compliance:**
-- ✅ Zero PII - no personal data is ever sent to or stored on TrustScript
-  servers. No names, email addresses, or identifiers of any kind.
-- ✅ Opt-out link included in every review request email - customers can
-  remove themselves from future requests with one click
-- ✅ One-way hashed email address used only for opt-out tracking -
-  cannot be reversed or decoded
-- ✅ No third-party data sharing - not possible by design, since no
-  personal data is ever received by TrustScript
-- ✅ No consent checkbox required - because no personal data is
-  collected, GDPR consent popups and checkout opt-ins are not necessary 
-  - every customer is automatically eligible to receive a review request
-- ✅ Review deletion requests can be submitted via the store owner or by
-  contacting support at support@nexlifylabs.com
-
-By using this plugin, you agree to TrustScript's Privacy Policy:
-https://nexlifylabs.com/privacy
 
 == Support ==
 

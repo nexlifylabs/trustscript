@@ -45,8 +45,12 @@
         });
     }
 
-    function getErrorMessage(xhr, fallback = 'Unknown error') {
-        return xhr?.responseJSON?.data?.message ?? fallback;
+    function getErrorMessage(xhr, fallback) {
+        fallback = fallback || TrustscriptAdmin.i18n.unknownError || 'Unknown error';
+        if (!xhr || !xhr.responseJSON || !xhr.responseJSON.data) {
+            return fallback;
+        }
+        return xhr.responseJSON.data.message || fallback;
     }
 
     // Category Search & Filter Functions
@@ -153,11 +157,38 @@
         });
     }
 
+    function initCategoryParentChildLogic() {
+        $(document).on('change', '.trustscript-parent-checkbox', function() {
+            const $checkbox = $(this);
+            const isChecked = $checkbox.is(':checked');
+            const categoryId = $checkbox.val();
+            const $categoryLabel = $checkbox.closest('.trustscript-parent-category');
+            const $immediateSubcats = $categoryLabel.next('.trustscript-subcategories');
+
+            if (isChecked && $immediateSubcats.length) {
+                $immediateSubcats.find('.trustscript-parent-checkbox').prop('checked', false);
+                $immediateSubcats.addClass('visible');
+                $categoryLabel.find('.trustscript-expand-toggle').text('▼');
+            }
+
+            if (isChecked) {
+                $checkbox.closest('.trustscript-subcategories').prevAll('.trustscript-parent-category').each(function() {
+                    const $ancestor = $(this);
+                    const $ancestorCheckbox = $ancestor.find('.trustscript-parent-checkbox').first();
+                    if ($ancestorCheckbox.length && $ancestorCheckbox.is(':checked')) {
+                        $ancestorCheckbox.prop('checked', false);
+                    }
+                });
+            }
+        });
+    }
+
 
     $(document).ready(function(){
         initCategorySearch();
         initCategoryBulkActions();
         initCategoryToggle();
+        initCategoryParentChildLogic();
 
         $('form').on('submit', function(e){
             const $apiKeyInput = $('#trustscript_api_key');
@@ -242,7 +273,7 @@
                 name: 'trustscript_api_key',
                 id: 'trustscript_api_key_input',
                 class: 'regular-text',
-                placeholder: 'Paste new API key to replace current key…'
+                placeholder: TrustscriptAdmin.i18n.pasteApiKeyPlaceholder
             });
             const $cancelBtn = $('<button>').attr({
                 type: 'button',
@@ -298,23 +329,14 @@
             }).done(function(res){
                 $modal.fadeOut(200).data('open', false);
                 if (res.success) {
-                    const $container = $('[data-api-key-container]');
-                    const $input = $('<input>').attr({
-                        type: 'text',
-                        id: 'trustscript_api_key',
-                        name: 'trustscript_api_key',
-                        value: '',
-                        class: 'regular-text',
-                        placeholder: 'TSK-XXXX-XXXX-XXXX'
-                    });
-                    $container.empty().append($input);
+                    location.reload();
                 } else {
-                    showNotification(TrustscriptAdmin.i18n.failedToDelete + ': ' + (res.data && res.data.message ? res.data.message : 'Unknown'), 'error');
+                    showNotification(res.data && res.data.message ? res.data.message : TrustscriptAdmin.i18n.failedToDelete, 'error');
                 }
             }).fail(function(xhr){
                 $modal.fadeOut(200).data('open', false);
-                const msg = getErrorMessage(xhr, 'Request failed');
-                showNotification(TrustscriptAdmin.i18n.failedToDelete + ': ' + msg, 'error');
+                const msg = getErrorMessage(xhr, TrustscriptAdmin.i18n.failedToDelete);
+                showNotification(msg, 'error');
             }).always(function(){
                 $btn.prop('disabled', false).text($btn.data('original-text')).data('deleting', false);
             });
@@ -345,7 +367,7 @@
                 }
             }).fail(function(xhr){
                 $loading.hide();
-                $error.text(getErrorMessage(xhr, 'Request failed')).show();
+                $error.text(getErrorMessage(xhr, TrustscriptAdmin.i18n.networkError)).show();
             });
         }
 
@@ -356,351 +378,6 @@
             fetchUsage();
         });
 
-        let mediaFrame = null;
-        $('#trustscript-select-logo').on('click', function(e){
-            e.preventDefault();
-            if (typeof wp === 'undefined' || !wp.media) {
-                showNotification(TrustscriptAdmin.i18n.mediaNotAvailable, 'error');
-                return;
-            }
-            if (mediaFrame) {
-                mediaFrame.open();
-                return;
-            }
-            mediaFrame = wp.media({
-                title: TrustscriptAdmin.i18n.selectLogo,
-                button: { text: TrustscriptAdmin.i18n.useThisLogo },
-                multiple: false
-            });
-            mediaFrame.on('select', function(){
-                const attachment = mediaFrame.state().get('selection').first().toJSON();
-                if (attachment && attachment.url) {
-                    $('#trustscript-brand-logo').val(attachment.url);
-                    $('#trustscript-logo-preview img').attr('src', attachment.url);
-                    $('#trustscript-logo-preview').show();
-                    $('#trustscript-remove-logo').show();
-                }
-            });
-            mediaFrame.open();
-        });
-
-        $('#trustscript-remove-logo').on('click', function(e){
-            e.preventDefault();
-            $('#trustscript-brand-logo').val('');
-            $('#trustscript-logo-preview img').attr('src', '');
-            $('#trustscript-logo-preview').hide();
-            $(this).hide();
-        });
-
-        $('#trustscript-branding-save').on('click', function(e){
-            e.preventDefault();
-            const $btn = $(this).prop('disabled', true).text(TrustscriptAdmin.i18n.saving);
-            const $status = $('#trustscript-branding-save-status');
-            $status.empty();
-            
-            const brand = {
-                businessName: $('#trustscript-brand-name').val() || '',
-                logoUrl: $('#trustscript-brand-logo').val() || '',
-                footerText: $('#trustscript-brand-footer').val() || '',
-                customSubdomain: $('#trustscript-brand-domain').val() || '',
-                removeFooter: $('input[name="brand[removeFooter]"]').is(':checked') ? 1 : 0,
-                displayLogoOnly: $('input[name="brand[displayLogoOnly]"]').is(':checked') ? 1 : 0,
-                displayNameOnly: $('input[name="brand[displayNameOnly]"]').is(':checked') ? 1 : 0,
-                primaryColor: $('input[name="brand[primaryColor]"]').val() || '',
-                accentColor: $('input[name="brand[accentColor]"]').val() || '',
-                backgroundColor: $('input[name="brand[backgroundColor]"]').val() || '',
-                headerBackgroundColor: $('input[name="brand[headerBackgroundColor]"]').val() || '',
-                cardBackgroundColor: $('input[name="brand[cardBackgroundColor]"]').val() || '',
-                pageBackgroundColor: $('input[name="brand[pageBackgroundColor]"]').val() || '',
-                textColor: $('input[name="brand[textColor]"]').val() || '',
-                secondaryTextColor: $('input[name="brand[secondaryTextColor]"]').val() || '',
-                borderColor: $('input[name="brand[borderColor]"]').val() || '',
-                buttonBackgroundColor: $('input[name="brand[buttonBackgroundColor]"]').val() || '',
-                buttonTextColor: $('input[name="brand[buttonTextColor]"]').val() || '',
-                buttonBorderColor: $('input[name="brand[buttonBorderColor]"]').val() || '',
-                successColor: $('input[name="brand[successColor]"]').val() || '',
-                errorColor: $('input[name="brand[errorColor]"]').val() || '',
-                starColor: $('input[name="brand[starColor]"]').val() || '',
-                starEmptyColor: $('input[name="brand[starEmptyColor]"]').val() || ''
-            };
-
-            $.post(TrustscriptAdmin.ajax_url, {
-                action: 'trustscript_save_branding',
-                nonce: TrustscriptAdmin.save_branding_nonce,
-                brand: brand
-            }).done(function(res){
-                if (res.success) {
-                    $status.empty().append(
-                        $('<span>').css({ color: '#48bb78', fontWeight: '600' }).text('✓ Branding saved and synced to TrustScript')
-                    );
-                    if (res.data && (res.data.logoUrl || res.data.url)) {
-                        const url = res.data.logoUrl || res.data.url;
-                        $('#trustscript-brand-logo').val(url);
-                        $('#trustscript-logo-preview img').attr('src', url).show();
-                        $('#trustscript-remove-logo').show();
-                    }
-                    setTimeout(function() {
-                        $status.fadeOut(300, function() { $(this).empty().show(); });
-                    }, 5000);
-                } else {
-                    const errorMsg = res.data && res.data.message ? res.data.message : 'Unknown error';
-                    $status.empty().append(
-                        $('<span>').css({ color: '#dc3545', fontWeight: '600' }).text('✗ Failed to save branding: ' + errorMsg)
-                    );
-                }
-            }).fail(function(xhr){
-                const msg = getErrorMessage(xhr, 'Request failed');
-                $status.empty().append(
-                    $('<span>').css({ color: '#dc3545', fontWeight: '600' }).text('✗ Failed to save branding: ' + msg)
-                );
-            }).always(function(){
-                $btn.prop('disabled', false).text('Save Changes');
-            });
-        });
-
-            function fetchBranding() {
-                if (!$('#trustscript-branding-container').length) return;
-                $.post(TrustscriptAdmin.ajax_url, {
-                    action: 'trustscript_get_branding',
-                    nonce: TrustscriptAdmin.nonce
-                }).done(function(res){
-                    if (res.success && res.data && res.data.branding) {
-                        const b = res.data.branding;
-                        
-                        $('#trustscript-brand-name').val(b.businessName || '');
-                        $('#trustscript-brand-logo').val(b.logoUrl || '');
-                        if (b.logoUrl) {
-                            $('#trustscript-logo-preview img').attr('src', b.logoUrl);
-                            $('#trustscript-logo-preview').show();
-                            $('#trustscript-remove-logo').show();
-                        }
-                        $('#trustscript-brand-footer').val(b.footerText || '');
-                        $('#trustscript-brand-domain').val(b.customSubdomain || '');
-                        
-                        if (b.primaryColor) {
-                            $('input[name="brand[primaryColor]"]').val(b.primaryColor);
-                            $('input[data-field="primaryColor-hex"]').val(b.primaryColor);
-                        }
-                        if (b.accentColor) {
-                            $('input[name="brand[accentColor]"]').val(b.accentColor);
-                            $('input[data-field="accentColor-hex"]').val(b.accentColor);
-                        }
-                        
-                        if (b.backgroundColor) {
-                            $('input[name="brand[backgroundColor]"]').val(b.backgroundColor);
-                            $('input[data-field="backgroundColor-hex"]').val(b.backgroundColor);
-                        }
-                        if (b.headerBackgroundColor) {
-                            $('input[name="brand[headerBackgroundColor]"]').val(b.headerBackgroundColor);
-                            $('input[data-field="headerBackgroundColor-hex"]').val(b.headerBackgroundColor);
-                        }
-                        if (b.cardBackgroundColor) {
-                            $('input[name="brand[cardBackgroundColor]"]').val(b.cardBackgroundColor);
-                            $('input[data-field="cardBackgroundColor-hex"]').val(b.cardBackgroundColor);
-                        }
-                        if (b.pageBackgroundColor) {
-                            $('input[name="brand[pageBackgroundColor]"]').val(b.pageBackgroundColor);
-                            $('input[data-field="pageBackgroundColor-hex"]').val(b.pageBackgroundColor);
-                        }
-                        
-                        if (b.textColor) {
-                            $('input[name="brand[textColor]"]').val(b.textColor);
-                            $('input[data-field="textColor-hex"]').val(b.textColor);
-                        }
-                        if (b.secondaryTextColor) {
-                            $('input[name="brand[secondaryTextColor]"]').val(b.secondaryTextColor);
-                            $('input[data-field="secondaryTextColor-hex"]').val(b.secondaryTextColor);
-                        }
-                        
-                        if (b.borderColor) {
-                            $('input[name="brand[borderColor]"]').val(b.borderColor);
-                            $('input[data-field="borderColor-hex"]').val(b.borderColor);
-                        }
-                        if (b.buttonBackgroundColor) {
-                            $('input[name="brand[buttonBackgroundColor]"]').val(b.buttonBackgroundColor);
-                            $('input[data-field="buttonBackgroundColor-hex"]').val(b.buttonBackgroundColor);
-                        }
-                        if (b.buttonTextColor) {
-                            $('input[name="brand[buttonTextColor]"]').val(b.buttonTextColor);
-                            $('input[data-field="buttonTextColor-hex"]').val(b.buttonTextColor);
-                        }
-                        if (b.buttonBorderColor) {
-                            $('input[name="brand[buttonBorderColor]"]').val(b.buttonBorderColor);
-                            $('input[data-field="buttonBorderColor-hex"]').val(b.buttonBorderColor);
-                        }
-                        
-                        if (b.successColor) {
-                            $('input[name="brand[successColor]"]').val(b.successColor);
-                            $('input[data-field="successColor-hex"]').val(b.successColor);
-                        }
-                        if (b.errorColor) {
-                            $('input[name="brand[errorColor]"]').val(b.errorColor);
-                            $('input[data-field="errorColor-hex"]').val(b.errorColor);
-                        }
-                        if (b.starColor) {
-                            $('input[name="brand[starColor]"]').val(b.starColor);
-                            $('input[data-field="starColor-hex"]').val(b.starColor);
-                        }
-                        if (b.starEmptyColor) {
-                            $('input[name="brand[starEmptyColor]"]').val(b.starEmptyColor);
-                            $('input[data-field="starEmptyColor-hex"]').val(b.starEmptyColor);
-                        }
-                        
-                        if (b.removeFooter) {
-                            $('input[name="brand[removeFooter]"]').prop('checked', true);
-                        }
-                        if (b.displayLogoOnly) {
-                            $('input[name="brand[displayLogoOnly]"]').prop('checked', true);
-                        }
-                        if (b.displayNameOnly) {
-                            $('input[name="brand[displayNameOnly]"]').prop('checked', true);
-                        }
-                    }
-                }).fail(function(){ /* failing silently */ });
-            }
-
-            $(document).on('input', '.trustscript-color-input', function() {
-                const $picker = $(this);
-                const $container = $picker.closest('.trustscript-color-picker');
-                const $hexInput = $container.find('.trustscript-color-hex');
-                $hexInput.val($picker.val());
-            });
-            
-            $(document).on('input', '.trustscript-color-hex', function() {
-                const $hexInput = $(this);
-                const hex = $hexInput.val().trim();
-                
-                if (/^#[0-9A-F]{6}$/i.test(hex)) {
-                    const $container = $hexInput.closest('.trustscript-color-picker');
-                    const $picker = $container.find('.trustscript-color-input');
-                    $picker.val(hex);
-                }
-            });
-
-            function checkUserPlanAndLoadBranding() {
-                if (!$('#trustscript-branding-loading').length) return;
-
-                $.post(TrustscriptAdmin.ajax_url, {
-                    action: 'trustscript_get_user_plan',
-                    nonce: TrustscriptAdmin.nonce,
-                    _t: Date.now()
-                }).done(function(res){
-                    if (res.success && res.data && res.data.plan) {
-                        const plan = res.data.plan.toLowerCase();
-                        
-                        $('#trustscript-branding-loading').hide();
-
-                        if (plan === 'pro' || plan === 'business') {
-                            $('#trustscript-branding-container').show();
-                            fetchBranding();
-                        } else {
-                            $('#trustscript-branding-upgrade').show();
-                        }
-                    } else {
-                        $('#trustscript-branding-loading').hide();
-                        $('#trustscript-branding-error').show();
-                        $('#trustscript-branding-error-message').text(
-                            res.data && res.data.message ? res.data.message : 'Unable to fetch your plan information. Please check your API settings.'
-                        );
-                    }
-                }).fail(function(xhr){
-                    $('#trustscript-branding-loading').hide();
-                    $('#trustscript-branding-error').show();
-                    const msg = getErrorMessage(xhr, 'Network error. Please check your API connection.');
-                    $('#trustscript-branding-error-message').text(msg);
-                });
-            }
-
-            checkUserPlanAndLoadBranding();
-
-            $(document).on('click', '#trustscript-refresh-plan', function() {
-                $(this).prop('disabled', true).text('Refreshing...');
-                $.post(TrustscriptAdmin.ajax_url, {
-                    action: 'trustscript_get_user_plan',
-                    nonce: TrustscriptAdmin.nonce,
-                    force_refresh: 'true'
-                }).done(function(res) {
-                    if (res.success && res.data && res.data.plan) {
-                        const plan = res.data.plan.toLowerCase();
-                        $('#trustscript-branding-error').hide();
-                        if (plan === 'pro' || plan === 'business') {
-                            $('#trustscript-branding-container').show();
-                            fetchBranding();
-                        } else {
-                            $('#trustscript-branding-upgrade').show();
-                        }
-                    }
-                }).fail(function() {
-                    showNotification('Failed to refresh plan information. Please try again.', 'error');
-                }).always(function() {
-                    $('#trustscript-refresh-plan').prop('disabled', false).text('Refresh Plan Information');
-                });
-            });
-
-            $(document).on('click', '#trustscript-refresh-plan-from-upgrade', function() {
-                $(this).prop('disabled', true).text('Refreshing...');
-                $.post(TrustscriptAdmin.ajax_url, {
-                    action: 'trustscript_get_user_plan',
-                    nonce: TrustscriptAdmin.nonce,
-                    force_refresh: 'true'
-                }).done(function(res) {
-                    if (res.success && res.data && res.data.plan) {
-                        const plan = res.data.plan.toLowerCase();
-                        if (plan === 'pro' || plan === 'business') {
-                            $('#trustscript-branding-upgrade').hide();
-                            $('#trustscript-branding-container').show();
-                            fetchBranding();
-                        }
-                    }
-                }).fail(function() {
-                    showNotification('Failed to refresh plan information. Please try again.', 'error');
-                }).always(function() {
-                    $('#trustscript-refresh-plan-from-upgrade').prop('disabled', false).text('Refresh Plan Information');
-                });
-            });
-
-            let domainCheckTimeout = null;
-            $('#trustscript-brand-domain').on('input', function() {
-                const domain = $(this).val().trim();
-                const $status = $('#trustscript-domain-status');
-
-                if (domainCheckTimeout) {
-                    clearTimeout(domainCheckTimeout);
-                }
-
-                if (!domain) {
-                    $status.empty();
-                    return;
-                }
-
-                $status.empty().append(
-                    $('<span>').css('color', '#666').text('Checking...')
-                );
-
-                domainCheckTimeout = setTimeout(function() {
-                    $.post(TrustscriptAdmin.ajax_url, {
-                        action: 'trustscript_check_domain',
-                        nonce: TrustscriptAdmin.check_domain_nonce,
-                        domain: domain
-                    }).done(function(res) {
-                        if (res.success && res.data) {
-                            if (res.data.available) {
-                                $status.empty().append(
-                                    $('<span>').css('color', '#48bb78').text('✓ Available')
-                                );
-                            } else {
-                                $status.empty().append(
-                                    $('<span>').css('color', '#dc3545').text('✗ Taken')
-                                );
-                            }
-                        } else {
-                            $status.empty();
-                        }
-                    }).fail(function() {
-                        $status.empty();
-                    });
-                }, 500);
-            });
 
         $(document)
             .off('click.trustscriptFaq', '.trustscript-faq-question')
@@ -761,15 +438,15 @@
             $.post(TrustscriptAdmin.ajax_url, formData)
                 .done(function(response) {
                     if (response.success) {
-                        $message.addClass('success').text(response.data.message || 'Settings saved!');
-                        showNotification(response.data.message || 'Service settings saved successfully!', 'success');
+                        $message.addClass('success').text(response.data.message || TrustscriptAdmin.i18n.saveSuccess);
+                        showNotification(response.data.message || TrustscriptAdmin.i18n.saveSuccess, 'success');
                     } else {
-                        $message.addClass('error').text(response.data.message || 'Save failed');
-                        showNotification(response.data.message || 'Failed to save settings', 'error');
+                        $message.addClass('error').text(response.data.message || TrustscriptAdmin.i18n.saveFailed);
+                        showNotification(response.data.message || TrustscriptAdmin.i18n.saveFailed, 'error');
                     }
                 })
                 .fail(function(xhr) {
-                    const errorMsg = getErrorMessage(xhr, 'Network error occurred');
+                    const errorMsg = getErrorMessage(xhr, TrustscriptAdmin.i18n.networkError);
                     $message.addClass('error').text(errorMsg);
                     showNotification(errorMsg, 'error');
                 })
@@ -831,15 +508,15 @@
             $.post(TrustscriptAdmin.ajax_url, formData)
                 .done(function(response) {
                     if (response.success) {
-                        $message.addClass('success').text(response.data.message || 'Settings saved!');
-                        showNotification(response.data.message || 'Privacy settings saved successfully!', 'success');
+                        $message.addClass('success').text(response.data.message || TrustscriptAdmin.i18n.saveSuccess);
+                        showNotification(response.data.message || TrustscriptAdmin.i18n.saveSuccess, 'success');
                     } else {
-                        $message.addClass('error').text(response.data.message || 'Save failed');
-                        showNotification(response.data.message || 'Failed to save settings', 'error');
+                        $message.addClass('error').text(response.data.message || TrustscriptAdmin.i18n.saveFailed);
+                        showNotification(response.data.message || TrustscriptAdmin.i18n.saveFailed, 'error');
                     }
                 })
                 .fail(function(xhr) {
-                    const errorMsg = getErrorMessage(xhr, 'Network error occurred');
+                    const errorMsg = getErrorMessage(xhr, TrustscriptAdmin.i18n.networkError);
                     $message.addClass('error').text(errorMsg);
                     showNotification(errorMsg, 'error');
                 })
@@ -917,20 +594,20 @@
             $.post(TrustscriptAdmin.ajax_url, formData)
                 .done(function(response) {
                     if (response.success) {
-                        $status.addClass('success').text('✓ Review settings saved successfully!');
-                        showNotification('Review settings saved!', 'success');
+                        $status.addClass('success').text('✓ ' + TrustscriptAdmin.i18n.saveSuccess);
+                        showNotification(TrustscriptAdmin.i18n.saveSuccess, 'success');
                     } else {
-                        $status.addClass('error').text('✗ Failed to save settings: ' + (response.data?.message || 'Unknown error'));
-                        showNotification(response.data?.message || 'Failed to save settings', 'error');
+                        $status.addClass('error').text('\u2717 ' + ((response.data && response.data.message) ? response.data.message : TrustscriptAdmin.i18n.saveFailed));
+                        showNotification((response.data && response.data.message) ? response.data.message : TrustscriptAdmin.i18n.saveFailed, 'error');
                     }
                 })
                 .fail(function(xhr) {
-                    const errorMsg = getErrorMessage(xhr, 'Network error occurred');
-                    $status.addClass('error').text('✗ Error: ' + errorMsg);
+                    const errorMsg = getErrorMessage(xhr, TrustscriptAdmin.i18n.networkError);
+                    $status.addClass('error').text('✗ ' + errorMsg);
                     showNotification(errorMsg, 'error');
                 })
                 .always(function() {
-                    $button.prop('disabled', false).text('Save Review Settings');
+                    $button.prop('disabled', false).text(TrustscriptAdmin.i18n.saveButton);
                     
                     setTimeout(function() {
                         $status.fadeOut(300, function() {
@@ -985,7 +662,6 @@
 
         syncSaveButton();
 
-        // Prevent checkbox from being directly checked - open modal instead
         $consentCheckbox.on('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
@@ -1050,11 +726,11 @@
                 if (res.success) {
                     $('#trustscript-queue-row-' + id).fadeOut(300, function(){ $(this).remove(); });
                 } else {
-                    showNotification('Failed to retry: ' + (res.data?.message ?? 'Unknown error'), 'error');
+                    showNotification((res.data && res.data.message) ? res.data.message : TrustscriptAdmin.i18n.retryFailed, 'error');
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.retry);
                 }
             }).fail(function(xhr){
-                showNotification('Failed to retry: ' + getErrorMessage(xhr, 'Request failed'), 'error');
+                showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.retryFailed), 'error');
                 $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.retry);
             });
         });
@@ -1062,7 +738,7 @@
         $(document).on('click', '[data-action="clear-queue-item"]', function(){
             const $btn = $(this);
             const id = $btn.data('id');
-            if (!window.confirm(TrustscriptAdmin.i18n?.confirmClear ?? 'Are you sure? This will remove the item from the queue.')) {
+            if (!window.confirm((TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.confirmClear) ? TrustscriptAdmin.i18n.confirmClear : 'Are you sure? This will remove the item from the queue.')) {
                 return;
             }
             $btn.prop('disabled', true).text(TrustscriptAdmin.i18n.clearing);
@@ -1075,11 +751,11 @@
                 if (res.success) {
                     $('#trustscript-queue-row-' + id).fadeOut(300, function(){ $(this).remove(); });
                 } else {
-                    showNotification('Failed to clear: ' + (res.data?.message ?? 'Unknown error'), 'error');
+                    showNotification((res.data && res.data.message) ? res.data.message : TrustscriptAdmin.i18n.clearFailed, 'error');
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.clear);
                 }
             }).fail(function(xhr){
-                showNotification('Failed to clear: ' + getErrorMessage(xhr, 'Request failed'), 'error');
+                showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.clearFailed), 'error');
                 $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.clear);
             });
         });
@@ -1114,12 +790,12 @@
                     location.reload();
                 } else {
                     $('#trustscript-processing-msg').remove();
-                    showNotification('Error: ' + (res.data && res.data.message ? res.data.message : 'Unknown error'));
+                    showNotification(res.data && res.data.message ? res.data.message : TrustscriptAdmin.i18n.processQueueFailed, 'error');
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.processQueueNow);
                 }
             }).fail(function(xhr){
                 $('#trustscript-processing-msg').remove();
-                showNotification('Failed to process queue: ' + getErrorMessage(xhr, 'Unknown error'), 'error');
+                showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.processQueueFailed), 'error');
                 $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.processQueueNow);
             });
         });
@@ -1142,11 +818,11 @@
                         location.reload();
                     }
                 } else {
-                    showNotification('Retry failed: ' + (res.data && res.data.message ? res.data.message : 'Unknown error'), 'error');
+                    showNotification(res.data && res.data.message ? res.data.message : TrustscriptAdmin.i18n.retryFailed, 'error');
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.retry);
                 }
             }).fail(function(xhr){
-                showNotification('Retry failed: ' + getErrorMessage(xhr, 'Request failed'), 'error');
+                showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.retryFailed), 'error');
                 $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.retry);
             });
         });
@@ -1156,7 +832,7 @@
             const $btn  = $(this);
             const id    = $btn.data('id');
             const order = $btn.data('order');
-            const message = (TrustscriptAdmin.i18n?.confirmClearQueue ?? 'Remove order #' + order + ' from the queue? This will not cancel the order, but the review request will NOT be retried.');
+            const message = ((TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.confirmClearQueue) ? TrustscriptAdmin.i18n.confirmClearQueue : 'Remove order #' + order + ' from the queue? This will not cancel the order, but the review request will NOT be retried.');
             if (!window.confirm(message)) {
                 return;
             }
@@ -1169,11 +845,11 @@
                 if (res.success) {
                     $('#trustscript-queue-row-' + id).fadeOut(300, function(){ $(this).remove(); });
                 } else {
-                    showNotification('Error: ' + (res.data && res.data.message ? res.data.message : 'Unknown error'), 'error');
+                    showNotification(res.data && res.data.message ? res.data.message : TrustscriptAdmin.i18n.clearFailed, 'error');
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.clear);
                 }
             }).fail(function(xhr){
-                showNotification('Failed to clear: ' + getErrorMessage(xhr, 'Request failed'), 'error');
+                showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.clearFailed), 'error');
                 $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.clear);
             });
         });
@@ -1199,17 +875,73 @@
                     if (response.success) {
                         showNotification(response.data.message, 'success');
                     } else {
-                        showNotification(response.data?.message || 'Failed to save preference', 'error');
+                        showNotification((response.data && response.data.message) ? response.data.message : TrustscriptAdmin.i18n.savePreferenceFailed, 'error');
                     }
                 },
                 error: function(xhr) {
-                    showNotification(getErrorMessage(xhr, 'Network error'), 'error');
+                    showNotification(getErrorMessage(xhr, TrustscriptAdmin.i18n.networkError), 'error');
                 },
                 complete: function() {
                     $btn.prop('disabled', false).text(TrustscriptAdmin.i18n.savePreference);
                 }
             });
         });
+
+        $( document ).on( 'input', '.trustscript-country-search-input', function () {
+            var q     = $( this ).val().toLowerCase();
+            var $list = $( this ).closest( '.trustscript-country-picker-container' ).find( '.trustscript-country-grid label' );
+            $list.each( function () {
+                var name = $( this ).text().toLowerCase();
+                $( this ).toggle( name.indexOf( q ) !== -1 );
+            } );
+        } );
+
+        $( document ).on( 'click', '.trustscript-country-select-all', function () {
+            var $wrap = $( this ).closest( '.trustscript-country-picker-container' );
+            $wrap.find( 'input[type=checkbox]:not(:disabled)' ).prop( 'checked', true );
+        } );
+        $( document ).on( 'click', '.trustscript-country-deselect-all', function () {
+            var $wrap = $( this ).closest( '.trustscript-country-picker-container' );
+            $wrap.find( 'input[type=checkbox]:not(:disabled)' ).prop( 'checked', false );
+        } );
+
+        $( '#trustscript-privacy-form' ).on( 'submit', function ( e ) {
+            e.preventDefault();
+
+            var $btn = $( '#trustscript-privacy-save-btn' );
+            var $msg = $( '#trustscript-privacy-save-msg' );
+            
+            var textSaving = (TrustscriptAdmin && TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.saving) ? TrustscriptAdmin.i18n.saving : 'Saving…';
+            var textSaveForm = (TrustscriptAdmin && TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.saveChanges) ? TrustscriptAdmin.i18n.saveChanges : 'Save Changes';
+            var textNetworkErr = (TrustscriptAdmin && TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.networkError) ? TrustscriptAdmin.i18n.networkError : 'Network error. Please try again.';
+            var textSaveFailed = (TrustscriptAdmin && TrustscriptAdmin.i18n && TrustscriptAdmin.i18n.saveFailed) ? TrustscriptAdmin.i18n.saveFailed : 'Save failed. Please try again.';
+
+            $btn.prop( 'disabled', true ).text( textSaving );
+            $msg.hide();
+
+            var data = $( this ).serialize();
+            data += '&action=trustscript_save_privacy_settings';
+
+            $.post( TrustscriptAdmin ? TrustscriptAdmin.ajax_url : ajaxurl, data, function ( res ) {
+                $btn.prop( 'disabled', false ).text( textSaveForm );
+                if ( res.success ) {
+                    $msg.css( 'color', '#2ecc71' )
+                        .text( '✓ ' + res.data.message )
+                        .fadeIn();
+                } else {
+                    $msg.css( 'color', '#e74c3c' )
+                        .text( '✗ ' + ( (res.data && res.data.message) ? res.data.message : textSaveFailed ) )
+                        .fadeIn();
+                }
+                setTimeout( function () { $msg.fadeOut(); }, 4000 );
+            } ).fail( function () {
+                $btn.prop( 'disabled', false ).text( textSaveForm );
+                $msg.css( 'color', '#e74c3c' )
+                    .text( textNetworkErr )
+                    .fadeIn();
+            } );
+        } );
+
     });
 
 })(jQuery);

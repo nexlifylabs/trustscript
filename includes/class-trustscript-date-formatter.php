@@ -9,35 +9,51 @@
 class TrustScript_Date_Formatter {
 
 	/**
-	 * Format a date string based on the specified format type.
+	 * Format a date string using the specified format type.
 	 *
-	 * @param string $date Date string to format.
-	 * @param string $format Format type: 'relative', 'full', 'short', 'numeric'. Default 'relative'.
-	 * @return string Formatted date string.
+	 * Timestamps are stored in site-local time. The method parses them with the
+	 * site timezone so `wp_date()` can convert to display time without double-offsetting.
+	 * Falls back to a raw escaped string if the date cannot be parsed at all.
+	 *
+	 * Supported formats: 'relative', 'full', 'short', 'datetime', 'numeric'.
+	 * Unknown values fall back to 'relative'.
+	 *
+	 * @since 1.0.0
+	 * @param string $date   Date string in Y-m-d H:i:s format.
+	 * @param string $format Format type. Default 'relative'.
+	 * @return string Formatted date string, or empty string if $date is empty.
 	 */
 	public static function format( $date, $format = 'relative' ) {
 		if ( empty( $date ) ) {
 			return '';
 		}
 
-		$timestamp = strtotime( $date );
-
-		if ( ! $timestamp ) {
+		$tz = wp_timezone();
+		$dt = date_create_from_format( 'Y-m-d H:i:s', $date, $tz );
+		if ( ! $dt ) {
+			$dt = new DateTime( $date, $tz );
+		}
+		if ( ! $dt ) {
 			return esc_html( $date );
 		}
+
+		$timestamp = $dt->getTimestamp();
 
 		switch ( $format ) {
 			case 'relative':
 				return self::format_relative( $timestamp );
 
 			case 'full':
-				return date_i18n( 'F j, Y', $timestamp );
+				return wp_date( 'F j, Y', $timestamp );
 
 			case 'short':
-				return date_i18n( 'M j, Y', $timestamp );
+				return wp_date( 'M j, Y', $timestamp );
+
+			case 'datetime':
+				return wp_date( 'M j, Y g:i A', $timestamp );
 
 			case 'numeric':
-				return date_i18n( 'm/d/Y', $timestamp );
+				return wp_date( 'm/d/Y', $timestamp );
 
 			default:
 				return self::format_relative( $timestamp );
@@ -45,10 +61,14 @@ class TrustScript_Date_Formatter {
 	}
 
 	/**
-	 * Format a timestamp into a relative time string (e.g., "2 weeks ago").
+	 * Format a Unix timestamp as a human-readable relative time string.
 	 *
+	 * Thresholds: < 1 hour → minutes, < 1 day → hours, < 1 week → days,
+	 * < 30 days → weeks, otherwise → months. All strings are translatable.
+	 *
+	 * @since 1.0.0
 	 * @param int $timestamp Unix timestamp.
-	 * @return string Relative time string.
+	 * @return string Localised relative time string, e.g. "2 weeks ago".
 	 */
 	private static function format_relative( $timestamp ) {
 		$diff = time() - $timestamp;
@@ -98,15 +118,17 @@ class TrustScript_Date_Formatter {
 	}
 
 	/**
-	 * Get available date format options for display in settings.
+	 * Get the available date format options for use in settings UI.
 	 *
-	 * @return array Array of format options with keys as format types and values as human-readable labels.
+	 * @since 1.0.0
+	 * @return array<string, string> Map of format keys to translated human-readable labels.
 	 */
 	public static function get_formats() {
 		return array(
 			'relative' => __( 'Relative (e.g., "2 weeks ago")', 'trustscript' ),
 			'full'     => __( 'Full (e.g., "January 15, 2024")', 'trustscript' ),
 			'short'    => __( 'Short (e.g., "Jan 15, 2024")', 'trustscript' ),
+			'datetime' => __( 'Date & Time (e.g., "Jan 15, 2024 4:26 PM")', 'trustscript' ),
 			'numeric'  => __( 'Numeric (e.g., "01/15/2024")', 'trustscript' ),
 		);
 	}

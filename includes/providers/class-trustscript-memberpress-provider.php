@@ -112,6 +112,17 @@ class TrustScript_MemberPress_Provider extends TrustScript_Service_Provider {
 		$service_description = $product && $product->post_excerpt ? wp_strip_all_tags( $product->post_excerpt ) : '';
 		$product_id = $product ? $product->ID : 0;
 		
+		// Try to get billing country from user meta or transaction meta
+		$billing_country = get_user_meta( $user->ID, 'billing_country', true );
+		if ( empty( $billing_country ) ) {
+			// Try to get from transaction meta if available
+			$billing_country = get_metadata( 'post', $txn->id, '_mepr_billing_country', true );
+		}
+		if ( empty( $billing_country ) ) {
+			// Default to empty string
+			$billing_country = '';
+		}
+		
 		return array(
 			'customer_name' => $customer_name,
 			'customer_email' => $customer_email,
@@ -121,6 +132,7 @@ class TrustScript_MemberPress_Provider extends TrustScript_Service_Provider {
 			'order_total' => $txn->total,
 			'order_number' => $txn->trans_num,
 			'product_id' => $product_id,
+			'billing_country' => $billing_country,
 		);
 	}
 	

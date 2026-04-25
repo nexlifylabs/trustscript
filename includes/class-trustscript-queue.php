@@ -1,8 +1,7 @@
 <?php
 /**
- * TrustScript Quota Queue
- * This class manages a queue of orders that have failed to 
- * send review requests due to quota limits or other issues.
+ * TrustScript Quota Queue - Manages a queue of orders that failed to send to TrustScript due
+ * to quota limits or other retryable errors, with scheduled retries and admin management.
  *
  * @package TrustScript
  * @since   1.0.0
@@ -28,20 +27,24 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Check if the table exists in the database.
+	 * Check if the queue table exists.
+	 *
+	 * @since 1.0.0
+	 * @return bool
 	 */
 	public static function table_exists() {
 		global $wpdb;
 		$table = esc_sql( self::get_table_name() );
-		// Safe: SHOW TABLES is introspection and doesn't execute user data. Table prefix is set by WordPress.
-		// Caching is unnecessary: introspection queries are fast and caching could become stale if tables are manually added/dropped.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.DirectDatabaseQuery.NoCaching
 		return $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table ) ) === $table;
 	}
 
 	/**
-	 * Create (or upgrade) the queue table.
+	 * Create or upgrade the queue table.
+	 *
 	 * Safe to call on every init — uses dbDelta for idempotency.
+	 *
+	 * @since 1.0.0
 	 */
 	public static function create_table() {
 		global $wpdb;
@@ -80,17 +83,15 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Run any necessary migrations when the DB version is updated.
+	 * Run schema migrations when the DB version is updated.
 	 *
-	 * @return void
+	 * @since 1.0.0
 	 */
 	public static function run_migrations() {
 		global $wpdb;
 
 		$table = esc_sql( self::get_table_name() );
 
-		// Safe: INFORMATION_SCHEMA introspection to check existing columns before migration.
-		// Caching not needed: schema checks only run during initialization.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 		$columns = $wpdb->get_results(
 			$wpdb->prepare(
@@ -104,18 +105,13 @@ class TrustScript_Queue {
 		$column_names = wp_list_pluck( $columns, 'COLUMN_NAME' );
 
 		if ( ! in_array( 'scheduled_for', $column_names, true ) ) {
-			// Safe: ALTER TABLE with computed table name from get_table_name() (WordPress prefix + suffix).
-			// Table name is not user input and is safe for direct interpolation.
-			// Schema changes are necessary during plugin initialization/migration.
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.SchemaChange, WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-				"ALTER TABLE {$table} ADD COLUMN scheduled_for datetime DEFAULT NULL AFTER queued_at" 
+				"ALTER TABLE {$table} ADD COLUMN scheduled_for datetime DEFAULT NULL AFTER queued_at"
 			);
 		}
 
-		// Safe: INFORMATION_SCHEMA introspection to check existing indexes before migration.
-		// Caching not needed: schema checks only run during initialization.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$indexes = $wpdb->get_results(
 			$wpdb->prepare(
@@ -129,9 +125,6 @@ class TrustScript_Queue {
 		$index_names = wp_list_pluck( $indexes, 'INDEX_NAME' );
 
 		if ( ! in_array( 'idx_scheduled_for', $index_names, true ) ) {
-			// Safe: ALTER TABLE with computed table name from get_table_name() (WordPress prefix + suffix).
-			// Table name is not user input and is safe for direct interpolation.
-			// Schema changes are necessary during plugin initialization/migration.
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->query(
 				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -141,61 +134,58 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Add an order to the queue with a specified failure reason and optional delay.
-	 * 
-	 * @param int      $order_id
-	 * @param string   $service_id         e.g. 'woocommerce', 'memberpress'
-	 * @param string   $failure_reason     'quota' | 'rate_limit' | 'network' | 'api_error' | 'delay'
-	 * @param int      $delay_seconds      How many seconds from now should this be processed? (optional)
-	 * @return bool    True on a new insertion, false if already queued.
+	 * Add an order to the queue with a failure reason and optional delay.
+	 *
+	 * @since 1.0.0
+	 * @param int    $order_id       WooCommerce order ID.
+	 * @param string $service_id     Service slug e.g. 'woocommerce', 'memberpress'.
+	 * @param string $failure_reason 'quota' | 'rate_limit' | 'network' | 'api_error' | 'delay'.
+	 * @param int    $delay_seconds  Seconds from now to schedule processing. Default 0.
+	 * @return bool True on insertion, false if already queued or provider inactive.
 	 */
 	public static function add( $order_id, $service_id, $failure_reason = 'quota', $delay_seconds = 0 ) {
 		global $wpdb;
 
 		$table = esc_sql( self::get_table_name() );
-		
+
 		if ( (int) $delay_seconds === 0 && 'delay' === $failure_reason ) {
 			$service_manager = TrustScript_Service_Manager::get_instance();
 			$providers       = $service_manager->get_active_providers();
-			
+
 			if ( isset( $providers[ $service_id ] ) ) {
 				$provider = $providers[ $service_id ];
 				$success  = $provider->retry_review_request( $order_id );
-				
+
 				if ( $success ) {
 					return true;
 				}
-				
+
 				$last_error = $provider->get_last_api_error();
-				
+
 				if ( 'quota' === $last_error || 'api_key_invalid' === $last_error ) {
-					// Safety net: queue with 24-hour delay. Backend webhook should notify sooner,
-					// but this ensures self-healing if the webhook notification is missed.
 					$delay_seconds = 86400;
+					$failure_reason = $last_error;
 				} else {
-					// Temporary error (network, timeout): retry sooner.
 					$delay_seconds = 300;
+					$failure_reason = $last_error ?: 'api_error';
 				}
 			} else {
-				// Provider not found: hard block. Backend will always reject the request
-				// until the provider (e.g. WooCommerce, MemberPress) is reinstalled/activated.
 				return false;
 			}
 		}
-		
+
 		$scheduled_for = null;
 		if ( $delay_seconds > 0 ) {
-			$delay_timestamp = time() + $delay_seconds;
-			$scheduled_for = wp_date( 'Y-m-d H:i:s', $delay_timestamp );
+			$scheduled_for = wp_date( 'Y-m-d H:i:s', time() + $delay_seconds );
 		}
-		// Safe: INSERT IGNORE with prepared values for order_id, service_id, failure_reason, and scheduled_for.
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$rows = $wpdb->query(
 			$wpdb->prepare(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				"INSERT IGNORE INTO {$table}
 					(order_id, service_id, failure_reason, retry_count, queued_at, scheduled_for, status)
-				 VALUES (%d, %s, %s, 0, %s, %s, 'pending')",
+				VALUES (%d, %s, %s, 0, %s, %s, 'pending')",
 				absint( $order_id ),
 				sanitize_key( $service_id ),
 				sanitize_key( $failure_reason ),
@@ -204,22 +194,14 @@ class TrustScript_Queue {
 			)
 		);
 
-		if ( $rows ) {
-			$log_msg = '[TrustScript Queue] Enqueued order #' . $order_id .
-				' service=' . $service_id .
-				' reason=' . $failure_reason;
-			
-			if ( $delay_seconds > 0 ) {
-				$log_msg .= ' scheduled_for=' . $scheduled_for;
-			}
-		}
-
 		return (bool) $rows;
 	}
 
 	/**
-	 * Remove an item from the queue by ID.
+	 * Remove an item from the queue by ID. Used for manual cleanup or if processing determines
+	 * the item should no longer be retried.
 	 *
+	 * @since 1.0.0
 	 * @param int $id
 	 * @return bool
 	 */
@@ -231,8 +213,9 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Mark a queue item as completed by ID.
+	 * Mark a queue item as completed by ID. Used when processing succeeds in the cron.
 	 *
+	 * @since 1.0.0
 	 * @param int $id Queue item ID
 	 * @return bool
 	 */
@@ -250,8 +233,10 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Mark a queue item as completed by order ID and service ID.
+	 * Mark a queue item as completed by order ID and service ID. Used when processing succeeds
+	 * outside of the cron (e.g. manual retry from admin or successful webhook notification).
 	 *
+	 * @since 1.0.0
 	 * @param int    $order_id
 	 * @param string $service_id
 	 * @return bool
@@ -273,16 +258,16 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Reset a queue item to pending for retry by ID.
+	 * Reset a queue item to pending by ID, clearing retry count and last attempt timestamp. 
+	 * Used for manual retries from the admin.
 	 *
+	 * @since 1.0.0
 	 * @param int $id
 	 * @return bool
 	 */
 	public static function reset_to_pending( $id ) {
 		global $wpdb;
 		$table = esc_sql( self::get_table_name() );
-		// Safe: Raw UPDATE query to properly set last_attempt_at to SQL NULL (not empty string).
-		// Using raw query because wpdb->update() converts PHP null to empty string with %s format.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		return (bool) $wpdb->query(
 			$wpdb->prepare(
@@ -297,9 +282,9 @@ class TrustScript_Queue {
 
 
 	/**
-	 * Register the hourly cron job for automated queue processing.
-	 * Called during plugin activation.
+	 * Register the cron job for processing the queue. Should be called on plugin activation.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function register_cron_job() {
@@ -309,9 +294,9 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Hook the cron callback.
-	 * Must be called on every page load (e.g., in plugins_loaded).
+	 * Hook callback to process the queue. Registered on 'trustscript_process_queue_cron' action.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function init_cron_hook() {
@@ -322,6 +307,7 @@ class TrustScript_Queue {
 	/**
 	 * Clear the cron job on plugin deactivation.
 	 *
+	 * @since 1.0.0
 	 * @return void
 	 */
 	public static function unregister_cron_job() {
@@ -334,6 +320,7 @@ class TrustScript_Queue {
 	/**
 	 * Custom cron interval of every 6 hours for processing the queue.
 	 *
+	 * @since 1.0.0
 	 * @param array $schedules Existing schedules.
 	 * @return array
 	 */
@@ -348,12 +335,9 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Process the queue via WordPress cron.
+	 * Cron callback to process the queue. Processes a batch of pending items that are ready (scheduled_for <= now).
 	 *
-	 * Callback triggered by the hourly WordPress cron schedule. Processes a batch of pending
-	 * queue items whose scheduled_for time has arrived. Implements a transient-based rate limit
-	 * of once per minute to prevent concurrent execution and database overhead.
-	 *
+	 * @since 1.0.0
 	 * @return bool True if items were processed, false if skipped due to rate limit or empty queue.
 	 */
 	public static function process_queue_cron() {
@@ -374,7 +358,6 @@ class TrustScript_Queue {
 		
 		set_transient( $lock_key, 1, 60 );
 
-		// Safe: COUNT query with prepared statement for scheduled_for timestamp comparison.
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$ready_count = (int) $wpdb->get_var(
 			$wpdb->prepare(
@@ -402,6 +385,7 @@ class TrustScript_Queue {
 	/**
 	 * Count pending items.
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_pending() {
@@ -410,14 +394,14 @@ class TrustScript_Queue {
 			return 0;
 		}
 		$table = esc_sql( self::get_table_name() );
-		// Safe: Simple COUNT query with static WHERE clause. Table name from get_table_name().
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'pending'" );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from internal method, cannot be parameterized.
+		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE status = %s", 'pending' ) );
 	}
 
 	/**
 	 * Count failed items.
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_failed() {
@@ -426,14 +410,14 @@ class TrustScript_Queue {
 			return 0;
 		}
 		$table = esc_sql( self::get_table_name() );
-		// Safe: Simple COUNT query with static WHERE clause. Table name from get_table_name().
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'failed'" );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from internal method, cannot be parameterized.
+		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE status = %s", 'failed' ) );
 	}
 
 	/**
 	 * Count completed items.
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_completed() {
@@ -442,14 +426,14 @@ class TrustScript_Queue {
 			return 0;
 		}
 		$table = esc_sql( self::get_table_name() );
-		// Safe: Simple COUNT query with static WHERE clause. Table name from get_table_name().
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table} WHERE status = 'completed'" );
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from internal method, cannot be parameterized.
+		return (int) $wpdb->get_var( $wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE status = %s", 'completed' ) );
 	}
 
 	/**
 	 * Count all items regardless of status.
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_all() {
@@ -458,14 +442,14 @@ class TrustScript_Queue {
 			return 0;
 		}
 		$table = esc_sql( self::get_table_name() );
-		// Safe: Simple COUNT query with no WHERE clause. Table name from get_table_name().
-		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching,WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		return (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
 	}
 
 	/**
 	 * Count pending items that are scheduled for a future time (scheduled_for > now).
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_scheduled() {
@@ -490,6 +474,7 @@ class TrustScript_Queue {
 	/**
 	 * Count pending items that are ready to be processed (scheduled_for IS NULL OR scheduled_for <= now).
 	 *
+	 * @since 1.0.0
 	 * @return int
 	 */
 	public static function count_ready() {
@@ -514,32 +499,31 @@ class TrustScript_Queue {
 	/**
 	 * Get queue items with pagination and optional status filter.
 	 *
-	 * @param int    $page       1-based page number.
-	 * @param int    $per_page
-	 * @param string $status     'pending' | 'failed' | '' (all)
-	 * @return array { items: array, total: int }
+	 * @since 1.0.0
+	 * @param int    $page     1-based page number. Default 1.
+	 * @param int    $per_page Items per page. Default 25.
+	 * @param string $status   'pending' | 'failed' | '' for all. Default 'pending'.
+	 * @return array {
+	 *     @type array $items Queued items.
+	 *     @type int   $total Total matching items.
+	 * }
 	 */
 	public static function get_items( $page = 1, $per_page = 25, $status = 'pending' ) {
 		global $wpdb;
 
 		if ( ! self::table_exists() ) {
-			return array(
-				'items' => array(),
-				'total' => 0,
-			);
+			return array( 'items' => array(), 'total' => 0 );
 		}
 
-		$table = esc_sql( self::get_table_name() );
+		$table  = esc_sql( self::get_table_name() );
 		$offset = ( max( 1, (int) $page ) - 1 ) * (int) $per_page;
 
 		if ( ! empty( $status ) ) {
-			// Safe: COUNT query with prepared status parameter. 
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$total = (int) $wpdb->get_var(
 				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 				$wpdb->prepare( "SELECT COUNT(*) FROM {$table} WHERE status = %s", $status )
 			);
-			// Safe: SELECT query with prepared status parameter and LIMIT/OFFSET.
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$items = $wpdb->get_results(
 				$wpdb->prepare(
@@ -552,10 +536,8 @@ class TrustScript_Queue {
 				ARRAY_A
 			);
 		} else {
-			// Safe: Simple COUNT query with no WHERE clause. Table name from get_table_name().
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$total = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table}" );
-			
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$items = $wpdb->get_results(
 				$wpdb->prepare(
@@ -575,61 +557,51 @@ class TrustScript_Queue {
 	}
 
 	/**
-	 * Process a batch of pending queue items by calling the appropriate service provider.
+	 * Process a batch of pending queue items.
 	 *
-	 * Retrieves up to $batch_size pending items from the queue and attempts to send review
-	 * requests via the appropriate service provider. Only processes items where the scheduled_for
-	 * time has arrived (or is NULL for immediate items). Halts processing early if the API
-	 * provider responds with quota exhausted or invalid API key to avoid unnecessary API calls
-	 * when the account has hit its limits.
+	 * Fetches up to $batch_size pending items and sends review requests via the
+	 * appropriate service provider. Halts early on quota exhaustion or invalid API key.
+	 * Items exceeding 5 retries are marked permanently failed.
 	 *
-	 * Items are processed in order of queued_at (FIFO). Each attempt is stamped with the
-	 * current timestamp and retry count before calling the API. Successfully published items
-	 * are marked completed. Failed items are retried up to 5 times; items exceeding max
-	 * retries are marked as permanently failed.
-	 *
-	 * @param int  $batch_size          Max items to attempt to process in one batch. Default 20.
-	 * @param bool $exclude_scheduled   If true, skip scheduled items (where scheduled_for IS NOT NULL).
-	 *                                  If false (default), process all ready items including those
-	 *                                  whose scheduled time has arrived. Default false.
+	 * @since 1.0.0
+	 * @param int  $batch_size        Max items to process in one batch. Default 20.
+	 * @param bool $exclude_scheduled If true, skip items with a scheduled_for date. Default false.
 	 * @return array {
-	 *     @type int $processed Number of items successfully published to the API.
-	 *     @type int $skipped   Number of items skipped (registry gate, provider inactive, or batch halted).
-	 *     @type int $failed    Number of items marked as permanently failed (5 retries exhausted).
-	 *     @type int $waiting   Number of pending items still waiting for their scheduled time.
+	 *     @type int $processed Number of items successfully sent.
+	 *     @type int $skipped   Number of items skipped or batch-halted.
+	 *     @type int $failed    Number of items permanently failed (5 retries exhausted).
+	 *     @type int $waiting   Number of pending items still awaiting their scheduled time.
 	 * }
 	 */
 	public static function process_batch( $batch_size = 20, $exclude_scheduled = false ) {
 		global $wpdb;
 
-		$table = esc_sql( self::get_table_name() );
+		$table   = esc_sql( self::get_table_name() );
 		$results = array( 'processed' => 0, 'skipped' => 0, 'failed' => 0, 'waiting' => 0 );
 
 		if ( $exclude_scheduled ) {
-			// Safe: SELECT query with hardcoded WHERE clause and prepared LIMIT parameter.
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$items = $wpdb->get_results(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-					"SELECT * FROM {$table} 
-					 WHERE status = 'pending' AND scheduled_for IS NULL
-					 ORDER BY queued_at ASC
-					 LIMIT %d",
+					"SELECT * FROM {$table}
+					WHERE status = 'pending' AND scheduled_for IS NULL
+					ORDER BY queued_at ASC
+					LIMIT %d",
 					$batch_size
 				),
 				ARRAY_A
 			);
 		} else {
-			// Safe: SELECT query with prepared scheduled_for timestamp and LIMIT parameters.
 			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$items = $wpdb->get_results(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-					"SELECT * FROM {$table} 
-					 WHERE status = 'pending' 
-					 AND (scheduled_for IS NULL OR scheduled_for <= %s)
-					 ORDER BY queued_at ASC 
-					 LIMIT %d",
+					"SELECT * FROM {$table}
+					WHERE status = 'pending'
+					AND (scheduled_for IS NULL OR scheduled_for <= %s)
+					ORDER BY queued_at ASC
+					LIMIT %d",
 					current_time( 'mysql' ),
 					$batch_size
 				),
@@ -642,16 +614,16 @@ class TrustScript_Queue {
 			$waiting_count = (int) $wpdb->get_var(
 				$wpdb->prepare(
 					// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-					"SELECT COUNT(*) FROM {$table} 
-					 WHERE status = 'pending' 
-					 AND scheduled_for > %s",
+					"SELECT COUNT(*) FROM {$table}
+					WHERE status = 'pending'
+					AND scheduled_for > %s",
 					current_time( 'mysql' )
 				)
 			);
-			
+
 			if ( $waiting_count > 0 ) {
 				$results['waiting'] = $waiting_count;
-			} 
+			}
 
 			return $results;
 		}
@@ -698,8 +670,7 @@ class TrustScript_Queue {
 				$last_error = $provider->get_last_api_error();
 
 				if ( 'quota' === $last_error ) {
-					// Hold this item; don't retry until server notifies quota is reset.
-					// Set scheduled_for to 24 hours in the future to prevent auto-retry.
+					// Hold for 24 hours to prevent auto-retry until quota resets.
 					$hold_until = wp_date( 'Y-m-d H:i:s', time() + 86400 );
 					// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 					$wpdb->update(
@@ -733,7 +704,7 @@ class TrustScript_Queue {
 				}
 			}
 
-			usleep( 250000 );
+			usleep( 100000 );
 		}
 
 		return $results;

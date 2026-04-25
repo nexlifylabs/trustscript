@@ -24,59 +24,83 @@ class TrustScript_Media_Upload {
 		));
 	}
 
-	public function verify_request($request) {
-		$api_key = $request->get_header( 'Authorization' );
-		$site_url = $request->get_header( 'X-Site-URL' );
-		$review_token = $request->get_param( 'review_token' );
-		
-		if ( empty( $api_key ) && empty( $site_url ) ) {
-			if ( ! empty( $review_token ) && preg_match( '/^[a-z0-9\-]{32,}$/i', $review_token ) ) {
-				// Verify the token actually exists in the database before allowing upload.
-				// Note: Current token lookup only searches WooCommerce orders. MemberPress customers must use API key authentication.
-				if ( class_exists( 'TrustScript_Plugin_Admin' ) ) {
-					$order = TrustScript_Plugin_Admin::find_order_by_review_token( $review_token );
-					if ( $order ) {
-						return true;
-					}
-				}
-				return new WP_Error( 'invalid_token', 'Review token not recognized', array( 'status' => 401 ) );
-			}
-			return new WP_Error( 'unauthorized', 'Missing authentication headers', array( 'status' => 401 ) );
-		}
-		
+	public function verify_request( $request ) {
+		$api_key   = $request->get_header( 'X-API-Key' );
+		$site_url  = $request->get_header( 'X-Site-URL' );
+		$timestamp = $request->get_header( 'X-Webhook-Timestamp' );
+		$signature = $request->get_header( 'X-Webhook-Signature' );
+
 		if ( ! $api_key || ! $site_url ) {
-			return new WP_Error( 'unauthorized', 'Missing authentication headers', array( 'status' => 401 ) );
+			return new WP_Error(
+				'unauthorized',
+				__( 'Missing authentication headers (X-API-Key and X-Site-URL required)', 'trustscript' ),
+				array( 'status' => 401 )
+			);
 		}
 
-		if ( strpos( $api_key, 'Bearer ' ) === 0 ) {
+		if ( str_starts_with( $api_key, 'Bearer ' ) ) {
 			$api_key = substr( $api_key, 7 );
 		}
 
 		$rate_limit_key = 'trustscript_media_limit_' . hash( 'sha256', $api_key );
-		$request_count = intval( get_transient( $rate_limit_key ) );
-		
-		// phpcs:ignore WordPress.Security.EscapedData.OutputNotEscaped -- Rate limiting is best-effort; transient reads are not atomic and can allow burst in high concurrency scenarios, but acceptable per WordPress.org standards
-		if ( $request_count >= 50 ) {
-			return new WP_Error( 'rate_limited', 'Too many uploads. Rate limit: 50 per minute', array( 'status' => 429 ) );
-		}
-		
-		set_transient( $rate_limit_key, $request_count + 1, 60 );
 
-		$stored_api_key = get_option( 'trustscript_api_key', '' );
-		
+		if ( false === get_transient( $rate_limit_key ) ) {
+			set_transient( $rate_limit_key, 1, 60 );
+		} else {
+			$request_count = intval( get_transient( $rate_limit_key ) );
+			// phpcs:ignore WordPress.Security.EscapedData.OutputNotEscaped
+			if ( $request_count >= 50 ) {
+				return new WP_Error(
+					'rate_limited',
+					__( 'Too many uploads. Rate limit: 50 per minute', 'trustscript' ),
+					array( 'status' => 429 )
+				);
+			}
+			set_transient( $rate_limit_key, $request_count + 1, 60 );
+		}
+
+		$stored_api_key = trustscript_get_api_key();
+
 		if ( empty( $stored_api_key ) ) {
-			return new WP_Error( 'unauthorized', 'No API key configured', array( 'status' => 401 ) );
+			return new WP_Error(
+				'unauthorized',
+				__( 'No API key configured', 'trustscript' ),
+				array( 'status' => 401 )
+			);
 		}
 
 		if ( ! hash_equals( $stored_api_key, $api_key ) ) {
-			return new WP_Error( 'unauthorized', 'Invalid API key', array( 'status' => 401 ) );
+			return new WP_Error(
+				'unauthorized',
+				__( 'Invalid API key', 'trustscript' ),
+				array( 'status' => 401 )
+			);
 		}
 
-		$current_site_url = get_site_url();
-		if ( ! hash_equals( $current_site_url, $site_url ) ) {
-			return new WP_Error( 'domain_mismatch', 'Domain mismatch', array( 'status' => 401 ) );
+		$expires_at = get_option( 'trustscript_api_key_expires_at', null );
+		if ( ! empty( $expires_at ) && time() > strtotime( $expires_at ) ) {
+			return new WP_Error(
+				'api_key_expired',
+				__( 'API key has expired. Please generate a new API key in TrustScript dashboard.', 'trustscript' ),
+				array( 'status' => 401 )
+			);
 		}
-		
+
+		if ( ! hash_equals( get_site_url(), $site_url ) ) {
+			return new WP_Error(
+				'domain_mismatch',
+				__( 'Domain mismatch: API key is not valid for this domain', 'trustscript' ),
+				array( 'status' => 401 )
+			);
+		}
+
+		$webhook_secret       = trustscript_get_webhook_secret();
+		$signature_validation = trustscript_verify_webhook_signature( $request, $webhook_secret );
+
+		if ( is_wp_error( $signature_validation ) ) {
+			return $signature_validation;
+		}
+
 		return true;
 	}
 
@@ -90,6 +114,21 @@ class TrustScript_Media_Upload {
 		$review_token = sanitize_text_field($review_token);
 		if ( ! preg_match( '/^[a-z0-9\-]{32,}$/i', $review_token ) ) {
 			return new WP_Error( 'invalid_token', 'Invalid token format', array( 'status' => 400 ) );
+		}
+
+		$api_key = $request->get_header( 'X-API-Key' );
+		if ( str_starts_with( $api_key, 'Bearer ' ) ) {
+			$api_key = substr( $api_key, 7 );
+		}
+		$api_key_hash = hash( 'sha256', $api_key );
+
+		$token_valid = $this->verify_token_from_review_request( $review_token, $api_key_hash );
+		if ( ! $token_valid ) {
+			return new WP_Error(
+				'invalid_token',
+				__( 'Review token not found or not associated with this API key', 'trustscript' ),
+				array( 'status' => 403 )
+			);
 		}
 
 		$files = $_FILES; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- REST API endpoint, authentication handled via API key validation
@@ -284,5 +323,91 @@ class TrustScript_Media_Upload {
 		$dirs['path'] = $dirs['basedir'] . '/trustscript-reviews';
 		$dirs['url'] = $dirs['baseurl'] . '/trustscript-reviews';
 		return $dirs;
+	}
+
+	/**
+	 * Verify that the review token exists in order meta
+	 *
+	 * @param string $token Review token (uniqueToken or productToken)
+	 * @param string $api_key_hash SHA256 hash of API key
+	 * @return bool True if token is valid, false otherwise
+	 */
+	private function verify_token_from_review_request( $token, $api_key_hash ) {
+		// Check if token exists as uniqueToken in order meta
+		if ( function_exists( 'wc_get_orders' ) ) {
+			$orders = wc_get_orders( array(
+				'limit'      => 1,
+				'return'     => 'ids',
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key'   => '_trustscript_review_token',
+						'value' => $token,
+					),
+					array(
+						'key'   => '_trustscript_api_key_hash',
+						'value' => $api_key_hash,
+					),
+				),
+			) );
+
+			if ( ! empty( $orders ) ) {
+				return true;
+			}
+
+			// Check if token exists as orderToken in order meta
+			$orders = wc_get_orders( array(
+				'limit'      => 1,
+				'return'     => 'ids',
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_meta_query
+				'meta_query' => array(
+					'relation' => 'AND',
+					array(
+						'key'   => '_trustscript_order_token',
+						'value' => $token,
+					),
+					array(
+						'key'   => '_trustscript_api_key_hash',
+						'value' => $api_key_hash,
+					),
+				),
+			) );
+
+			if ( ! empty( $orders ) ) {
+				return true;
+			}
+		}
+
+		// Check if token exists as productToken in order item meta
+		global $wpdb;
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+		$order_item_id = $wpdb->get_var( $wpdb->prepare(
+			"SELECT order_item_id FROM {$wpdb->prefix}woocommerce_order_itemmeta
+			 WHERE meta_key = %s AND meta_value = %s LIMIT 1",
+			'_trustscript_product_token',
+			$token
+		) );
+
+		if ( $order_item_id ) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+			$order_id = $wpdb->get_var( $wpdb->prepare(
+				"SELECT order_id FROM {$wpdb->prefix}woocommerce_order_items
+				 WHERE order_item_id = %d LIMIT 1",
+				$order_item_id
+			) );
+
+			if ( $order_id && function_exists( 'wc_get_order' ) ) {
+				$order = wc_get_order( $order_id );
+				if ( $order ) {
+					$stored_hash = $order->get_meta( '_trustscript_api_key_hash' );
+					if ( hash_equals( $stored_hash, $api_key_hash ) ) {
+						return true;
+					}
+				}
+			}
+		}
+
+		return false;
 	}
 }

@@ -74,19 +74,13 @@ class TrustScript_Plugin_Admin
 		add_action('admin_notices', array($this, 'display_quota_exceeded_notice'));
 		add_action('admin_enqueue_scripts', array($this, 'enqueue_assets'));
 		add_action('wp_ajax_trustscript_delete_api_key', array($this, 'handle_delete_api_key'));
-		add_action('wp_ajax_trustscript_get_user_plan', array($this, 'handle_get_user_plan'));
-		add_action('wp_ajax_trustscript_check_domain', array($this, 'handle_check_domain'));
-		add_action('wp_ajax_trustscript_get_branding', array($this, 'handle_get_branding'));
-		add_action('wp_ajax_trustscript_save_branding', array($this, 'handle_save_branding'));
-		add_action('wp_ajax_trustscript_upload_logo', array($this, 'handle_upload_logo'));
 		add_action('wp_ajax_trustscript_save_review_settings', array($this, 'handle_save_review_settings'));
-		add_action('wp_ajax_trustscript_fetch_review_stats', array($this, 'handle_fetch_review_stats'));
-		add_action('wp_ajax_trustscript_fetch_review_requests', array($this, 'handle_fetch_review_requests'));
 		add_action('wp_ajax_trustscript_sync_orders', array($this, 'handle_sync_orders'));
 		add_action('wp_ajax_trustscript_save_service_settings', array($this, 'handle_save_service_settings'));
 		add_action('wp_ajax_trustscript_save_optional_data_settings', array($this, 'handle_save_optional_data_settings'));
 		add_action('wp_ajax_trustscript_dismiss_notice', array($this, 'handle_dismiss_notice'));
 		add_action('wp_ajax_trustscript_save_uninstall_preference', array($this, 'handle_save_uninstall_preference'));
+		add_action('wp_ajax_trustscript_save_privacy_settings',    array( new TrustScript_Privacy_Settings_Page(), 'handle_save_privacy_settings' ) );
 		add_action('update_option_trustscript_api_key', array($this, 'on_api_key_updated'), 10, 2);
 		add_action('admin_init', array($this, 'maybe_redirect_after_api_key_save'));
 	}
@@ -125,35 +119,17 @@ class TrustScript_Plugin_Admin
 	{
 		// Main Menu
 		add_menu_page(
-			__('TrustScript', 'trustscript'),
+			__('TrustScript Settings', 'trustscript'),
 			__('TrustScript', 'trustscript'),
 			'manage_options',
-			'trustscript-analytics',
-			array('TrustScript_Analytics_Page', 'render'),
-			'dashicons-chart-area',
+			'trustscript-settings',
+			array('TrustScript_Settings_Page', 'render'),
+			'dashicons-star-filled',
 			58
 		);
 
 		add_submenu_page(
-			'trustscript-analytics',
-			__('Settings', 'trustscript'),
-			__('Settings', 'trustscript'),
-			'manage_options',
 			'trustscript-settings',
-			array('TrustScript_Settings_Page', 'render')
-		);
-
-		add_submenu_page(
-			'trustscript-analytics',
-			__('Branding', 'trustscript'),
-			__('Branding', 'trustscript'),
-			'manage_options',
-			'trustscript-branding',
-			array('TrustScript_Branding_Page', 'render')
-		);
-
-		add_submenu_page(
-			'trustscript-analytics',
 			__('Review Settings', 'trustscript'),
 			__('Review Settings', 'trustscript'),
 			'manage_options',
@@ -162,30 +138,32 @@ class TrustScript_Plugin_Admin
 		);
 
 		add_submenu_page(
-			'trustscript-analytics',
-			__('Review Requests', 'trustscript'),
-			__('Review Requests', 'trustscript'),
+			'trustscript-settings',
+			__('Analytics', 'trustscript'),
+			__('Analytics', 'trustscript'),
 			'manage_options',
 			'trustscript-review-requests',
 			array('TrustScript_Review_Request_Page', 'render')
 		);
 
+
+
 		add_submenu_page(
-			'trustscript-analytics',
-			__('Email Templates', 'trustscript'),
-			__('Email Templates', 'trustscript'),
+			'trustscript-settings',
+			__('Privacy & Compliance', 'trustscript'),
+			__('Privacy & Compliance', 'trustscript'),
 			'manage_options',
-			'trustscript-email-templates',
-			array('TrustScript_Email_Template_Page', 'render')
+			'trustscript-privacy',
+			array('TrustScript_Privacy_Settings_Page', 'render')
 		);
 
-		$queue_count = TrustScript_Queue::count_pending();
+		$queue_count = absint( TrustScript_Queue::count_pending() );
 		$queue_label = __('Pending Queue', 'trustscript');
 		if ($queue_count > 0) {
 			$queue_label .= ' <span class="update-plugins count-' . $queue_count . '"><span class="plugin-count">' . $queue_count . '</span></span>';
 		}
 		add_submenu_page(
-			'trustscript-analytics',
+			'trustscript-settings',
 			__('Pending Queue', 'trustscript'),
 			$queue_label,
 			'manage_options',
@@ -228,7 +206,7 @@ class TrustScript_Plugin_Admin
 					class="button button-primary">
 					<?php esc_html_e('Go to Settings & Update Key', 'trustscript'); ?>
 				</a>
-				<a href="https://nexlifylabs.com/dashboard/api-keys" target="_blank" class="button">
+				<a href="<?php echo esc_url( TRUSTSCRIPT_DASHBOARD_URL . '/api-keys' ); ?>" target="_blank" class="button">
 					<?php esc_html_e('Generate New Key', 'trustscript'); ?>
 				</a>
 			</p>
@@ -263,7 +241,7 @@ class TrustScript_Plugin_Admin
 		$plan_label = ucfirst(str_replace('_', ' ', $current_plan));
 
 		$upgrade_message = sprintf(
-			/* translators: %s: current plan name */
+			/* translators: %s: plan name */
 			esc_html__('Monthly review limit reached for your %s plan.', 'trustscript'),
 			esc_html($plan_label)
 		);
@@ -271,7 +249,7 @@ class TrustScript_Plugin_Admin
 		if ($next_plan && $next_limit) {
 			$next_plan_label = ucfirst(str_replace('_', ' ', $next_plan));
 			$upgrade_message .= sprintf(
-				/* translators: 1: next plan name, 2: review limit */
+				/* translators: %1$s: next plan name, %2$d: review limit */
 				esc_html__(' Upgrade to %1$s for %2$d reviews per month.', 'trustscript'),
 				esc_html($next_plan_label),
 				intval($next_limit)
@@ -283,7 +261,7 @@ class TrustScript_Plugin_Admin
 				$reset_datetime = new DateTime($reset_date, new DateTimeZone('UTC'));
 				$formatted_date = $reset_datetime->format('F j, Y');
 				$upgrade_message .= sprintf(
-					/* translators: %s: date when quota resets */
+					/* translators: %s: reset date */
 					esc_html__(' Or wait until %s for your limit to reset.', 'trustscript'),
 					esc_html($formatted_date)
 				);
@@ -301,7 +279,7 @@ class TrustScript_Plugin_Admin
 			<h3>📊 <?php esc_html_e('Review Quota Limit Reached', 'trustscript'); ?></h3>
 			<p><?php echo wp_kses_post($upgrade_message); ?></p>
 			<p>
-				<a href="https://nexlifylabs.com/pricing" target="_blank" class="button button-primary">
+				<a href="<?php echo esc_url( TRUSTSCRIPT_PRICING_URL ); ?>" target="_blank" class="button button-primary">
 					<?php esc_html_e('Upgrade Your Plan', 'trustscript'); ?>
 				</a>
 			</p>
@@ -313,6 +291,11 @@ class TrustScript_Plugin_Admin
 	{
 		register_setting('trustscript_options', 'trustscript_api_key', array(
 			'sanitize_callback' => array($this, 'sanitize_api_key'),
+		));
+		register_setting('trustscript_options', 'trustscript_webhook_secret', array(
+			'type' => 'string',
+			'sanitize_callback' => array($this, 'sanitize_webhook_secret'),
+			'default' => '',
 		));
 		register_setting('trustscript_options', 'trustscript_data_consent', array(
 			'type' => 'string',
@@ -330,11 +313,53 @@ class TrustScript_Plugin_Admin
 	}
 
 	/**
+	 * Validate and sanitize the webhook secret when it's saved.
+	 */
+	public function sanitize_webhook_secret($value)
+	{
+		$value = sanitize_text_field($value);
+		if (empty($value)) {
+			$existing = get_option('trustscript_webhook_secret', '');
+			if (!empty($existing)) {
+				return $existing;
+			}
+			return '';
+		}
+
+		if (!preg_match('/^TSS-[A-F0-9-]+$/i', $value)) {
+			// Check if this is an encrypted blob round-tripping through the settings form
+			$decrypted = trustscript_decrypt_data($value);
+			if (!empty($decrypted) && preg_match('/^TSS-[A-F0-9-]+$/i', $decrypted)) {
+				return $value;
+			}
+			
+			add_settings_error(
+				'trustscript_webhook_secret',
+				'invalid_format',
+				esc_html__('Invalid webhook secret format. Webhook secrets should look like: TSS-XXXX-XXXX-XXXX', 'trustscript')
+			);
+			return '';
+		}
+
+		$encrypted = trustscript_encrypt_data( $value );
+		
+		if (empty($encrypted)) {
+			add_settings_error(
+				'trustscript_webhook_secret',
+				'encryption_failed',
+				esc_html__('Failed to encrypt webhook secret. Please try again.', 'trustscript')
+			);
+			return '';
+		}
+		
+		return $encrypted;
+	}
+
+	/**
 	 * Validate and sanitize the API key when it's saved.
 	 */
 
-	public function sanitize_api_key($value)
-	{
+	public function sanitize_api_key($value)	{
 		$value = sanitize_text_field($value);
 
 		if (empty($value)) {
@@ -347,6 +372,12 @@ class TrustScript_Plugin_Admin
 		}
 
 		if (!preg_match('/^TSK-[A-F0-9-]+$/i', $value)) {
+			// Check if this is an encrypted blob round-tripping through the settings form
+			$decrypted = trustscript_decrypt_data($value);
+			if (!empty($decrypted) && preg_match('/^TSK-[A-F0-9-]+$/i', $decrypted)) {
+				return $value;
+			}
+			
 			add_settings_error(
 				'trustscript_api_key',
 				'invalid_format',
@@ -366,6 +397,28 @@ class TrustScript_Plugin_Admin
 				'trustscript_api_key',
 				'consent_required',
 				esc_html__('You must agree to data sharing before verifying your API key.', 'trustscript')
+			);
+			return '';
+		}
+
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing -- Nonce verified by settings_fields() / options.php handler.
+		$post_webhook_secret = isset($_POST['trustscript_webhook_secret']) ? sanitize_text_field(wp_unslash($_POST['trustscript_webhook_secret'])) : '';
+		$webhook_secret = !empty($post_webhook_secret) ? $post_webhook_secret : get_option('trustscript_webhook_secret', '');
+
+		if (empty($webhook_secret)) {
+			add_settings_error(
+				'trustscript_api_key',
+				'webhook_secret_required',
+				esc_html__('Webhook secret is required. Please generate both an API key and webhook secret from the TrustScript dashboard.', 'trustscript')
+			);
+			return '';
+		}
+
+		if (!preg_match('/^TSS-[A-F0-9-]+$/i', $webhook_secret)) {
+			add_settings_error(
+				'trustscript_api_key',
+				'invalid_webhook_secret_format',
+				esc_html__('Invalid webhook secret format. Webhook secrets should look like: TSS-XXXX-XXXX-XXXX', 'trustscript')
 			);
 			return '';
 		}
@@ -417,6 +470,7 @@ class TrustScript_Plugin_Admin
 		if (!empty($data['apiUrl'])) {
 			update_option('trustscript_base_url', $data['apiUrl']);
 
+
 			set_transient('trustscript_base_url', $data['apiUrl'], 3600);
 		}
 
@@ -446,6 +500,11 @@ class TrustScript_Plugin_Admin
 				$plan = isset($quota['plan']) ? sanitize_text_field($quota['plan']) : '';
 				$next_plan = isset($quota['nextPlan']) ? sanitize_text_field($quota['nextPlan']) : '';
 				$next_limit = isset($quota['nextLimit']) ? intval($quota['nextLimit']) : 0;
+
+				// Cache the plan for internal use
+				if (!empty($plan)) {
+					set_transient('trustscript_user_plan', $plan, WEEK_IN_SECONDS);
+				}
 
 				if ($exceeded) {
 					$plan_label = !empty($plan) ? ucfirst(str_replace('_', ' ', $plan)) : 'unknown';
@@ -530,7 +589,18 @@ class TrustScript_Plugin_Admin
 			);
 		}
 
-		return $value;
+		$encrypted = trustscript_encrypt_data( $value );
+		
+		if (empty($encrypted)) {
+			add_settings_error(
+				'trustscript_api_key',
+				'encryption_failed',
+				esc_html__('Failed to encrypt API key. Please try again.', 'trustscript')
+			);
+			return '';
+		}
+		
+		return $encrypted;
 	}
 
 	/**
@@ -582,11 +652,6 @@ class TrustScript_Plugin_Admin
 		wp_enqueue_style('trustscript-admin-notices', $base_url . 'assets/css/trustscript-admin-notices.css', array(), $admin_notices_css_ver);
 		wp_enqueue_script('trustscript-admin-js', $base_url . 'assets/js/admin.js', array('jquery'), $admin_js_ver, true);
 
-		if (strpos($hook, 'trustscript-analytics') !== false) {
-			$analytics_js_ver = file_exists($base_dir . 'assets/js/analytics.js') ? filemtime($base_dir . 'assets/js/analytics.js') : '0.2.0';
-			wp_enqueue_script('trustscript-analytics-js', $base_url . 'assets/js/analytics.js', array('jquery', 'trustscript-admin-js'), $analytics_js_ver, true);
-		}
-
 		if (strpos($hook, 'trustscript-reviews') !== false) {
 			$reviews_js_ver = file_exists($base_dir . 'assets/js/reviews.js') ? filemtime($base_dir . 'assets/js/reviews.js') : '0.2.0';
 			wp_enqueue_script('trustscript-reviews-js', $base_url . 'assets/js/reviews.js', array('jquery'), $reviews_js_ver, true);
@@ -597,16 +662,13 @@ class TrustScript_Plugin_Admin
 			wp_enqueue_script('trustscript-review-requests-js', $base_url . 'assets/js/review-requests.js', array('jquery'), $review_requests_js_ver, true);
 		}
 
-		if (strpos($hook, 'trustscript-branding') !== false) {
-			wp_enqueue_media();
-		}
+
 
 		// Localize the script with settings and translation strings.
 		wp_localize_script('trustscript-admin-js', 'TrustscriptAdmin', array(
 			'ajax_url' => admin_url('admin-ajax.php'),
 			'nonce' => wp_create_nonce('trustscript_admin'),
-			'check_domain_nonce' => wp_create_nonce('trustscript_check_domain'),
-			'save_branding_nonce' => wp_create_nonce('trustscript_save_branding'),
+
 			'save_review_nonce' => wp_create_nonce('trustscript_save_review'),
 			'site_url' => get_site_url(),
 			'i18n' => array(
@@ -633,12 +695,9 @@ class TrustScript_Plugin_Admin
 				'apiKeyRequiredTitle' => __('API Key Required', 'trustscript'),
 				'invalidFormat' => __('Invalid format. Your key should look like: TSK-XXXX-XXXX-XXXX. Copy it from your TrustScript dashboard.', 'trustscript'),
 				'invalidFormatTitle' => __('Invalid API Key Format', 'trustscript'),
-				'mediaNotAvailable' => __('Media library not available', 'trustscript'),
-				'selectLogo' => __('Select Logo', 'trustscript'),
-				'useThisLogo' => __('Use this logo', 'trustscript'),
 				'deleting' => __('Deleting...', 'trustscript'),
 				'failedToDelete' => __('Failed to delete API key', 'trustscript'),
-				'failedToRefresh' => __('Failed to refresh plan information. Please try again.', 'trustscript'),
+				'unknownError' => __('Unknown error', 'trustscript'),
 				'queuedForProcessing' => __('Queued for processing...', 'trustscript'),
 				'processingBackground' => __('Processing your orders in the background — please check back in a few minutes.', 'trustscript'),
 				'allCategories' => __('All categories', 'trustscript'),
@@ -652,6 +711,16 @@ class TrustScript_Plugin_Admin
 				'clear' => __('Clear', 'trustscript'),
 				'processQueueNow' => __('Process Queue Now', 'trustscript'),
 				'savePreference' => __('Save Preference', 'trustscript'),
+				'retryFailed' => __('Failed to retry', 'trustscript'),
+				'clearFailed' => __('Failed to clear', 'trustscript'),
+				'processQueueFailed' => __('Failed to process queue', 'trustscript'),
+				'savePreferenceFailed' => __('Failed to save preference', 'trustscript'),
+				'pasteApiKeyPlaceholder' => __('Paste new API key to replace current key…', 'trustscript'),
+				'saveChanges' => __('Save Changes', 'trustscript'),
+				'syncBreakdown' => __('Breakdown:', 'trustscript'),
+				'syncReviewsPublished' => __('review(s) published', 'trustscript'),
+				'syncOrdersSent' => __('new order(s) sent to TrustScript', 'trustscript'),
+				'syncOrdersSkipped' => __('order(s) already published (skipped)', 'trustscript'),
 			),
 		));
 	}
@@ -713,291 +782,10 @@ class TrustScript_Plugin_Admin
 		}
 
 		delete_option('trustscript_api_key');
+		delete_option('trustscript_webhook_secret');
 		delete_transient('trustscript_user_plan');
 
 		wp_send_json_success(array('message' => esc_html__('API key deleted successfully', 'trustscript')));
-	}
-
-	public function handle_get_user_plan()
-	{
-		check_ajax_referer('trustscript_admin', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$force_refresh = isset($_POST['force_refresh']) && $_POST['force_refresh'] === 'true';
-
-		if (!$force_refresh) {
-			$cached_plan = get_transient('trustscript_user_plan');
-			if ($cached_plan !== false) {
-				wp_send_json_success(array('plan' => $cached_plan));
-				return;
-			}
-		}
-
-		$result = trustscript_api_request('GET', 'api/usage');
-
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), $result->get_error_data()['status'] ?? 500);
-		}
-
-		$data = $result['data'];
-		$plan = isset($data['plan']) ? $data['plan'] : 'free';
-
-		set_transient('trustscript_user_plan', $plan, 6 * 3600);
-
-		wp_send_json_success(array('plan' => $plan, 'usage' => $data));
-	}
-
-
-	public function handle_check_domain()
-	{
-		check_ajax_referer('trustscript_check_domain', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$subdomain = isset($_POST['domain']) ? sanitize_text_field(wp_unslash($_POST['domain'])) : '';
-		if (empty($subdomain)) {
-			wp_send_json_error(array('message' => esc_html__('Subdomain is required', 'trustscript')), 400);
-		}
-
-		if (!preg_match('/^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/i', $subdomain)) {
-			wp_send_json_error(array('message' => esc_html__('Invalid subdomain format. Use alphanumeric characters and hyphens only (3-63 characters).', 'trustscript')), 400);
-		}
-
-		$result = trustscript_api_request('GET', 'api/branding/check-domain?domain=' . urlencode($subdomain), array(), 10);
-
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), $result->get_error_data()['status'] ?? 500);
-		}
-
-		wp_send_json_success($result['data']);
-	}
-
-
-	public function handle_get_branding()
-	{
-		check_ajax_referer('trustscript_admin', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$result = trustscript_api_request('GET', 'api/branding');
-
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), $result->get_error_data()['status'] ?? 500);
-		}
-
-		wp_send_json_success($result['data']);
-	}
-
-	/**
-	 * Logo upload handler
-	 */
-	public function handle_upload_logo()
-	{
-		check_ajax_referer('trustscript_admin', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$logo_url = isset($_POST['logo_url']) ? esc_url_raw(wp_unslash($_POST['logo_url'])) : '';
-
-		if (empty($logo_url)) {
-			wp_send_json_error(array('message' => esc_html__('logo_url is required', 'trustscript')), 400);
-		}
-
-		$api_key = get_option('trustscript_api_key', '');
-		$base_url = $this->get_trustscript_base_url();
-		$site_url = get_site_url();
-
-		if (empty($api_key)) {
-			wp_send_json_error(array('message' => esc_html__('Please set your API key in settings.', 'trustscript')), 400);
-		}
-
-		$result = $this->upload_logo_to_trustscript($logo_url, $api_key, $base_url, $site_url);
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), 500);
-		}
-
-		wp_send_json_success($result);
-	}
-
-	public function handle_save_branding()
-	{
-		check_ajax_referer('trustscript_save_branding', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$usage_result = trustscript_api_request('GET', 'api/usage', array(), 10);
-
-		if (is_wp_error($usage_result)) {
-			wp_send_json_error(array('message' => sprintf(/* translators: %s: error message */ esc_html__('Failed to verify plan: %s', 'trustscript'), $usage_result->get_error_message())), $usage_result->get_error_data()['status'] ?? 500);
-		}
-
-		$usage_data = $usage_result['data'];
-		$user_plan = !empty($usage_data['plan']) ? strtolower($usage_data['plan']) : '';
-
-		if (!in_array($user_plan, array('pro', 'business'), true)) {
-			wp_send_json_error(array('message' => esc_html__('Custom branding is available for Pro and Business plan users only. Please upgrade your plan to access this feature.', 'trustscript')), 403);
-		}
-
-		$incoming = isset($_POST['brand']) ? (array) wp_unslash($_POST['brand']) : array(); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- sanitized on next line
-		$incoming = array_map(function ($v) {
-			return is_array($v) ? $v : sanitize_text_field($v);
-		}, $incoming);
-
-		$brand = array();
-		if (isset($incoming['businessName']))
-			$brand['businessName'] = $incoming['businessName'];
-		if (isset($incoming['logoUrl']))
-			$brand['logoUrl'] = $incoming['logoUrl'];
-		if (isset($incoming['footerText']))
-			$brand['footerText'] = $incoming['footerText'];
-		if (isset($incoming['customSubdomain']))
-			$brand['customSubdomain'] = $incoming['customSubdomain'];
-		if (isset($incoming['removeFooter']))
-			$brand['removeFooter'] = $incoming['removeFooter'] === '1' || $incoming['removeFooter'] === 1;
-		if (isset($incoming['displayLogoOnly']))
-			$brand['displayLogoOnly'] = $incoming['displayLogoOnly'] === '1' || $incoming['displayLogoOnly'] === 1;
-		if (isset($incoming['displayNameOnly']))
-			$brand['displayNameOnly'] = $incoming['displayNameOnly'] === '1' || $incoming['displayNameOnly'] === 1;
-		if (isset($incoming['primaryColor']))
-			$brand['primaryColor'] = $incoming['primaryColor'];
-		if (isset($incoming['accentColor']))
-			$brand['accentColor'] = $incoming['accentColor'];
-		if (isset($incoming['headerBackgroundColor']))
-			$brand['headerBackgroundColor'] = $incoming['headerBackgroundColor'];
-		if (isset($incoming['cardBackgroundColor']))
-			$brand['cardBackgroundColor'] = $incoming['cardBackgroundColor'];
-		if (isset($incoming['pageBackgroundColor']))
-			$brand['pageBackgroundColor'] = $incoming['pageBackgroundColor'];
-		if (isset($incoming['textColor']))
-			$brand['textColor'] = $incoming['textColor'];
-		if (isset($incoming['secondaryTextColor']))
-			$brand['secondaryTextColor'] = $incoming['secondaryTextColor'];
-		if (isset($incoming['borderColor']))
-			$brand['borderColor'] = $incoming['borderColor'];
-		if (isset($incoming['buttonBackgroundColor']))
-			$brand['buttonBackgroundColor'] = $incoming['buttonBackgroundColor'];
-		if (isset($incoming['buttonTextColor']))
-			$brand['buttonTextColor'] = $incoming['buttonTextColor'];
-		if (isset($incoming['buttonBorderColor']))
-			$brand['buttonBorderColor'] = $incoming['buttonBorderColor'];
-		if (isset($incoming['successColor']))
-			$brand['successColor'] = $incoming['successColor'];
-		if (isset($incoming['errorColor']))
-			$brand['errorColor'] = $incoming['errorColor'];
-		if (isset($incoming['starColor']))
-			$brand['starColor'] = $incoming['starColor'];
-		if (isset($incoming['starEmptyColor']))
-			$brand['starEmptyColor'] = $incoming['starEmptyColor'];
-
-		if (!empty($brand['logoUrl']) && strpos($brand['logoUrl'], untrailingslashit(get_site_url())) === 0) {
-			$api_key = get_option('trustscript_api_key', '');
-			$base_url = trustscript_get_base_url();
-
-			$upload_result = $this->upload_logo_to_trustscript($brand['logoUrl'], $api_key, $base_url, get_site_url());
-			if (is_wp_error($upload_result)) {
-				wp_send_json_error(array('message' => 'Failed to upload logo: ' . $upload_result->get_error_message()), 500);
-			}
-			if (isset($upload_result['logoUrl'])) {
-				$brand['logoUrl'] = $upload_result['logoUrl'];
-			}
-		}
-
-		$result = trustscript_api_request('POST', 'api/branding', array_merge(array('projectId' => get_option('trustscript_project_id')), $brand));
-
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), $result->get_error_data()['status'] ?? 500);
-		}
-
-		wp_send_json_success($result['data']);
-	}
-
-	/**
-	 * Upload logo from WordPress Media Library to TrustScript
-	 */
-	private function upload_logo_to_trustscript($logo_url, $api_key, $base_url, $site_url)
-	{
-		$resp = wp_remote_get($logo_url);
-		if (is_wp_error($resp)) {
-			return new WP_Error('fetch_failed', 'Failed to fetch logo from WordPress: ' . $resp->get_error_message());
-		}
-
-		$code = wp_remote_retrieve_response_code($resp);
-		if ($code < 200 || $code >= 300) {
-			return new WP_Error('fetch_failed', 'Failed to fetch logo; HTTP ' . $code);
-		}
-
-		$body = wp_remote_retrieve_body($resp);
-		$content_type = wp_remote_retrieve_header($resp, 'content-type') ?: 'image/png';
-
-		$file_size = strlen($body);
-		if ($file_size > 5 * 1024 * 1024) {
-			return new WP_Error('file_too_large', 'Logo file is too large. Maximum size is 5MB.');
-		}
-
-		$upload_url = trailingslashit($base_url) . 'api/branding/upload-logo';
-		$boundary = wp_generate_password(24, false);
-		$file_name = basename($logo_url);
-
-		$payload = '';
-		$payload .= '--' . $boundary . "\r\n";
-		$payload .= 'Content-Disposition: form-data; name="logo"; filename="' . $file_name . '"' . "\r\n";
-		$payload .= 'Content-Type: ' . $content_type . "\r\n\r\n";
-		$payload .= $body . "\r\n";
-		$payload .= '--' . $boundary . '--';
-
-		$args = array(
-			'headers' => array(
-				'Authorization' => 'Bearer ' . $api_key,
-				'X-Site-URL' => get_site_url(),
-				'Content-Type' => 'multipart/form-data; boundary=' . $boundary,
-			),
-			'body' => $payload,
-			'timeout' => 30,
-		);
-
-		$response = wp_remote_post($upload_url, $args);
-
-		if (is_wp_error($response)) {
-			return new WP_Error('upload_error', 'Failed to upload logo: ' . $response->get_error_message());
-		}
-
-		$httpCode = wp_remote_retrieve_response_code($response);
-		$result = wp_remote_retrieve_body($response);
-
-		if ($httpCode < 200 || $httpCode >= 300) {
-			$error_message = 'Upload failed (HTTP ' . $httpCode . ')';
-			$json = json_decode($result, true);
-			if ($json && isset($json['error'])) {
-				$error_message = $json['error'];
-			}
-			return new WP_Error('upload_failed', $error_message);
-		}
-
-		$json = json_decode($result, true);
-		if (!$json) {
-			return new WP_Error('invalid_response', 'Invalid response from TrustScript');
-		}
-
-		if (isset($json['url'])) {
-			return array('logoUrl' => $json['url']);
-		}
-
-		if (isset($json['logoUrl'])) {
-			return array('logoUrl' => $json['logoUrl']);
-		}
-
-		return new WP_Error('no_url', 'Upload succeeded but no URL returned');
 	}
 
 	/**
@@ -1023,7 +811,7 @@ class TrustScript_Plugin_Admin
 			));
 		}
 
-		// Boolean flags (coming from JavaScript as 'true'/'false' strings)
+		// Boolean values 
 		$enabled = isset($_POST['enabled'])
 			&& 'true' === sanitize_text_field(wp_unslash($_POST['enabled']));
 
@@ -1039,54 +827,64 @@ class TrustScript_Plugin_Admin
 		$enable_international_handling = isset($_POST['enable_international_handling'])
 			&& 'true' === sanitize_text_field(wp_unslash($_POST['enable_international_handling']));
 
-		// Numeric values
+		// Integer values
 		$delay_hours = isset($_POST['delay_hours'])
 			? absint(wp_unslash($_POST['delay_hours']))
 			: 1;
 
 		$auto_sync_lookback = isset($_POST['auto_sync_lookback'])
 			? absint(wp_unslash($_POST['auto_sync_lookback']))
-			: 30;
+			: 2;
 
 		$international_delay_hours = isset($_POST['international_delay_hours'])
 			? absint(wp_unslash($_POST['international_delay_hours']))
 			: 336;
 
-		// Trigger status (already sanitized in your original code)
+		// Trigger status (string value)
 		$trigger_status = isset($_POST['trigger_status'])
 			? sanitize_text_field(wp_unslash($_POST['trigger_status']))
 			: 'delivered';
 
-		// Auto sync time (HH:MM format)
+		// Time value (HH:MM)
 		$auto_sync_time = isset($_POST['auto_sync_time'])
 			? sanitize_text_field(wp_unslash($_POST['auto_sync_time']))
 			: '02:00';
 
-		// Validate time format (HH:MM)
+		// Validate time format (basic check for HH:MM)
 		if (!preg_match('/^\d{2}:\d{2}$/', $auto_sync_time)) {
 			$auto_sync_time = '02:00';
 		}
 
-		// Category filtering.
-		// JS collects the IDs of CHECKED checkboxes and sends them as `categories[]`.
-		// Store them directly as the allowed list.
-		// An empty allowed list means "include all products" (no filter applied).
+		// Categories - ensure it's an array of valid category IDs, and remove child categories if their parent is also selected to avoid redundancy
 		$categories = array();
 		if (isset($_POST['categories']) && is_array($_POST['categories'])) {
 			$all_valid_categories = get_terms(array(
 				'taxonomy' => 'product_cat',
-				'hide_empty' => true,
-				'fields' => 'ids',
+				'hide_empty' => false,
+				'fields' => 'id=>parent',
 			));
 
 			if (!is_wp_error($all_valid_categories) && !empty($all_valid_categories)) {
-				$all_valid_categories = array_map('intval', $all_valid_categories);
-				$requested_categories = array_map('intval', wp_unslash($_POST['categories']));
-				$categories = array_values(
-					array_filter($requested_categories, function ($cat_id) use ($all_valid_categories) {
-						return in_array($cat_id, $all_valid_categories, true);
-					})
-				);
+				$requested_categories = array_map('absint', (array) wp_unslash($_POST['categories']));
+				$requested_categories = array_unique($requested_categories);
+				
+				$filtered_categories = array();
+				foreach ($requested_categories as $cat_id) {
+					$should_include = true;
+					
+					foreach ($requested_categories as $other_cat_id) {
+						if ($other_cat_id !== $cat_id && $this->is_category_ancestor($other_cat_id, $cat_id, $all_valid_categories)) {
+							$should_include = false;
+							break;
+						}
+					}
+					
+					if ($should_include) {
+						$filtered_categories[] = $cat_id;
+					}
+				}
+				
+				$categories = array_values($filtered_categories);
 			}
 		}
 
@@ -1126,15 +924,15 @@ class TrustScript_Plugin_Admin
 			);
 		}
 
-		// Validation / clamping
+		// Validation and sanitization
 		if ($delay_hours > 2160) {
 			$delay_hours = 0;
 		}
 		if ($international_delay_hours > 2160) {
 			$international_delay_hours = 336;
 		}
-		if ($auto_sync_lookback < 1 || $auto_sync_lookback > 90) {
-			$auto_sync_lookback = 30;
+		if ($auto_sync_lookback < 1 || $auto_sync_lookback > 2) {
+			$auto_sync_lookback = 2;
 		}
 
 		if (!in_array($trigger_status, array('delivered', 'completed'), true)) {
@@ -1159,7 +957,7 @@ class TrustScript_Plugin_Admin
 		update_option('trustscript_international_delay_hours', $international_delay_hours);
 		update_option('trustscript_review_keywords', $keywords);
 
-		// Re-schedule auto-sync cron if needed
+		// Schedule or unschedule auto-sync cron job based on the setting
 		if (class_exists('TrustScript_Auto_Sync')) {
 			if ($auto_sync_enabled) {
 				TrustScript_Auto_Sync::schedule_cron();
@@ -1190,110 +988,6 @@ class TrustScript_Plugin_Admin
 	}
 
 	/**
-	 * Fetching review statistics from TrustScript API
-	 */
-	public function handle_fetch_review_stats()
-	{
-		check_ajax_referer('trustscript_admin', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$result = trustscript_api_request('GET', 'api/review-requests/stats');
-
-		if (is_wp_error($result)) {
-			wp_send_json_error(array('message' => $result->get_error_message()), $result->get_error_data()['status'] ?? 500);
-		}
-
-		$data = $result['data'];
-		$recent_activity = array();
-		if (isset($data['recentActivity']) && is_array($data['recentActivity'])) {
-			foreach ($data['recentActivity'] as $activity) {
-				$project_name = isset($data['projectName']) ? $data['projectName'] : 'TrustScript';
-				$recent_activity[] = array(
-					'productName' => $activity['productName'] ?? 'Review Request',
-					'sourceOrderId' => $activity['sourceOrderId'] ?? null,
-					'status' => strtolower($activity['status'] ?? 'pending'),
-					'timestamp' => $activity['timestamp'] ?? '',
-					'projectName' => $project_name,
-				);
-			}
-		}
-		$data['recentActivity'] = $recent_activity;
-
-		wp_send_json_success($data);
-	}
-
-	/**
-	 * Handle fetching review requests from TrustScript API via AJAX
-	 */
-	public function handle_fetch_review_requests()
-	{
-		check_ajax_referer('trustscript_admin', 'nonce');
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(array('message' => esc_html__('Unauthorized', 'trustscript')), 401);
-		}
-
-		$orders_result = trustscript_api_request('GET', 'api/wordpress-orders');
-		$stats_result = trustscript_api_request('GET', 'api/review-requests/stats');
-
-		if (is_wp_error($orders_result)) {
-			wp_send_json_error(array('message' => $orders_result->get_error_message()), $orders_result->get_error_data()['status'] ?? 500);
-		}
-
-		$orders_data = $orders_result['data'];
-
-		$stats_data = array(
-			'total' => 0,
-			'pending' => 0,
-			'approved' => 0,
-			'conversionRate' => 0,
-		);
-
-		if (!is_wp_error($stats_result)) {
-			$stats_parsed = $stats_result['data'];
-			$stats_data = array(
-				'total' => $stats_parsed['totalRequests'] ?? 0,
-				'pending' => $stats_parsed['pendingReviews'] ?? 0,
-				'approved' => $stats_parsed['approvedReviews'] ?? 0,
-				'conversionRate' => $stats_parsed['conversionRate'] ?? 0,
-			);
-		}
-
-		$base_url = trustscript_get_base_url();
-		$requests = array();
-
-		if (isset($orders_data['orders']) && is_array($orders_data['orders'])) {
-			foreach ($orders_data['orders'] as $order) {
-				$created_at = $order['createdAt'] ?? null;
-				$date_formatted = $created_at ? wp_date('M j, Y g:i A', strtotime($created_at)) : 'N/A';
-				$project_name = isset($order['project']['name']) ? $order['project']['name'] : null;
-				$dashboard_url = trailingslashit($base_url) . 'dashboard/wordpress-orders';
-
-				$requests[] = array(
-					'id' => $order['id'] ?? null,
-					'uniqueToken' => $order['uniqueToken'] ?? null,
-					'productName' => $order['productName'] ?? 'Product',
-					'sourceOrderId' => $order['sourceOrderId'] ?? null,
-					'source' => $order['source'] ?? 'wordpress',
-					'status' => strtolower($order['status'] ?? 'pending'),
-					'date' => $date_formatted,
-					'dateObj' => $created_at,
-					'projectName' => $project_name,
-					'dashboardUrl' => $dashboard_url,
-				);
-			}
-		}
-
-		wp_send_json_success(array(
-			'stats' => $stats_data,
-			'requests' => $requests,
-		));
-	}
-
-	/**
 	 * Syncing existing completed orders and approved reviews
 	 */
 	public function handle_sync_orders()
@@ -1312,10 +1006,12 @@ class TrustScript_Plugin_Admin
 			wp_send_json_error(array('message' => esc_html__('No active service providers detected. Please enable at least one service (WooCommerce or MemberPress).', 'trustscript')), 400);
 		}
 
-		$days = isset($_POST['days']) ? sanitize_text_field(wp_unslash($_POST['days'])) : '30';
+		$days = isset($_POST['days']) ? sanitize_text_field(wp_unslash($_POST['days'])) : '2';
 
 		if ($days !== 'all') {
-			$days = max(1, min(365, intval($days)));
+			$days = max(1, min(2, intval($days)));
+		} else {
+			$days = 2; // Max lookback is 2 days to avoid performance issues
 		}
 
 		$reviews_published = $this->fetch_and_publish_approved_reviews();
@@ -1600,13 +1296,16 @@ class TrustScript_Plugin_Admin
 
 		foreach ($active_services as $service_id => $provider) {
 			$enabled_key = 'trustscript_enable_service_' . $service_id;
-			$is_enabled = isset($_POST[$enabled_key]) && $_POST[$enabled_key] === '1';
+			$is_enabled = isset($_POST[$enabled_key]) && '1' === sanitize_text_field(wp_unslash($_POST[$enabled_key]));
 			update_option($enabled_key, $is_enabled ? '1' : '0');
 
 			$trigger_key = 'trustscript_trigger_status_' . $service_id;
 			if (isset($_POST[$trigger_key])) {
 				$trigger_value = sanitize_text_field(wp_unslash($_POST[$trigger_key]));
-				update_option($trigger_key, $trigger_value);
+				$allowed_statuses = array_keys($provider->get_available_statuses());
+				if (in_array($trigger_value, $allowed_statuses, true)) {
+					update_option($trigger_key, $trigger_value);
+				}
 			}
 		}
 
@@ -1818,18 +1517,140 @@ class TrustScript_Plugin_Admin
 		}
 	}
 
+	/**
+	 * Build a recursive category tree supporting unlimited nesting levels
+	 */
+	private function build_recursive_category_tree($categories_by_id, $parent_id = 0)
+	{
+		$tree = array();
+
+		foreach ($categories_by_id as $term_id => $term) {
+			if ((int) $term->parent === (int) $parent_id) {
+				$children = $this->build_recursive_category_tree($categories_by_id, $term_id);
+				
+				$total_count = $term->count;
+				if (!empty($children)) {
+					foreach ($children as $child) {
+						$total_count += $child['term']->count;
+					}
+				}
+				
+				$tree[$term_id] = array(
+					'term' => $term,
+					'children' => $children,
+					'total_count' => $total_count,
+				);
+			}
+		}
+
+		return $tree;
+	}
+
+	/**
+	 * Filter category tree to only show categories with products or children with products
+	 */
+	private function filter_category_tree($tree)
+	{
+		$filtered = array();
+
+		foreach ($tree as $term_id => $node) {
+			$filtered_children = $this->filter_category_tree($node['children']);
+			if ($node['term']->count > 0 || !empty($filtered_children)) {
+				$node['children'] = $filtered_children;
+				$filtered[$term_id] = $node;
+			}
+		}
+
+		return $filtered;
+	}
+
+	/**
+	 * Check if a category is an ancestor of another category
+	 * 
+	 * @param int $potential_ancestor Category ID to check
+	 * @param int $category_id Category ID to check against
+	 * @param array $categories_hierarchy Map of category_id => parent_id
+	 * @return bool True if potential_ancestor is an ancestor of category_id
+	 */
+	private function is_category_ancestor($potential_ancestor, $category_id, $categories_hierarchy)
+	{
+		if ($potential_ancestor === $category_id) {
+			return false;
+		}
+
+		$current_id = $category_id;
+		while ($current_id > 0 && isset($categories_hierarchy[$current_id])) {
+			$parent_id = $categories_hierarchy[$current_id];
+			if ($parent_id === 0) {
+				return false;
+			}
+			if ($parent_id === $potential_ancestor) {
+				return true;
+			}
+			$current_id = $parent_id;
+		}
+		return false;
+	}
+
+	/**
+	 * Recursively render category tree with proper nesting and expand/collapse support
+	 */
+	private function render_category_tree_recursive($tree, $selected_categories, $depth = 0)
+	{
+		foreach ($tree as $term_id => $node) {
+			$term = $node['term'];
+			$children = $node['children'];
+			$is_checked = in_array($term->term_id, (array) $selected_categories);
+			$has_children = !empty($children);
+			$indent_style = $depth > 0 ? 'margin-left: ' . ($depth * 24) . 'px;' : '';
+			?>
+
+			<!-- Category Level -->
+			<label class="trustscript-checkbox-label trustscript-parent-category" 
+				data-parent-id="<?php echo esc_attr($term->term_id); ?>" style="<?php echo esc_attr($indent_style); ?>">
+				<input type="checkbox" name="trustscript_review_categories[]"
+					value="<?php echo esc_attr($term->term_id); ?>" class="trustscript-category-checkbox trustscript-parent-checkbox"
+					data-category-name="<?php echo esc_attr(strtolower($term->name)); ?>"
+					data-has-children="<?php echo $has_children ? '1' : '0'; ?>"
+					data-depth="<?php echo esc_attr($depth); ?>" <?php checked($is_checked); ?>>
+				<span>
+					<?php echo esc_html($term->name); ?>
+					<span class="trustscript-product-categories-label-count">
+						(<?php echo esc_html($node['total_count']); ?>)
+					</span>
+				</span>
+				<?php if ($has_children): ?>
+					<span class="trustscript-expand-toggle">▶</span>
+				<?php endif; ?>
+			</label>
+
+			<!-- Nested Children -->
+			<?php if ($has_children): ?>
+				<div class="trustscript-subcategories" data-parent-id="<?php echo esc_attr($term->term_id); ?>" data-depth="<?php echo esc_attr($depth); ?>">
+					<?php $this->render_category_tree_recursive($children, $selected_categories, $depth + 1); ?>
+				</div>
+			<?php endif; ?>
+			<?php
+		}
+	}
+
 	private function render_woocommerce_settings($categories = array())
 	{
 		$wc_categories = get_terms(array(
 			'taxonomy' => 'product_cat',
-			'hide_empty' => true,  // Only show categories with products
+			'hide_empty' => false,
 		));
 
-		// Additional filter: remove categories with 0 count just to be safe
+		$category_tree = array();
+		$categories_by_id = array();
+
 		if (!is_wp_error($wc_categories) && !empty($wc_categories)) {
-			$wc_categories = array_filter($wc_categories, function ($term) {
-				return $term->count > 0;
-			});
+			foreach ($wc_categories as $term) {
+				$categories_by_id[$term->term_id] = $term;
+			}
+
+			$category_tree = $this->build_recursive_category_tree($categories_by_id, 0);
+			$category_tree = $this->filter_category_tree($category_tree);
 		}
 
 		$min_order_value = get_option('trustscript_woocommerce_min_value', '0');
@@ -1840,10 +1661,10 @@ class TrustScript_Plugin_Admin
 			<h3>📦<?php esc_html_e('Product Category Filtering', 'trustscript'); ?></h3>
 			<p class="description">
 				<?php esc_html_e('Select specific product categories to collect reviews for. Leave all unchecked to include all products.', 'trustscript'); ?>
+				<br><em><?php esc_html_e('Note: When you select a parent category, all products in that category tree are included. Child categories should not be selected alongside their parent.', 'trustscript'); ?></em>
 			</p>
 
-			<?php if (!empty($wc_categories) && !is_wp_error($wc_categories)): ?>
-				<!-- Search & Bulk Actions -->
+			<?php if (!empty($category_tree)): ?>
 				<div class="trustscript-category-search-toolbar">
 					<input type="text" id="trustscript-category-search" class="trustscript-category-search-input"
 						placeholder="<?php esc_attr_e('Search categories...', 'trustscript'); ?>">
@@ -1858,80 +1679,13 @@ class TrustScript_Plugin_Admin
 					<span id="trustscript-category-count" class="trustscript-category-count">
 						<?php
 						/* translators: %d: number of categories */
-						printf(esc_html__('%d categories', 'trustscript'), count($wc_categories));
+						printf(esc_html__('%d categories', 'trustscript'), count($category_tree));
 						?>
 					</span>
 				</div>
 
 				<div class="trustscript-product-categories-list">
-					<?php
-					$category_tree = array();
-					foreach ($wc_categories as $term) {
-						if ($term->parent === 0) {
-							$category_tree[$term->term_id] = array(
-								'term' => $term,
-								'children' => array(),
-							);
-						}
-					}
-					foreach ($wc_categories as $term) {
-						if ($term->parent !== 0 && isset($category_tree[$term->parent])) {
-							$category_tree[$term->parent]['children'][] = $term;
-						}
-					}
-					foreach ($wc_categories as $term) {
-						if ($term->parent !== 0 && !isset($category_tree[$term->parent])) {
-							$category_tree[$term->term_id] = array(
-								'term' => $term,
-								'children' => array(),
-							);
-						}
-					}
-
-					foreach ($category_tree as $parent_id => $parent_data):
-						$term = $parent_data['term'];
-						$children = $parent_data['children'];
-						$is_checked = in_array($term->term_id, (array) $categories);
-						?>
-
-						<!-- Parent Category -->
-						<label class="trustscript-checkbox-label trustscript-parent-category">
-							<input type="checkbox" name="trustscript_review_categories[]"
-								value="<?php echo esc_attr($term->term_id); ?>" class="trustscript-category-checkbox"
-								data-category-name="<?php echo esc_attr(strtolower($term->name)); ?>" <?php checked($is_checked); ?>>
-							<span>
-								<?php echo esc_html($term->name); ?>
-								<span class="trustscript-product-categories-label-count">
-									(<?php echo esc_html($term->count); ?>)
-								</span>
-							</span>
-							<?php if (!empty($children)): ?>
-								<span class="trustscript-expand-toggle">▶</span>
-							<?php endif; ?>
-						</label>
-
-						<!-- Subcategories -->
-						<?php if (!empty($children)): ?>
-							<div class="trustscript-subcategories">
-								<?php foreach ($children as $child_term):
-									$child_checked = in_array($child_term->term_id, (array) $categories);
-									?>
-									<label class="trustscript-checkbox-label">
-										<input type="checkbox" name="trustscript_review_categories[]"
-											value="<?php echo esc_attr($child_term->term_id); ?>" class="trustscript-category-checkbox"
-											data-category-name="<?php echo esc_attr(strtolower($child_term->name)); ?>"
-											data-parent-id="<?php echo esc_attr($term->term_id); ?>" <?php checked($child_checked); ?>>
-										<span>
-											<?php echo esc_html($child_term->name); ?>
-											<span class="trustscript-product-categories-label-count">
-												(<?php echo esc_html($child_term->count); ?>)
-											</span>
-										</span>
-									</label>
-								<?php endforeach; ?>
-							</div>
-						<?php endif; ?>
-					<?php endforeach; ?>
+					<?php $this->render_category_tree_recursive($category_tree, $categories, 0); ?>
 				</div>
 			<?php else: ?>
 				<p class="description"><?php esc_html_e('No product categories found.', 'trustscript'); ?></p>

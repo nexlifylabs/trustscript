@@ -13,28 +13,37 @@ if ( ! defined( 'ABSPATH' ) ) {
 class TrustScript_Auto_Sync {
 	
 	/**
-	 * Cron hook name
+	 * Cron hook name used to schedule and identify the auto-sync event.
 	 */
 	const CRON_HOOK = 'trustscript_auto_sync_orders';
 	
-	// Batch processing parameters sending requests in batches of 50 with a 2 second delay between batches to avoid hitting API rate limits or PHP execution timeouts. These can be adjusted as needed.
+	/** Number of orders per batch. */
 	private $batch_size = 50;
+	/** Seconds to pause between batches to avoid rate-limit and timeout issues. */
 	private $batch_delay = 2;
+	/** Maximum allowed PHP execution time in seconds for a sync run. */
 	private $max_execution_time = 300;
+	/** Maximum API calls allowed per sync run before backing off. */
 	private $api_rate_limit = 100;
 
+	/**
+	 * Register cron, quota queue, and settings-change hooks.
+	 */
 	public function __construct() {
 		add_action( self::CRON_HOOK, array( $this, 'run_auto_sync' ) );
-
-		// This action can be triggered manually from the backend when an admin upgrades 
-		// their plan or when we receive a webhook indicating that the quota has been reset. 
-		// It can also be scheduled to run periodically if desired.
 		add_action( 'trustscript_process_quota_queue', array( $this, 'process_quota_queue' ) );
-
 		add_action( 'update_option_trustscript_auto_sync_enabled', array( $this, 'reschedule_cron' ), 10, 2 );
 		add_action( 'update_option_trustscript_auto_sync_time', array( $this, 'reschedule_cron' ), 10, 2 );
 	}
 
+	/**
+	 * Schedule the daily auto-sync cron event based on the configured run time.
+	 *
+	 * Does nothing if auto-sync is disabled. Unschedules any existing event before
+	 * registering a fresh one.
+	 *
+	 * @since 1.0.0
+	 */
 	public static function schedule_cron() {
 		if ( ! get_option( 'trustscript_auto_sync_enabled', false ) ) {
 			return;
@@ -49,6 +58,11 @@ class TrustScript_Auto_Sync {
 		wp_schedule_event( $next_run, 'daily', self::CRON_HOOK );
 	}
 
+	/**
+	 * Remove the scheduled auto-sync cron event if one exists.
+	 *
+	 * @since 1.0.0
+	 */
 	public static function unschedule_cron() {
 		$timestamp = wp_next_scheduled( self::CRON_HOOK );
 		if ( $timestamp ) {
@@ -56,10 +70,27 @@ class TrustScript_Auto_Sync {
 		}
 	}
 
+	/**
+	 * Reschedule the cron event when a relevant setting is updated.
+	 *
+	 * @since 1.0.0
+	 * @param mixed $old_value Previous option value (unused).
+	 * @param mixed $new_value New option value (unused).
+	 */
 	public function reschedule_cron( $old_value, $new_value ) {
 		self::schedule_cron();
 	}
 
+	/**
+	 * Calculate the next Unix timestamp for a given HH:MM time string.
+	 *
+	 * Returns a timestamp for today if the time has not yet passed, otherwise
+	 * returns tomorrow's timestamp at the same time.
+	 *
+	 * @since 1.0.0
+	 * @param string $time_string Time in HH:MM format. Defaults to 02:00 on parse failure.
+	 * @return int Unix timestamp of the next scheduled run.
+	 */
 	private static function calculate_next_run( $time_string ) {
 		$timezone = wp_timezone();
 		$now = new DateTime( 'now', $timezone );
@@ -80,6 +111,13 @@ class TrustScript_Auto_Sync {
 		return $target->getTimestamp();
 	}
 
+	/**
+	 * Execute the auto-sync routine: publish approved reviews, sync orders, and drain the quota queue.
+	 *
+	 * Exits early if auto-sync is disabled.
+	 *
+	 * @since 1.0.0
+	 */
 	public function run_auto_sync() {
 
 		if ( ! get_option( 'trustscript_auto_sync_enabled', false ) ) {
@@ -92,11 +130,13 @@ class TrustScript_Auto_Sync {
 	}
 
 	/**
-	 * Drains the quota queue, processing items until the queue is empty or we hit an API rate limit / quota exhaustion condition. 
-	 * This is intended to be triggered manually from the backend when an admin upgrades their plan or when we receive a webhook 
-	 * indicating that the quota has been reset. It can also be scheduled to run periodically if desired.
+	 * Drain the quota queue in batches until empty or a blocking condition is reached.
 	 *
-	 * @return array Aggregated { processed, skipped, failed } counts.
+	 * A blocking condition is when a batch produces zero processed items and at least
+	 * one skipped item, indicating quota exhaustion or rate-limiting.
+	 *
+	 * @since 1.0.0
+	 * @return array Aggregated counts: { processed, skipped, failed }.
 	 */
 	public function process_quota_queue() {
 		$pending = TrustScript_Queue::count_pending();
@@ -130,8 +170,17 @@ class TrustScript_Auto_Sync {
 		return $totals;
 	}
 
+	/**
+	 * Poll the TrustScript API for approved reviews and publish them as WordPress comments.
+	 *
+	 * Skips reviews where the customer has opted out, or where the order has
+	 * already been published to the registry.
+	 *
+	 * @since 1.0.0
+	 * @return int|void Number of reviews published, or void on early exit.
+	 */
 	private function publish_approved_reviews() {
-		$api_key = get_option( 'trustscript_api_key', '' );
+		$api_key = trustscript_get_api_key();
 		$base_url = trustscript_get_base_url();
 		
 		if ( empty( $api_key ) || empty( $base_url ) ) {
@@ -199,6 +248,25 @@ class TrustScript_Auto_Sync {
 		return $published_count;
 	}
 
+	/**
+	 * Validate and publish a single review payload as a WordPress comment.
+	 *
+	 * Runs a chain of guards in order:
+	 * - `uniqueToken` present and a string
+	 * - Project status is active
+	 * - Review text is non-empty after sanitisation
+	 * - Source service is in the allow-list (`woocommerce`, `memberpress`)
+	 * - Token-to-order ID ownership verified via meta lookup
+	 * - HMAC verification hash matches the stored hash
+	 * - WooCommerce order is not cancelled, refunded, or failed
+	 *
+	 * On success, marks the order in the registry and persists publishing
+	 * metadata to order/post meta.
+	 *
+	 * @since 1.0.0
+	 * @param array $review Decoded review payload from the TrustScript API.
+	 * @return bool True if the review was published, false if any guard failed.
+	 */
 	private function publish_review( $review ) {
 		$unique_token = $review['uniqueToken'] ?? 'unknown';
 		
@@ -269,6 +337,7 @@ class TrustScript_Auto_Sync {
 			$order = wc_get_order( $source_order_id );
 			$stored_hash = $order ? $order->get_meta( '_trustscript_verification_hash' ) : '';
 		} else {
+			$order = null;
 			$stored_hash = get_post_meta( $source_order_id, '_trustscript_verification_hash', true );
 		}
 
@@ -317,6 +386,23 @@ class TrustScript_Auto_Sync {
 		return $result;
 	}
 
+	/**
+	 * Publish a review for every product in a WooCommerce order.
+	 *
+	 * Skips products that already have a comment with the same unique token.
+	 * Notifies the TrustScript API after at least one comment is inserted.
+	 *
+	 * @since 1.0.0
+	 * @param int         $order_id        WooCommerce order ID.
+	 * @param string      $review_text     Sanitised review body.
+	 * @param int         $rating          Star rating (1–5).
+	 * @param string      $unique_token    TrustScript unique review token.
+	 * @param string      $comment_date    Comment date in site timezone (Y-m-d H:i:s).
+	 * @param string      $comment_date_gmt Comment date in UTC (Y-m-d H:i:s).
+	 * @param array       $review          Full decoded review payload from the API.
+	 * @param WC_Order|null $order         Pre-loaded order object, or null to fetch fresh.
+	 * @return bool True if at least one product review was inserted.
+	 */
 	private function publish_woocommerce_review( $order_id, $review_text, $rating, $unique_token, $comment_date, $comment_date_gmt, $review, $order = null ) {
 		if ( ! function_exists( 'wc_get_order' ) ) {
 			return false;
@@ -387,6 +473,22 @@ class TrustScript_Auto_Sync {
 		return false;
 	}
 
+	/**
+	 * Publish a review against the membership product linked to a MemberPress transaction.
+	 *
+	 * Skips insertion if a comment with the same unique token already exists.
+	 * Notifies the TrustScript API on successful insertion.
+	 *
+	 * @since 1.0.0
+	 * @param int    $txn_id           MemberPress transaction ID.
+	 * @param string $review_text      Sanitised review body.
+	 * @param int    $rating           Star rating (1–5).
+	 * @param string $unique_token     TrustScript unique review token.
+	 * @param string $comment_date     Comment date in site timezone (Y-m-d H:i:s).
+	 * @param string $comment_date_gmt Comment date in UTC (Y-m-d H:i:s).
+	 * @param array  $review           Full decoded review payload from the API.
+	 * @return bool True if the review comment was inserted successfully.
+	 */
 	private function publish_memberpress_review( $txn_id, $review_text, $rating, $unique_token, $comment_date, $comment_date_gmt, $review ) {
 		if ( ! class_exists( 'MeprTransaction' ) ) {
 			return false;
@@ -444,16 +546,24 @@ class TrustScript_Auto_Sync {
 		return false;
 	}
 
+	/**
+	 * Push recent orders from all active service providers to the TrustScript API.
+	 *
+	 * Iterates each active provider, syncing orders from the last 2 days to
+	 * cover any missed during downtime. Stops early if the remaining execution
+	 * time drops below 30 seconds. Pauses 500ms between providers to reduce
+	 * server load. Persists run timestamp and aggregate stats to options on
+	 * completion.
+	 *
+	 * @since 1.0.0
+	 */
 	private function sync_orders_to_trustscript() {
 		if ( function_exists( 'set_time_limit' ) ) {
 			// phpcs:ignore Squiz.PHP.DiscouragedFunctions.Discouraged, WordPress.PHP.IniSet.Risky -- Required for long-running sync operations
 			set_time_limit( $this->max_execution_time );
 		}
 		$start_time = time();
-
-		$lookback_days = get_option( 'trustscript_auto_sync_lookback', 30 );
-		$lookback_days = max( 1, min( 365, intval( $lookback_days ) ) );
-		
+		$lookback_days = 2;
 		$service_manager = TrustScript_Service_Manager::get_instance();
 		$active_providers = $service_manager->get_active_providers();
 		
@@ -506,8 +616,18 @@ class TrustScript_Auto_Sync {
 		) );
 	}
 
+	/**
+	 * Notify the TrustScript API that a review has been published on this site.
+	 *
+	 * Sends a POST request with the unique token and publishing metadata.
+	 * Silently returns false on any HTTP error or non-2xx response.
+	 *
+	 * @since 1.0.0
+	 * @param string $unique_token TrustScript unique review token.
+	 * @return bool True if the API accepted the notification, false otherwise.
+	 */
 	private function notify_trustscript_published( $unique_token ) {
-		$api_key = get_option( 'trustscript_api_key', '' );
+		$api_key = trustscript_get_api_key();
 		
 		if ( empty( $api_key ) ) {
 			return;
@@ -557,11 +677,27 @@ class TrustScript_Auto_Sync {
 		return true;
 	}
 
+	/**
+	 * Get the Unix timestamp of the next scheduled auto-sync run.
+	 *
+	 * @since 1.0.0
+	 * @return int|false Timestamp of the next run, or false if not scheduled.
+	 */
 	public static function get_next_run() {
 		$timestamp = wp_next_scheduled( self::CRON_HOOK );
 		return $timestamp ? $timestamp : false;
 	}
 
+	/**
+	 * Check that a URL is structurally valid and uses an HTTP/HTTPS scheme.
+	 *
+	 * Does not make a network request. Used before sending outbound API calls
+	 * to avoid wasted requests to malformed or non-HTTP URLs.
+	 *
+	 * @since 1.0.0
+	 * @param string $url URL to validate.
+	 * @return bool True if the URL is well-formed with an http or https scheme.
+	 */
 	private function validate_webhook_url( $url ) {
 		if ( empty( $url ) ) {
 			return false;
@@ -579,6 +715,12 @@ class TrustScript_Auto_Sync {
 		return true;
 	}
 	
+	/**
+	 * Get the aggregate stats from the most recent auto-sync run.
+	 *
+	 * @since 1.0.0
+	 * @return array { processed: int, skipped: int, errors: int, total: int }
+	 */
 	public static function get_last_run_stats() {
 		return get_option( 'trustscript_auto_sync_last_stats', array(
 			'processed' => 0,
@@ -588,6 +730,12 @@ class TrustScript_Auto_Sync {
 		) );
 	}
 
+	/**
+	 * Get the Unix timestamp of the most recent completed auto-sync run.
+	 *
+	 * @since 1.0.0
+	 * @return int Unix timestamp, or 0 if the sync has never run.
+	 */
 	public static function get_last_run_time() {
 		return get_option( 'trustscript_auto_sync_last_run', 0 );
 	}

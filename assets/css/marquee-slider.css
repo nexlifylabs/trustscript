@@ -181,3 +181,81 @@
   font-size: 11px;
   color: #8b7355;
 }
+
+/* ─────────────────────────────────────────────
+   Mobile Auto-Swipe Carousel  (≤ 724 px)
+   Replaces the continuous marquee with a
+   one-by-one auto-swipe on small screens.
+───────────────────────────────────────────── */
+@media (max-width: 724px) {
+
+  /* Extra bottom space for dots */
+  .trustscript-marquee-slider {
+    padding-bottom: 48px;
+  }
+
+  /* Hide the edge-fade overlays – they look
+     wrong when only one card is visible */
+  .trustscript-marquee-slider::before,
+  .trustscript-marquee-slider::after {
+    display: none;
+  }
+
+  /* Kill the CSS animation; JS controls the
+     transform instead */
+  .trustscript-marquee-track {
+    gap: 0 !important;
+    animation: none !important;
+    animation-play-state: paused !important;
+    /* Smooth slide driven by JS goTo() */
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  /* Card hover lift is distracting on touch */
+  .trustscript-marquee-card:hover {
+    transform: none;
+    box-shadow: 0 4px 24px rgba(59, 42, 26, 0.055);
+  }
+
+  /* ── Dot indicators ── */
+  .trustscript-marquee-dots {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    bottom: 12px;
+    left: 0;
+    right: 0;
+  }
+
+  .trustscript-marquee-dot {
+    width: 4px !important;
+    height: 4px !important;
+    min-height: auto !important;
+    border-radius: 50% !important;
+    background: #d1c4b0 !important;
+    border: none !important;
+    padding: 0 !important;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    flex-shrink: 0;
+    outline: none;
+    box-shadow: none !important;
+    text-transform: none !important;
+    line-height: 1 !important;
+  }
+
+  .trustscript-marquee-dot.ts-active {
+    background: #c8813a !important;
+    transform: scale(1.5);
+  }
+}
+
+/* Always hide dots on desktop */
+@media (min-width: 725px) {
+  .trustscript-marquee-dots {
+    display: none !important;
+  }
+}

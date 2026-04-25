@@ -1,14 +1,13 @@
 <?php
 /**
  * Plugin Name: TrustScript
- * Description: Automated review collection for WooCommerce — verified, visual, AI-assisted, and 100% privacy compliant. No PII. No manual work.
+ * Description: Automated review collection for WooCommerce - verified, visual, AI-assisted, and 100% privacy compliant. No PII. No manual work.
  * Version: 1.0.0
  * Requires at least: 6.2
  * Tested up to: 6.9
  * Requires PHP: 8.0
  * Plugin URI: https://nexlifylabs.com
  * Author: NexlifyLabs
- * Author URI: https://nexlifylabs.com
  * License: GPL-2.0+
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: trustscript
@@ -22,34 +21,45 @@ if (!defined('ABSPATH')) {
 define('TRUSTSCRIPT_PLUGIN_FILE', __FILE__);
 define('TRUSTSCRIPT_VERSION', '1.0.0');
 define('TRUSTSCRIPT_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('TRUSTSCRIPT_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('TRUSTSCRIPT_API_BASE_URL', 'https://nexlifylabs.com');
+define('TRUSTSCRIPT_DASHBOARD_URL', TRUSTSCRIPT_API_BASE_URL . '/dashboard');
+define('TRUSTSCRIPT_PRICING_URL', TRUSTSCRIPT_API_BASE_URL . '/pricing');
+define('TRUSTSCRIPT_DOCS_URL', TRUSTSCRIPT_API_BASE_URL . '/docs');
+define('TRUSTSCRIPT_SUPPORT_URL', TRUSTSCRIPT_API_BASE_URL . '/support');
 /**
  * Default endpoint for TrustScript API key verification.
  */
-define('TRUSTSCRIPT_VERIFY_ENDPOINT', 'https://nexlifylabs.com/api/verify-api-key');
+define('TRUSTSCRIPT_VERIFY_ENDPOINT', TRUSTSCRIPT_API_BASE_URL . '/api/verify-api-key');
 
 require_once plugin_dir_path(__FILE__) . 'includes/trustscript-helpers.php';
 require_once plugin_dir_path(__FILE__) . 'includes/pricing-config.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-placeholder-mapper.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-service-manager.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-sync-service.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/privacy-settings.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/consent-manager.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin/settings.php';
-require_once plugin_dir_path(__FILE__) . 'includes/admin/class-analytics-page.php';
-require_once plugin_dir_path(__FILE__) . 'includes/admin/branding.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin/review-setting.php';
-require_once plugin_dir_path(__FILE__) . 'includes/admin/email-template.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin/review-request.php';
 require_once plugin_dir_path(__FILE__) . 'includes/admin/pending-queue.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-admin.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-webhook.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-settings-sync.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/consent.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/consent-block-checkout.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-media-upload.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-auto-sync.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/consent-capture.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/consent-confirmation.php';
+require_once plugin_dir_path(__FILE__) . 'includes/consent/review-queue.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-immutability.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-order-status.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-compatibility.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-review-voting.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-order-registry.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-queue.php';
+require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-opt-out.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-review-query.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-review-renderer.php';
 require_once plugin_dir_path(__FILE__) . 'includes/class-trustscript-woocommerce-reviews.php';
@@ -63,8 +73,7 @@ if (file_exists(plugin_dir_path(__FILE__) . 'includes/integration/elementor/clas
 	require_once plugin_dir_path(__FILE__) . 'includes/integration/elementor/class-trustscript-elementor.php';
 }
 
-function trustscript_plugin_init()
-{
+function trustscript_plugin_init() {
 	$service_manager = TrustScript_Service_Manager::get_instance();
 	$woocommerce_active = class_exists('WooCommerce');
 
@@ -96,14 +105,14 @@ function trustscript_plugin_init()
 	TrustScript_Queue::init_cron_hook();
 
 	if (!is_admin() && class_exists('WooCommerce')) {
+		new TrustScript_Checkout_Consent();
 		new TrustScript_Shop_Display();
 	}
 
 }
 add_action('plugins_loaded', 'trustscript_plugin_init');
 
-function trustscript_process_scheduled_queue()
-{
+function trustscript_process_scheduled_queue() {
 	$lock_key = 'trustscript_queue_fallback_lock';
 	if (get_transient($lock_key)) {
 		return;
@@ -125,10 +134,15 @@ function trustscript_process_scheduled_queue()
 }
 add_action('wp_loaded', 'trustscript_process_scheduled_queue', 99);
 
-function trustscript_plugin_activate()
-{
+function trustscript_plugin_activate() {
+	// Initialize persistent encryption key (safe to call multiple times)
+	trustscript_initialize_encryption_key();
+
 	TrustScript_Order_Registry::create_table();
 	TrustScript_Queue::create_table();
+	TrustScript_Opt_Out::create_table();
+	TrustScript_Consent_Manager::create_tables();
+	TrustScript_Review_Voting::create_votes_table();
 
 	TrustScript_Queue::register_cron_job();
 	TrustScript_Auto_Sync::schedule_cron();
@@ -140,8 +154,7 @@ function trustscript_plugin_activate()
 
 register_activation_hook(TRUSTSCRIPT_PLUGIN_FILE, 'trustscript_plugin_activate');
 
-function trustscript_plugin_deactivate()
-{
+function trustscript_plugin_deactivate() {
 	// Clear the 6-hourly queue processing cron job on plugin deactivation
 	TrustScript_Queue::unregister_cron_job();
 	TrustScript_Auto_Sync::unschedule_cron();
@@ -149,8 +162,7 @@ function trustscript_plugin_deactivate()
 
 register_deactivation_hook(TRUSTSCRIPT_PLUGIN_FILE, 'trustscript_plugin_deactivate');
 
-function trustscript_activation_redirect()
-{
+function trustscript_activation_redirect() {
 	if (!get_transient('trustscript_activation_redirect')) {
 		return;
 	}
@@ -167,8 +179,7 @@ function trustscript_activation_redirect()
 
 add_action('admin_init', 'trustscript_activation_redirect');
 
-function trustscript_no_services_notice()
-{
+function trustscript_no_services_notice() {
 	?>
 	<div class="notice notice-info">
 		<p>
@@ -177,26 +188,25 @@ function trustscript_no_services_notice()
 		</p>
 		<p>
 			<?php esc_html_e('Install and activate a supported plugin to start collecting reviews.', 'trustscript'); ?>
-			<a href="https://nexlifylabs.com/docs/supported-platforms"
+			<a href="<?php echo esc_url( TRUSTSCRIPT_DOCS_URL . '/supported-platforms' ); ?>"
 				target="_blank"><?php esc_html_e('View Supported Platforms', 'trustscript'); ?></a>
 		</p>
 	</div>
 	<?php
 }
 
-function trustscript_plugin_action_links($links)
-{
+function trustscript_plugin_action_links($links) {
 	$custom_links = array(
-		'<a href="https://nexlifylabs.com/pricing" target="_blank" rel="noopener noreferrer" style="color: #10b981; font-weight: bold;">'
+		'<a href="' . esc_url( TRUSTSCRIPT_PRICING_URL ) . '" target="_blank" rel="noopener noreferrer" style="color: #10b981; font-weight: bold;">'
 		. esc_html__('Go Pro', 'trustscript') . '</a>',
 
 		'<a href="' . esc_url(admin_url('admin.php?page=trustscript-settings')) . '">'
 		. esc_html__('Settings', 'trustscript') . '</a>',
 
-		'<a href="https://nexlifylabs.com/docs" target="_blank" rel="noopener noreferrer">'
+		'<a href="' . esc_url( TRUSTSCRIPT_DOCS_URL ) . '" target="_blank" rel="noopener noreferrer">'
 		. esc_html__('Docs', 'trustscript') . '</a>',
 
-		'<a href="https://nexlifylabs.com/support" target="_blank" rel="noopener noreferrer">'
+		'<a href="' . esc_url( TRUSTSCRIPT_SUPPORT_URL ) . '" target="_blank" rel="noopener noreferrer">'
 		. esc_html__('Support', 'trustscript') . '</a>',
 	);
 

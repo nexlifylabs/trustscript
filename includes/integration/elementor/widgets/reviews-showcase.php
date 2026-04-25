@@ -164,7 +164,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 		) );
 
 		$this->add_control( 'product_name_length', array(
-			'label'     => __( 'Product Name Length (characters)', 'trustscript' ),
+			'label'     => __( 'Product Name Length (words)', 'trustscript' ),
 			'type'      => \Elementor\Controls_Manager::NUMBER,
 			'min'       => 10,
 			'max'       => 200,
@@ -193,7 +193,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 		) );
 
 		$this->add_control( 'excerpt_length', array(
-			'label'   => __( 'Review Text Length (characters)', 'trustscript' ),
+			'label'   => __( 'Review Text Length (words)', 'trustscript' ),
 			'type'    => \Elementor\Controls_Manager::NUMBER,
 			'min'     => 10,
 			'max'     => 200,
@@ -263,6 +263,17 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 			'label_off'   => __( 'No', 'trustscript' ),
 			'return_value' => 'yes',
 			'default'     => '',
+		) );
+
+		$this->add_control( 'image_hover_overlay', array(
+			'label'        => __( 'Darken Image on Card Hover', 'trustscript' ),
+			'description'  => __( 'Shows a subtle dark gradient over the photo when the card is hovered.', 'trustscript' ),
+			'type'         => \Elementor\Controls_Manager::SWITCHER,
+			'label_on'     => __( 'Yes', 'trustscript' ),
+			'label_off'    => __( 'No', 'trustscript' ),
+			'return_value' => 'yes',
+			'default'      => 'yes',
+			'separator'    => 'before',
 		) );
 
 		$this->end_controls_section();
@@ -382,6 +393,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 				'{{WRAPPER}} .trustscript-marquee-text'         => 'text-align: {{VALUE}};',
 				'{{WRAPPER}} .trustscript-marquee-meta'         => 'justify-content: {{VALUE}};',
 				'{{WRAPPER}} .trustscript-marquee-author'       => 'justify-content: {{VALUE}};',
+				'{{WRAPPER}} .trustscript-marquee-author-info'  => 'text-align: {{VALUE}};',
 			),
 		) );
 
@@ -954,20 +966,31 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 				display: flex; flex-direction: column; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card {
-				display: flex; flex-direction: column; height: 100%; position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease;
+				display: flex; flex-direction: column; height: 100%; position: relative;
+				overflow: hidden; 
+				isolation: isolate;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-image-wrapper {
-				position: relative; overflow: hidden; background: #f5f5f5;
+				position: relative; overflow: hidden; background: #f5f5f5; flex-shrink: 0;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-image {
 				width: 100%; display: block;
+				transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+				will-change: transform;
+			}
+			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card:hover .trustscript-image-first-card-image {
+				transform: scale(1.05);
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-overlay {
-				position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%); opacity: 0; transition: opacity 0.3s ease;
+				position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+				background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.32) 100%);
+				opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
 			}
+			<?php if ( 'yes' === ( $settings['image_hover_overlay'] ?? 'yes' ) ) : ?>
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card:hover .trustscript-image-first-card-overlay {
 				opacity: 1;
 			}
+			<?php endif; ?>
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-content {
 				flex-grow: 1; display: flex; flex-direction: column; padding: 1.25rem;
 			}
@@ -990,7 +1013,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 				background-color: var(--avatar-bg, #ccc);
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-author-info {
-				/* no flex-grow  */
+				text-align: left;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-image-first-card-author-name {
 				/* no flex-grow */
@@ -1008,7 +1031,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 				background-color: var(--avatar-bg, #ccc);
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-review-author-info {
-				/* no flex-grow  */
+				text-align: left;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-review-author-name {
 				/* no flex-grow */
@@ -1016,6 +1039,9 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 			#<?php echo esc_attr( $uid ); ?> .trustscript-marquee-author { 
 				display: flex;
 				align-items: center;
+			}
+			#<?php echo esc_attr( $uid ); ?> .trustscript-marquee-author-info {
+				text-align: left;
 			}
 			#<?php echo esc_attr( $uid ); ?> .trustscript-review-rating {
 				display: flex;
@@ -1105,7 +1131,10 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 						<img src="<?php echo esc_url( TrustScript_Review_Renderer::normalize_media_url( $first_image ) ); ?>" 
 							 alt="<?php echo esc_attr( __( 'Review photo', 'trustscript' ) ); ?>" 
 							 class="trustscript-image-first-card-image"
-							 loading="lazy">
+							 loading="lazy"
+							 decoding="async"
+							 onload="this.classList.add('ts-loaded')"
+							 onerror="this.classList.add('ts-loaded')">
 						<div class="trustscript-image-first-card-overlay"></div>
 					</div>
 					
@@ -1242,7 +1271,7 @@ class TrustScript_Reviews_Showcase_Widget extends \Elementor\Widget_Base {
 								<div class="trustscript-marquee-avatar">
 									<?php echo esc_html( $initials ); ?>
 								</div>
-								<div>
+								<div class="trustscript-marquee-author-info">
 									<div class="trustscript-marquee-author-name"><?php echo esc_html( $review->comment_author ); ?></div>
 									<div class="trustscript-marquee-author-label"><?php esc_html_e( 'Verified Buyer', 'trustscript' ); ?></div>
 								</div>

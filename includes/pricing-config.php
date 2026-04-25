@@ -51,7 +51,7 @@ function trustscript_get_pricing_tiers() {
 				'api_access' => true,
 			),
 			'button_text' => 'Upgrade to Starter',
-			'button_url' => 'https://nexlifylabs.com/pricing',
+			'button_url' => TRUSTSCRIPT_PRICING_URL,
 		),
 		'pro' => array(
 			'name' => 'Pro',
@@ -75,7 +75,7 @@ function trustscript_get_pricing_tiers() {
 				'api_access' => true,
 			),
 			'button_text' => 'Upgrade to Pro',
-			'button_url' => 'https://nexlifylabs.com/pricing',
+			'button_url' => TRUSTSCRIPT_PRICING_URL,
 		),
 		'business' => array(
 			'name' => 'Business',
@@ -100,7 +100,7 @@ function trustscript_get_pricing_tiers() {
 				'api_access' => true,
 			),
 			'button_text' => 'Upgrade to Business',
-			'button_url' => 'https://nexlifylabs.com/pricing',
+			'button_url' => TRUSTSCRIPT_PRICING_URL,
 		),
 	);
 }
